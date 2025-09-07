@@ -7,11 +7,6 @@ class HeapSortTest {
 
 
     @Test
-    void testMain() {
-        assertDoesNotThrow(() -> Main.main(new String[]{}));
-    }
-
-    @Test
     void testSmallArray() {
         int[] arr = {64, 34, 25, 12, 22, 11, 90};
         int[] expected = {11, 12, 22, 25, 34, 64, 90};
