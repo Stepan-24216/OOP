@@ -3,44 +3,46 @@ package org.example;
 import java.util.Scanner;
 
 public class Main {
-    public static int startGame(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Добро пожаловать в мою реализацию игры BlackJack\n" +
-                "Выберите количество колод: ");
-        int countDeck = scanner.nextInt();
-        System.out.println("Раунд 1\n" +
-                "Дилер раздал карты");
-        return countDeck;
-    }
-    public static void main(String[] args) {
-        int countDeck = startGame();
-        DeckLogic.Deck deck = new DeckLogic.Deck(countDeck);
-        HandLogic.Hand Player = new HandLogic.Hand();
-        HandLogic.Hand Diler = new HandLogic.Hand();
-        DeckLogic.TopCard cur = deck.TakeCard();
-        Player.AddCard(cur);
-        cur = deck.TakeCard();
-        Player.AddCard(cur);
-        Player.printHandPlayer();
-        cur = deck.TakeCard();
-        Diler.AddCard(cur);
-        cur = deck.TakeCard();
-        Diler.AddCard(cur);
-        Diler.printHandDiler(1);
-        Diler.printHandDiler(2);
-//                "Карты дилера: [Туз Трефы (11), <закрытая карта ]\n" +
-//                "\n" +
-//                "Ваш ход\n" +
-//                "-------\n" +
-//                "Введите “1”, чтобы взять карту, и “0”, чтобы остановиться .\n" +
-//                "1\n" +
-//                "Вы открыли карту Семерка Пики (7)\n" +
-//                "Ваши карты: [Пиковая дама (10), Тройка Червы (3), Семерка Пики\n" +
-//                "(7)] > 20\n" +
-//                "Карты дилера: [Туз Трефы (11), <закрытая карта ]\n" +
-//                "Введите “1”, чтобы взять карту, и “0”, чтобы остановиться .\n" +
-//                "0\n" +
-//                "Ход дилера");
+    static Scanner scanner = new Scanner(System.in);
+    static HandLogic.Hand Player = new HandLogic.Hand();
+    static HandLogic.Hand Diler = new HandLogic.Hand();
+    static int countRound = 1;
+    static int game = 1;
+    static int countDeck;
+    static DeckLogic.Deck deck;
+
+    public static void main() {
+        System.out.println("Добро пожаловать в мою реализацию игры BlackJack");
+        System.out.println("Выберите количество колод: ");
+        countDeck = scanner.nextInt();
+        deck = new DeckLogic.Deck(countDeck);
+        while (game != 0){
+            DeckLogic.Deck deck = Game.startGame(Player,Diler);
+            if (HandLogic.movePlayer(deck,scanner)){
+                if (!HandLogic.moveDiler(deck)){
+                    Game.winer(true);
+                }
+                else {
+                    if (Player.getValue() > Diler.getValue()){ Game.winer(true);}
+                    else if (Player.getValue() < Diler.getValue()){ Game.winer(false);}
+                    else { System.out.println("Количество очков одинаковое\n Счёт:"+Player.getScore()+":"+Diler.getScore());}
+                }
+            }
+            else{
+                Game.winer(false);
+            }
+            System.out.println("Хотите сыграть ещё?(Введите 1 для следующего раунда, 0 чтобы закончить игру)");
+            game = scanner.nextInt();
+            if (game == 0){
+                System.out.println("Финальный счёт: "+Player.getScore()+":"+Diler.getScore());
+                System.out.println("Спасибо за игру заходи ещё");
+            }
+            else {
+                Player.newGame();
+                Diler.newGame();
+                countRound++;
+            }
+        }
     }
 }
 

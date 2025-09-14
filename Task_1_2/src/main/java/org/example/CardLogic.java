@@ -22,23 +22,15 @@ public class CardLogic {
         public void setValue(int value) {
             this.value = value;
         }
-
         public void setRank(int rank) {
             this.rank = rank;
         }
-
         public void setSuit(int suit) {
             this.suit = suit;
         }
 
-        public int getRank() {
-            return rank;
-        }
-
-        public int getSuit() {
-            return suit;
-        }
-
+        public int getRank() { return rank;}
+        public int getSuit() { return suit; }
         public int getValue() {
             return value;
         }
