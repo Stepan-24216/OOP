@@ -16,28 +16,29 @@ public class Main {
         System.out.println("Выберите количество колод: ");
         countDeck = scanner.nextInt();
         deck = new DeckLogic.Deck(countDeck);
-        while (game != 0){
-            DeckLogic.Deck deck = Game.startGame(Player,Diler);
-            if (HandLogic.movePlayer(deck,scanner)){
-                if (!HandLogic.moveDiler(deck)){
+        while (game != 0) {
+            DeckLogic.Deck deck = Game.startGame(Player, Diler);
+            if (HandLogic.movePlayer(deck, scanner)) {
+                if (!HandLogic.moveDiler(deck)) {
                     Game.winer(true);
+                } else {
+                    if (Player.getValue() > Diler.getValue()) {
+                        Game.winer(true);
+                    } else if (Player.getValue() < Diler.getValue()) {
+                        Game.winer(false);
+                    } else {
+                        System.out.println("Количество очков одинаковое\n Счёт:" + Player.getScore() + ":" + Diler.getScore());
+                    }
                 }
-                else {
-                    if (Player.getValue() > Diler.getValue()){ Game.winer(true);}
-                    else if (Player.getValue() < Diler.getValue()){ Game.winer(false);}
-                    else { System.out.println("Количество очков одинаковое\n Счёт:"+Player.getScore()+":"+Diler.getScore());}
-                }
-            }
-            else{
+            } else {
                 Game.winer(false);
             }
             System.out.println("Хотите сыграть ещё?(Введите 1 для следующего раунда, 0 чтобы закончить игру)");
             game = scanner.nextInt();
-            if (game == 0){
-                System.out.println("Финальный счёт: "+Player.getScore()+":"+Diler.getScore());
+            if (game == 0) {
+                System.out.println("Финальный счёт: " + Player.getScore() + ":" + Diler.getScore());
                 System.out.println("Спасибо за игру заходи ещё");
-            }
-            else {
+            } else {
                 Player.newGame();
                 Diler.newGame();
                 countRound++;

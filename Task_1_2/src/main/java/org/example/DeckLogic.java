@@ -11,7 +11,7 @@ public class DeckLogic {
             this.card = card;
             this.value = value;
         }
-        
+
         public CardLogic.Card getCard() {
             return card;
         }
@@ -24,15 +24,17 @@ public class DeckLogic {
             return card.toString() + " (" + value + ")";
         }
     }
-    public static class Deck{
+
+    public static class Deck {
         private final CardLogic.Card[] cards;
         private int topCardIndex;
         private final Random random = new Random();
+
         public Deck(int countDeck) {
             cards = new CardLogic.Card[52 * countDeck];
             topCardIndex = 0;
             int index = 0;
-            for (int iterations = 0;iterations < countDeck;iterations++){
+            for (int iterations = 0; iterations < countDeck; iterations++) {
                 for (int suit = 0; suit < 4; suit++) {
                     for (int rank = 2; rank <= 14; rank++) {
                         cards[index++] = new CardLogic.Card(rank, suit);
@@ -51,9 +53,10 @@ public class DeckLogic {
             }
             topCardIndex = 0;
         }
+
         public TopCard TakeCard() {
             if (topCardIndex < cards.length) {
-                TopCard current = new TopCard(cards[topCardIndex],cards[topCardIndex].getValue());
+                TopCard current = new TopCard(cards[topCardIndex], cards[topCardIndex].getValue());
                 topCardIndex++;
                 return current;
             } else {
