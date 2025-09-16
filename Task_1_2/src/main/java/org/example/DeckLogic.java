@@ -3,11 +3,11 @@ package org.example;
 import java.util.Random;
 
 public class DeckLogic {
-    public static class TopCard {
+    public static class topCard {
         private final CardLogic.Card card;
         private final int value;
 
-        public TopCard(CardLogic.Card card, int value) {
+        public topCard(CardLogic.Card card, int value) {
             this.card = card;
             this.value = value;
         }
@@ -54,9 +54,9 @@ public class DeckLogic {
             topCardIndex = 0;
         }
 
-        public TopCard TakeCard() {
+        public topCard takeCard() {
             if (topCardIndex < cards.length) {
-                TopCard current = new TopCard(cards[topCardIndex], cards[topCardIndex].getValue());
+                topCard current = new topCard(cards[topCardIndex], cards[topCardIndex].getValue());
                 topCardIndex++;
                 return current;
             } else {

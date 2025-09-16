@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class HandLogic {
     public static class Hand {
-        private List<DeckLogic.TopCard> cards;
+        private List<DeckLogic.topCard> cards;
         private int handValue;
         private boolean hasAce;
         private int handScore;
@@ -19,7 +19,7 @@ public class HandLogic {
             this.hasAce = false;
         }
 
-        public boolean AddCard(DeckLogic.TopCard card) {
+        public boolean addCard(DeckLogic.topCard card) {
             if (card != null) {
                 cards.add(card);
                 calculateValue();
@@ -50,14 +50,14 @@ public class HandLogic {
             handValue = 0;
             hasAce = false;
             int acecnt = 0;
-            for (DeckLogic.TopCard topCard : cards) {
+            for (DeckLogic.topCard topCard : cards) {
                 handValue += topCard.getValue();
                 if (topCard.getCard().getRank() == 14 && topCard.getCard().getValue() == 11) {
                     hasAce = true;
                     acecnt++;
                 }
                 if (handValue > 21 && hasAce) {
-                    for (DeckLogic.TopCard aceCard : cards) {
+                    for (DeckLogic.topCard aceCard : cards) {
                         if (aceCard.getCard().getRank() == 14 && aceCard.getCard().getValue() == 11) {
                             aceCard.getCard().setValue(1);
                         }
@@ -96,13 +96,13 @@ public class HandLogic {
             System.out.println("Введите “1”, чтобы взять карту, и “0”, чтобы остановиться...");
             action = scanner.nextInt();
             if (action == 1) {
-                DeckLogic.TopCard cur = deck.TakeCard();
-                if (!Main.Player.AddCard(cur)) {
+                DeckLogic.topCard cur = deck.takeCard();
+                if (!Main.player.addCard(cur)) {
                     Game.noCard();
                 }
                 System.out.println("Вы открыли карту " + cur.toString());
                 Game.printStatistics(1);
-                if (Main.Player.getValue() > 21) {
+                if (Main.player.getValue() > 21) {
                     return false;
                 }
             }
@@ -113,14 +113,14 @@ public class HandLogic {
     public static boolean moveDiler(DeckLogic.Deck deck) {
         System.out.println("Ход дилера:\n-------\nДилер открыл свою вторую карту");
         Game.printStatistics(2);
-        while (Main.Diler.getValue() < 17) {
-            DeckLogic.TopCard cur = deck.TakeCard();
-            if (!Main.Diler.AddCard(cur)) {
+        while (Main.diler.getValue() < 17) {
+            DeckLogic.topCard cur = deck.takeCard();
+            if (!Main.diler.addCard(cur)) {
                 Game.noCard();
             }
             System.out.println("Дилер открыл карту " + cur.toString());
             Game.printStatistics(2);
-            if (Main.Diler.getValue() > 21) {
+            if (Main.diler.getValue() > 21) {
                 return false;
             }
         }

@@ -26,29 +26,32 @@ public class BlackjackTest {
     @Test
     void tesDeckLogic() {
         CardLogic.Card card = new CardLogic.Card(10, 0);
-        DeckLogic.TopCard topcard = new DeckLogic.TopCard(card, 10);
+        DeckLogic.topCard topcard = new DeckLogic.topCard(card, 10);
         assertEquals(10, topcard.getValue());
         assertEquals("10 Пик (10)", topcard.toString());
 
         DeckLogic.Deck deck = new DeckLogic.Deck(1);
-        DeckLogic.TopCard cur = deck.TakeCard();
+        DeckLogic.topCard cur = deck.takeCard();
         cur.getCard();
     }
 
     @Test
     void testHandLogic() {
         CardLogic.Card card = new CardLogic.Card(14, 0);
-        DeckLogic.TopCard topcard = new DeckLogic.TopCard(card, 11);
+        DeckLogic.topCard topcard = new DeckLogic.topCard(card, 11);
         HandLogic.Hand hand = new HandLogic.Hand();
-        hand.AddCard(topcard);
+        hand.addCard(topcard);
 
         hand.win();
         assertEquals(1, hand.getScore());
         assertEquals(11, hand.getValue());
 
-        hand.AddCard(topcard);
+        hand.addCard(topcard);
         assertEquals(12, hand.getValue());
     }
 
+    @Test
+    void testMainLogic() {
 
+    }
 }
