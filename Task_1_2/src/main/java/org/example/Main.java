@@ -27,19 +27,21 @@ public class Main {
                     } else if (player.getValue() < diler.getValue()) {
                         Game.winer(false);
                     } else {
-                        System.out.println("Количество очков одинаковое\n Счёт:" + player.getScore() + ":" + diler.getScore());
+                        System.out.println("Количество очков одинаковое\n Счёт:"
+                                + player.getScore() + ":" + diler.getScore());
                     }
                 }
             } else {
                 Game.winer(false);
             }
             System.out.println(
-                    "Хотите сыграть ещё?(Введите 1 для " +
-                            "следующего раунда, 0 чтобы закончить игру)"
+                    "Хотите сыграть ещё?(Введите 1 для "
+                            + "следующего раунда, 0 чтобы закончить игру)"
             );
             game = scanner.nextInt();
             if (game == 0) {
-                System.out.println("Финальный счёт: " + player.getScore() + ":" + diler.getScore());
+                System.out.println("Финальный счёт: "
+                        + player.getScore() + ":" + diler.getScore());
                 System.out.println("Спасибо за игру заходи ещё");
             } else {
                 player.newGame();

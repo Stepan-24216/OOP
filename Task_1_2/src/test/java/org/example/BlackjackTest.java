@@ -2,9 +2,15 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.Scanner;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BlackjackTest {
+
+    private Scanner scanner;
 
     @Test
     void testCardLogic() {
@@ -48,10 +54,51 @@ public class BlackjackTest {
 
         hand.addCard(topcard);
         assertEquals(12, hand.getValue());
+        //testPrintHandDiler
+
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        hand.printHandDiler(2);
+
+        String output = outContent.toString();
+
+        assertTrue(output.contains("    Карты диллера: "));
+        assertTrue(output.contains("Туз Пик (11), Туз Пик (11)] => 12"));
+
+        //testprintHandPlayer
+
+        hand.printHandPlayer();
+
+        output = outContent.toString();
+
+        assertTrue(output.contains("    Ваши карты:"));
+        assertTrue(output.contains("Туз Пик (11), Туз Пик (11)] => 12"));
+        System.setOut(System.out);
     }
 
     @Test
-    void testMainLogic() {
+    void testGameLogic() {
+        CardLogic.Card card = new CardLogic.Card(14, 0);
+        DeckLogic.topCard topcard = new DeckLogic.topCard(card, 11);
+        HandLogic.Hand hand_1 = new HandLogic.Hand();
+        HandLogic.Hand hand_2 = new HandLogic.Hand();
+        hand_1.addCard(topcard);
+        hand_1.addCard(topcard);
+        hand_2.addCard(topcard);
+        hand_2.addCard(topcard);
 
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        Game.printStatistics(2);
+
+        String output = outContent.toString();
+        assertTrue(output.contains("    Ваши карты:"));
+        assertTrue(output.contains("] => 0"));
+        assertTrue(output.contains("    Карты диллера: "));
+        assertTrue(output.contains("] => 0"));
+
+        System.setOut(System.out);
     }
 }
