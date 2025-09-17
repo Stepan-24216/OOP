@@ -39,15 +39,16 @@ public class Game {
     }
 
     public static void noCard() {
-        System.out.println("Карты в колоде кончились\n" +
-                "Подвожу итоги игры");
+        System.out.println("Карты в колоде кончились\n"
+                + "Подвожу итоги игры");
         printStatistics(2);
         if (Main.player.getValue() > Main.dealer.getValue()) {
             winer(true);
         } else if (Main.player.getValue() < Main.dealer.getValue()) {
             winer(false);
         } else {
-            System.out.println("Количество очков одинаковое\n Счёт:" + Main.player.getScore() + ":" + Main.dealer.getScore());
+            System.out.println("Количество очков одинаковое\n Счёт:"
+                    + Main.player.getScore() + ":" + Main.dealer.getScore());
         }
         System.exit(0);
     }

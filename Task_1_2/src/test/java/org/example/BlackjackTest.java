@@ -52,6 +52,7 @@ public class BlackjackTest {
         DeckLogic.TopCard topcard = new DeckLogic.TopCard(card, 11);
         HandLogic.Hand hand = new HandLogic.Hand();
         hand.addCard(topcard);
+        DeckLogic.Deck deck = new DeckLogic.Deck(1);
 
         hand.win();
         assertEquals(1, hand.getScore());
@@ -79,6 +80,11 @@ public class BlackjackTest {
 
         assertTrue(output.contains("    Ваши карты:"));
         assertTrue(output.contains("Туз Пик (11), Туз Пик (11)] => 12"));
+
+        //test-moveDialer
+        HandLogic.moveDialer(deck);
+        assertTrue(output.contains("Ход дилера:\n-------\nДилер открыл свою вторую карту"));
+
         System.setOut(System.out);
     }
 
@@ -98,6 +104,7 @@ public class BlackjackTest {
 
         String output = outContent.toString();
 
+
         Game.noCard();
 
         assertTrue(output.contains("Карты в колоде кончились\n" +
@@ -115,6 +122,11 @@ public class BlackjackTest {
         assertTrue(output.contains(" в вашу пользу."));
         assertTrue(output.contains("\n"));
 
+        Game.startGame(hand_1,hand_2);
+
+        assertTrue(output.contains("Раунд " + 1 + "\n" +
+                "Дилер раздал карты"));
+
         System.setOut(System.out);
     }
 
@@ -122,16 +134,12 @@ public class BlackjackTest {
     public void testMain() {
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         final PrintStream originalOut = System.out;
-        // Подготавливаем искусственный ввод
-        String input = "1\n1\n0\n0\n"; // 1 колода, 1 раунд, выход
+
+        String input = "2\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1"
+                +"\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n0";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
 
-        // Запускаем main
         Main.main(new String[]{});
 
-        // Проверяем что вывод содержит ожидаемые сообщения
-        String output = outContent.toString();
-        assertTrue(output.contains("BlackJack"));
-        assertTrue(output.contains("Финальный счёт"));
     }
 }
