@@ -1,18 +1,20 @@
 package org.example;
 
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
- * Тестовый класс для игры Blackjack
+ * Тестовый класс для игры Blackjack.
  */
 public class BlackjackTest {
+
     /**
-     * Тест логики карт
+     * Тест логики карт.
      */
     @Test
     void testCardLogic() {
@@ -31,6 +33,9 @@ public class BlackjackTest {
         assertEquals(3, card.getSuit());
     }
 
+    /**
+     * Тест логики колоды.
+     */
     @Test
     void tesDeckLogic() {
         CardLogic.Card card = new CardLogic.Card(10, 0);
@@ -42,11 +47,15 @@ public class BlackjackTest {
         DeckLogic.TopCard cur = deck.takeCard();
         CardLogic.Card topcard2 = cur.getCard();
         String[] ranks = {"2", "3", "4", "5", "6", "7", "8",
-                "9", "10", "Валет", "Дама", "Король", "Туз"};
+                "9", "10", "Валet", "Дама", "Король", "Туз"};
         String[] suits = {"Пик", "Червей", "Бубен", "Треф"};
-        assertEquals(ranks[topcard2.getRank() - 2] + ' ' + suits[topcard2.getSuit()], topcard2.toString());
+        assertEquals(ranks[topcard2.getRank() - 2] + ' ' + suits[topcard2.getSuit()],
+                topcard2.toString());
     }
 
+    /**
+     * Тест логики руки.
+     */
     @Test
     void testHandLogic() {
         CardLogic.Card card = new CardLogic.Card(14, 0);
@@ -61,7 +70,6 @@ public class BlackjackTest {
 
         hand.addCard(topcard);
         assertEquals(12, hand.getValue());
-        //testPrintHandDialer
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
@@ -70,10 +78,8 @@ public class BlackjackTest {
 
         String output = outContent.toString();
 
-        assertTrue(output.contains("    Карты диллера: "));
+        assertTrue(output.contains("    Карты дилера: "));
         assertTrue(output.contains("Туз Пик (11), Туз Пик (11)] => 12"));
-
-        //test-printHandPlayer
 
         hand.printHandPlayer();
 
@@ -82,13 +88,15 @@ public class BlackjackTest {
         assertTrue(output.contains("    Ваши карты:"));
         assertTrue(output.contains("Туз Пик (11), Туз Пик (11)] => 12"));
 
-        //test-moveDialer
         HandLogic.moveDealer(deck);
         assertTrue(output.contains("Ход дилера:\n-------\nДилер открыл свою вторую карту"));
 
         System.setOut(System.out);
     }
 
+    /**
+     * Тест логики игры.
+     */
     @Test
     void testGameLogic() {
         CardLogic.Card card = new CardLogic.Card(14, 0);
@@ -105,32 +113,34 @@ public class BlackjackTest {
 
         String output = outContent.toString();
 
-
         Game.noCard();
 
         assertTrue(output.contains("Карты в колоде кончились\n"
                 + "Подвожу итоги игры"));
         assertTrue(output.contains("    Ваши карты:"));
         assertTrue(output.contains("] => 0"));
-        assertTrue(output.contains("    Карты диллера: "));
+        assertTrue(output.contains("    Карты дилера: "));
         assertTrue(output.contains("] => 0"));
         assertTrue(output.contains("Количество очков одинаковое\n Счёт:" + 0 + ":" + 0));
 
         Game.winer(true);
 
-        assertTrue(output.contains("Вы выиграли раунд! :) " +
-                    "Счет " + 1 + ":" + 0));
+        assertTrue(output.contains("Вы выиграли раунд! :) "
+                + "Счет " + 1 + ":" + 0));
         assertTrue(output.contains(" в вашу пользу."));
         assertTrue(output.contains("\n"));
 
-        Game.startGame(hand1,hand2);
+        Game.startGame(hand1, hand2);
 
-        assertTrue(output.contains("Раунд " + 1 + "\n" +
-                "Дилер раздал карты"));
+        assertTrue(output.contains("Раунд " + 1 + "\n"
+                + "Дилер раздал карты"));
 
         System.setOut(System.out);
     }
 
+    /**
+     * Тест главного метода.
+     */
     @Test
     public void testMain() {
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();

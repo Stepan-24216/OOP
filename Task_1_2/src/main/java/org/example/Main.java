@@ -1,8 +1,9 @@
 package org.example;
 
 import java.util.Scanner;
+
 /**
- * Главный класс приложения для игры в Blackjack
+ * Главный класс приложения для игры в Blackjack.
  */
 public class Main {
     static Scanner scanner = new Scanner(System.in);
@@ -12,8 +13,9 @@ public class Main {
     static int game = 1;
     static int countDeck;
     static DeckLogic.Deck deck;
+
     /**
-     * Главный метод, запускающий игру
+     * Главный метод, запускающий игру.
      */
     public static void main(String[] args) {
         System.out.println("Добро пожаловать в мою реализацию игры BlackJack");
@@ -55,4 +57,3 @@ public class Main {
         }
     }
 }
-
