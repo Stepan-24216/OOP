@@ -1,6 +1,11 @@
 package org.example;
-
+/**
+ * Логика работы с картами
+ */
 public class CardLogic {
+    /**
+     * Класс представляющий карту
+     */
     public static class Card {
         private int rank; // 2-10, 11-J, 12-Q, 13-K, 14-A
         private int suit; // 0-пики, 1-червы, 2-бубны, 3-трефы

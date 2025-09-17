@@ -79,8 +79,8 @@ public class HandLogic {
 
         public void printHandDialer(int countMove) {
             if (countMove == 1) {
-                System.out.print("    Карты диллера: [");
-                System.out.print(cards.get(0).toString() + " <SecreteCard>]");
+                System.out.print("    Карты дилера: ["
+                        + cards.get(0).toString() + " <SecreteCard>]");
             } else {
                 System.out.print("    Карты диллера: ");
                 System.out.print(cards.toString() + " => " + handValue);
@@ -110,7 +110,7 @@ public class HandLogic {
         return true;
     }
 
-    public static boolean moveDialer(DeckLogic.Deck deck) {
+    public static boolean moveDealer(DeckLogic.Deck deck) {
         System.out.println("Ход дилера:\n-------\nДилер открыл свою вторую карту");
         Game.printStatistics(2);
         while (Main.dealer.getValue() < 17) {

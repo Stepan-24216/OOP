@@ -1,18 +1,19 @@
 package org.example;
 
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.Scanner;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Тестовый класс для игры Blackjack
+ */
 public class BlackjackTest {
-
-    private Scanner scanner;
-
+    /**
+     * Тест логики карт
+     */
     @Test
     void testCardLogic() {
         CardLogic.Card card = new CardLogic.Card(10, 0);
@@ -82,7 +83,7 @@ public class BlackjackTest {
         assertTrue(output.contains("Туз Пик (11), Туз Пик (11)] => 12"));
 
         //test-moveDialer
-        HandLogic.moveDialer(deck);
+        HandLogic.moveDealer(deck);
         assertTrue(output.contains("Ход дилера:\n-------\nДилер открыл свою вторую карту"));
 
         System.setOut(System.out);
@@ -92,12 +93,12 @@ public class BlackjackTest {
     void testGameLogic() {
         CardLogic.Card card = new CardLogic.Card(14, 0);
         DeckLogic.TopCard topcard = new DeckLogic.TopCard(card, 11);
-        HandLogic.Hand hand_1 = new HandLogic.Hand();
-        HandLogic.Hand hand_2 = new HandLogic.Hand();
-        hand_1.addCard(topcard);
-        hand_1.addCard(topcard);
-        hand_2.addCard(topcard);
-        hand_2.addCard(topcard);
+        HandLogic.Hand hand1 = new HandLogic.Hand();
+        HandLogic.Hand hand2 = new HandLogic.Hand();
+        hand1.addCard(topcard);
+        hand1.addCard(topcard);
+        hand2.addCard(topcard);
+        hand2.addCard(topcard);
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
@@ -107,8 +108,8 @@ public class BlackjackTest {
 
         Game.noCard();
 
-        assertTrue(output.contains("Карты в колоде кончились\n" +
-                                 "Подвожу итоги игры"));
+        assertTrue(output.contains("Карты в колоде кончились\n"
+                + "Подвожу итоги игры"));
         assertTrue(output.contains("    Ваши карты:"));
         assertTrue(output.contains("] => 0"));
         assertTrue(output.contains("    Карты диллера: "));
@@ -122,7 +123,7 @@ public class BlackjackTest {
         assertTrue(output.contains(" в вашу пользу."));
         assertTrue(output.contains("\n"));
 
-        Game.startGame(hand_1,hand_2);
+        Game.startGame(hand1,hand2);
 
         assertTrue(output.contains("Раунд " + 1 + "\n" +
                 "Дилер раздал карты"));
@@ -136,7 +137,7 @@ public class BlackjackTest {
         final PrintStream originalOut = System.out;
 
         String input = "2\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1"
-                +"\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n0";
+                + "\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n0";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
 
         Main.main(new String[]{});

@@ -1,7 +1,9 @@
 package org.example;
 
 import java.util.Scanner;
-
+/**
+ * Главный класс приложения для игры в Blackjack
+ */
 public class Main {
     static Scanner scanner = new Scanner(System.in);
     static HandLogic.Hand player = new HandLogic.Hand();
@@ -10,7 +12,9 @@ public class Main {
     static int game = 1;
     static int countDeck;
     static DeckLogic.Deck deck;
-
+    /**
+     * Главный метод, запускающий игру
+     */
     public static void main(String[] args) {
         System.out.println("Добро пожаловать в мою реализацию игры BlackJack");
         System.out.println("Выберите количество колод: ");
@@ -19,7 +23,7 @@ public class Main {
         while (game != 0) {
             DeckLogic.Deck deck = Game.startGame(player, dealer);
             if (HandLogic.movePlayer(deck, scanner)) {
-                if (!HandLogic.moveDialer(deck)) {
+                if (!HandLogic.moveDealer(deck)) {
                     Game.winer(true);
                 } else {
                     if (player.getValue() > dealer.getValue()) {

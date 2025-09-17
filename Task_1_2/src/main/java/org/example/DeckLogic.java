@@ -1,8 +1,13 @@
 package org.example;
 
 import java.util.Random;
-
+/**
+ * Логика работы с колодой карт
+ */
 public class DeckLogic {
+    /**
+     * Класс представляющий верхнюю карту
+     */
     public static class TopCard {
         private final CardLogic.Card card;
         private final int value;

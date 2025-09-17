@@ -2,8 +2,8 @@ package org.example;
 
 public class Game {
     public static DeckLogic.Deck startGame(HandLogic.Hand player, HandLogic.Hand dialer) {
-        System.out.println("Раунд " + Main.countRound + "\n" +
-                "Дилер раздал карты");
+        System.out.println("Раунд " + Main.countRound + "\n"
+                + "Дилер раздал карты");
         if (!player.addCard(Main.deck.takeCard())) {
             Game.noCard();
         }
@@ -23,8 +23,8 @@ public class Game {
     public static void winer(boolean win) {
         if (win) {
             Main.player.win();
-            System.out.print("Вы выиграли раунд! :) " +
-                    "Счет " + Main.player.getScore() + ":" + Main.dealer.getScore());
+            System.out.print("Вы выиграли раунд! :) "
+                    + "Счет " + Main.player.getScore() + ":" + Main.dealer.getScore());
         } else {
             Main.dealer.win();
             System.out.print("Вы проиграли раунд! :( " +
