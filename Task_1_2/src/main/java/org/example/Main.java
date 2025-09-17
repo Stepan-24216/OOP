@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
     static Scanner scanner = new Scanner(System.in);
     static HandLogic.Hand player = new HandLogic.Hand();
-    static HandLogic.Hand diler = new HandLogic.Hand();
+    static HandLogic.Hand dealer = new HandLogic.Hand();
     static int countRound = 1;
     static int game = 1;
     static int countDeck;
@@ -17,18 +17,18 @@ public class Main {
         countDeck = scanner.nextInt();
         deck = new DeckLogic.Deck(countDeck);
         while (game != 0) {
-            DeckLogic.Deck deck = Game.startGame(player, diler);
+            DeckLogic.Deck deck = Game.startGame(player, dealer);
             if (HandLogic.movePlayer(deck, scanner)) {
-                if (!HandLogic.moveDiler(deck)) {
+                if (!HandLogic.moveDialer(deck)) {
                     Game.winer(true);
                 } else {
-                    if (player.getValue() > diler.getValue()) {
+                    if (player.getValue() > dealer.getValue()) {
                         Game.winer(true);
-                    } else if (player.getValue() < diler.getValue()) {
+                    } else if (player.getValue() < dealer.getValue()) {
                         Game.winer(false);
                     } else {
                         System.out.println("Количество очков одинаковое\n Счёт:"
-                                + player.getScore() + ":" + diler.getScore());
+                                + player.getScore() + ":" + dealer.getScore());
                     }
                 }
             } else {
@@ -41,11 +41,11 @@ public class Main {
             game = scanner.nextInt();
             if (game == 0) {
                 System.out.println("Финальный счёт: "
-                        + player.getScore() + ":" + diler.getScore());
+                        + player.getScore() + ":" + dealer.getScore());
                 System.out.println("Спасибо за игру заходи ещё");
             } else {
                 player.newGame();
-                diler.newGame();
+                dealer.newGame();
                 countRound++;
             }
         }

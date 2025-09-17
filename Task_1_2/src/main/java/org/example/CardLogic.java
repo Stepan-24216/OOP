@@ -44,7 +44,8 @@ public class CardLogic {
         }
 
         public String toString() {
-            String[] ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Валет", "Дама", "Король", "Туз"};
+            String[] ranks = {"2", "3", "4", "5", "6", "7", "8",
+                    "9", "10", "Валет", "Дама", "Король", "Туз"};
             String[] suits = {"Пик", "Червей", "Бубен", "Треф"};
             return ranks[rank - 2] + ' ' + suits[suit];
         }

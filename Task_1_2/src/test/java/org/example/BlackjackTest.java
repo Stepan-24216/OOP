@@ -2,6 +2,7 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -32,19 +33,23 @@ public class BlackjackTest {
     @Test
     void tesDeckLogic() {
         CardLogic.Card card = new CardLogic.Card(10, 0);
-        DeckLogic.topCard topcard = new DeckLogic.topCard(card, 10);
+        DeckLogic.TopCard topcard = new DeckLogic.TopCard(card, 10);
         assertEquals(10, topcard.getValue());
         assertEquals("10 Пик (10)", topcard.toString());
 
         DeckLogic.Deck deck = new DeckLogic.Deck(1);
-        DeckLogic.topCard cur = deck.takeCard();
-        cur.getCard();
+        DeckLogic.TopCard cur = deck.takeCard();
+        CardLogic.Card topcard2 = cur.getCard();
+        String[] ranks = {"2", "3", "4", "5", "6", "7", "8",
+                "9", "10", "Валет", "Дама", "Король", "Туз"};
+        String[] suits = {"Пик", "Червей", "Бубен", "Треф"};
+        assertEquals(ranks[topcard2.getRank() - 2] + ' ' + suits[topcard2.getSuit()], topcard2.toString());
     }
 
     @Test
     void testHandLogic() {
         CardLogic.Card card = new CardLogic.Card(14, 0);
-        DeckLogic.topCard topcard = new DeckLogic.topCard(card, 11);
+        DeckLogic.TopCard topcard = new DeckLogic.TopCard(card, 11);
         HandLogic.Hand hand = new HandLogic.Hand();
         hand.addCard(topcard);
 
@@ -54,19 +59,19 @@ public class BlackjackTest {
 
         hand.addCard(topcard);
         assertEquals(12, hand.getValue());
-        //testPrintHandDiler
+        //testPrintHandDialer
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        hand.printHandDiler(2);
+        hand.printHandDialer(2);
 
         String output = outContent.toString();
 
         assertTrue(output.contains("    Карты диллера: "));
         assertTrue(output.contains("Туз Пик (11), Туз Пик (11)] => 12"));
 
-        //testprintHandPlayer
+        //test-printHandPlayer
 
         hand.printHandPlayer();
 
@@ -80,7 +85,7 @@ public class BlackjackTest {
     @Test
     void testGameLogic() {
         CardLogic.Card card = new CardLogic.Card(14, 0);
-        DeckLogic.topCard topcard = new DeckLogic.topCard(card, 11);
+        DeckLogic.TopCard topcard = new DeckLogic.TopCard(card, 11);
         HandLogic.Hand hand_1 = new HandLogic.Hand();
         HandLogic.Hand hand_2 = new HandLogic.Hand();
         hand_1.addCard(topcard);
@@ -91,14 +96,42 @@ public class BlackjackTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        Game.printStatistics(2);
-
         String output = outContent.toString();
+
+        Game.noCard();
+
+        assertTrue(output.contains("Карты в колоде кончились\n" +
+                                 "Подвожу итоги игры"));
         assertTrue(output.contains("    Ваши карты:"));
         assertTrue(output.contains("] => 0"));
         assertTrue(output.contains("    Карты диллера: "));
         assertTrue(output.contains("] => 0"));
+        assertTrue(output.contains("Количество очков одинаковое\n Счёт:" + 0 + ":" + 0));
+
+        Game.winer(true);
+
+        assertTrue(output.contains("Вы выиграли раунд! :) " +
+                    "Счет " + 1 + ":" + 0));
+        assertTrue(output.contains(" в вашу пользу."));
+        assertTrue(output.contains("\n"));
 
         System.setOut(System.out);
+    }
+
+    @Test
+    public void testMain() {
+        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        final PrintStream originalOut = System.out;
+        // Подготавливаем искусственный ввод
+        String input = "1\n1\n0\n0\n"; // 1 колода, 1 раунд, выход
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        // Запускаем main
+        Main.main(new String[]{});
+
+        // Проверяем что вывод содержит ожидаемые сообщения
+        String output = outContent.toString();
+        assertTrue(output.contains("BlackJack"));
+        assertTrue(output.contains("Финальный счёт"));
     }
 }
