@@ -1,6 +1,12 @@
 package org.example;
 
+/**
+ * Логика игры.
+ */
 public class Game {
+    /**
+     * Начинает игру.
+     */
     public static DeckLogic.Deck startGame(HandLogic.Hand player, HandLogic.Hand dialer) {
         System.out.println("Раунд " + Main.countRound + "\n"
                 + "Дилер раздал карты");
@@ -20,6 +26,9 @@ public class Game {
         return Main.deck;
     }
 
+    /**
+     * Объявляет победителя.
+     */
     public static void winer(boolean win) {
         if (win) {
             Main.player.win();
@@ -27,8 +36,8 @@ public class Game {
                     + "Счет " + Main.player.getScore() + ":" + Main.dealer.getScore());
         } else {
             Main.dealer.win();
-            System.out.print("Вы проиграли раунд! :( " +
-                    "Счет " + Main.player.getScore() + ":" + Main.dealer.getScore());
+            System.out.print("Вы проиграли раунд! :( "
+                    + "Счет " + Main.player.getScore() + ":" + Main.dealer.getScore());
         }
         if (Main.player.getScore() > Main.dealer.getScore()) {
             System.out.print(" в вашу пользу.");
@@ -38,6 +47,9 @@ public class Game {
         System.out.print("\n");
     }
 
+    /**
+     * Обрабатывает ситуацию, когда карты закончились.
+     */
     public static void noCard() {
         System.out.println("Карты в колоде кончились\n"
                 + "Подвожу итоги игры");
@@ -53,6 +65,9 @@ public class Game {
         System.exit(0);
     }
 
+    /**
+     * Печатает статистику игры.
+     */
     public static void printStatistics(int countMove) {
         Main.player.printHandPlayer();
         Main.dealer.printHandDialer(countMove);

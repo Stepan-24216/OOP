@@ -1,40 +1,59 @@
 package org.example;
 
 import java.util.Random;
+
 /**
- * Логика работы с колодой карт
+ * Логика работы с колодой карт.
  */
 public class DeckLogic {
     /**
-     * Класс представляющий верхнюю карту
+     * Класс представляющий верхнюю карту.
      */
     public static class TopCard {
         private final CardLogic.Card card;
         private final int value;
 
+        /**
+         * Конструктор верхней карты.
+         */
         public TopCard(CardLogic.Card card, int value) {
             this.card = card;
             this.value = value;
         }
 
+        /**
+         * Возвращает карту.
+         */
         public CardLogic.Card getCard() {
             return card;
         }
 
+        /**
+         * Возвращает значение карты.
+         */
         public int getValue() {
             return value;
         }
 
+        /**
+         * Возвращает строковое представление карты.
+         */
         public String toString() {
             return card.toString() + " (" + value + ")";
         }
     }
 
+    /**
+     * Класс представляющий колоду карт.
+     */
     public static class Deck {
         private final CardLogic.Card[] cards;
         private int topCardIndex;
         private final Random random = new Random();
 
+        /**
+         * Конструктор колоды.
+         */
         public Deck(int countDeck) {
             cards = new CardLogic.Card[52 * countDeck];
             topCardIndex = 0;
@@ -49,6 +68,9 @@ public class DeckLogic {
             shuffle();
         }
 
+        /**
+         * Перемешивает колоду.
+         */
         public void shuffle() {
             for (int i = cards.length - 1; i > 0; i--) {
                 int index = random.nextInt(i + 1);
@@ -59,6 +81,9 @@ public class DeckLogic {
             topCardIndex = 0;
         }
 
+        /**
+         * Берет карту из колоды.
+         */
         public TopCard takeCard() {
             if (topCardIndex < cards.length) {
                 TopCard current = new TopCard(cards[topCardIndex], cards[topCardIndex].getValue());
@@ -70,4 +95,3 @@ public class DeckLogic {
         }
     }
 }
-
