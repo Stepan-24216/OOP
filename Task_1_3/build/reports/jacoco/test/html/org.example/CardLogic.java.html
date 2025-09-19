@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CardLogic.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Task_1_2</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">CardLogic.java</span></div><h1>CardLogic.java</h1><pre class="source lang-java linenums">package org.example;
+
+<span class="nc" id="L3">public class CardLogic {</span>
+    public static class Card {
+        private int rank; // 2-10, 11-J, 12-Q, 13-K, 14-A
+        private int suit; // 0-пики, 1-червы, 2-бубны, 3-трефы
+        private int value;
+
+<span class="fc" id="L9">        public Card(int rank, int suit) {</span>
+<span class="fc" id="L10">            this.rank = rank;</span>
+<span class="fc" id="L11">            this.suit = suit;</span>
+
+<span class="pc bpc" id="L13" title="1 of 4 branches missed.">            if (2 &lt;= rank &amp;&amp; rank &lt;= 10) {</span>
+<span class="fc" id="L14">                this.value = rank;</span>
+<span class="pc bpc" id="L15" title="1 of 4 branches missed.">            } else if (11 &lt;= rank &amp;&amp; rank &lt;= 13) {</span>
+<span class="fc" id="L16">                this.value = 10;</span>
+<span class="pc bpc" id="L17" title="1 of 2 branches missed.">            } else if (rank == 14) {</span>
+<span class="fc" id="L18">                this.value = 11;</span>
+            }
+<span class="fc" id="L20">        }</span>
+
+        public void setValue(int value) {
+<span class="fc" id="L23">            this.value = value;</span>
+<span class="fc" id="L24">        }</span>
+        public void setRank(int rank) {
+<span class="fc" id="L26">            this.rank = rank;</span>
+<span class="fc" id="L27">        }</span>
+        public void setSuit(int suit) {
+<span class="fc" id="L29">            this.suit = suit;</span>
+<span class="fc" id="L30">        }</span>
+
+<span class="fc" id="L32">        public int getRank() { return rank;}</span>
+<span class="fc" id="L33">        public int getSuit() { return suit; }</span>
+        public int getValue() {
+<span class="fc" id="L35">            return value;</span>
+        }
+
+        public String toString() {
+<span class="fc" id="L39">            String[] ranks = {&quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;, &quot;10&quot;, &quot;Валет&quot;, &quot;Дама&quot;, &quot;Король&quot;, &quot;Туз&quot;};</span>
+<span class="fc" id="L40">            String[] suits = {&quot;Пик&quot;, &quot;Червей&quot;, &quot;Бубен&quot;, &quot;Треф&quot;};</span>
+<span class="fc" id="L41">            return ranks[rank - 2] + ' ' + suits[suit];</span>
+        }
+    }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
