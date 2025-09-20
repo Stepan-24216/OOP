@@ -2,9 +2,7 @@ package org.example;
 
 public abstract class Expression {
     public abstract Expression derivative(String variable);
-//    public int eval(String s){
-//        String[] parts = s.split(";");
-//    }
+    public abstract int eval(String s);
     public abstract String toString();
 
     public void print() {

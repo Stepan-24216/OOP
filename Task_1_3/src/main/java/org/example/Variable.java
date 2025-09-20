@@ -1,5 +1,8 @@
 package org.example;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Variable extends Expression{
     private String var;
 
@@ -13,5 +16,25 @@ public class Variable extends Expression{
 
     public Expression derivative(String variable){
         return new Number(this.var.equals(variable) ? 1 : 0);
+    }
+
+    public int eval(String s) {
+        String[] parts = s.split(";");
+        Map<String, String> variables = new HashMap<>();
+
+        for (String test : parts) {
+            String[] varandnum = test.split("=");
+            if (varandnum.length == 2) {
+                String variable = varandnum[0].trim();
+                String value = varandnum[1].trim();
+                variables.put(variable, value);
+            }
+        }
+
+        // Правильное сравнение строк через equals()
+        if (variables.containsKey(var)) {
+            return Integer.parseInt(variables.get(var));
+        }
+        return 0;
     }
 }

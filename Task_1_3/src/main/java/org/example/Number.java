@@ -14,4 +14,8 @@ public class Number extends Expression{
     public String toString(){
         return String.valueOf(value);
     }
+
+    public int eval(String s){
+        return value;
+    }
 }

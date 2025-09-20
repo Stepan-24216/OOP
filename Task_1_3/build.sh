@@ -26,15 +26,11 @@ javac -d build/classes src/main/java/org/example/*.java
 
 # Генерируем документацию (игнорируем предупреждения)
 echo "Генерация документации..."
-javadoc -d build/docs -sourcepath src/main/java -subpackages com.example.heapsort 2>/dev/null || true
+javadoc -d build/docs -sourcepath src/main/java -subpackages com.example.Expression 2>/dev/null || true
 
 # Создаем JAR файл
 echo "Создание JAR файла..."
-jar cf build/heapsort.jar -C build/classes .
-
-echo ""
-echo "=== Запуск приложения ==="
-java -cp build/classes com.example.heapsort.Main
+jar cf build/Expression.jar -C build/classes .
 
 echo ""
 echo "=== Компиляция тестов ==="
@@ -46,7 +42,7 @@ echo "=== Запуск тестов ==="
 # Запускаем тесты
 java -jar lib/junit-platform-console-standalone-1.9.2.jar \
     --class-path "build/classes:build/test" \
-    --select-class com.example.BlackjackTest \
+    --select-class com.example.OperationTest \
     --details summary
 
 echo ""
