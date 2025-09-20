@@ -1,5 +1,8 @@
 package org.example;
 
+/**
+ * Реализация методов для чисел.
+ */
 public class Number extends Expression {
     private final int value;
 

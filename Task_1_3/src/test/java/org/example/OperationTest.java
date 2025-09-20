@@ -7,9 +7,14 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
+/**
+ * Проверка операций с уравнениями.
+ */
 public class OperationTest {
 
+    /**
+     * Проверка класса число.
+     */
     @Test
     void testNumber() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -31,6 +36,9 @@ public class OperationTest {
         assertEquals("15", x.toString());
     }
 
+    /**
+     * Проверка класса переменная.
+     */
     @Test
     void testVariable() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -54,6 +62,9 @@ public class OperationTest {
         assertEquals("x", x.toString());
     }
 
+    /**
+     * Проверка тестов показанных в заданиях.
+     */
     @Test
     void testTask() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -79,8 +90,11 @@ public class OperationTest {
         assertTrue(output.contains("23\n"));
     }
 
+    /**
+     * Проверка класса для операции деления.
+     */
     @Test
-    void testDiv () {
+    void testDiv() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
@@ -93,8 +107,12 @@ public class OperationTest {
 
         assertTrue(output.contains("(((0 * x) - (1 * 1)) / (x * x))\n"));
     }
+
+    /**
+     * Проверка класса для операции умножения.
+     */
     @Test
-    void testMul () {
+    void testMul() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
@@ -125,8 +143,11 @@ public class OperationTest {
 
     }
 
+    /**
+     * Проверка класса для операции вычитания.
+     */
     @Test
-    void testSub () {
+    void testSub() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 

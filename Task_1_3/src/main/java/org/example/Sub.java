@@ -1,5 +1,8 @@
 package org.example;
 
+/**
+ * Реализация методов для операции вычитания.
+ */
 public class Sub extends Expression {
     Expression element1;
     Expression element2;

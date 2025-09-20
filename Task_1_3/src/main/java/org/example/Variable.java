@@ -3,6 +3,9 @@ package org.example;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Реализация методов для переменных.
+ */
 public class Variable extends Expression {
     private final String var;
 
