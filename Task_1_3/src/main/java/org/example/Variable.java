@@ -3,18 +3,18 @@ package org.example;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Variable extends Expression{
+public class Variable extends Expression {
     private String var;
 
     public Variable(String name) {
         this.var = name;
     }
 
-    public String toString(){
+    public String toString() {
         return var;
     }
 
-    public Expression derivative(String variable){
+    public Expression derivative(String variable) {
         return new Number(this.var.equals(variable) ? 1 : 0);
     }
 
@@ -31,7 +31,6 @@ public class Variable extends Expression{
             }
         }
 
-        // Правильное сравнение строк через equals()
         if (variables.containsKey(var)) {
             return Integer.parseInt(variables.get(var));
         }
