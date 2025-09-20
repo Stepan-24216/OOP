@@ -8,7 +8,7 @@ public abstract class Expression {
     public abstract String toString();
 
     public void print() {
-        System.out.println(this.toString());
+        System.out.println(this);
     }
 }
 

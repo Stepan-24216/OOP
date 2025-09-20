@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.example.OperationTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2025-09-20T12:02:52.089Z" hostname="rend-V15x-V17xRNx" time="0.019">
+<testsuite name="org.example.OperationTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2025-09-20T13:01:04.247Z" hostname="rend-V15x-V17xRNx" time="0.023">
   <properties/>
-  <testcase name="TestNumber()" classname="org.example.OperationTest" time="0.013"/>
-  <testcase name="TestVariable()" classname="org.example.OperationTest" time="0.001"/>
-  <testcase name="TestExpression()" classname="org.example.OperationTest" time="0.004"/>
+  <testcase name="testDiv()" classname="org.example.OperationTest" time="0.014"/>
+  <testcase name="testMul()" classname="org.example.OperationTest" time="0.002"/>
+  <testcase name="testSub()" classname="org.example.OperationTest" time="0.001"/>
+  <testcase name="testTask()" classname="org.example.OperationTest" time="0.001"/>
+  <testcase name="testVariable()" classname="org.example.OperationTest" time="0.002"/>
+  <testcase name="testNumber()" classname="org.example.OperationTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

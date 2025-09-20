@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Variable extends Expression {
-    private String var;
+    private final String var;
 
     public Variable(String name) {
         this.var = name;
@@ -23,10 +23,10 @@ public class Variable extends Expression {
         Map<String, String> variables = new HashMap<>();
 
         for (String test : parts) {
-            String[] varandnum = test.split("=");
-            if (varandnum.length == 2) {
-                String variable = varandnum[0].trim();
-                String value = varandnum[1].trim();
+            String[] varAndNum = test.split("=");
+            if (varAndNum.length == 2) {
+                String variable = varAndNum[0].trim();
+                String value = varAndNum[1].trim();
                 variables.put(variable, value);
             }
         }
