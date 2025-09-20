@@ -1,5 +1,8 @@
 package org.example;
 
+/**
+ * Реализация методов для операции деления.
+ */
 public class Div extends Expression {
     Expression element1;
     Expression element2;

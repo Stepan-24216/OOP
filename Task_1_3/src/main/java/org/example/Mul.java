@@ -1,5 +1,8 @@
 package org.example;
 
+/**
+ * Реализация методов для операции умножения.
+ */
 public class Mul extends Expression {
     Expression element1;
     Expression element2;

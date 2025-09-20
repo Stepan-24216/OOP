@@ -1,5 +1,8 @@
 package org.example;
 
+/**
+ * Абстрактный класс с объявлением операций работы с методами.
+ */
 public abstract class Expression {
     public abstract Expression derivative(String variable);
 

@@ -1,5 +1,8 @@
 package org.example;
 
+/**
+ * Реализация методов для операции сложения.
+ */
 public class Add extends Expression {
     Expression element1;
     Expression element2;
