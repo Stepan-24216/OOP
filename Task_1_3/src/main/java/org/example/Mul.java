@@ -17,4 +17,8 @@ public class Mul extends Expression{
         else if (element1 instanceof Number && !(element2 instanceof Number)){return new Mul(element1,element2.derivative(variable));}
         return new Add( new Mul(element1.derivative(variable),element2), new Mul(element1,element2.derivative(variable)));
     }
+
+    public int eval(String s){
+        return element1.eval(s) * element2.eval(s);
+    }
 }

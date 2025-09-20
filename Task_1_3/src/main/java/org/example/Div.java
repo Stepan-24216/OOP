@@ -16,4 +16,8 @@ public class Div extends Expression{
         return new Div (new Sub( new Mul(element1.derivative(variable),element2),
                         new Mul(element1,element2.derivative(variable))), new Mul(element2,element2));
     }
+
+    public int eval(String s){
+        return element1.eval(s) / element2.eval(s);
+    }
 }

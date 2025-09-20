@@ -23,9 +23,13 @@ public class main {
         Expression dv = new Div(new Number(1),new Variable("x"));
         Expression di = dv.derivative("y");
         di.print();
-//        Expression ee = new Add(new Number(3), new Mul(new Number(2),
-//                new Variable("x"))); // (3+(2*x))
-//        int result = ee.eval("x = 10; y = 13");
-//        System.out.println(result);
+
+        Expression var = new Mul(new Variable("x"), new Variable("y"));
+
+        System.out.println(var.eval("x = 10 ; y = 5"));
+        Expression ee = new Add(new Number(3), new Mul(new Number(2),
+                new Variable("x"))); // (3+(2*x))
+        int result = ee.eval("x = 10; y = 13");
+        System.out.println(result);
     }
 }
