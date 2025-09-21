@@ -62,7 +62,8 @@ public class DeckLogic {
                 for (int suit = 0; suit < 4; suit++) {
                     for (int rank = 2; rank <= 14; rank++) {
                         if (Rank.createRankUsNum(rank) != null && Suit.createSuitUsNum(suit) != null) {
-                            cards[index++] = new CardLogic.Card(Rank.createRankUsNum(rank), Suit.createSuitUsNum(suit));
+                            cards[index++] = new CardLogic.Card(Rank.createRankUsNum(rank),
+                                    Suit.createSuitUsNum(suit));
                         }
                     }
                 }
@@ -88,7 +89,8 @@ public class DeckLogic {
          */
         public TopCard takeCard() {
             if (topCardIndex < cards.length) {
-                TopCard current = new TopCard(cards[topCardIndex], cards[topCardIndex].getValue());
+                TopCard current = new TopCard(cards[topCardIndex],
+                        cards[topCardIndex].getValue());
                 topCardIndex++;
                 return current;
             } else {

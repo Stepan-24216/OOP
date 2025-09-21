@@ -31,7 +31,7 @@ public enum Suit {
     }
 
     /**
-     * Распознаёт масть по номеру
+     * Распознаёт масть по номеру.
      */
     public static Suit createSuitUsNum(int number) {
         for (Suit suit : values()) {
