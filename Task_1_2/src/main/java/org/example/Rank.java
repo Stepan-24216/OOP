@@ -1,7 +1,8 @@
 package org.example;
 
 /**
- * Класс enum для номинала карт и методы работы с ним.
+ * Класс enum для номинала
+ * карт и методы работы с ним.
  */
 public enum Rank {
     TWO(2, "2"),
@@ -35,6 +36,9 @@ public enum Rank {
         return name;
     }
 
+    /**
+     * Получить игровое значение карты.
+     */
     public int getCardValue() {
         if (rankNumber >= 2 && rankNumber <= 10) {
             return rankNumber;
