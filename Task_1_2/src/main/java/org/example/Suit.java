@@ -1,5 +1,9 @@
 package org.example;
 
+
+/**
+ * Класс enum для масти карт и методы работы с ним.
+ */
 public enum Suit {
     SPADES("Пик", 0),
     HEARTS("Червей", 1),
@@ -26,6 +30,9 @@ public enum Suit {
         return number;
     }
 
+    /**
+     * Распознаёт масть по номеру
+     */
     public static Suit createSuitUsNum(int number) {
         for (Suit suit : values()) {
             if (suit.number == number) {

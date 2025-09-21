@@ -1,5 +1,8 @@
 package org.example;
 
+/**
+ * Класс enum для номинала карт и методы работы с ним.
+ */
 public enum Rank {
     TWO(2, "2"),
     THREE(3, "3"),
@@ -46,6 +49,9 @@ public enum Rank {
         return name;
     }
 
+    /**
+     * Распознаёт номинал карты по номеру
+     */
     public static Rank createRankUsNum(int number){
         for (Rank rank: values()){
             if (rank.rankNumber == number){
