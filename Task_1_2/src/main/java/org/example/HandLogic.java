@@ -78,14 +78,14 @@ public class HandLogic {
             int accent = 0;
             for (DeckLogic.TopCard topCard : cards) {
                 handValue += topCard.getValue();
-                if (topCard.getCard().getRank() == 14
+                if (topCard.getCard().getRank().getRankNumber() == 14
                         && topCard.getCard().getValue() == 11) {
                     hasAce = true;
                     accent++;
                 }
                 if (handValue > 21 && hasAce) {
                     for (DeckLogic.TopCard aceCard : cards) {
-                        if (aceCard.getCard().getRank() == 14
+                        if (aceCard.getCard().getRank().getRankNumber() == 14
                                 && aceCard.getCard().getValue() == 11) {
                             aceCard.getCard().setValue(1);
                         }

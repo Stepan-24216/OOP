@@ -61,7 +61,9 @@ public class DeckLogic {
             for (int iterations = 0; iterations < countDeck; iterations++) {
                 for (int suit = 0; suit < 4; suit++) {
                     for (int rank = 2; rank <= 14; rank++) {
-                        cards[index++] = new CardLogic.Card(rank, suit);
+                        if (Rank.createRankUsNum(rank) != null && Suit.createSuitUsNum(suit) != null) {
+                            cards[index++] = new CardLogic.Card(Rank.createRankUsNum(rank), Suit.createSuitUsNum(suit));
+                        }
                     }
                 }
             }

@@ -8,24 +8,17 @@ public class CardLogic {
      * Класс представляющий карту.
      */
     public static class Card {
-        private int rank; // 2-10, 11-J, 12-Q, 13-K, 14-A
-        private int suit; // 0-пики, 1-червы, 2-бубны, 3-трефы
+        private Rank rank;
+        private Suit suit;
         private int value;
 
         /**
          * Конструктор карты.
          */
-        public Card(int rank, int suit) {
+        public Card(Rank rank, Suit suit) {
             this.rank = rank;
             this.suit = suit;
-
-            if (2 <= rank && rank <= 10) {
-                this.value = rank;
-            } else if (11 <= rank && rank <= 13) {
-                this.value = 10;
-            } else if (rank == 14) {
-                this.value = 11;
-            }
+            this.value = rank.getCardValue();
         }
 
         /**
@@ -38,28 +31,29 @@ public class CardLogic {
         /**
          * Устанавливает ранг карты.
          */
-        public void setRank(int rank) {
+        public void setRank(Rank rank) {
             this.rank = rank;
+            this.value = rank.getCardValue(); // Обновляем значение при изменении ранга
         }
 
         /**
          * Устанавливает масть карты.
          */
-        public void setSuit(int suit) {
+        public void setSuit(Suit suit) {
             this.suit = suit;
         }
 
         /**
          * Возвращает ранг карты.
          */
-        public int getRank() {
+        public Rank getRank() {
             return rank;
         }
 
         /**
          * Возвращает масть карты.
          */
-        public int getSuit() {
+        public Suit getSuit() {
             return suit;
         }
 
@@ -71,13 +65,24 @@ public class CardLogic {
         }
 
         /**
+         * Возвращает числовое значение ранга.
+         */
+        public int getRankValue() {
+            return rank.getRankNumber();
+        }
+
+        /**
          * Возвращает строковое представление карты.
          */
         public String toString() {
-            String[] ranks = {"2", "3", "4", "5", "6", "7", "8",
-                    "9", "10", "Валет", "Дама", "Король", "Туз"};
-            String[] suits = {"Пик", "Червей", "Бубен", "Треф"};
-            return ranks[rank - 2] + ' ' + suits[suit];
+            return rank.getName() + " " + suit.getName();
+        }
+
+        /**
+         * Возвращает короткое строковое представление карты.
+         */
+        public String toShortString() {
+            return rank.toString() + " " + suit.toString();
         }
     }
 }
