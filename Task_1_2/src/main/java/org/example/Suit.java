@@ -9,8 +9,8 @@ public enum Suit {
     private final String name;
     private final int number;
 
-    Suit(String Name,int number) {
-        this.name = Name;
+    Suit(String name, int number) {
+        this.name = name;
         this.number = number;
     }
 
@@ -26,9 +26,9 @@ public enum Suit {
         return number;
     }
 
-    public static Suit createSuitUsNum(int number){
-        for (Suit suit: values()){
-            if (suit.number == number){
+    public static Suit createSuitUsNum(int number) {
+        for (Suit suit : values()) {
+            if (suit.number == number) {
                 return suit;
             }
         }

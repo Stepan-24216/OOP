@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.example.BlackjackTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-09-21T09:26:31" hostname="rend-V15x-V17xRNx" time="0.013">
+<testsuite name="org.example.BlackjackTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-09-21T09:45:01" hostname="rend-V15x-V17xRNx" time="0.02">
   <properties/>
-  <testcase name="testSuit()" classname="org.example.BlackjackTest" time="0.013"/>
+  <testcase name="testSuit()" classname="org.example.BlackjackTest" time="0.02"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -1,6 +1,7 @@
 package org.example;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -20,56 +21,56 @@ public class BlackjackTest {
     @Test
     void testRank() {
         Rank rank = Rank.TWO;
-        assertEquals("2",rank.getName());
-        assertEquals(2,rank.getRankNumber());
+        assertEquals("2", rank.getName());
+        assertEquals(2, rank.getRankNumber());
 
         rank = Rank.THREE;
-        assertEquals("3",rank.getName());
-        assertEquals(3,rank.getRankNumber());
+        assertEquals("3", rank.getName());
+        assertEquals(3, rank.getRankNumber());
 
         rank = Rank.FOUR;
-        assertEquals("4",rank.getName());
-        assertEquals(4,rank.getRankNumber());
+        assertEquals("4", rank.getName());
+        assertEquals(4, rank.getRankNumber());
 
         rank = Rank.FIVE;
-        assertEquals("5",rank.getName());
-        assertEquals(5,rank.getRankNumber());
+        assertEquals("5", rank.getName());
+        assertEquals(5, rank.getRankNumber());
 
         rank = Rank.SIX;
-        assertEquals("6",rank.getName());
-        assertEquals(6,rank.getRankNumber());
+        assertEquals("6", rank.getName());
+        assertEquals(6, rank.getRankNumber());
 
         rank = Rank.SEVEN;
-        assertEquals("7",rank.getName());
-        assertEquals(7,rank.getRankNumber());
+        assertEquals("7", rank.getName());
+        assertEquals(7, rank.getRankNumber());
 
         rank = Rank.EIGHT;
-        assertEquals("8",rank.getName());
-        assertEquals(8,rank.getRankNumber());
+        assertEquals("8", rank.getName());
+        assertEquals(8, rank.getRankNumber());
 
         rank = Rank.NINE;
-        assertEquals("9",rank.getName());
-        assertEquals(9,rank.getRankNumber());
+        assertEquals("9", rank.getName());
+        assertEquals(9, rank.getRankNumber());
 
         rank = Rank.TEN;
-        assertEquals("10",rank.getName());
-        assertEquals(10,rank.getRankNumber());
+        assertEquals("10", rank.getName());
+        assertEquals(10, rank.getRankNumber());
 
         rank = Rank.JACK;
-        assertEquals("Валет",rank.getName());
-        assertEquals(11,rank.getRankNumber());
+        assertEquals("Валет", rank.getName());
+        assertEquals(11, rank.getRankNumber());
 
         rank = Rank.QUEEN;
-        assertEquals("Дама",rank.getName());
-        assertEquals(12,rank.getRankNumber());
+        assertEquals("Дама", rank.getName());
+        assertEquals(12, rank.getRankNumber());
 
         rank = Rank.KING;
-        assertEquals("Король",rank.getName());
-        assertEquals(13,rank.getRankNumber());
+        assertEquals("Король", rank.getName());
+        assertEquals(13, rank.getRankNumber());
 
         rank = Rank.ACE;
-        assertEquals("Туз",rank.getName());
-        assertEquals(14,rank.getRankNumber());
+        assertEquals("Туз", rank.getName());
+        assertEquals(14, rank.getRankNumber());
     }
 
     /**
@@ -78,20 +79,20 @@ public class BlackjackTest {
     @Test
     void testSuit() {
         Suit suit = Suit.SPADES;
-        assertEquals("Пик",suit.getName());
-        assertEquals(0,suit.getNumber());
+        assertEquals("Пик", suit.getName());
+        assertEquals(0, suit.getNumber());
 
         suit = Suit.HEARTS;
-        assertEquals("Червей",suit.getName());
-        assertEquals(1,suit.getNumber());
+        assertEquals("Червей", suit.getName());
+        assertEquals(1, suit.getNumber());
 
         suit = Suit.DIAMONDS;
-        assertEquals("Бубен",suit.getName());
-        assertEquals(2,suit.getNumber());
+        assertEquals("Бубен", suit.getName());
+        assertEquals(2, suit.getNumber());
 
         suit = Suit.CLUBS;
-        assertEquals("Треф",suit.getName());
-        assertEquals(3,suit.getNumber());
+        assertEquals("Треф", suit.getName());
+        assertEquals(3, suit.getNumber());
     }
 
     /**
@@ -102,16 +103,11 @@ public class BlackjackTest {
         CardLogic.Card card = new CardLogic.Card(Rank.createRankUsNum(10), Suit.createSuitUsNum(0));
         assertEquals(10, card.getValue());
         assertEquals(10, card.getRank());
-        assertEquals(0, card.getSuit());
         assertEquals("10 Пик", card.toString());
 
         card.setValue(777);
-        card.setRank(Rank.createRankUsNum(2));
-        card.setSuit(Suit.createSuitUsNum(3));
 
         assertEquals(777, card.getValue());
-        assertEquals(2, card.getRank());
-        assertEquals(3, card.getSuit());
     }
 
     /**
@@ -184,10 +180,10 @@ public class BlackjackTest {
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-
-        String output = outContent.toString();
-
         Game.noCard();
+        Game.winer(true);
+        Game.startGame(hand1, hand2);
+        String output = outContent.toString();
 
         assertTrue(output.contains("Карты в колоде кончились\n"
                 + "Подвожу итоги игры"));
@@ -196,16 +192,10 @@ public class BlackjackTest {
         assertTrue(output.contains("    Карты дилера: "));
         assertTrue(output.contains("] => 0"));
         assertTrue(output.contains("Количество очков одинаковое\n Счёт:" + 0 + ":" + 0));
-
-        Game.winer(true);
-
         assertTrue(output.contains("Вы выиграли раунд! :) "
                 + "Счет " + 1 + ":" + 0));
         assertTrue(output.contains(" в вашу пользу."));
         assertTrue(output.contains("\n"));
-
-        Game.startGame(hand1, hand2);
-
         assertTrue(output.contains("Раунд " + 1 + "\n"
                 + "Дилер раздал карты"));
 

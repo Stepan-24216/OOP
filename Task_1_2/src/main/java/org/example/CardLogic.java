@@ -29,32 +29,10 @@ public class CardLogic {
         }
 
         /**
-         * Устанавливает ранг карты.
-         */
-        public void setRank(Rank rank) {
-            this.rank = rank;
-            this.value = rank.getCardValue(); // Обновляем значение при изменении ранга
-        }
-
-        /**
-         * Устанавливает масть карты.
-         */
-        public void setSuit(Suit suit) {
-            this.suit = suit;
-        }
-
-        /**
          * Возвращает ранг карты.
          */
         public Rank getRank() {
             return rank;
-        }
-
-        /**
-         * Возвращает масть карты.
-         */
-        public Suit getSuit() {
-            return suit;
         }
 
         /**
@@ -64,12 +42,6 @@ public class CardLogic {
             return value;
         }
 
-        /**
-         * Возвращает числовое значение ранга.
-         */
-        public int getRankValue() {
-            return rank.getRankNumber();
-        }
 
         /**
          * Возвращает строковое представление карты.
@@ -78,11 +50,5 @@ public class CardLogic {
             return rank.getName() + " " + suit.getName();
         }
 
-        /**
-         * Возвращает короткое строковое представление карты.
-         */
-        public String toShortString() {
-            return rank.toString() + " " + suit.toString();
-        }
     }
 }
