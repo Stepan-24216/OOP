@@ -148,9 +148,9 @@ public class BlackjackTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        hand.printHandDialer(2);
-        hand.printHandPlayer();
-        HandLogic.moveDealer(deck);
+        Output.printHandDialer(2);
+        Output.printHandPlayer();
+        Move.moveDealer(deck);
 
         String output = outContent.toString();
 

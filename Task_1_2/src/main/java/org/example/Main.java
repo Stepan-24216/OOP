@@ -24,8 +24,8 @@ public class Main {
         deck = new DeckLogic.Deck(countDeck);
         while (game != 0) {
             DeckLogic.Deck deck = Game.startGame(player, dealer);
-            if (HandLogic.movePlayer(deck, scanner)) {
-                if (!HandLogic.moveDealer(deck)) {
+            if (Move.movePlayer(deck, scanner)) {
+                if (!Move.moveDealer(deck)) {
                     Game.winer(true);
                 } else {
                     if (player.getValue() > dealer.getValue()) {

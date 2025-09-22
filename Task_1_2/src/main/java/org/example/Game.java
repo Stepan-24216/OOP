@@ -69,7 +69,7 @@ public class Game {
      * Печатает статистику игры.
      */
     public static void printStatistics(int countMove) {
-        Main.player.printHandPlayer();
-        Main.dealer.printHandDialer(countMove);
+        Output.printHandPlayer();
+        Output.printHandDialer(countMove);
     }
 }
