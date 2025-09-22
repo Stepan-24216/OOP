@@ -12,7 +12,7 @@ public class HandLogic {
      * Класс представляющий руку игрока.
      */
     public static class Hand {
-        protected List<DeckLogic.TopCard> cards;
+        protected List<TopCardLogic.TopCard> cards;
         protected int handValue;
         private boolean hasAce;
         private int handScore;
@@ -30,7 +30,7 @@ public class HandLogic {
         /**
          * Добавляет карту в руку.
          */
-        public boolean addCard(DeckLogic.TopCard card) {
+        public boolean addCard(TopCardLogic.TopCard card) {
             if (card != null) {
                 cards.add(card);
                 calculateValue();
@@ -76,7 +76,7 @@ public class HandLogic {
             handValue = 0;
             hasAce = false;
             int accent = 0;
-            for (DeckLogic.TopCard topCard : cards) {
+            for (TopCardLogic.TopCard topCard : cards) {
                 handValue += topCard.getValue();
                 if (topCard.getCard().getRank().getRankNumber() == 14
                         && topCard.getCard().getValue() == 11) {
@@ -84,10 +84,10 @@ public class HandLogic {
                     accent++;
                 }
                 if (handValue > 21 && hasAce) {
-                    for (DeckLogic.TopCard aceCard : cards) {
+                    for (TopCardLogic.TopCard aceCard : cards) {
                         if (aceCard.getCard().getRank().getRankNumber() == 14
                                 && aceCard.getCard().getValue() == 11) {
-                            aceCard.getCard().setValue(1);
+                            aceCard.setValue(1);
                         }
                     }
                     handValue -= 10;

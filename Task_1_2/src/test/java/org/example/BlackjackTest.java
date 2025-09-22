@@ -103,10 +103,6 @@ public class BlackjackTest {
         assertEquals(10, card.getValue());
         assertEquals(10, card.getRank());
         assertEquals("10 Пик", card.toString());
-
-        card.setValue(777);
-
-        assertEquals(777, card.getValue());
     }
 
     /**
@@ -115,16 +111,13 @@ public class BlackjackTest {
     @Test
     void tesDeckLogic() {
         CardLogic.Card card = new CardLogic.Card(Rank.createRankUsNum(10), Suit.createSuitUsNum(0));
-        DeckLogic.TopCard topcard = new DeckLogic.TopCard(card, 10);
+        TopCardLogic.TopCard topcard = new TopCardLogic.TopCard(card, 10);
         assertEquals(10, topcard.getValue());
         assertEquals("10 Пик (10)", topcard.toString());
 
         DeckLogic.Deck deck = new DeckLogic.Deck(1);
-        DeckLogic.TopCard cur = deck.takeCard();
+        TopCardLogic.TopCard cur = deck.takeCard();
         CardLogic.Card topcard2 = cur.getCard();
-        String[] ranks = {"2", "3", "4", "5", "6", "7", "8",
-                "9", "10", "Валet", "Дама", "Король", "Туз"};
-        String[] suits = {"Пик", "Червей", "Бубен", "Треф"};
     }
 
     /**
@@ -133,7 +126,7 @@ public class BlackjackTest {
     @Test
     void testHandLogic() {
         CardLogic.Card card = new CardLogic.Card(Rank.createRankUsNum(14), Suit.createSuitUsNum(0));
-        DeckLogic.TopCard topcard = new DeckLogic.TopCard(card, 11);
+        TopCardLogic.TopCard topcard = new TopCardLogic.TopCard(card, 11);
         HandLogic.Hand hand = new HandLogic.Hand();
         hand.addCard(topcard);
         DeckLogic.Deck deck = new DeckLogic.Deck(1);
@@ -169,7 +162,7 @@ public class BlackjackTest {
     @Test
     void testGameLogic() {
         CardLogic.Card card = new CardLogic.Card(Rank.createRankUsNum(14), Suit.createSuitUsNum(0));
-        DeckLogic.TopCard topcard = new DeckLogic.TopCard(card, 11);
+        TopCardLogic.TopCard topcard = new TopCardLogic.TopCard(card, 11);
         HandLogic.Hand hand1 = new HandLogic.Hand();
         HandLogic.Hand hand2 = new HandLogic.Hand();
         hand1.addCard(topcard);

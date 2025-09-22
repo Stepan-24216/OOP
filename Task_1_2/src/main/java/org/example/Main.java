@@ -18,8 +18,7 @@ public class Main {
      * Главный метод, запускающий игру.
      */
     public static void main(String[] args) {
-        System.out.println("Добро пожаловать в мою реализацию игры BlackJack");
-        System.out.println("Выберите количество колод: ");
+        Output.greeting();
         countDeck = scanner.nextInt();
         deck = new DeckLogic.Deck(countDeck);
         while (game != 0) {
@@ -33,22 +32,16 @@ public class Main {
                     } else if (player.getValue() < dealer.getValue()) {
                         Game.winer(false);
                     } else {
-                        System.out.println("Количество очков одинаковое\n Счёт:"
-                                + player.getScore() + ":" + dealer.getScore());
+                        Output.draw();
                     }
                 }
             } else {
                 Game.winer(false);
             }
-            System.out.println(
-                    "Хотите сыграть ещё?(Введите 1 для "
-                            + "следующего раунда, 0 чтобы закончить игру)"
-            );
+            Output.questionNewGame();
             game = scanner.nextInt();
             if (game == 0) {
-                System.out.println("Финальный счёт: "
-                        + player.getScore() + ":" + dealer.getScore());
-                System.out.println("Спасибо за игру заходи ещё");
+                Output.endGame();
             } else {
                 player.newGame();
                 dealer.newGame();

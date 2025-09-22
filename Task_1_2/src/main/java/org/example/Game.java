@@ -8,8 +8,7 @@ public class Game {
      * Начинает игру.
      */
     public static DeckLogic.Deck startGame(HandLogic.Hand player, HandLogic.Hand dialer) {
-        System.out.println("Раунд " + Main.countRound + "\n"
-                + "Дилер раздал карты");
+        Output.newRound();
         if (!player.addCard(Main.deck.takeCard())) {
             Game.noCard();
         }
@@ -32,19 +31,10 @@ public class Game {
     public static void winer(boolean win) {
         if (win) {
             Main.player.win();
-            System.out.print("Вы выиграли раунд! :) "
-                    + "Счет " + Main.player.getScore() + ":" + Main.dealer.getScore());
         } else {
             Main.dealer.win();
-            System.out.print("Вы проиграли раунд! :( "
-                    + "Счет " + Main.player.getScore() + ":" + Main.dealer.getScore());
         }
-        if (Main.player.getScore() > Main.dealer.getScore()) {
-            System.out.print(" в вашу пользу.");
-        } else if (Main.player.getScore() < Main.dealer.getScore()) {
-            System.out.print(" в пользу дилера.");
-        }
-        System.out.print("\n");
+        Output.winScore(win);
     }
 
     /**

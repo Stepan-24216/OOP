@@ -8,8 +8,8 @@ public class CardLogic {
      * Класс представляющий карту.
      */
     public static class Card {
-        private Rank rank;
-        private Suit suit;
+        private final Rank rank;
+        private final Suit suit;
         private int value;
 
         /**
@@ -19,13 +19,6 @@ public class CardLogic {
             this.rank = rank;
             this.suit = suit;
             this.value = rank.getCardValue();
-        }
-
-        /**
-         * Устанавливает значение карты.
-         */
-        public void setValue(int value) {
-            this.value = value;
         }
 
         /**

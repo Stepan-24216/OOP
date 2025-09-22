@@ -6,42 +6,6 @@ import java.util.Random;
  * Логика работы с колодой карт.
  */
 public class DeckLogic {
-    /**
-     * Класс представляющий верхнюю карту.
-     */
-    public static class TopCard {
-        private final CardLogic.Card card;
-        private final int value;
-
-        /**
-         * Конструктор верхней карты.
-         */
-        public TopCard(CardLogic.Card card, int value) {
-            this.card = card;
-            this.value = value;
-        }
-
-        /**
-         * Возвращает карту.
-         */
-        public CardLogic.Card getCard() {
-            return card;
-        }
-
-        /**
-         * Возвращает значение карты.
-         */
-        public int getValue() {
-            return value;
-        }
-
-        /**
-         * Возвращает строковое представление карты.
-         */
-        public String toString() {
-            return card.toString() + " (" + value + ")";
-        }
-    }
 
     /**
      * Класс представляющий колоду карт.
@@ -88,9 +52,9 @@ public class DeckLogic {
         /**
          * Берет карту из колоды.
          */
-        public TopCard takeCard() {
+        public TopCardLogic.TopCard takeCard() {
             if (topCardIndex < cards.length) {
-                TopCard current = new TopCard(cards[topCardIndex],
+                TopCardLogic.TopCard current = new TopCardLogic.TopCard(cards[topCardIndex],
                         cards[topCardIndex].getValue());
                 topCardIndex++;
                 return current;

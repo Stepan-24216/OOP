@@ -1,7 +1,9 @@
 package org.example;
 
 import java.util.Scanner;
-
+/**
+ * Класс для совершения хода.
+ */
 public class Move {
     public static boolean movePlayer(DeckLogic.Deck deck, Scanner scanner) {
         System.out.println("Ваш ход:\n-------");
@@ -10,7 +12,7 @@ public class Move {
             System.out.println("Введите \"1\", чтобы взять карту, и \"0\", чтобы остановиться...");
             action = scanner.nextInt();
             if (action == 1) {
-                DeckLogic.TopCard cur = deck.takeCard();
+                TopCardLogic.TopCard cur = deck.takeCard();
                 if (!Main.player.addCard(cur)) {
                     Game.noCard();
                 }
@@ -31,7 +33,7 @@ public class Move {
         System.out.println("Ход дилера:\n-------\nДилер открыл свою вторую карту");
         Game.printStatistics(2);
         while (Main.dealer.getValue() < 17) {
-            DeckLogic.TopCard cur = deck.takeCard();
+            TopCardLogic.TopCard cur = deck.takeCard();
             if (!Main.dealer.addCard(cur)) {
                 Game.noCard();
             }
