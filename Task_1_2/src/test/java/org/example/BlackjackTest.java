@@ -3,7 +3,6 @@ package org.example;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -129,7 +128,7 @@ public class BlackjackTest {
         TopCardLogic.TopCard topcard = new TopCardLogic.TopCard(card, 11);
         HandLogic.Hand hand = new HandLogic.Hand();
         hand.addCard(topcard);
-        DeckLogic.Deck deck = new DeckLogic.Deck(1);
+
 
         hand.win();
         assertEquals(1, hand.getScore());
@@ -138,20 +137,22 @@ public class BlackjackTest {
         hand.addCard(topcard);
         assertEquals(12, hand.getValue());
 
+        DeckLogic.Deck deck = new DeckLogic.Deck(1);
+        Move.moveDealer(deck);
+
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
         Output.printHandDialer(2);
         Output.printHandPlayer();
-        Move.moveDealer(deck);
 
         String output = outContent.toString();
 
+        assertTrue(output.contains("Ход дилера:\n-------\nДилер открыл свою вторую карту"));
         assertTrue(output.contains("    Карты дилера: "));
         assertTrue(output.contains("Туз Пик (11), Туз Пик (11)] => 12"));
         assertTrue(output.contains("    Ваши карты:"));
         assertTrue(output.contains("Туз Пик (11), Туз Пик (11)] => 12"));
-        assertTrue(output.contains("Ход дилера:\n-------\nДилер открыл свою вторую карту"));
 
         System.setOut(System.out);
     }

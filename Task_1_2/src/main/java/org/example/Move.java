@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.Scanner;
+
 /**
  * Класс для совершения хода.
  */

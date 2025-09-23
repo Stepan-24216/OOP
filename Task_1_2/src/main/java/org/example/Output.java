@@ -55,7 +55,7 @@ public class Output {
      * Печатает количество очков и статус победы или поражения.
      */
     public static void winScore(boolean win) {
-        if (win){
+        if (win) {
             System.out.print("Вы выиграли раунд! :) "
                     + "Счет " + Main.player.getScore() + ":" + Main.dealer.getScore());
         } else {
@@ -103,6 +103,9 @@ public class Output {
                 + "Подвожу итоги игры");
     }
 
+    /**
+     * Вывод итогов и конца игры.
+     */
     public static void endGame() {
         System.out.println("Финальный счёт: "
                 + Main.player.getScore() + ":" + Main.dealer.getScore());

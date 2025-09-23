@@ -48,7 +48,8 @@ public enum Rank {
     public int getCardValue() {
         if (rankNumber >= 2 && rankNumber <= 10) {
             return rankNumber;
-        } else if (rankNumber >= 11 && rankNumber <= 13) {
+        } else if (rankNumber >= 11
+                && rankNumber <= 13) {
             return 10;
         } else { // ACE
             return 11;
