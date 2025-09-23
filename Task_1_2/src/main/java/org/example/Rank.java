@@ -23,11 +23,17 @@ public enum Rank {
     private final int rankNumber;
     private final String name;
 
+    /**
+     * Конструктор.
+     */
     Rank(int numValue, String name) {
         this.rankNumber = numValue;
         this.name = name;
     }
 
+    /**
+     * Методы получения информации о enum.
+     */
     public int getRankNumber() {
         return rankNumber;
     }
@@ -58,7 +64,7 @@ public enum Rank {
      */
     public static Rank createRankUsNum(int number) {
         for (Rank rank: values()) {
-            if (rank.rankNumber == number){
+            if (rank.rankNumber == number) {
                 return rank;
             }
         }

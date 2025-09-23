@@ -41,16 +41,14 @@ public class Game {
      * Обрабатывает ситуацию, когда карты закончились.
      */
     public static void noCard() {
-        System.out.println("Карты в колоде кончились\n"
-                + "Подвожу итоги игры");
+        Output.printNoCard();
         printStatistics(2);
         if (Main.player.getValue() > Main.dealer.getValue()) {
             winer(true);
         } else if (Main.player.getValue() < Main.dealer.getValue()) {
             winer(false);
         } else {
-            System.out.println("Количество очков одинаковое\n Счёт:"
-                    + Main.player.getScore() + ":" + Main.dealer.getScore());
+            Output.draw();
         }
         System.exit(0);
     }

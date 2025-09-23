@@ -1,24 +1,60 @@
 package org.example;
 
+/**
+ * Функции для вывода информации для пользователя.
+ */
 public class Output {
 
-    public static void greeting(){
+    /**
+     * Приветствие.
+     */
+    public static void greeting() {
         System.out.println("Добро пожаловать в мою реализацию игры BlackJack");
         System.out.println("Выберите количество колод: ");
     }
 
-    public static void questionNewGame(){
+    /**
+     * Вопрос в конце раунда.
+     */
+    public static void questionNewGame() {
         System.out.println(
                 "Хотите сыграть ещё?(Введите 1 для "
                         + "следующего раунда, 0 чтобы закончить игру)"
         );
     }
 
-    public static void draw(){
+    /**
+     * Выбор следубщего действия для хода.
+     */
+    public static void choosingAnAction() {
+        System.out.println("Введите \"1\", чтобы взять карту, и \"0\", чтобы остановиться...");
+    }
+
+    public static void yourMoveMassage() {
+        System.out.println("Ваш ход:\n-------");
+    }
+
+    public static void dilerMoveMassage() {
+        System.out.println("Ход дилера:\n-------\nДилер открыл свою вторую карту");
+    }
+
+    public static void playerOpenCardMassage(TopCardLogic.TopCard cur) {
+        System.out.println("Вы открыли карту " + cur.toString());
+    }
+
+    public static void dilerOpenCardMassage(TopCardLogic.TopCard cur) {
+        System.out.println("Дилер открыл карту " + cur.toString());
+    }
+
+    public static void draw() {
         System.out.println("Количество очков одинаковое\n Счёт:"
                 + Main.player.getScore() + ":" + Main.dealer.getScore());
     }
-    public static void winScore(boolean win){
+
+    /**
+     * Печатает количество очков и статус победы или поражения.
+     */
+    public static void winScore(boolean win) {
         if (win){
             System.out.print("Вы выиграли раунд! :) "
                     + "Счет " + Main.player.getScore() + ":" + Main.dealer.getScore());
@@ -34,10 +70,11 @@ public class Output {
         System.out.print("\n");
     }
 
-    public static void newRound(){
+    public static void newRound() {
         System.out.println("Раунд " + Main.countRound + "\n"
                 + "Дилер раздал карты");
     }
+
     /**
      * Печатает руку игрока.
      */
@@ -61,7 +98,12 @@ public class Output {
         System.out.print("\n");
     }
 
-    public static void endGame(){
+    public static void printNoCard() {
+        System.out.println("Карты в колоде кончились\n"
+                + "Подвожу итоги игры");
+    }
+
+    public static void endGame() {
         System.out.println("Финальный счёт: "
                 + Main.player.getScore() + ":" + Main.dealer.getScore());
         System.out.println("Спасибо за игру заходи ещё");

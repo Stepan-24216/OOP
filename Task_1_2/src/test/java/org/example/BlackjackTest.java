@@ -199,9 +199,6 @@ public class BlackjackTest {
      */
     @Test
     public void testMain() {
-        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        final PrintStream originalOut = System.out;
-
         String input = "2\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1"
                 + "\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n0"
                 + "\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n0";
