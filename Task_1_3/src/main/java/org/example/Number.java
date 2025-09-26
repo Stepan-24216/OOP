@@ -15,7 +15,11 @@ public class Number extends Expression {
     }
 
     public String toString() {
-        return String.valueOf(value);
+        if (value >= 0) {
+            return String.valueOf(value);
+        } else {
+            return ("(" + value + ")");
+        }
     }
 
     public int eval(String s) {
