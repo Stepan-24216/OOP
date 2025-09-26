@@ -1,18 +1,20 @@
 package org.example;
 
-
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.AfterEach;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.util.Scanner;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.Scanner;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Тестовый класс для игры Blackjack.
@@ -151,12 +153,10 @@ public class BlackjackTest {
     void testHandAceLogic() {
         Hand hand = new Hand();
 
-        Card ace1 = new Card(Rank.ACE, Suit.SPADES);
-        Card ace2 = new Card(Rank.ACE, Suit.HEARTS);
         Card nine = new Card(Rank.NINE, Suit.DIAMONDS);
 
-        hand.addCard(ace1);
-        hand.addCard(ace2);
+        hand.addCard(new Card(Rank.ACE, Suit.SPADES));
+        hand.addCard(new Card(Rank.ACE, Suit.HEARTS));
         assertEquals(12, hand.getValue());
 
         hand.addCard(nine);
@@ -177,7 +177,6 @@ public class BlackjackTest {
      */
     @Test
     void testOutput() {
-        Output output = new Output();
         Hand player = new Hand();
         Hand dealer = new Hand();
 
@@ -186,6 +185,8 @@ public class BlackjackTest {
 
         dealer.addCard(new Card(Rank.ACE, Suit.DIAMONDS));
         dealer.addCard(new Card(Rank.KING, Suit.CLUBS));
+
+        Output output = new Output();
 
         output.printHands(player, dealer, true);
         String outputText = outContent.toString();
@@ -265,14 +266,14 @@ public class BlackjackTest {
         Output output = new Output();
         Scanner scanner = new Scanner(System.in);
 
-        GameRound gameRound = new GameRound(player, dealer, deck, output, scanner, 1);
-
         player.addCard(new Card(Rank.KING, Suit.SPADES));
         player.addCard(new Card(Rank.QUEEN, Suit.HEARTS));
         player.addCard(new Card(Rank.THREE, Suit.DIAMONDS)); // 10 + 10 + 3 = 23
 
         dealer.addCard(new Card(Rank.KING, Suit.CLUBS));
         dealer.addCard(new Card(Rank.SEVEN, Suit.SPADES)); // 10 + 7 = 17
+
+        GameRound gameRound = new GameRound(player, dealer, deck, output, scanner, 1);
 
         gameRound.determineWinner();
 
@@ -294,12 +295,17 @@ public class BlackjackTest {
     }
 
     /**
-     * Интеграционный тест полного цикла игры.
+     * Тест главного метода.
      */
     @Test
-    void testFullGameIntegration() {
-        String input = "1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n";
+    public void testMain() {
+        String input = "2\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1"
+                + "\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n0"
+                + "\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n0";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        Main.main(new String[]{});
+
     }
 
 }
