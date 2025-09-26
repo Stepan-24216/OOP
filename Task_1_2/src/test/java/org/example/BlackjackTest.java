@@ -1,5 +1,6 @@
 package org.example;
 
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
@@ -7,7 +8,11 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Тестовый класс для игры Blackjack.
@@ -111,14 +116,11 @@ public class BlackjackTest {
         assertEquals(0, hand.getScore());
         assertTrue(hand.getCards().isEmpty());
 
-        Card ace = new Card(Rank.ACE, Suit.SPADES);
-        Card king = new Card(Rank.KING, Suit.HEARTS);
-
-        hand.addCard(ace);
+        hand.addCard(new Card(Rank.ACE, Suit.SPADES));
         assertEquals(11, hand.getValue());
         assertEquals(1, hand.getCards().size());
 
-        hand.addCard(king);
+        hand.addCard(new Card(Rank.KING, Suit.HEARTS));
         assertEquals(21, hand.getValue()); // 11 + 10 = 21
         assertEquals(2, hand.getCards().size());
 
@@ -135,8 +137,8 @@ public class BlackjackTest {
         assertEquals(2, hand.getScore());
 
 
-        hand.addCard(ace);
-        hand.addCard(king);
+        hand.addCard(new Card(Rank.ACE, Suit.SPADES));
+        hand.addCard(new Card(Rank.KING, Suit.HEARTS));
         assertTrue(hand.toString().contains("Туз Пик (11)"));
         assertTrue(hand.toString().contains("Король Червей (10)"));
         assertTrue(hand.toString().contains("=> 21"));

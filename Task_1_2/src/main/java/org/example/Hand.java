@@ -94,7 +94,9 @@ public class Hand {
         }
 
         for (Card card : cards) {
-            if (handValue <= 21) break;
+            if (handValue <= 21) {
+                break;
+            }
 
             if (card.getRank() == Rank.ACE && card.getValue() == 11) {
                 card.setValue(1);

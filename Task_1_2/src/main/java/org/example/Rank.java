@@ -64,7 +64,7 @@ public enum Rank {
      * Распознаёт номинал карты по номеру.
      */
     public static Rank createRankUsNum(int number) {
-        for (Rank rank: values()) {
+        for (Rank rank : values()) {
             if (rank.rankNumber == number) {
                 return rank;
             }

@@ -13,7 +13,11 @@ public class GameRound {
     private final Scanner scanner;
     private final int roundNumber;
 
-    public GameRound(Hand player, Hand dealer, Deck deck, Output output, Scanner scanner, int roundNumber) {
+    /**
+     * Конструктор игрового раунда.
+     */
+    public GameRound(Hand player, Hand dealer, Deck deck,
+                     Output output, Scanner scanner, int roundNumber) {
         this.player = player;
         this.dealer = dealer;
         this.deck = deck;

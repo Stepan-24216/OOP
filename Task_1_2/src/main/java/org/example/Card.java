@@ -37,9 +37,11 @@ public class Card {
     public int getValue() {
         return value;
     }
+
     /**
      * Возвращает строковое представление карты.
      */
+
     public String toString() {
         return rank.getName() + " " + suit.getName() + " (" + value + ")";
     }
