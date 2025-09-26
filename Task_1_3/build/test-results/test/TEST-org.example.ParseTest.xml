@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.example.ParseTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-09-25T14:23:43.860Z" hostname="rend-V15x-V17xRNx" time="0.024">
+  <properties/>
+  <testcase name="moreLetterWord()" classname="org.example.ParseTest" time="0.015"/>
+  <testcase name="negativNumberTest()" classname="org.example.ParseTest" time="0.003"/>
+  <testcase name="simpleTest()" classname="org.example.ParseTest" time="0.001"/>
+  <testcase name="spaceTest()" classname="org.example.ParseTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
