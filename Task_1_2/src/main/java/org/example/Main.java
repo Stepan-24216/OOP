@@ -6,47 +6,39 @@ import java.util.Scanner;
  * Главный класс приложения для игры в Blackjack.
  */
 public class Main {
-    static Scanner scanner = new Scanner(System.in);
-    static HandLogic.Hand player = new HandLogic.Hand();
-    static HandLogic.Hand dealer = new HandLogic.Hand();
-    static int countRound = 1;
-    static int game = 1;
-    static int countDeck;
-    static DeckLogic.Deck deck;
 
     /**
      * Главный метод, запускающий игру.
      */
     public static void main(String[] args) {
-        Output.greeting();
-        countDeck = scanner.nextInt();
-        deck = new DeckLogic.Deck(countDeck);
+        Scanner scanner = new Scanner(System.in);
+        Output output = new Output();
+
+        output.greeting();
+        int countDeck = scanner.nextInt();
+
+        Hand player = new Hand();
+        Hand dealer = new Hand();
+        Deck deck = new Deck(countDeck);
+
+        int game = 1;
+        int countRound = 1;
+
         while (game != 0) {
-            DeckLogic.Deck deck = Game.startGame(player, dealer);
-            if (Move.movePlayer(deck, scanner)) {
-                if (!Move.moveDealer(deck)) {
-                    Game.winer(true);
-                } else {
-                    if (player.getValue() > dealer.getValue()) {
-                        Game.winer(true);
-                    } else if (player.getValue() < dealer.getValue()) {
-                        Game.winer(false);
-                    } else {
-                        Output.draw();
-                    }
-                }
-            } else {
-                Game.winer(false);
-            }
-            Output.questionNewGame();
+            GameRound gameRound = new GameRound(player, dealer, deck, output, scanner, countRound);
+            gameRound.start();
+
+            output.questionNewGame();
             game = scanner.nextInt();
+
             if (game == 0) {
-                Output.endGame();
+                output.endGame(player.getScore(), dealer.getScore());
             } else {
                 player.newGame();
                 dealer.newGame();
                 countRound++;
             }
         }
+        scanner.close();
     }
 }

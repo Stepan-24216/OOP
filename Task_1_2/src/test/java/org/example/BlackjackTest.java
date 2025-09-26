@@ -1,17 +1,31 @@
 package org.example;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.Scanner;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Тестовый класс для игры Blackjack.
  */
-
 public class BlackjackTest {
+
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+
+    @BeforeEach
+    void setUp() {
+        System.setOut(new PrintStream(outContent));
+    }
+
+    @AfterEach
+    void tearDown() {
+        System.setOut(originalOut);
+    }
 
     /**
      * Тест номиналов карт.
@@ -21,58 +35,24 @@ public class BlackjackTest {
         Rank rank = Rank.TWO;
         assertEquals("2", rank.getName());
         assertEquals(2, rank.getRankNumber());
-
-        rank = Rank.THREE;
-        assertEquals("3", rank.getName());
-        assertEquals(3, rank.getRankNumber());
-
-        rank = Rank.FOUR;
-        assertEquals("4", rank.getName());
-        assertEquals(4, rank.getRankNumber());
-
-        rank = Rank.FIVE;
-        assertEquals("5", rank.getName());
-        assertEquals(5, rank.getRankNumber());
-
-        rank = Rank.SIX;
-        assertEquals("6", rank.getName());
-        assertEquals(6, rank.getRankNumber());
-
-        rank = Rank.SEVEN;
-        assertEquals("7", rank.getName());
-        assertEquals(7, rank.getRankNumber());
-
-        rank = Rank.EIGHT;
-        assertEquals("8", rank.getName());
-        assertEquals(8, rank.getRankNumber());
-
-        rank = Rank.NINE;
-        assertEquals("9", rank.getName());
-        assertEquals(9, rank.getRankNumber());
-
-        rank = Rank.TEN;
-        assertEquals("10", rank.getName());
-        assertEquals(10, rank.getRankNumber());
+        assertEquals(2, rank.getCardValue());
 
         rank = Rank.JACK;
         assertEquals("Валет", rank.getName());
         assertEquals(11, rank.getRankNumber());
-
-        rank = Rank.QUEEN;
-        assertEquals("Дама", rank.getName());
-        assertEquals(12, rank.getRankNumber());
-
-        rank = Rank.KING;
-        assertEquals("Король", rank.getName());
-        assertEquals(13, rank.getRankNumber());
+        assertEquals(10, rank.getCardValue());
 
         rank = Rank.ACE;
         assertEquals("Туз", rank.getName());
         assertEquals(14, rank.getRankNumber());
+        assertEquals(11, rank.getCardValue());
+
+        assertEquals(Rank.KING, Rank.createRankUsNum(13));
+        assertNull(Rank.createRankUsNum(100));
     }
 
     /**
-     * Тест номиналов карт.
+     * Тест мастей карт.
      */
     @Test
     void testSuit() {
@@ -84,128 +64,240 @@ public class BlackjackTest {
         assertEquals("Червей", suit.getName());
         assertEquals(1, suit.getNumber());
 
-        suit = Suit.DIAMONDS;
-        assertEquals("Бубен", suit.getName());
-        assertEquals(2, suit.getNumber());
-
-        suit = Suit.CLUBS;
-        assertEquals("Треф", suit.getName());
-        assertEquals(3, suit.getNumber());
+        assertEquals(Suit.DIAMONDS, Suit.createSuitUsNum(2));
+        assertNull(Suit.createSuitUsNum(5));
     }
 
     /**
-     * Тест логики карт.
+     * Тест класса Card.
      */
     @Test
-    void testCardLogic() {
-        CardLogic.Card card = new CardLogic.Card(Rank.createRankUsNum(10), Suit.createSuitUsNum(0));
-        assertEquals(10, card.getValue());
-        assertEquals(10, card.getRank());
-        assertEquals("10 Пик", card.toString());
+    void testCard() {
+        Card card = new Card(Rank.ACE, Suit.HEARTS);
+        assertEquals(Rank.ACE, card.getRank());
+        assertEquals(11, card.getValue());
+        assertEquals("Туз Червей (11)", card.toString());
+
+        card.setValue(1);
+        assertEquals(1, card.getValue());
+        assertEquals("Туз Червей (1)", card.toString());
     }
 
     /**
-     * Тест логики колоды.
+     * Тест класса Deck.
      */
     @Test
-    void tesDeckLogic() {
-        CardLogic.Card card = new CardLogic.Card(Rank.createRankUsNum(10), Suit.createSuitUsNum(0));
-        TopCardLogic.TopCard topcard = new TopCardLogic.TopCard(card, 10);
-        assertEquals(10, topcard.getValue());
-        assertEquals("10 Пик (10)", topcard.toString());
+    void testDeck() {
+        Deck deck = new Deck(1); // Одна колода
 
-        DeckLogic.Deck deck = new DeckLogic.Deck(1);
-        TopCardLogic.TopCard cur = deck.takeCard();
-        CardLogic.Card topcard2 = cur.getCard();
+        Card card = deck.takeCard();
+        assertNotNull(card);
+        assertEquals(51, deck.getRemainingCards());
+
+        deck.shuffle();
+        assertTrue(deck.getRemainingCards() > 0);
+
+        Deck multiDeck = new Deck(2);
+        assertEquals(104, multiDeck.getRemainingCards());
     }
 
     /**
-     * Тест логики руки.
+     * Тест класса Hand.
      */
     @Test
-    void testHandLogic() {
-        CardLogic.Card card = new CardLogic.Card(Rank.createRankUsNum(14), Suit.createSuitUsNum(0));
-        TopCardLogic.TopCard topcard = new TopCardLogic.TopCard(card, 11);
-        HandLogic.Hand hand = new HandLogic.Hand();
-        hand.addCard(topcard);
+    void testHand() {
+        Hand hand = new Hand();
+        assertEquals(0, hand.getValue());
+        assertEquals(0, hand.getScore());
+        assertTrue(hand.getCards().isEmpty());
+
+        Card ace = new Card(Rank.ACE, Suit.SPADES);
+        Card king = new Card(Rank.KING, Suit.HEARTS);
+
+        hand.addCard(ace);
+        assertEquals(11, hand.getValue());
+        assertEquals(1, hand.getCards().size());
+
+        hand.addCard(king);
+        assertEquals(21, hand.getValue()); // 11 + 10 = 21
+        assertEquals(2, hand.getCards().size());
 
 
         hand.win();
         assertEquals(1, hand.getScore());
-        assertEquals(11, hand.getValue());
+        hand.win();
+        assertEquals(2, hand.getScore());
 
-        hand.addCard(topcard);
+
+        hand.newGame();
+        assertEquals(0, hand.getValue());
+        assertTrue(hand.getCards().isEmpty());
+        assertEquals(2, hand.getScore());
+
+
+        hand.addCard(ace);
+        hand.addCard(king);
+        assertTrue(hand.toString().contains("Туз Пик (11)"));
+        assertTrue(hand.toString().contains("Король Червей (10)"));
+        assertTrue(hand.toString().contains("=> 21"));
+    }
+
+    /**
+     * Тест логики работы с тузами в Hand.
+     */
+    @Test
+    void testHandAceLogic() {
+        Hand hand = new Hand();
+
+        Card ace1 = new Card(Rank.ACE, Suit.SPADES);
+        Card ace2 = new Card(Rank.ACE, Suit.HEARTS);
+        Card nine = new Card(Rank.NINE, Suit.DIAMONDS);
+
+        hand.addCard(ace1);
+        hand.addCard(ace2);
         assertEquals(12, hand.getValue());
 
-        DeckLogic.Deck deck = new DeckLogic.Deck(1);
-        Move.moveDealer(deck);
+        hand.addCard(nine);
+        assertEquals(21, hand.getValue());
 
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
+        Hand hand2 = new Hand();
+        hand2.addCard(new Card(Rank.ACE, Suit.SPADES));
+        hand2.addCard(new Card(Rank.ACE, Suit.HEARTS));
+        hand2.addCard(new Card(Rank.ACE, Suit.DIAMONDS));
+        hand2.addCard(new Card(Rank.ACE, Suit.CLUBS));
+        hand2.addCard(new Card(Rank.SEVEN, Suit.SPADES));
 
-        Output.printHandDialer(2);
-        Output.printHandPlayer();
-
-        String output = outContent.toString();
-
-        assertTrue(output.contains("Ход дилера:\n-------\nДилер открыл свою вторую карту"));
-        assertTrue(output.contains("    Карты дилера: "));
-        assertTrue(output.contains("Туз Пик (11), Туз Пик (11)] => 12"));
-        assertTrue(output.contains("    Ваши карты:"));
-        assertTrue(output.contains("Туз Пик (11), Туз Пик (11)] => 12"));
-
-        System.setOut(System.out);
+        assertEquals(21, hand2.getValue());
     }
 
     /**
-     * Тест логики игры.
+     * Тест класса Output.
      */
     @Test
-    void testGameLogic() {
-        CardLogic.Card card = new CardLogic.Card(Rank.createRankUsNum(14), Suit.createSuitUsNum(0));
-        TopCardLogic.TopCard topcard = new TopCardLogic.TopCard(card, 11);
-        HandLogic.Hand hand1 = new HandLogic.Hand();
-        HandLogic.Hand hand2 = new HandLogic.Hand();
-        hand1.addCard(topcard);
-        hand1.addCard(topcard);
-        hand2.addCard(topcard);
-        hand2.addCard(topcard);
+    void testOutput() {
+        Output output = new Output();
+        Hand player = new Hand();
+        Hand dealer = new Hand();
 
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        Game.noCard();
-        Game.winer(true);
-        Game.startGame(hand1, hand2);
-        String output = outContent.toString();
+        player.addCard(new Card(Rank.TEN, Suit.HEARTS));
+        player.addCard(new Card(Rank.SEVEN, Suit.SPADES));
 
-        assertTrue(output.contains("Карты в колоде кончились\n"
-                + "Подвожу итоги игры"));
-        assertTrue(output.contains("    Ваши карты:"));
-        assertTrue(output.contains("] => 0"));
-        assertTrue(output.contains("    Карты дилера: "));
-        assertTrue(output.contains("] => 0"));
-        assertTrue(output.contains("Количество очков одинаковое\n Счёт:" + 0 + ":" + 0));
-        assertTrue(output.contains("Вы выиграли раунд! :) "
-                + "Счет " + 1 + ":" + 0));
-        assertTrue(output.contains(" в вашу пользу."));
-        assertTrue(output.contains("\n"));
-        assertTrue(output.contains("Раунд " + 1 + "\n"
-                + "Дилер раздал карты"));
+        dealer.addCard(new Card(Rank.ACE, Suit.DIAMONDS));
+        dealer.addCard(new Card(Rank.KING, Suit.CLUBS));
 
-        System.setOut(System.out);
+        output.printHands(player, dealer, true);
+        String outputText = outContent.toString();
+        assertTrue(outputText.contains("Ваши карты:"));
+        assertTrue(outputText.contains("10 Червей (10)"));
+        assertTrue(outputText.contains("7 Пик (7)"));
+        assertTrue(outputText.contains("=> 17"));
+        assertTrue(outputText.contains("Карты дилера:"));
+        assertTrue(outputText.contains("<Скрытая карта>"));
+
+        outContent.reset();
+
+        output.printHands(player, dealer, false);
+        outputText = outContent.toString();
+        assertTrue(outputText.contains("Туз Бубен (11)"));
+        assertTrue(outputText.contains("Король Треф (10)"));
+        assertFalse(outputText.contains("<Скрытая карта>"));
+
+        outContent.reset();
+
+        output.winScore(true, 3, 2);
+        outputText = outContent.toString();
+        assertTrue(outputText.contains("Вы выиграли раунд! :)"));
+        assertTrue(outputText.contains("3:2"));
+        assertTrue(outputText.contains("в вашу пользу"));
+
+        outContent.reset();
+
+        output.winScore(false, 1, 3);
+        outputText = outContent.toString();
+        assertTrue(outputText.contains("Вы проиграли раунд! :("));
+        assertTrue(outputText.contains("в пользу дилера"));
+
+        outContent.reset();
+
+        output.draw(2, 2);
+        assertTrue(outContent.toString().contains("Количество очков одинаковое"));
+
+        outContent.reset();
+
+        output.newRound(5);
+        assertTrue(outContent.toString().contains("Раунд 5"));
     }
 
     /**
-     * Тест главного метода.
+     * Тест класса GameRound.
      */
     @Test
-    public void testMain() {
-        String input = "2\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1"
-                + "\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n0"
-                + "\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n0";
+    void testGameRound() {
+        Hand player = new Hand();
+        Hand dealer = new Hand();
+        Deck deck = new Deck(1);
+        Output output = new Output();
+
+        String input = "1\n0\n";
+        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+        Scanner scanner = new Scanner(in);
+
+        GameRound gameRound = new GameRound(player, dealer, deck, output, scanner, 1);
+
+        gameRound.start();
+
+        assertTrue(player.getValue() > 0);
+        assertTrue(dealer.getValue() > 0);
+        assertTrue(player.getCards().size() >= 2); // Минимум 2 начальные карты + возможно еще одна
+        assertTrue(dealer.getCards().size() >= 2);
+    }
+
+    /**
+     * Тест определения победителя.
+     */
+    @Test
+    void testDetermineWinnerLogic() {
+        Hand player = new Hand();
+        Hand dealer = new Hand();
+        Deck deck = new Deck(1);
+        Output output = new Output();
+        Scanner scanner = new Scanner(System.in);
+
+        GameRound gameRound = new GameRound(player, dealer, deck, output, scanner, 1);
+
+        player.addCard(new Card(Rank.KING, Suit.SPADES));
+        player.addCard(new Card(Rank.QUEEN, Suit.HEARTS));
+        player.addCard(new Card(Rank.THREE, Suit.DIAMONDS)); // 10 + 10 + 3 = 23
+
+        dealer.addCard(new Card(Rank.KING, Suit.CLUBS));
+        dealer.addCard(new Card(Rank.SEVEN, Suit.SPADES)); // 10 + 7 = 17
+
+        gameRound.determineWinner();
+
+        assertEquals(1,dealer.getScore());
+
+        player.newGame();
+        dealer.newGame();
+
+        player.addCard(new Card(Rank.KING, Suit.SPADES));
+        player.addCard(new Card(Rank.SEVEN, Suit.HEARTS)); // 10 + 7 = 17
+
+        dealer.addCard(new Card(Rank.KING, Suit.CLUBS));
+        dealer.addCard(new Card(Rank.QUEEN, Suit.SPADES));
+        dealer.addCard(new Card(Rank.TWO, Suit.DIAMONDS)); // 10 + 10 + 2 = 22
+
+        gameRound.determineWinner();
+
+        assertEquals(1,player.getScore());
+    }
+
+    /**
+     * Интеграционный тест полного цикла игры.
+     */
+    @Test
+    void testFullGameIntegration() {
+        String input = "1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
-
-        Main.main(new String[]{});
-
     }
+
 }

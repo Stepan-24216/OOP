@@ -1,14 +1,14 @@
 package org.example;
 
 /**
- * Функции для вывода информации для пользователя.
+ * Класс для вывода информации пользователю.
  */
 public class Output {
 
     /**
      * Приветствие.
      */
-    public static void greeting() {
+    public void greeting() {
         System.out.println("Добро пожаловать в мою реализацию игры BlackJack");
         System.out.println("Выберите количество колод: ");
     }
@@ -16,100 +16,88 @@ public class Output {
     /**
      * Вопрос в конце раунда.
      */
-    public static void questionNewGame() {
-        System.out.println(
-                "Хотите сыграть ещё?(Введите 1 для "
-                        + "следующего раунда, 0 чтобы закончить игру)"
-        );
+    public void questionNewGame() {
+        System.out.println("Хотите сыграть ещё? (Введите 1 для следующего раунда, 0 чтобы закончить игру)");
     }
 
     /**
-     * Выбор следубщего действия для хода.
+     * Выбор следующего действия для хода.
      */
-    public static void choosingAnAction() {
+    public void choosingAnAction() {
         System.out.println("Введите \"1\", чтобы взять карту, и \"0\", чтобы остановиться...");
     }
 
-    public static void yourMoveMassage() {
+    public void yourMoveMessage() {
         System.out.println("Ваш ход:\n-------");
     }
 
-    public static void dilerMoveMassage() {
+    public void dealerMoveMessage() {
         System.out.println("Ход дилера:\n-------\nДилер открыл свою вторую карту");
     }
 
-    public static void playerOpenCardMassage(TopCardLogic.TopCard cur) {
-        System.out.println("Вы открыли карту " + cur.toString());
+    public void playerOpenCardMessage(Card card) {
+        System.out.println("Вы открыли карту " + card.toString());
     }
 
-    public static void dilerOpenCardMassage(TopCardLogic.TopCard cur) {
-        System.out.println("Дилер открыл карту " + cur.toString());
+    public void dealerOpenCardMessage(Card card) {
+        System.out.println("Дилер открыл карту " + card.toString());
     }
 
-    public static void draw() {
-        System.out.println("Количество очков одинаковое\n Счёт:"
-                + Main.player.getScore() + ":" + Main.dealer.getScore());
+    public void draw(int playerScore, int dealerScore) {
+        System.out.println("Количество очков одинаковое\nСчёт: " + playerScore + ":" + dealerScore);
     }
 
     /**
      * Печатает количество очков и статус победы или поражения.
      */
-    public static void winScore(boolean win) {
+    public void winScore(boolean win, int playerScore, int dealerScore) {
         if (win) {
-            System.out.print("Вы выиграли раунд! :) "
-                    + "Счет " + Main.player.getScore() + ":" + Main.dealer.getScore());
+            System.out.print("Вы выиграли раунд! :) Счет " + playerScore + ":" + dealerScore);
         } else {
-            System.out.print("Вы проиграли раунд! :( "
-                    + "Счет " + Main.player.getScore() + ":" + Main.dealer.getScore());
+            System.out.print("Вы проиграли раунд! :( Счет " + playerScore + ":" + dealerScore);
         }
-        if (Main.player.getScore() > Main.dealer.getScore()) {
+
+        if (playerScore > dealerScore) {
             System.out.print(" в вашу пользу.");
-        } else if (Main.player.getScore() < Main.dealer.getScore()) {
+        } else if (playerScore < dealerScore) {
             System.out.print(" в пользу дилера.");
         }
-        System.out.print("\n");
+        System.out.println();
     }
 
-    public static void newRound() {
-        System.out.println("Раунд " + Main.countRound + "\n"
-                + "Дилер раздал карты");
-    }
-
-    /**
-     * Печатает руку игрока.
-     */
-    public static void printHandPlayer() {
-        System.out.print("    Ваши карты: ");
-        System.out.print(Main.player.cards.toString() + " => " + Main.player.handValue);
-        System.out.print("\n");
+    public void newRound(int roundNumber) {
+        System.out.println("Раунд " + roundNumber + "\nДилер раздал карты");
     }
 
     /**
-     * Печатает руку дилера.
+     * Печатает руки игрока и дилера.
      */
-    public static void printHandDialer(int countMove) {
-        if (countMove == 1) {
-            System.out.print("    Карты дилера: ["
-                    + Main.dealer.cards.get(0).toString() + " <SecreteCard>]");
+    public void printHands(Hand player, Hand dealer, boolean hideDealerCard) {
+        System.out.print("    Ваши карты: " + player.toString());
+        System.out.println();
+
+        System.out.print("    Карты дилера: ");
+        if (hideDealerCard) {
+            // Показываем только первую карту дилера
+            var dealerCards = dealer.getCards();
+            if (!dealerCards.isEmpty()) {
+                System.out.print("[" + dealerCards.get(0).toString() + " <Скрытая карта>]");
+            }
         } else {
-            System.out.print("    Карты дилера: ");
-            System.out.print(Main.dealer.cards.toString() + " => " + Main.dealer.handValue);
+            System.out.print(dealer.toString());
         }
-        System.out.print("\n");
+        System.out.println();
     }
 
-    public static void printNoCard() {
-        System.out.println("Карты в колоде кончились\n"
-                + "Подвожу итоги игры");
+    public void printNoCard() {
+        System.out.println("Карты в колоде кончились\nПодвожу итоги игры");
     }
 
     /**
      * Вывод итогов и конца игры.
      */
-    public static void endGame() {
-        System.out.println("Финальный счёт: "
-                + Main.player.getScore() + ":" + Main.dealer.getScore());
-        System.out.println("Спасибо за игру заходи ещё");
+    public void endGame(int playerScore, int dealerScore) {
+        System.out.println("Финальный счёт: " + playerScore + ":" + dealerScore);
+        System.out.println("Спасибо за игру! Заходи ещё!");
     }
 }
-
