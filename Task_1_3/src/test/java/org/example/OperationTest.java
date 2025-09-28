@@ -191,7 +191,9 @@ public class OperationTest {
         String output = outContent.toString();
 
         assertTrue(output.contains(
-            "((((x + x) + (3 * 1)) * (((x * x) + (3 * x)) * ((x * x) + (3 * x)))) + (((x * x) + (3 * x)) * ((((x + x) + (3 * 1)) * ((x * x) + (3 * x))) + (((x * x) + (3 * x)) * ((x + x) + (3 * 1))))))\n"));
+            "((((x + x) + (3 * 1)) * (((x * x) + (3 * x)) * ((x * x) + (3 * x)))) + (((x * x) + " +
+                "(3 * x)) * ((((x + x) + (3 * 1)) * ((x * x) + (3 * x))) + (((x * x) + (3 * x)) *" +
+                " ((x + x) + (3 * 1))))))\n"));
     }
 
     @Test

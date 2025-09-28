@@ -149,7 +149,7 @@ public class ParseTest {
 //        new Mul(new Number(3), new Variable("x"))
 //);
 //Expression f = new Mul(inner, new Mul(inner, inner)); - взять производную по x
-//// f'(x) = 3*(x² + 3x)² * (2x + 3)
+/// / f'(x) = 3*(x² + 3x)² * (2x + 3)
 //
 //Expression e = new Add(
 //        new Mul(new Variable("x"), new Variable("y")),
