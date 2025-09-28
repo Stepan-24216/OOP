@@ -15,7 +15,6 @@ import java.util.Scanner;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.example.entities.Card;
 import org.example.entities.Deck;
 import org.example.entities.Hand;
@@ -266,11 +265,11 @@ public class BlackjackTest {
      */
     @Test
     void testDetermineWinnerLogic() {
-        Hand player = new Hand();
-        Hand dealer = new Hand();
-        Deck deck = new Deck(1);
-        Output output = new Output();
-        Scanner scanner = new Scanner(System.in);
+        final Hand player = new Hand();
+        final Hand dealer = new Hand();
+        final Deck deck = new Deck(1);
+        final Output output = new Output();
+        final Scanner scanner = new Scanner(System.in);
 
         player.addCard(new Card(Rank.KING, Suit.SPADES));
         player.addCard(new Card(Rank.QUEEN, Suit.HEARTS));

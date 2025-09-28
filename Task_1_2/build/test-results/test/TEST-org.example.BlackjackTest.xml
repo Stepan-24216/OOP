@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.example.BlackjackTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2025-09-28T12:50:37" hostname="rend-V15x-V17xRNx" time="0.043">
+<testsuite name="org.example.BlackjackTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2025-09-28T13:03:56" hostname="rend-V15x-V17xRNx" time="0.043">
   <properties/>
-  <testcase name="testCard()" classname="org.example.BlackjackTest" time="0.018"/>
-  <testcase name="testDeck()" classname="org.example.BlackjackTest" time="0.001"/>
+  <testcase name="testCard()" classname="org.example.BlackjackTest" time="0.017"/>
+  <testcase name="testDeck()" classname="org.example.BlackjackTest" time="0.002"/>
   <testcase name="testHand()" classname="org.example.BlackjackTest" time="0.002"/>
-  <testcase name="testMain()" classname="org.example.BlackjackTest" time="0.01"/>
+  <testcase name="testMain()" classname="org.example.BlackjackTest" time="0.009"/>
   <testcase name="testRank()" classname="org.example.BlackjackTest" time="0.001"/>
   <testcase name="testSuit()" classname="org.example.BlackjackTest" time="0.001"/>
-  <testcase name="testDetermineWinnerLogic()" classname="org.example.BlackjackTest" time="0.001"/>
+  <testcase name="testDetermineWinnerLogic()" classname="org.example.BlackjackTest" time="0.0"/>
   <testcase name="testHandAceLogic()" classname="org.example.BlackjackTest" time="0.001"/>
-  <testcase name="testOutput()" classname="org.example.BlackjackTest" time="0.002"/>
-  <testcase name="testGameRound()" classname="org.example.BlackjackTest" time="0.001"/>
+  <testcase name="testOutput()" classname="org.example.BlackjackTest" time="0.001"/>
+  <testcase name="testGameRound()" classname="org.example.BlackjackTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
