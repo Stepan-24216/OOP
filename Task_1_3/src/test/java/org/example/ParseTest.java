@@ -37,7 +37,7 @@ public class ParseTest {
     }
 
     @Test
-    void moreLetterWord(){
+    void moreLetterWord() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
@@ -101,7 +101,7 @@ public class ParseTest {
     }
 
     @Test
-    void failTest(){
+    void failTest() {
         Parser parser = new Parser();
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -143,7 +143,7 @@ public class ParseTest {
 }
 
 
-////f(x) = (x² + 3x)³
+/// /f(x) = (x² + 3x)³
 //Expression inner = new Add(
 //        new Mul(new Variable("x"), new Variable("x")),
 //        new Mul(new Number(3), new Variable("x"))
