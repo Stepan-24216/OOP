@@ -108,58 +108,41 @@ public class ParseTest {
             parser.parse(null);
         });
 
-        assertEquals("Не опознанный объект. *_*", exception.getMessage());
+        assertEquals("Эй тут пусто!!!", exception.getMessage());
 
-        Expression parsed = parser.parse("(x+y");
-        parsed.print();
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            parser.parse("(x+y");
+        });
+        assertEquals("Непарные скобки или неизвестный символ.", exception.getMessage());
 
-        parsed = parser.parse("x+y)");
-        parsed.print();
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            parser.parse("x+y)");
+        });
+        assertEquals("Непарные скобки или неизвестный символ.", exception.getMessage());
 
-        parsed = parser.parse("(x # y)");
-        parsed.print();
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            parser.parse("(2{3)");
+        });
+        assertEquals("Непарные скобки или неизвестный символ.", exception.getMessage());
 
-        parsed = parser.parse("()");
-        parsed.print();
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            parser.parse("()");
+        });
+        assertEquals("Неправильный синтаксис. *_*", exception.getMessage());
 
-        parsed = parser.parse("(+)");
-        parsed.print();
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            parser.parse("(+)");
+        });
+        assertEquals("Неправильный синтаксис. *_*", exception.getMessage());
 
-        parsed = parser.parse("(x++)");
-        parsed.print();
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            parser.parse("(x++)");
+        });
+        assertEquals("Неправильный синтаксис. *_*", exception.getMessage());
     }
 }
 
-//// Непарные скобки
-//        "(x+y" → ParseException
-//"x+y)" → ParseException
-//
-//// Неизвестные символы
-//"(x # y)" → ParseException
-//
-//// Неправильный синтаксис
-//"()" → ParseException
-//"(+)" → ParseException
-//"(x++)" → ParseException
 
-//// Производная константы
-//new Number(5).derivative("x") → new Number(0)
-//
-//// Производная переменной по себе
-//new Variable("x").derivative("x") → new Number(1)
-//
-//// Производная переменной по другой переменной
-//new Variable("x").derivative("y") → new Number(0)
-//
-//// Дифференцирование выражений без переменной
-//Expression e = new Add(new Number(3), new Number(5));
-//e.derivative("x") → должно быть new Number(0)
-//
-//// Многократное дифференцирование
-//Expression e = new Variable("x");
-//Expression de1 = e.derivative("x"); // 1
-//Expression de2 = de1.derivative("x"); // 0
-//
 ////f(x) = (x² + 3x)³
 //Expression inner = new Add(
 //        new Mul(new Variable("x"), new Variable("x")),
@@ -175,28 +158,6 @@ public class ParseTest {
 //e.eval("x=3; y=4; z=10") → (34 + 10/2) = 12 + 5 = 17
 //        e.eval("x=0; y=100; z=8") → (0100 + 8/2) = 0 + 4 = 4
 //
-//// Переменные в разном порядке
-//        e.eval("z=10; x=3; y=4") → 17
-//// Лишние переменные
-//        e.eval("x=3; y=4; z=10; w=100") → 17
-//        e.eval("x=3; y=4") // z не задана → ошибка
-//new Number(5).eval("") → 5 - пустое означивание для выражений без переменных
-//new Add(new Number(2), new Number(3)).eval("") → 5
-//
-//Некорректный ввод:
 
 
-//
-//// Некорректное означивание переменных
-//e.eval("x=; y=5")
-//e.eval("x=abc") → не число
-//e.eval("x=5 y=3") → нет разделителя
-//
-//к парсингу
-//// Пустые значения
-//e.eval("x=; y=5") → должно бросать исключение
-//// Лишние пробелы и разделители
-//e.eval(" x = 3 ; y = 4 ; ; ") → должно работать
-//// Нестандартные разделители
-//e.eval("x=3, y=4") → должно бросать исключение
 

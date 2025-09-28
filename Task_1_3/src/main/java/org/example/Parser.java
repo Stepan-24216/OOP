@@ -11,14 +11,16 @@ public class Parser {
     private char currentChar;
 
     public Expression parse(String expression) {
+        if (expression == null || expression == "") {
+            throw new IllegalArgumentException("Эй тут пусто!!!");
+        }
         this.input = expression.replaceAll("\\s+", ""); // Убираем пробелы
         this.position = 0;
         this.currentChar = input.length() > 0 ? input.charAt(0) : '\0';
 
         Expression result = parseExpression();
-
         if (position < input.length()) {
-            throw new IllegalArgumentException("Ошибка считывания");
+            throw new IllegalArgumentException("Непарные скобки или неизвестный символ.");
         }
 
         return result;
@@ -78,7 +80,7 @@ public class Parser {
             advance(); // пропускаем '('
             Expression expr = parseExpression();
             if (currentChar != ')') {
-                throw new IllegalArgumentException("Нет закрывающей скобки");
+                throw new IllegalArgumentException("Непарные скобки или неизвестный символ.");
             }
             advance(); // пропускаем ')'
             return expr;
@@ -91,8 +93,8 @@ public class Parser {
             }
         } else if (Character.isLetter(currentChar)) {
             return parseVariable();
-        } else {System.err.println("Не опознанный объект. *_*");
-            throw new IllegalArgumentException("Не опознанный объект. *_*");
+        } else {
+            throw new IllegalArgumentException("Неправильный синтаксис. *_*");
         }
     }
     /**
@@ -115,7 +117,7 @@ public class Parser {
                 return new Number(value);
             }
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid number. *_*");
+            throw new IllegalArgumentException("Некорекнтное число. *_*");
         }
     }
 
@@ -134,15 +136,16 @@ public class Parser {
 
         // Проверяем, что имя переменной не пустое
         if (varName.isEmpty()) {
-            throw new IllegalArgumentException("Void Variable. *_*");
+            throw new IllegalArgumentException("Имя переменной пустое. *_*");
         }
 
         // Проверяем, что имя начинается с буквы
         if (!Character.isLetter(varName.charAt(0))) {
-            throw new IllegalArgumentException("Incorrect name Varaible. *_*");
+            throw new IllegalArgumentException("Некоректное имя переменной. *_*");
         }
 
         return new Variable(varName);
     }
+
 }
 
