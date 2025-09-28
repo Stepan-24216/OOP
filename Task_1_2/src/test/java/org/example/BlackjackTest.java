@@ -16,8 +16,13 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import org.example.entities.*;
-import org.example.game.*;
+import org.example.entities.Card;
+import org.example.entities.Deck;
+import org.example.entities.Hand;
+import org.example.entities.Rank;
+import org.example.entities.Suit;
+import org.example.game.GameRound;
+import org.example.game.Output;
 
 /**
  * Тестовый класс для игры Blackjack.
@@ -156,13 +161,11 @@ public class BlackjackTest {
     void testHandAceLogic() {
         Hand hand = new Hand();
 
-        Card nine = new Card(Rank.NINE, Suit.DIAMONDS);
-
         hand.addCard(new Card(Rank.ACE, Suit.SPADES));
         hand.addCard(new Card(Rank.ACE, Suit.HEARTS));
         assertEquals(12, hand.getValue());
 
-        hand.addCard(nine);
+        hand.addCard(new Card(Rank.NINE, Suit.DIAMONDS));
         assertEquals(21, hand.getValue());
 
         Hand hand2 = new Hand();

@@ -1,11 +1,10 @@
 package org.example;
 
 import java.util.Scanner;
-import org.example.game.Output;
-import org.example.entities.Hand;
 import org.example.entities.Deck;
+import org.example.entities.Hand;
 import org.example.game.GameRound;
-
+import org.example.game.Output;
 /**
  * Главный класс приложения для игры в Blackjack.
  */
