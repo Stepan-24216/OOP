@@ -159,8 +159,89 @@ public class OperationTest {
 
         String output = outContent.toString();
 
-        assertTrue(output.contains("(1 - 0)\n"));
+        assertTrue(output.contains("1\n"));
     }
 
+    @Test
+    void testDerivative(){
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
 
+        Expression e = new Variable("x");
+        Expression de1 = e.derivative("x"); // 1
+        Expression de2 = de1.derivative("x"); // 0
+        assertEquals(0,((Number)de2).getValue());
+
+        e = new Add(new Number(3), new Number(5));//→ должно быть new Number(0)
+        assertEquals(0,((Number)e.derivative("x")).getValue());
+
+        assertEquals(0,((Number)new Variable("x").derivative("y")).getValue());
+
+        assertEquals(0,((Number)new Number(5).derivative("x")).getValue());
+
+        assertEquals(1,((Number)new Variable("x").derivative("x")).getValue());
+
+        Expression inner = new Add(
+            new Mul(new Variable("x"), new Variable("x")),
+            new Mul(new Number(3), new Variable("x"))
+        );
+        Expression f = new Mul(inner, new Mul(inner, inner));
+        (f.derivative("x")).print();
+
+        String output = outContent.toString();
+
+        assertTrue(output.contains("((((x + x) + (3 * 1)) * (((x * x) + (3 * x)) * ((x * x) + (3 * x)))) + (((x * x) + (3 * x)) * ((((x + x) + (3 * 1)) * ((x * x) + (3 * x))) + (((x * x) + (3 * x)) * ((x + x) + (3 * 1))))))\n"));
+    }
+
+    @Test
+    void testEval(){
+        Expression var = new Mul(new Variable("x"), new Variable("y"));
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            var.eval("x=; y=5");
+        });
+        assertEquals("Отсутствует важная для означивания часть строки", exception.getMessage());
+
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            var.eval("x 1; y=5");
+        });
+        assertEquals("Отсутствует важная для означивания часть строки", exception.getMessage());
+
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            var.eval("x=abc");
+        });
+        assertEquals("Некорректное числовое значение для переменной", exception.getMessage());
+
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            var.eval("x=5 y=3");
+        });
+        assertEquals("Некорректное означивание переменных", exception.getMessage());
+
+        exception = assertThrows(IllegalArgumentException.class, () -> {
+            (new Add(new Add(new Variable("x"), new Variable("y")),new Variable("z"))).eval("x=3; y=4");
+        });
+        assertEquals("Не найдено значение для переменной: z", exception.getMessage());
+
+        int num = var.eval(" x = 3 ; y = 4 ; ; ");
+        assertEquals(12,num);
+
+        assertEquals(103,(new Add(new Variable("x"), new Variable("w"))).eval("x=3; y=4; z=10; w=100"));
+
+        assertEquals(5,new Number(5).eval(""));
+
+        assertEquals(5,new Add(new Number(2), new Number(3)).eval(""));
+
+        assertEquals(17,(new Add(new Add(new Variable("x"), new Variable("y")),new Variable("z"))).eval("z=10; x=3; y=4"));
+
+        Expression e = new Add(
+                new Mul(new Variable("x"), new Variable("y")),
+                new Div(new Variable("z"), new Number(2))
+        );
+        int a = e.eval("x=3; y=4; z=10");// → (34 + 10/2) = 12 + 5 = 17
+        int b = e.eval("x=0; y=100; z=8");// → (0100 + 8/2) = 0 + 4 = 4
+
+        assertEquals(17,a);
+
+        assertEquals(4,b);
+    }
 }

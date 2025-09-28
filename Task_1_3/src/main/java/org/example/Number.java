@@ -10,6 +10,10 @@ public class Number extends Expression {
         this.value = value;
     }
 
+    public int getValue() {
+        return value;
+    }
+
     public Expression derivative(String variable) {
         return new Number(0); // производная константы это нуль
     }

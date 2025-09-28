@@ -27,16 +27,31 @@ public class Variable extends Expression {
 
         for (String test : parts) {
             String[] varAndNum = test.split("=");
+
+            if (test == null || test.trim().isEmpty()) {
+                continue; // переходим к следующей итерации
+            }
+
             if (varAndNum.length == 2) {
                 String variable = varAndNum[0].trim();
                 String value = varAndNum[1].trim();
                 variables.put(variable, value);
             }
+            else if (varAndNum.length > 2) {
+                throw new IllegalArgumentException("Некорректное означивание переменных");
+            }
+            else if (varAndNum.length == 1) {
+                throw new IllegalArgumentException("Отсутствует важная для означивания часть строки");
+            }
         }
 
         if (variables.containsKey(var)) {
-            return Integer.parseInt(variables.get(var));
+            try {
+                return Integer.parseInt(variables.get(var));
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Некорректное числовое значение для переменной");
+            }
         }
-        return 0;
+        throw new IllegalArgumentException("Не найдено значение для переменной: " + var);
     }
 }
