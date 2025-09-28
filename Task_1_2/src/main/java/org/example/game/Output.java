@@ -1,4 +1,7 @@
-package org.example;
+package org.example.game;
+
+import org.example.entities.Card;
+import org.example.entities.Hand;
 
 /**
  * Класс для вывода информации пользователю.
@@ -18,7 +21,7 @@ public class Output {
      */
     public void questionNewGame() {
         System.out.println("Хотите сыграть ещё? "
-                + "(Введите 1 для следующего раунда, 0 чтобы закончить игру)");
+            + "(Введите 1 для следующего раунда, 0 чтобы закончить игру)");
     }
 
     /**

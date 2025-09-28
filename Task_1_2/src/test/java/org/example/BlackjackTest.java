@@ -16,6 +16,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import org.example.entities.*;
+import org.example.game.*;
+
 /**
  * Тестовый класс для игры Blackjack.
  */
@@ -277,7 +280,7 @@ public class BlackjackTest {
 
         gameRound.determineWinner();
 
-        assertEquals(1,dealer.getScore());
+        assertEquals(1, dealer.getScore());
 
         player.newGame();
         dealer.newGame();
@@ -291,7 +294,7 @@ public class BlackjackTest {
 
         gameRound.determineWinner();
 
-        assertEquals(1,player.getScore());
+        assertEquals(1, player.getScore());
     }
 
     /**
@@ -300,11 +303,11 @@ public class BlackjackTest {
     @Test
     public void testMain() {
         String input = "2\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1"
-                + "\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n0"
-                + "\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n0";
+            + "\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n0"
+            + "\n0\n1\n0\n1\n0\n1\n0\n1\n0\n1\n0\n0";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
 
-        Main.main(new String[]{});
+        Main.main(new String[] {});
 
     }
 

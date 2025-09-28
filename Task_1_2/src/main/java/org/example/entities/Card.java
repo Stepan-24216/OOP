@@ -1,4 +1,4 @@
-package org.example;
+package org.example.entities;
 
 /**
  * Класс представляющий карту.
@@ -25,17 +25,17 @@ public class Card {
     }
 
     /**
-     * Устанавливает значение карты (для туза).
-     */
-    public void setValue(int value) {
-        this.value = value;
-    }
-
-    /**
      * Возвращает значение карты.
      */
     public int getValue() {
         return value;
+    }
+
+    /**
+     * Устанавливает значение карты (для туза).
+     */
+    public void setValue(int value) {
+        this.value = value;
     }
 
     /**

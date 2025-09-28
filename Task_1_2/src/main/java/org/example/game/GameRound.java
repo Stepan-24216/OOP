@@ -1,6 +1,9 @@
-package org.example;
+package org.example.game;
 
 import java.util.Scanner;
+import org.example.entities.Hand;
+import org.example.entities.Deck;
+import org.example.entities.Card;
 
 /**
  * Класс для симуляции одного игрового раунда.
@@ -105,7 +108,7 @@ public class GameRound {
         return true;
     }
 
-    protected void determineWinner() {
+    public void determineWinner() {
         int playerValue = player.getValue();
         int dealerValue = dealer.getValue();
 

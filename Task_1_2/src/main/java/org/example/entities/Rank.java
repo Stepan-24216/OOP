@@ -1,4 +1,4 @@
-package org.example;
+package org.example.entities;
 
 /**
  * Класс enum для номинала
@@ -32,6 +32,18 @@ public enum Rank {
     }
 
     /**
+     * Распознаёт номинал карты по номеру.
+     */
+    public static Rank createRankUsNum(int number) {
+        for (Rank rank : values()) {
+            if (rank.rankNumber == number) {
+                return rank;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Методы получения информации о enum.
      */
     public int getRankNumber() {
@@ -49,7 +61,7 @@ public enum Rank {
         if (rankNumber >= 2 && rankNumber <= 10) {
             return rankNumber;
         } else if (rankNumber >= 11
-                && rankNumber <= 13) {
+            && rankNumber <= 13) {
             return 10;
         } else { // ACE
             return 11;
@@ -58,17 +70,5 @@ public enum Rank {
 
     public String toString() {
         return name;
-    }
-
-    /**
-     * Распознаёт номинал карты по номеру.
-     */
-    public static Rank createRankUsNum(int number) {
-        for (Rank rank : values()) {
-            if (rank.rankNumber == number) {
-                return rank;
-            }
-        }
-        return null;
     }
 }

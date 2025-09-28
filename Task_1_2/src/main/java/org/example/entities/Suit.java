@@ -1,4 +1,4 @@
-package org.example;
+package org.example.entities;
 
 
 /**
@@ -18,18 +18,6 @@ public enum Suit {
         this.number = number;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String toString() {
-        return name;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
     /**
      * Распознаёт масть по номеру.
      */
@@ -40,5 +28,17 @@ public enum Suit {
             }
         }
         return null;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String toString() {
+        return name;
+    }
+
+    public int getNumber() {
+        return number;
     }
 }
