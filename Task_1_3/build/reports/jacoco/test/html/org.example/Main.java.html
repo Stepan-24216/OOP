@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Task_1_2</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">package org.example;
+
+import java.util.Scanner;
+
+<span class="nc" id="L5">public class Main {</span>
+<span class="nc" id="L6">    static Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L7">    static HandLogic.Hand Player = new HandLogic.Hand();</span>
+<span class="nc" id="L8">    static HandLogic.Hand Diler = new HandLogic.Hand();</span>
+<span class="nc" id="L9">    static int countRound = 1;</span>
+<span class="nc" id="L10">    static int game = 1;</span>
+    static int countDeck;
+    static DeckLogic.Deck deck;
+
+    public static void main() {
+<span class="nc" id="L15">        System.out.println(&quot;Добро пожаловать в мою реализацию игры BlackJack&quot;);</span>
+<span class="nc" id="L16">        System.out.println(&quot;Выберите количество колод: &quot;);</span>
+<span class="nc" id="L17">        countDeck = scanner.nextInt();</span>
+<span class="nc" id="L18">        deck = new DeckLogic.Deck(countDeck);</span>
+<span class="nc bnc" id="L19" title="All 2 branches missed.">        while (game != 0){</span>
+<span class="nc" id="L20">            DeckLogic.Deck deck = Game.startGame(Player,Diler);</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">            if (HandLogic.movePlayer(deck,scanner)){</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">                if (!HandLogic.moveDiler(deck)){</span>
+<span class="nc" id="L23">                    Game.winer(true);</span>
+                }
+                else {
+<span class="nc bnc" id="L26" title="All 2 branches missed.">                    if (Player.getValue() &gt; Diler.getValue()){ Game.winer(true);}</span>
+<span class="nc bnc" id="L27" title="All 2 branches missed.">                    else if (Player.getValue() &lt; Diler.getValue()){ Game.winer(false);}</span>
+<span class="nc" id="L28">                    else { System.out.println(&quot;Количество очков одинаковое\n Счёт:&quot;+Player.getScore()+&quot;:&quot;+Diler.getScore());}</span>
+                }
+            }
+            else{
+<span class="nc" id="L32">                Game.winer(false);</span>
+            }
+<span class="nc" id="L34">            System.out.println(&quot;Хотите сыграть ещё?(Введите 1 для следующего раунда, 0 чтобы закончить игру)&quot;);</span>
+<span class="nc" id="L35">            game = scanner.nextInt();</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">            if (game == 0){</span>
+<span class="nc" id="L37">                System.out.println(&quot;Финальный счёт: &quot;+Player.getScore()+&quot;:&quot;+Diler.getScore());</span>
+<span class="nc" id="L38">                System.out.println(&quot;Спасибо за игру заходи ещё&quot;);</span>
+            }
+            else {
+<span class="nc" id="L41">                Player.newGame();</span>
+<span class="nc" id="L42">                Diler.newGame();</span>
+<span class="nc" id="L43">                countRound++;</span>
+            }
+<span class="nc" id="L45">        }</span>
+<span class="nc" id="L46">    }</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
