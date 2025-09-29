@@ -18,6 +18,10 @@ public class Number extends Expression {
         return new Number(0); // производная константы это нуль
     }
 
+    public Expression simplification() {
+        return new Number(value);
+    }
+
     public String toString() {
         if (value >= 0) {
             return String.valueOf(value);
