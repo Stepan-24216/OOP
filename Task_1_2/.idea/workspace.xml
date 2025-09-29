@@ -5,13 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9324a91-1953-483a-b940-ee1f4c9a9d9a" name="Изменения" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.10/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.10/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/DeckLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DeckLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Move.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Output.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Output.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Rank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Rank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TopCardLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/TopCardLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/BlackjackTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/BlackjackTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/example/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/example/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/game/GameRound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/game/GameRound.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

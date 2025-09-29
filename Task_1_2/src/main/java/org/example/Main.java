@@ -19,8 +19,13 @@ public class Main {
         Output output = new Output();
 
         output.greeting();
-        int countDeck = scanner.nextInt();
+        int countDeck = 0;
 
+        while (!scanner.hasNextInt()){
+            System.out.println("Ошибка! Введите целое число.");
+            scanner.next();
+        }
+        countDeck = scanner.nextInt();
         Hand player = new Hand();
         Hand dealer = new Hand();
         Deck deck = new Deck(countDeck);
@@ -33,7 +38,14 @@ public class Main {
             gameRound.start();
 
             output.questionNewGame();
+
+            while (!scanner.hasNextInt()){
+                System.out.println("Ошибка! Введите целое число.");
+                scanner.next();
+            }
             game = scanner.nextInt();
+
+
 
             if (game == 0) {
                 output.endGame(player.getScore(), dealer.getScore());
