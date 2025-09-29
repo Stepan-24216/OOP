@@ -1,4 +1,4 @@
-package org.example;
+package org.example.objects;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,18 +13,30 @@ public class Variable extends Expression {
         this.var = name;
     }
 
+    /**
+     * Преобразование в строку.
+     */
     public String toString() {
         return var;
     }
 
+    /**
+     * Взятие производной.
+     */
     public Expression derivative(String variable) {
         return new Number(this.var.equals(variable) ? 1 : 0);
     }
 
+    /**
+     * Упрощение выражения.
+     */
     public Expression simplification() {
         return new Variable(var);
     }
 
+    /**
+     * Означивание для переменной.
+     */
     public int eval(String s) {
         String[] parts = s.split(";");
         Map<String, String> variables = new HashMap<>();

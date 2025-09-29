@@ -1,8 +1,8 @@
-package org.example;
+package org.example.operations;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Scanner;
+import org.example.objects.Expression;
+import org.example.objects.Number;
+import org.example.objects.Variable;
 
 
 public class Parser {
@@ -11,7 +11,8 @@ public class Parser {
     private char currentChar;
 
     public Expression parse(String expression) {
-        if (expression == null || expression == "") {
+        if (expression == null
+            || expression == "") {
             throw new IllegalArgumentException("Эй тут пусто!!!");
         }
         this.input = expression.replaceAll("\\s+", ""); // Убираем пробелы
@@ -36,15 +37,16 @@ public class Parser {
     }
 
     private boolean isVariableChar(char c) {
-        return Character.isLetter(c) || c == '_' ||
-            (Character.isDigit(c) && position > 0 &&
+        return Character.isLetter(c) || c == '_'
+            || (Character.isDigit(c) && position > 0 &&
                 Character.isLetter(input.charAt(position - 1)));
     }
 
     private Expression parseExpression() {
         Expression left = parseTerm();
 
-        while (currentChar == '+' || currentChar == '-') {
+        while (currentChar == '+'
+            || currentChar == '-') {
             char operator = currentChar;
             advance();
             Expression right = parseTerm();
@@ -61,7 +63,8 @@ public class Parser {
     private Expression parseTerm() {
         Expression left = parseFactor();
 
-        while (currentChar == '*' || currentChar == '/') {
+        while (currentChar == '*'
+            || currentChar == '/') {
             char operator = currentChar;
             advance();
             Expression right = parseFactor();
@@ -106,7 +109,6 @@ public class Parser {
     private Expression parseNumber(boolean flag) {
         StringBuilder sb = new StringBuilder();
 
-        // Читаем только цифры (целые числа)
         while (Character.isDigit(currentChar)) {
             sb.append(currentChar);
             advance();
@@ -115,7 +117,7 @@ public class Parser {
         try {
             int value = Integer.parseInt(sb.toString());
             if (flag) {
-                return new Number(-value);
+                return new org.example.objects.Number(-value);
             } else {
                 return new Number(value);
             }
@@ -139,12 +141,10 @@ public class Parser {
 
         String varName = sb.toString();
 
-        // Проверяем, что имя переменной не пустое
         if (varName.isEmpty()) {
             throw new IllegalArgumentException("Имя переменной пустое. *_*");
         }
 
-        // Проверяем, что имя начинается с буквы
         if (!(Character.isLetter(varName.charAt(0)) || varName.charAt(0) == '-')) {
             throw new IllegalArgumentException("Некоректное имя переменной. *_*");
         }
