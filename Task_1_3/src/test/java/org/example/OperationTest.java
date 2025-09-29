@@ -173,7 +173,7 @@ public class OperationTest {
         assertEquals(0, ((Number) de2).getValue());
 
         e = new Add(new Number(3), new Number(5));//→ должно быть new Number(0)
-        assertEquals(0, ((Number) e.derivative("x")).getValue());
+        assertEquals(0, ((Number) e.derivative("x").simplification()).getValue());
 
         assertEquals(0, ((Number) new Variable("x").derivative("y")).getValue());
 
@@ -191,9 +191,9 @@ public class OperationTest {
         String output = outContent.toString();
 
         assertTrue(output.contains(
-            "((((x + x) + (3 * 1)) * (((x * x) + (3 * x)) * ((x * x) + (3 * x)))) + (((x * x) + " +
-                "(3 * x)) * ((((x + x) + (3 * 1)) * ((x * x) + (3 * x))) + (((x * x) + (3 * x)) *" +
-                " ((x + x) + (3 * 1))))))\n"));
+            "(((((1 * x) + (x * 1)) + (3 * 1)) * (((x * x) + (3 * x)) * ((x * x) + (3 * x)))) + (" +
+                "((x * x) + (3 * x)) * (((((1 * x) + (x * 1)) + (3 * 1)) * ((x * x) + (3 * x))) +" +
+                " (((x * x) + (3 * x)) * (((1 * x) + (x * 1)) + (3 * 1))))))\n"));
     }
 
     @Test
@@ -250,5 +250,59 @@ public class OperationTest {
         assertEquals(17, a);
 
         assertEquals(4, b);
+    }
+
+    @Test
+    void testSimplification() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        Parser parser = new Parser();
+        Expression f = parser.parse("0-x");
+        Expression a = f.simplification();
+        a.print();
+        f = parser.parse("0-0");
+        a = f.simplification();
+        a.print();
+        f = parser.parse("0/x");
+        a = f.simplification();
+        a.print();
+        f = parser.parse("abc*0");
+        a = f.simplification();
+        a.print();
+        f = parser.parse("0*abc");
+        a = f.simplification();
+        a.print();
+        f = parser.parse("0*abc");
+        a = f.simplification();
+        a.print();
+        f = parser.parse("10-10");
+        a = f.simplification();
+        a.print();
+        f = parser.parse("13-10");
+        a = f.simplification();
+        a.print();
+        f = parser.parse("21/7");
+        a = f.simplification();
+        a.print();
+        f = parser.parse("-5+8");
+        a = f.simplification();
+        a.print();
+        f = parser.parse("1*3");
+        a = f.simplification();
+        a.print();
+
+        String output = outContent.toString();
+
+        assertTrue(output.contains("0\n" +
+            "0\n" +
+            "0\n" +
+            "0\n" +
+            "0\n" +
+            "0\n" +
+            "3\n" +
+            "3\n" +
+            "3\n" +
+            "3\n"));
     }
 }

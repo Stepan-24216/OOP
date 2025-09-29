@@ -85,15 +85,16 @@ public class Parser {
             }
             advance(); // пропускаем ')'
             return expr;
-        } else if (Character.isDigit(currentChar) || currentChar == '-') {
-            if (currentChar == '-') {
-                advance();
+        } else if (currentChar == '-') {
+            advance();
+            if (Character.isDigit(currentChar)) {
                 return parseNumber(true);
-            } else {
-                return parseNumber(false);
             }
+            return parseVariable(true);
+        } else if (Character.isDigit(currentChar)) {
+            return parseNumber(false);
         } else if (Character.isLetter(currentChar)) {
-            return parseVariable();
+            return parseVariable(false);
         } else {
             throw new IllegalArgumentException("Неправильный синтаксис. *_*");
         }
@@ -126,9 +127,11 @@ public class Parser {
     /**
      * Читаем имя переменной.
      */
-    private Expression parseVariable() {
+    private Expression parseVariable(boolean flag) {
         StringBuilder sb = new StringBuilder();
-
+        if (flag) {
+            sb.append('-');
+        }
         while (isVariableChar(currentChar)) {
             sb.append(currentChar);
             advance();
@@ -142,7 +145,7 @@ public class Parser {
         }
 
         // Проверяем, что имя начинается с буквы
-        if (!Character.isLetter(varName.charAt(0))) {
+        if (!(Character.isLetter(varName.charAt(0)) || varName.charAt(0) == '-')) {
             throw new IllegalArgumentException("Некоректное имя переменной. *_*");
         }
 

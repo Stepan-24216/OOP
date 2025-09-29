@@ -10,6 +10,8 @@ public abstract class Expression {
 
     public abstract String toString();
 
+    public abstract Expression simplification();
+
     public void print() {
         System.out.println(this);
     }

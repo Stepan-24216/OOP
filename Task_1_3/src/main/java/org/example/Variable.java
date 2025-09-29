@@ -21,6 +21,10 @@ public class Variable extends Expression {
         return new Number(this.var.equals(variable) ? 1 : 0);
     }
 
+    public Expression simplification() {
+        return new Variable(var);
+    }
+
     public int eval(String s) {
         String[] parts = s.split(";");
         Map<String, String> variables = new HashMap<>();
@@ -44,8 +48,11 @@ public class Variable extends Expression {
             }
         }
 
-        if (variables.containsKey(var)) {
+        if (variables.containsKey(var) || variables.containsKey(var.substring(1))) {
             try {
+                if (var.charAt(0) == '-') {
+                    return -Integer.parseInt(variables.get(var.substring(1)));
+                }
                 return Integer.parseInt(variables.get(var));
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("Некорректное числовое значение для переменной");

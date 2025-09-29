@@ -32,6 +32,28 @@ public class Sub extends Expression {
         return new Sub(element1.derivative(variable), element2.derivative(variable));
     }
 
+    public Expression simplification() {
+        if (((element1 instanceof Number && element2 instanceof Number)
+            && ((Number) element1).getValue() == 0 && ((Number) element2).getValue() == 0)
+            || ((element1 instanceof Number && element2 instanceof Number)
+            && ((Number) element1).getValue() == ((Number) element2).getValue())) {
+            return new Number(0);
+        } else if ((element1 instanceof Number)
+            && ((Number) element1).getValue() == 0) {
+            if (element2 instanceof Number) {
+                return new Number(-((Number) element2).getValue());
+            } else if (element2 instanceof Variable) {
+                return new Variable('-' + ((Variable) element2).toString());
+            }
+        } else if ((element2 instanceof Number)
+            && ((Number) element2).getValue() == 0) {
+            return element1;
+        } else if (element1 instanceof Number && element2 instanceof Number) {
+            return new Number(((Number) element1).getValue() - ((Number) element2).getValue());
+        }
+        return new Sub(element1, element2);
+    }
+
     public int eval(String s) {
         return element1.eval(s) - element2.eval(s);
     }
