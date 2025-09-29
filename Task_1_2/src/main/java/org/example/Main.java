@@ -21,7 +21,7 @@ public class Main {
         output.greeting();
         int countDeck = 0;
 
-        while (!scanner.hasNextInt()){
+        while (!scanner.hasNextInt()) {
             System.out.println("Ошибка! Введите целое число.");
             scanner.next();
         }
@@ -39,7 +39,7 @@ public class Main {
 
             output.questionNewGame();
 
-            while (!scanner.hasNextInt()){
+            while (!scanner.hasNextInt()) {
                 System.out.println("Ошибка! Введите целое число.");
                 scanner.next();
             }

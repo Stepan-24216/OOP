@@ -63,7 +63,8 @@ public class GameRound {
 
         while (true) {
             output.choosingAnAction();
-            while (!scanner.hasNextInt()){
+
+            while (!scanner.hasNextInt()) {
                 System.out.println("Ошибка! Введите целое число.");
                 scanner.next();
             }
