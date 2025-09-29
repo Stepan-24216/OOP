@@ -29,9 +29,7 @@ public class Sub extends Expression {
     public Expression derivative(String variable) {
         Expression e1 = element1.derivative(variable);
         Expression e2 = element2.derivative(variable);
-        if (e1 instanceof org.example.objects.Number && e2 instanceof org.example.objects.Number) {
-            org.example.objects.Number num1 = (org.example.objects.Number) e1;
-            org.example.objects.Number num2 = (org.example.objects.Number) e2;
+        if (e1 instanceof Number num1 && e2 instanceof Number num2) {
             if ((num1.getValue() == 0 && num2.getValue() == 0)
                 || (num1.getValue() == 1 && num2.getValue() == 1)) {
                 return new org.example.objects.Number(0);
@@ -46,23 +44,31 @@ public class Sub extends Expression {
      * Упрощение выражения.
      */
     public Expression simplification() {
-        if (((element1 instanceof org.example.objects.Number && element2 instanceof org.example.objects.Number)
-            && ((org.example.objects.Number) element1).getValue() == 0 && ((org.example.objects.Number) element2).getValue() == 0)
-            || ((element1 instanceof org.example.objects.Number && element2 instanceof org.example.objects.Number)
-            && ((org.example.objects.Number) element1).getValue() == ((org.example.objects.Number) element2).getValue())) {
+        if (((element1 instanceof org.example.objects.Number
+            && element2 instanceof org.example.objects.Number)
+            && ((org.example.objects.Number) element1).getValue() == 0
+            && ((org.example.objects.Number) element2).getValue() == 0)
+            || ((element1 instanceof org.example.objects.Number
+            && element2 instanceof org.example.objects.Number)
+            && ((org.example.objects.Number) element1).getValue()
+            == ((org.example.objects.Number) element2).getValue())) {
             return new org.example.objects.Number(0);
         } else if ((element1 instanceof org.example.objects.Number)
             && ((org.example.objects.Number) element1).getValue() == 0) {
             if (element2 instanceof org.example.objects.Number) {
-                return new org.example.objects.Number(-((org.example.objects.Number) element2).getValue());
+                return new org.example.objects.Number(
+                    -((org.example.objects.Number) element2).getValue());
             } else if (element2 instanceof Variable) {
-                return new Variable('-' + ((Variable) element2).toString());
+                return new Variable('-' + (element2).toString());
             }
         } else if ((element2 instanceof org.example.objects.Number)
             && ((org.example.objects.Number) element2).getValue() == 0) {
             return element1;
-        } else if (element1 instanceof org.example.objects.Number && element2 instanceof org.example.objects.Number) {
-            return new org.example.objects.Number(((org.example.objects.Number) element1).getValue() - ((Number) element2).getValue());
+        } else if (element1 instanceof org.example.objects.Number
+            && element2 instanceof org.example.objects.Number) {
+            return new org.example.objects.Number(
+                ((org.example.objects.Number) element1).getValue()
+                    - ((Number) element2).getValue());
         }
         return new Sub(element1.simplification(), element2.simplification());
     }

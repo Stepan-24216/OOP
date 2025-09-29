@@ -4,12 +4,17 @@ import org.example.objects.Expression;
 import org.example.objects.Number;
 import org.example.objects.Variable;
 
-
+/**
+ * Парсер строк.
+ */
 public class Parser {
     private String input;
     private int position;
     private char currentChar;
 
+    /**
+     * Главная функция.
+     */
     public Expression parse(String expression) {
         if (expression == null
             || expression == "") {
@@ -27,6 +32,9 @@ public class Parser {
         return result;
     }
 
+    /**
+     * Сдвиг позиции.
+     */
     private void advance() {
         position++;
         if (position < input.length()) {
@@ -36,12 +44,19 @@ public class Parser {
         }
     }
 
+    /**
+     * Символы допустимые в названии.
+     */
     private boolean isVariableChar(char c) {
-        return Character.isLetter(c) || c == '_'
-            || (Character.isDigit(c) && position > 0 &&
-                Character.isLetter(input.charAt(position - 1)));
+        return Character.isLetter(c)
+            || c == '_'
+            || (Character.isDigit(c) && position > 0
+            && Character.isLetter(input.charAt(position - 1)));
     }
 
+    /**
+     * Парсинг выражения.
+     */
     private Expression parseExpression() {
         Expression left = parseTerm();
 
@@ -60,6 +75,9 @@ public class Parser {
         return left;
     }
 
+    /**
+     * Парсинг выражения в глубь.
+     */
     private Expression parseTerm() {
         Expression left = parseFactor();
 
@@ -78,6 +96,9 @@ public class Parser {
         return left;
     }
 
+    /**
+     * Парсинг ещё глубже.
+     */
     private Expression parseFactor() {
 
         if (currentChar == '(') {
