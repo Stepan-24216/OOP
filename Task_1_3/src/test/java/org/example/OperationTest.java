@@ -1,5 +1,13 @@
 package org.example;
 
+import org.example.objects.Expression;
+import org.example.objects.Number;
+import org.example.objects.Variable;
+import org.example.operations.Add;
+import org.example.operations.Div;
+import org.example.operations.Mul;
+import org.example.operations.Parser;
+import org.example.operations.Sub;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -20,7 +28,7 @@ public class OperationTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        Number x = new Number(15);
+        org.example.objects.Number x = new org.example.objects.Number(15);
         x.print();
         Expression der = x.derivative("x");
         der.print();
@@ -71,15 +79,17 @@ public class OperationTest {
         System.setOut(new PrintStream(outContent));
 
         // TaskTests
-        Expression e = new Add(new Number(3), new Mul(new Number(2),
-            new Variable("x")));
+        Expression e =
+            new Add(new org.example.objects.Number(3), new Mul(new org.example.objects.Number(2),
+                new Variable("x")));
         e.print();
 
         Expression de = e.derivative("x");
         de.print();
 
-        Expression ee = new Add(new Number(3), new Mul(new Number(2),
-            new Variable("x"))); // (3+(2*x))
+        Expression ee =
+            new Add(new org.example.objects.Number(3), new Mul(new org.example.objects.Number(2),
+                new Variable("x"))); // (3+(2*x))
         int result = ee.eval("x = 10; y = 13");
         System.out.println(result);
 
@@ -99,7 +109,7 @@ public class OperationTest {
         System.setOut(new PrintStream(outContent));
 
 
-        Expression dv = new Div(new Number(1), new Variable("x"));
+        Expression dv = new Div(new org.example.objects.Number(1), new Variable("x"));
         Expression di = dv.derivative("x");
         di.print();
 
@@ -122,15 +132,16 @@ public class OperationTest {
         int rez = var.eval("x = 10 ; y = 5");
         assertEquals(50, rez);
 
-        Expression mulTwo = new Mul(new Add(new Variable("x"), new Number(5)), new Variable("x"));
+        Expression mulTwo = new Mul(new Add(new Variable("x"), new org.example.objects.Number(5)),
+            new Variable("x"));
         Expression hardDiv = mulTwo.derivative("x");
         hardDiv.print();
 
-        Expression numVar = new Mul(new Number(5), new Variable("x"));
+        Expression numVar = new Mul(new org.example.objects.Number(5), new Variable("x"));
         Expression numVarDiv = numVar.derivative("x");
         numVarDiv.print();
 
-        Expression varNum = new Mul(new Variable("x"), new Number(5));
+        Expression varNum = new Mul(new Variable("x"), new org.example.objects.Number(5));
         Expression varNumDiv = varNum.derivative("x");
         varNumDiv.print();
 
@@ -151,7 +162,7 @@ public class OperationTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        Expression twoSub = new Sub(new Variable("x"), new Number(5));
+        Expression twoSub = new Sub(new Variable("x"), new org.example.objects.Number(5));
         Expression twoSubDiv = twoSub.derivative("x");
         twoSubDiv.print();
         int twoSubRez = twoSub.eval("x = 10");
@@ -170,20 +181,25 @@ public class OperationTest {
         Expression e = new Variable("x");
         Expression de1 = e.derivative("x"); // 1
         Expression de2 = de1.derivative("x"); // 0
-        assertEquals(0, ((Number) de2).getValue());
+        assertEquals(0, ((org.example.objects.Number) de2).getValue());
 
-        e = new Add(new Number(3), new Number(5));//→ должно быть new Number(0)
-        assertEquals(0, ((Number) e.derivative("x").simplification()).getValue());
+        e = new Add(new org.example.objects.Number(3),
+            new org.example.objects.Number(5));//→ должно быть new Number(0)
+        assertEquals(0,
+            ((org.example.objects.Number) e.derivative("x").simplification()).getValue());
 
-        assertEquals(0, ((Number) new Variable("x").derivative("y")).getValue());
+        assertEquals(0,
+            ((org.example.objects.Number) new Variable("x").derivative("y")).getValue());
 
-        assertEquals(0, ((Number) new Number(5).derivative("x")).getValue());
+        assertEquals(0, ((org.example.objects.Number) new org.example.objects.Number(5).derivative(
+            "x")).getValue());
 
-        assertEquals(1, ((Number) new Variable("x").derivative("x")).getValue());
+        assertEquals(1,
+            ((org.example.objects.Number) new Variable("x").derivative("x")).getValue());
 
         Expression inner = new Add(
             new Mul(new Variable("x"), new Variable("x")),
-            new Mul(new Number(3), new Variable("x"))
+            new Mul(new org.example.objects.Number(3), new Variable("x"))
         );
         Expression f = new Mul(inner, new Mul(inner, inner));
         (f.derivative("x")).print();
@@ -232,9 +248,10 @@ public class OperationTest {
         assertEquals(103,
             (new Add(new Variable("x"), new Variable("w"))).eval("x=3; y=4; z=10; w=100"));
 
-        assertEquals(5, new Number(5).eval(""));
+        assertEquals(5, new org.example.objects.Number(5).eval(""));
 
-        assertEquals(5, new Add(new Number(2), new Number(3)).eval(""));
+        assertEquals(5,
+            new Add(new org.example.objects.Number(2), new org.example.objects.Number(3)).eval(""));
 
         assertEquals(17,
             (new Add(new Add(new Variable("x"), new Variable("y")), new Variable("z"))).eval(

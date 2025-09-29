@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.example.OperationTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2025-09-29T15:57:58.190Z" hostname="rend-V15x-V17xRNx" time="0.035">
+<testsuite name="org.example.OperationTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2025-09-29T16:31:48.867Z" hostname="rend-V15x-V17xRNx" time="0.034">
   <properties/>
-  <testcase name="testDerivative()" classname="org.example.OperationTest" time="0.017"/>
+  <testcase name="testDerivative()" classname="org.example.OperationTest" time="0.016"/>
   <testcase name="testDiv()" classname="org.example.OperationTest" time="0.001"/>
   <testcase name="testMul()" classname="org.example.OperationTest" time="0.001"/>
   <testcase name="testSub()" classname="org.example.OperationTest" time="0.001"/>
-  <testcase name="testEval()" classname="org.example.OperationTest" time="0.003"/>
+  <testcase name="testEval()" classname="org.example.OperationTest" time="0.004"/>
   <testcase name="testTask()" classname="org.example.OperationTest" time="0.001"/>
-  <testcase name="testVariable()" classname="org.example.OperationTest" time="0.001"/>
+  <testcase name="testVariable()" classname="org.example.OperationTest" time="0.0"/>
   <testcase name="testSimplification()" classname="org.example.OperationTest" time="0.002"/>
-  <testcase name="testNumber()" classname="org.example.OperationTest" time="0.001"/>
+  <testcase name="testNumber()" classname="org.example.OperationTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
