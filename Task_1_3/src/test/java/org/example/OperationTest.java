@@ -1,5 +1,8 @@
 package org.example;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.example.objects.Expression;
 import org.example.objects.Number;
 import org.example.objects.Variable;
@@ -8,12 +11,12 @@ import org.example.operations.Div;
 import org.example.operations.Mul;
 import org.example.operations.Parser;
 import org.example.operations.Sub;
+
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Проверка операций с уравнениями.
@@ -314,7 +317,7 @@ public class OperationTest {
         String output = outContent.toString();
 
         assertTrue(output.contains("0\n"
-            + "0\n" 
+            + "0\n"
             + "0\n"
             + "0\n"
             + "0\n"

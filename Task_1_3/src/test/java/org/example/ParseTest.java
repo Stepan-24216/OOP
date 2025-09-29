@@ -147,21 +147,4 @@ public class ParseTest {
 }
 
 
-/// /f(x) = (x² + 3x)³
-//Expression inner = new Add(
-//        new Mul(new Variable("x"), new Variable("x")),
-//        new Mul(new Number(3), new Variable("x"))
-//);
-//Expression f = new Mul(inner, new Mul(inner, inner)); - взять производную по x
-/// / f'(x) = 3*(x² + 3x)² * (2x + 3)
-//
-//Expression e = new Add(
-//        new Mul(new Variable("x"), new Variable("y")),
-//        new Div(new Variable("z"), new Number(2))
-//);
-//e.eval("x=3; y=4; z=10") → (34 + 10/2) = 12 + 5 = 17
-//        e.eval("x=0; y=100; z=8") → (0100 + 8/2) = 0 + 4 = 4
-//
-
-
 

@@ -36,8 +36,11 @@ public class Div extends Expression {
     public Expression simplification() {
         if ((element1 instanceof org.example.objects.Number
             && element2 instanceof org.example.objects.Number)) {
-            return new org.example.objects.Number(((org.example.objects.Number) element1).getValue() / ((org.example.objects.Number) element2).getValue());
-        } else if (element2 instanceof org.example.objects.Number && ((org.example.objects.Number) element2).getValue() == 1) {
+            return new org.example.objects.Number(
+                ((org.example.objects.Number) element1).getValue()
+                / ((org.example.objects.Number) element2).getValue());
+        } else if (element2 instanceof org.example.objects.Number
+            && ((org.example.objects.Number) element2).getValue() == 1) {
             return element1;
         } else if ((element1 instanceof org.example.objects.Number)
             && ((org.example.objects.Number) element1).getValue() == 0) {
