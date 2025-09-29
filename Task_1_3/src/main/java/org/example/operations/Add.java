@@ -43,8 +43,10 @@ public class Add extends Expression {
      * Упрощение выражения.
      */
     public Expression simplification() {
-        if ((element1 instanceof org.example.objects.Number && element2 instanceof org.example.objects.Number)
-            && ((org.example.objects.Number) element1).getValue() == 0 && ((org.example.objects.Number) element2).getValue() == 0) {
+        if ((element1 instanceof org.example.objects.Number
+            && element2 instanceof org.example.objects.Number)
+            && ((org.example.objects.Number) element1).getValue() == 0
+            && ((org.example.objects.Number) element2).getValue() == 0) {
             return new org.example.objects.Number(0);
         } else if ((element1 instanceof org.example.objects.Number)
             && ((org.example.objects.Number) element1).getValue() == 0) {
@@ -52,8 +54,11 @@ public class Add extends Expression {
         } else if ((element2 instanceof org.example.objects.Number)
             && ((org.example.objects.Number) element2).getValue() == 0) {
             return element1;
-        } else if (element1 instanceof org.example.objects.Number && element2 instanceof org.example.objects.Number) {
-            return new org.example.objects.Number(((org.example.objects.Number) element1).getValue() + ((Number) element2).getValue());
+        } else if (element1 instanceof org.example.objects.Number
+            && element2 instanceof org.example.objects.Number) {
+            return new org.example.objects.Number(
+                ((org.example.objects.Number) element1).getValue()
+                    + ((Number) element2).getValue());
         }
         return new Add(element1.simplification(), element2.simplification());
     }

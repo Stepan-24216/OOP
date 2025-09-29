@@ -184,7 +184,8 @@ public class OperationTest {
         assertEquals(0, ((org.example.objects.Number) de2).getValue());
 
         e = new Add(new org.example.objects.Number(3),
-            new org.example.objects.Number(5));//→ должно быть new Number(0)
+            new org.example.objects.Number(5));
+
         assertEquals(0,
             ((org.example.objects.Number) e.derivative("x").simplification()).getValue());
 
@@ -207,9 +208,9 @@ public class OperationTest {
         String output = outContent.toString();
 
         assertTrue(output.contains(
-            "(((((1 * x) + (x * 1)) + (3 * 1)) * (((x * x) + (3 * x)) * ((x * x) + (3 * x)))) + (" +
-                "((x * x) + (3 * x)) * (((((1 * x) + (x * 1)) + (3 * 1)) * ((x * x) + (3 * x))) +" +
-                " (((x * x) + (3 * x)) * (((1 * x) + (x * 1)) + (3 * 1))))))\n"));
+            "(((((1 * x) + (x * 1)) + (3 * 1)) * (((x * x) + (3 * x)) * ((x * x) + (3 * x)))) + ("
+                + "((x * x) + (3 * x)) * (((((1 * x) + (x * 1)) + (3 * 1)) * ((x * x) + (3 * x))) +"
+                + " (((x * x) + (3 * x)) * (((1 * x) + (x * 1)) + (3 * 1))))))\n"));
     }
 
     @Test
@@ -261,8 +262,9 @@ public class OperationTest {
             new Mul(new Variable("x"), new Variable("y")),
             new Div(new Variable("z"), new Number(2))
         );
-        int a = e.eval("x=3; y=4; z=10");// → (34 + 10/2) = 12 + 5 = 17
-        int b = e.eval("x=0; y=100; z=8");// → (0100 + 8/2) = 0 + 4 = 4
+
+        int a = e.eval("x=3; y=4; z=10"); // → (34 + 10/2) = 12 + 5 = 17
+        int b = e.eval("x=0; y=100; z=8"); // → (0100 + 8/2) = 0 + 4 = 4
 
         assertEquals(17, a);
 
@@ -311,15 +313,15 @@ public class OperationTest {
 
         String output = outContent.toString();
 
-        assertTrue(output.contains("0\n" +
-            "0\n" +
-            "0\n" +
-            "0\n" +
-            "0\n" +
-            "0\n" +
-            "3\n" +
-            "3\n" +
-            "3\n" +
-            "3\n"));
+        assertTrue(output.contains("0\n"
+            + "0\n" 
+            + "0\n"
+            + "0\n"
+            + "0\n"
+            + "0\n"
+            + "3\n"
+            + "3\n"
+            + "3\n"
+            + "3\n"));
     }
 }
