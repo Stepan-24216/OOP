@@ -2,7 +2,6 @@ package org.example;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-
 import org.example.objects.Expression;
 import org.example.objects.Number;
 import org.example.objects.Variable;
@@ -11,12 +10,10 @@ import org.example.operations.Div;
 import org.example.operations.Mul;
 import org.example.operations.Parser;
 import org.example.operations.Sub;
-
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 
 /**
  * Проверка операций с уравнениями.

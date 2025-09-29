@@ -5,7 +5,6 @@ import java.io.PrintStream;
 
 import org.example.objects.Expression;
 import org.example.operations.Parser;
-
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
