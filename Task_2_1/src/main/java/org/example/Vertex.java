@@ -11,12 +11,12 @@ public class Vertex {
         this.edges = new ArrayList<Edge>();
     }
 
-    public ArrayList<Edge> getEdges(){
+    public ArrayList<Edge> getEdges() {
         return edges;
     }
-    
+
     public String getName() {
-       return this.vertexName;
+        return this.vertexName;
     }
 
     public void addEdge(String nameEdge, Vertex vertex) {
@@ -24,29 +24,17 @@ public class Vertex {
     }
 
     public void deleteEdge(Edge edge) {
-        if (this.edges.contains(edge)){
+        if (this.edges.contains(edge)) {
             this.edges.remove(edge);
         }
     }
 
-    public boolean equals(Vertex vertex) {
-        if (this == vertex) return true;
-        if (vertex == null) return false;
-        return vertexName.equals(vertex.vertexName);
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Vertex vertex = (Vertex) obj;
+        return vertexName != null && vertexName.equals(vertex.vertexName);
     }
 
-//    public void deleteVertex(){
-//        boolean flag = false;
-//        for (Vertex neighbor : vertexList) {
-//            if (this == neighbor){
-//                flag = true;
-//            } else {
-//                neighbor.adjacencyList.adjacencyList.remove(this);
-//            }
-//        }
-//        if (flag){
-//            adjacencyList.adjacencyList.remove(this);
-//        }
-//        adjacencyList.adjacencyList.clear();
-//    }
 }
