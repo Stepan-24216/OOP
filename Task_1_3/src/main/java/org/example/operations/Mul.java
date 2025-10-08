@@ -27,11 +27,11 @@ public class Mul extends Expression {
      * Взятие производной.
      */
     public Expression derivative(String variable) {
-        if (!(element1 instanceof org.example.objects.Number)
-            && element2 instanceof org.example.objects.Number) {
+        boolean isElement1Number = element1 instanceof Number;
+        boolean isElement2Number = element2 instanceof Number;
+        if (!isElement1Number && isElement2Number) {
             return new Mul(element1.derivative(variable), element2);
-        } else if (element1 instanceof org.example.objects.Number
-            && !(element2 instanceof org.example.objects.Number)) {
+        } else if (isElement1Number && !isElement2Number) {
             return new Mul(element1, element2.derivative(variable));
         }
         Expression summand1 = new Mul(element1.derivative(variable), element2);
@@ -42,25 +42,31 @@ public class Mul extends Expression {
     /**
      * Упрощение выражения.
      */
-    public Expression simplification() {
-        if ((element1 instanceof org.example.objects.Number
-            && ((org.example.objects.Number) element1).getValue() == 1
-            && element2 instanceof Variable)) {
+     public Expression simplification() {
+        boolean isElement1Number = element1 instanceof Number;
+        boolean isElement2Number = element2 instanceof Number;
+
+        if (isElement1Number && isElement2Number){
+            int value1 = ((Number) element1).getValue();
+            int value2 = ((Number) element2).getValue();
+
+            if (value1 == 0 || value2 == 0) return new Number(0);
+            if (value1 == 1) return element2;
+            if (value2 == 1) return element1;
+            return new Number(value1 * value2);
+        }
+
+        if (isElement1Number && ((Number) element1).getValue() == 1) {
             return element2;
-        } else if (element2 instanceof org.example.objects.Number
-            && ((org.example.objects.Number) element2).getValue() == 1
-            && element1 instanceof Variable) {
+        }
+        if (isElement2Number && ((Number) element2).getValue() == 1) {
             return element1;
-        } else if ((element1 instanceof org.example.objects.Number
-            && ((org.example.objects.Number) element1).getValue() == 0)
-            || (element2 instanceof org.example.objects.Number
-            && ((org.example.objects.Number) element2).getValue() == 0)) {
-            return new org.example.objects.Number(0);
-        } else if (element1 instanceof org.example.objects.Number
-            && element2 instanceof org.example.objects.Number) {
-            return new org.example.objects.Number(
-                ((org.example.objects.Number) element1).getValue()
-                    * ((Number) element2).getValue());
+        }
+        if (isElement1Number && ((Number) element1).getValue() == 0) {
+            return new Number(0);
+        }
+        if (isElement2Number && ((Number) element2).getValue() == 0){
+            return new Number(0);
         }
         return new Mul(element1.simplification(), element2.simplification());
     }

@@ -27,24 +27,22 @@ public class Div extends Expression {
      */
     public Expression derivative(String variable) {
         return new Div(new Sub(new Mul(element1.derivative(variable), element2),
-            new Mul(element1, element2.derivative(variable))), new Mul(element2, element2));
+            new Mul(element1, element2.derivative(variable))),
+            new Mul(element2, element2));
     }
 
     /**
      * Упрощение выражения.
      */
     public Expression simplification() {
-        if ((element1 instanceof org.example.objects.Number
-            && element2 instanceof org.example.objects.Number)) {
-            return new org.example.objects.Number(
-                ((org.example.objects.Number) element1).getValue()
-                / ((org.example.objects.Number) element2).getValue());
-        } else if (element2 instanceof org.example.objects.Number
-            && ((org.example.objects.Number) element2).getValue() == 1) {
-            return element1;
-        } else if ((element1 instanceof org.example.objects.Number)
-            && ((org.example.objects.Number) element1).getValue() == 0) {
+        boolean isElement1Number = element1 instanceof Number;
+        boolean isElement2Number = element2 instanceof Number;
+        if ((isElement1Number) && ((Number) element1).getValue() == 0) {
             return new Number(0);
+        } else if (isElement2Number && ((Number) element2).getValue() == 1) {
+            return element1;
+        } else if (isElement1Number && isElement2Number) {
+            return new Number(((Number) element1).getValue() / ((Number) element2).getValue());
         }
         return new Div(element1.simplification(), element2.simplification());
     }

@@ -26,16 +26,6 @@ public class Add extends Expression {
      * Производная для суммы.
      */
     public Expression derivative(String variable) {
-        // Ну это упрощение наверное не нужно было делать, пусть пока что будет :)
-        //Expression e1 = element1.derivative(variable);
-        //Expression e2 = element2.derivative(variable);
-        //if (e1 instanceof Number && e2 instanceof Number) {
-        //Number num1 = (Number) e1;
-        //Number num2 = (Number) e2;
-        //if (num1.getValue() == 0 && num2.getValue() == 0) {
-        //return new Number(0);
-        //}
-        //}
         return new Add(element1.derivative(variable), element2.derivative(variable));
     }
 
@@ -43,23 +33,26 @@ public class Add extends Expression {
      * Упрощение выражения.
      */
     public Expression simplification() {
-        if ((element1 instanceof org.example.objects.Number
-            && element2 instanceof org.example.objects.Number)
-            && ((org.example.objects.Number) element1).getValue() == 0
-            && ((org.example.objects.Number) element2).getValue() == 0) {
-            return new org.example.objects.Number(0);
-        } else if ((element1 instanceof org.example.objects.Number)
-            && ((org.example.objects.Number) element1).getValue() == 0) {
-            return element2;
-        } else if ((element2 instanceof org.example.objects.Number)
-            && ((org.example.objects.Number) element2).getValue() == 0) {
-            return element1;
-        } else if (element1 instanceof org.example.objects.Number
-            && element2 instanceof org.example.objects.Number) {
-            return new org.example.objects.Number(
-                ((org.example.objects.Number) element1).getValue()
-                    + ((Number) element2).getValue());
+        boolean isElement1Number = element1 instanceof Number;
+        boolean isElement2Number = element2 instanceof Number;
+
+        if (isElement1Number && isElement2Number){
+            int value1 = ((Number) element1).getValue();
+            int value2 = ((Number) element2).getValue();
+
+            if (value1 == 0 && value2 == 0) return new Number(0);
+            if (value1 == 0) return element2;
+            if (value2 == 0) return element1;
+            return new Number(value1 + value2);
         }
+
+        if (isElement1Number && ((Number) element1).getValue() == 0) {
+            return element2;
+        }
+        if (isElement2Number && ((Number) element2).getValue() == 0) {
+            return element1;
+        }
+
         return new Add(element1.simplification(), element2.simplification());
     }
 

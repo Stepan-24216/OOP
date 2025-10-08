@@ -138,7 +138,7 @@ public class Parser {
         try {
             int value = Integer.parseInt(sb.toString());
             if (flag) {
-                return new org.example.objects.Number(-value);
+                return new Number(-value);
             } else {
                 return new Number(value);
             }

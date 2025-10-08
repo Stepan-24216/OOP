@@ -24,6 +24,9 @@ public abstract class Expression {
      */
     public abstract Expression simplification();
 
+    /**
+     * Вывод.
+     */
     public void print() {
         System.out.println(this);
     }
