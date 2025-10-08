@@ -39,20 +39,26 @@ public class Mul extends Expression {
         return new Add(summand1, summand2);
     }
 
-    /**
+     /**
      * Упрощение выражения.
      */
      public Expression simplification() {
         boolean isElement1Number = element1 instanceof Number;
         boolean isElement2Number = element2 instanceof Number;
 
-        if (isElement1Number && isElement2Number){
+        if (isElement1Number && isElement2Number) {
             int value1 = ((Number) element1).getValue();
             int value2 = ((Number) element2).getValue();
 
-            if (value1 == 0 || value2 == 0) return new Number(0);
-            if (value1 == 1) return element2;
-            if (value2 == 1) return element1;
+            if (value1 == 0 || value2 == 0) {
+                return new Number(0);
+            }
+            if (value1 == 1) {
+                return element2;
+            }
+            if (value2 == 1) {
+                return element1;
+            }
             return new Number(value1 * value2);
         }
 
@@ -65,7 +71,7 @@ public class Mul extends Expression {
         if (isElement1Number && ((Number) element1).getValue() == 0) {
             return new Number(0);
         }
-        if (isElement2Number && ((Number) element2).getValue() == 0){
+        if (isElement2Number && ((Number) element2).getValue() == 0) {
             return new Number(0);
         }
         return new Mul(element1.simplification(), element2.simplification());

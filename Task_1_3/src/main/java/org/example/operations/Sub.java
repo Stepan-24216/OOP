@@ -50,12 +50,16 @@ public class Sub extends Expression {
         boolean isElement1Number = element1 instanceof Number;
         boolean isElement2Number = element2 instanceof Number;
 
-        if (isElement1Number && isElement2Number){
+        if (isElement1Number && isElement2Number) {
             int value1 = ((Number) element1).getValue();
             int value2 = ((Number) element2).getValue();
 
-            if (value1 == value2) return new Number(0);
-            if (value2 == 0) return element1;
+            if (value1 == value2) {
+                return new Number(0);
+            }
+            if (value2 == 0) {
+                return element1;
+            }
             return new Number(value1 - value2);
         }
 
