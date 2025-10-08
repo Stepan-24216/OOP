@@ -1,9 +1,16 @@
 package org.example;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
-public class AdjacencyMatrix {
+public class AdjacencyMatrix implements Graph {
     ArrayList<Vertex> vertexList;
+
+    public ArrayList<Vertex> getVertexList(){
+        return vertexList;
+    }
 
     public AdjacencyMatrix() {
         vertexList = new ArrayList<>();
@@ -103,6 +110,19 @@ public class AdjacencyMatrix {
                 System.out.printf(format, cell == null ? "" : cell);
             }
             System.out.println();
+        }
+    }
+
+    public void fileReader(String filePath) {
+        try (Scanner scanner = new Scanner(new File(filePath))) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (!line.isEmpty()) {
+                    ParseDataFile.parseData(line,this,false);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Файл не найден: " + e.getMessage());
         }
     }
 }
