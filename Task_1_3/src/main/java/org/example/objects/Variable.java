@@ -36,7 +36,7 @@ public class Variable extends Expression {
     }
 
     /**
-     * Распаршивание строки с означиванием переменных.
+     * Распаршивание строки содержащую означивание переменных.
      */
     public Map<String, String> parseVariables(String s){
         String[] parts = s.split(";");
