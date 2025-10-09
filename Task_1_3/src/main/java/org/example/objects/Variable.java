@@ -64,7 +64,7 @@ public class Variable extends Expression {
     }
 
     /**
-     * Означивание для переменной.
+     * Означивание для заданной переменной.
      */
     public int eval(String s) {
         Map<String, String> variables = parseVariables(s);
