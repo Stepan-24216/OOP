@@ -3,6 +3,7 @@ package org.example.objects;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
  * Реализация методов для переменных.
  */
@@ -35,16 +36,16 @@ public class Variable extends Expression {
     }
 
     /**
-     * Означивание для переменной.
+     * Распаршивание строки с означиванием переменных.
      */
-    public int eval(String s) {
+    public Map<String, String> parseVariables(String s){
         String[] parts = s.split(";");
         Map<String, String> variables = new HashMap<>();
 
         for (String test : parts) {
             String[] varAndNum = test.split("=");
 
-            if (test == null || test.trim().isEmpty()) {
+            if (test.trim().isEmpty()) {
                 continue; // переходим к следующей итерации
             }
 
@@ -59,6 +60,14 @@ public class Variable extends Expression {
                     "Отсутствует важная для означивания часть строки");
             }
         }
+        return variables;
+    }
+
+    /**
+     * Означивание для переменной.
+     */
+    public int eval(String s) {
+        Map<String, String> variables = parseVariables(s);
 
         if (variables.containsKey(var) || variables.containsKey(var.substring(1))) {
             try {
