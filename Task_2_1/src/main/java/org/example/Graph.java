@@ -2,13 +2,16 @@ package org.example;
 
 import java.util.ArrayList;
 
-interface Graph {
-    public ArrayList<Vertex> getVertexList();
-    public void addEdge(String nameEdge,Vertex firstVertex,Vertex secondVertex);
-    public void deleteEdge(String nameEdge,Vertex firstVertex,Vertex secondVertex);
-    public void addVertex(Vertex vertex);
-    public void deleteVertex(Vertex vertex);
-    public ArrayList<Vertex> getNeighbors(Vertex vertex);
-    public void fileReader(String filePath);
+public interface Graph {
+     void addEdge(String nameEdge,Vertex firstVertex,Vertex secondVertex);
+     void deleteEdge(String nameEdge,Vertex firstVertex,Vertex secondVertex);
+     void addVertex(Vertex vertex);
+     void deleteVertex(Vertex vertex);
+     ArrayList<Vertex> getNeighbors(Vertex vertex);
+     void fileReader(String filePath);
 
+    ArrayList<Vertex> getVertexList();
+    void setVertexList(ArrayList<Vertex> vertexList);
+    void printGraph();
+    void topologicalSort();
 }

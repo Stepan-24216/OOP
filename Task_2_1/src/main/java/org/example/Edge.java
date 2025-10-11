@@ -14,16 +14,18 @@ public class Edge {
     }
 
     public String getNameVertex(){
-        return target.vertexName;
+        return target.getName();
     }
 
     public Vertex getTarget(){
         return target;
     }
 
-    public boolean equals(Edge edge) {
-        if (this == edge) return true;
-        if (edge == null) return false;
-        return nameEdge.equals(edge.nameEdge) && target.equals(edge.target);
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Edge edge = (Edge) obj;
+       return nameEdge.equals(edge.nameEdge) && target.equals(edge.target);
     }
 }

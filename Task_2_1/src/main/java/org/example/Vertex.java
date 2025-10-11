@@ -3,12 +3,14 @@ package org.example;
 import java.util.ArrayList;
 
 public class Vertex {
-    String vertexName;
-    ArrayList<Edge> edges;
+    private final String vertexName;
+    private final ArrayList<Edge> edges;
+    private Color color;
 
     Vertex(String name) {
         this.vertexName = name;
         this.edges = new ArrayList<Edge>();
+        this.color = Color.WHITE;
     }
 
     public ArrayList<Edge> getEdges() {
@@ -19,8 +21,18 @@ public class Vertex {
         return this.vertexName;
     }
 
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
     public void addEdge(String nameEdge, Vertex vertex) {
-        this.edges.add(new Edge(nameEdge, vertex));
+        if (!this.edges.contains(new Edge(nameEdge, vertex))){
+            this.edges.add(new Edge(nameEdge, vertex));
+        }
     }
 
     public void deleteEdge(Edge edge) {

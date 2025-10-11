@@ -4,34 +4,30 @@ import java.util.ArrayList;
 
 class Main {
     public static void main(String[] args) {
-        Vertex x = new Vertex("1");
-        Vertex y = new Vertex("2");
-        Vertex z = new Vertex("3");
-        Vertex c = new Vertex("1");
+        Vertex A = new Vertex("A");
+        Vertex B = new Vertex("B");
+        Vertex C = new Vertex("C");
+        Vertex D = new Vertex("D");
+        Vertex E = new Vertex("E");
+        Vertex F = new Vertex("F");
+        IncidenceMatrix graph = new IncidenceMatrix();
+        graph.addVertex(F);
+        graph.addVertex(D);
+        graph.addVertex(B);
+        graph.addVertex(C);
+        graph.addVertex(E);
+        graph.addVertex(A);
 
-//        Vertex v = new Vertex("5");
-//
-        IncidenceMatrix list = new IncidenceMatrix();
-
-        list.fileReader("src/main/java/org/example/test.txt");
-//        list.addVertex(x);
-//        list.addVertex(y);
-//        list.addVertex(z);
-//        list.addEdge("haha",x,y);
-//        list.addEdge("hehe",y,z);
-//        list.addEdge("hoho",x,z);
-//        list.addEdge("hihi",x,x);
-//        list.addEdge("lolo",z,y);
-//
-        list.printIncidenceMatrix();
-//
-//        list.deleteVertex(y);
-//
-//        list.printAdjacencyList();
-//        z.printAdjacencyList();
-//
-//        x.deleteVertex();
-//
-//        z.printAdjacencyList();
+        graph.addEdge("edge1", A, B);
+        graph.addEdge("edge2", B, C);
+        graph.addEdge("edge3", C, D);
+        graph.addEdge("edge4", A, E);
+        graph.addEdge("edge5", E, F);
+        graph.addEdge("edge6", B, F);
+        graph.addEdge("edge7", C, E);
+        graph.topologicalSort();
+        graph.printGraph();
+        graph.deleteEdge("edge7",C,E);
+        graph.printGraph();
     }
 }

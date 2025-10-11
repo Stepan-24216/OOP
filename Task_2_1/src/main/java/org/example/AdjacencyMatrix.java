@@ -3,17 +3,22 @@ package org.example;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class AdjacencyMatrix implements Graph {
-    ArrayList<Vertex> vertexList;
+    private ArrayList<Vertex> vertexList;
+
+    public AdjacencyMatrix() {
+        vertexList = new ArrayList<>();
+    }
 
     public ArrayList<Vertex> getVertexList(){
         return vertexList;
     }
 
-    public AdjacencyMatrix() {
-        vertexList = new ArrayList<>();
+    public void setVertexList(ArrayList<Vertex> vertexList){
+        this.vertexList = vertexList;
     }
 
     public void addVertex(Vertex vertex) {
@@ -24,8 +29,8 @@ public class AdjacencyMatrix implements Graph {
 
     public void deleteVertex(Vertex v) {
         for (Vertex vertex : vertexList) {
-            if (vertex.edges != null) {
-                for (Edge edges : vertex.edges) {
+            if (!vertex.getEdges().isEmpty()) {
+                for (Edge edges : vertex.getEdges()) {
                     if (edges.getTarget().equals(v)) {
                         vertex.deleteEdge(edges);
                         break;
@@ -33,20 +38,17 @@ public class AdjacencyMatrix implements Graph {
                 }
             }
         }
-        if (vertexList != null) {
+        if (!vertexList.isEmpty()) {
             vertexList.remove(v);
         }
     }
 
     public void addEdge(String nameEdge, Vertex firstVertex, Vertex secondVertex) {
-        if (firstVertex.edges == null) {
-            firstVertex.edges = new ArrayList<>();
-        }
         firstVertex.addEdge(nameEdge, secondVertex);
     }
 
     public void deleteEdge(String nameEdge,Vertex firstVertex,Vertex secondVertex){
-        for (Edge edges : firstVertex.edges) {
+        for (Edge edges : firstVertex.getEdges()) {
             if (edges.getTarget().equals(secondVertex)) {
                 firstVertex.deleteEdge(edges);
                 break;
@@ -70,15 +72,15 @@ public class AdjacencyMatrix implements Graph {
             if (i == 0) {
                 IncidenceMatrix[i][0] = "";
             } else {
-                IncidenceMatrix[i][0] = vertexList.get(i-1).vertexName;
-                IncidenceMatrix[0][i] = vertexList.get(i-1).vertexName;
+                IncidenceMatrix[i][0] = vertexList.get(i-1).getName();
+                IncidenceMatrix[0][i] = vertexList.get(i-1).getName();
             }
         }
         for (int i = 1; i <= vertexList.size(); i++) {
             Vertex vertex = vertexList.get(i-1);
             for (int j = 1; j <= vertexList.size(); j++) {
-                if (!vertex.edges.isEmpty()) {
-                    for (Edge edge: vertex.edges) {
+                if (!vertex.getEdges().isEmpty()) {
+                    for (Edge edge: vertex.getEdges()) {
                         if (edge.getTarget().equals(vertexList.get(j-1))) {
                             IncidenceMatrix[i][j] = "1";
                             break;
@@ -94,12 +96,12 @@ public class AdjacencyMatrix implements Graph {
         return IncidenceMatrix;
     }
 
-    public void printAdjacencyMatrix() {
+    public void printGraph() {
         String[][] matrix = getAdjacencyMatrix();
         int maxLen = 1;
         for (String[] row : matrix) {
             for (String cell : row) {
-                if (cell != null && cell.length() > maxLen) {
+                if (!cell.isEmpty() && cell.length() > maxLen) {
                     maxLen = cell.length();
                 }
             }
@@ -124,5 +126,17 @@ public class AdjacencyMatrix implements Graph {
         } catch (FileNotFoundException e) {
             System.out.println("Файл не найден: " + e.getMessage());
         }
+    }
+
+    public void topologicalSort() {
+        ArrayList<Vertex> sortedList = new ArrayList<>();
+        for (Vertex vertex : vertexList) {
+            vertex.setColor(Color.WHITE);
+        }
+        for (Vertex vertex : vertexList) {
+            TopSort.DFS(vertex, sortedList);
+        }
+        Collections.reverse(sortedList);
+        this.setVertexList(sortedList);
     }
 }

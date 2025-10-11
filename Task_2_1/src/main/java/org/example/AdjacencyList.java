@@ -3,19 +3,22 @@ package org.example;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class AdjacencyList implements Graph{
-    ArrayList<Vertex> vertexList;
+    private ArrayList<Vertex> vertexList;
+
+    public AdjacencyList() {
+        vertexList = new ArrayList<>();
+    }
 
     public ArrayList<Vertex> getVertexList(){
         return vertexList;
     }
 
-    public AdjacencyList() {
-        vertexList = new ArrayList<>();
+    public void setVertexList(ArrayList<Vertex> vertexList){
+        this.vertexList = vertexList;
     }
 
     public void addVertex(Vertex vertex) {
@@ -26,8 +29,8 @@ public class AdjacencyList implements Graph{
 
     public void deleteVertex(Vertex v) {
         for (Vertex vertex : vertexList) {
-            if (vertex.edges != null) {
-                for (Edge edges : vertex.edges) {
+            if (!vertex.getEdges().isEmpty()) {
+                for (Edge edges : vertex.getEdges()) {
                     if (edges.getTarget().equals(v)) {
                         vertex.deleteEdge(edges);
                         break;
@@ -35,20 +38,17 @@ public class AdjacencyList implements Graph{
                 }
             }
         }
-        if (vertexList != null) {
+        if (!vertexList.isEmpty()) {
             vertexList.remove(v);
         }
     }
 
    public void addEdge(String nameEdge, Vertex firstVertex, Vertex secondVertex) {
-       if (firstVertex.edges == null) {
-           firstVertex.edges = new ArrayList<>();
-       }
        firstVertex.addEdge(nameEdge, secondVertex);
    }
 
     public void deleteEdge(String nameEdge,Vertex firstVertex,Vertex secondVertex){
-        for (Edge edges : firstVertex.edges) {
+        for (Edge edges : firstVertex.getEdges()) {
             if (edges.getTarget().equals(secondVertex)) {
                 firstVertex.deleteEdge(edges);
                 break;
@@ -66,23 +66,23 @@ public class AdjacencyList implements Graph{
         return adjacent;
     }
 
-    public void printAdjacentVertices(Vertex vertex){
-        System.out.print(vertex.vertexName + ": ");
-        if (vertex.edges != null) {
-            for (Edge neighbor : vertex.edges) {
+    private void printAdjacentVertices(Vertex vertex){
+        System.out.print(vertex.getName() + ": ");
+        if (!vertex.getEdges().isEmpty()) {
+            for (Edge neighbor : vertex.getEdges()) {
                 System.out.print(neighbor.getNameVertex() + " ");
             }
         }
         System.out.println();
     }
 
-    public void printAdjacencyList() {
-        if (vertexList == null || vertexList.isEmpty()) {
+    public void printGraph() {
+        if (vertexList.isEmpty()) {
             System.out.println("Список вершин пуст");
             return;
         }
         for (Vertex vertex : vertexList) {
-            if (vertex == null || vertex.vertexName == null) {
+            if (vertex == null || vertex.getName() == null) {
                 System.out.println("Вершина не инициализирована");
                 continue;
             }
@@ -101,5 +101,17 @@ public class AdjacencyList implements Graph{
         } catch (FileNotFoundException e) {
             System.out.println("Файл не найден: " + e.getMessage());
         }
+    }
+
+    public void topologicalSort() {
+        ArrayList<Vertex> sortedList = new ArrayList<>();
+        for (Vertex vertex : vertexList) {
+            vertex.setColor(Color.WHITE);
+        }
+        for (Vertex vertex : vertexList) {
+            TopSort.DFS(vertex, sortedList);
+        }
+        Collections.reverse(sortedList);
+        this.setVertexList(sortedList);
     }
 }

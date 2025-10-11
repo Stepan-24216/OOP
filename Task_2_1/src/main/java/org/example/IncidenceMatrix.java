@@ -3,19 +3,24 @@ package org.example;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class IncidenceMatrix implements Graph{
-    ArrayList<Vertex> vertexList;
-    ArrayList<Edge> edgeList;
+    private ArrayList<Vertex> vertexList;
+    private final ArrayList<Edge> edgeList;
+
+    public IncidenceMatrix() {
+        vertexList = new ArrayList<>();
+        edgeList = new ArrayList<>();
+    }
 
     public ArrayList<Vertex> getVertexList(){
         return vertexList;
     }
 
-    public IncidenceMatrix() {
-        vertexList = new ArrayList<>();
-        edgeList = new ArrayList<>();
+    public void setVertexList(ArrayList<Vertex> vertexList){
+        this.vertexList = vertexList;
     }
 
     public void addVertex(Vertex vertex) {
@@ -26,8 +31,8 @@ public class IncidenceMatrix implements Graph{
 
     public void deleteVertex(Vertex v) {
         for (Vertex vertex : vertexList) {
-            if (!vertex.edges.isEmpty()) {
-                for (Edge edges : vertex.edges) {
+            if (!vertex.getEdges().isEmpty()) {
+                for (Edge edges : vertex.getEdges()) {
                     if (edges.getTarget().equals(v)) {
                         vertex.deleteEdge(edges);
                         break;
@@ -36,7 +41,7 @@ public class IncidenceMatrix implements Graph{
             }
         }
         edgeList.removeIf(edge -> edge.getTarget().equals(v));
-        for (Edge edge:v.edges){
+        for (Edge edge:v.getEdges()){
             edgeList.removeIf(e -> e.equals(edge));
         }
         if (!vertexList.isEmpty()) {
@@ -52,7 +57,7 @@ public class IncidenceMatrix implements Graph{
     }
 
     public void deleteEdge(String nameEdge,Vertex firstVertex,Vertex secondVertex){
-        for (Edge edges : firstVertex.edges) {
+        for (Edge edges : firstVertex.getEdges()) {
             if (edges.getTarget().equals(secondVertex)) {
                 firstVertex.deleteEdge(edges);
                 break;
@@ -82,7 +87,7 @@ public class IncidenceMatrix implements Graph{
             if (i == 0) {
                 IncidenceMatrix[i][0] = "";
             } else {
-                IncidenceMatrix[i][0] = vertexList.get(i-1).vertexName;
+                IncidenceMatrix[i][0] = vertexList.get(i-1).getName();
             }
         }
         for (int j = 0; j <= edgeList.size(); j++) {
@@ -95,8 +100,8 @@ public class IncidenceMatrix implements Graph{
         for (int i = 1; i <= vertexList.size(); i++) {
             Vertex vertex = vertexList.get(i-1);
             for (int j = 1; j <= edgeList.size(); j++) {
-                if (!vertex.edges.isEmpty()) {
-                    for (Edge edge: vertex.edges) {
+                if (!vertex.getEdges().isEmpty()) {
+                    for (Edge edge: vertex.getEdges()) {
                         if (edge.equals(edgeList.get(j-1))) {
                             IncidenceMatrix[i][j] = "1";
                             break;
@@ -112,12 +117,12 @@ public class IncidenceMatrix implements Graph{
         return IncidenceMatrix;
     }
 
-    public void printIncidenceMatrix() {
+    public void printGraph() {
         String[][] matrix = getIncidenceMatrix();
         int maxLen = 1;
         for (String[] row : matrix) {
             for (String cell : row) {
-                if (cell != null && cell.length() > maxLen) {
+                if (!cell.isEmpty() && cell.length() > maxLen) {
                     maxLen = cell.length();
                 }
             }
@@ -125,7 +130,7 @@ public class IncidenceMatrix implements Graph{
         String format = "%-" + (maxLen + 2) + "s";
         for (String[] row : matrix) {
             for (String cell : row) {
-                System.out.printf(format, cell == null ? "" : cell);
+                System.out.printf(format, cell.isEmpty() ? "" : cell);
             }
             System.out.println();
         }
@@ -142,5 +147,17 @@ public class IncidenceMatrix implements Graph{
         } catch (FileNotFoundException e) {
             System.out.println("Файл не найден: " + e.getMessage());
         }
+    }
+
+    public void topologicalSort() {
+        ArrayList<Vertex> sortedList = new ArrayList<>();
+        for (Vertex vertex : vertexList) {
+            vertex.setColor(Color.WHITE);
+        }
+        for (Vertex vertex : vertexList) {
+            TopSort.DFS(vertex, sortedList);
+        }
+        Collections.reverse(sortedList);
+        this.setVertexList(sortedList);
     }
 }
