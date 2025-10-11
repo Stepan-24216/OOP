@@ -1,5 +1,7 @@
 package org.example;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,6 +27,9 @@ public class TestGraph {
      */
     @Test
     void testAdjacencyMatrix() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
         AdjacencyMatrix graph = new AdjacencyMatrix();
         graph.addVertex(vertexF);
         graph.addVertex(vertexD);
@@ -77,6 +82,17 @@ public class TestGraph {
             assertEquals(sortDelEge[i], vertex.getName());
             i++;
         }
+
+        graph.printGraph();
+        String output = outContent.toString();
+
+        assertTrue(output.contains("   A  E  B  F  C  D  \n" +
+                                    "A  0  1  1  0  0  0  \n" +
+                                    "E  0  0  0  1  0  0  \n" +
+                                    "B  0  0  0  1  1  0  \n" +
+                                    "F  0  0  0  0  0  0  \n" +
+                                    "C  0  0  0  0  0  1  \n" +
+                                    "D  0  0  0  0  0  0  "));
     }
 
     /**
@@ -84,6 +100,8 @@ public class TestGraph {
      */
     @Test
     void testAdjacencyList() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
         AdjacencyList graph = new AdjacencyList();
         graph.addVertex(vertexF);
         graph.addVertex(vertexD);
@@ -170,6 +188,15 @@ public class TestGraph {
             }
             j++;
         }
+
+        graph.printGraph();
+        String output = outContent.toString();
+
+        assertTrue(output.contains("A: B E \n" +
+                                    "B: F \n" +
+                                    "E: F \n" +
+                                    "D: \n" +
+                                    "F: "));
     }
 
     /**
@@ -177,6 +204,8 @@ public class TestGraph {
      */
     @Test
     void testIncidenceMatrix() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
         IncidenceMatrix graph = new IncidenceMatrix();
         graph.addVertex(vertexF);
         graph.addVertex(vertexD);
@@ -244,5 +273,16 @@ public class TestGraph {
         graph.addVertex(vertexG);
         graph.addEdge("edge8", vertexG, vertexA);
         assertTrue(graph.getVertexList().contains(vertexG));
+
+        graph.printGraph();
+        String output = outContent.toString();
+
+        assertTrue(output.contains("       edge3  edge4  edge5  edge8  \n" +
+                                    "A      0      1      0      0      \n" +
+                                    "E      0      0      1      0      \n" +
+                                    "F      0      0      0      0      \n" +
+                                    "C      1      0      0      0      \n" +
+                                    "D      0      0      0      0      \n" +
+                                    "G      0      0      0      1  "));
     }
 }

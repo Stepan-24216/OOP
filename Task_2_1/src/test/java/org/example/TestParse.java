@@ -60,7 +60,7 @@ public class TestParse {
         };
         String[] cur2 = {"E", "F", "B", "C", "A", "D"};
         for (String line : data) {
-            ParseDataFile.parseData(line,graph2,false);
+            ParseDataFile.parseData(line, graph2, false);
         }
         int i = 0;
         for (Vertex vertex : graph2.getVertexList()) {
@@ -90,7 +90,7 @@ public class TestParse {
         };
         String[] cur2 = {"E", "F", "B", "C", "A", "D"};
         for (String line : data) {
-            ParseDataFile.parseData(line,graph2,false);
+            ParseDataFile.parseData(line, graph2, false);
         }
         int i = 0;
         for (Vertex vertex : graph2.getVertexList()) {
