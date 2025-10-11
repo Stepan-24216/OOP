@@ -1,10 +1,17 @@
 package org.example;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Тесты для составляющих граф объектов.
+ */
 public class TestObjects {
+    /**
+     * Тесты для вершин.
+     */
     @Test
     void createVertex() {
         Vertex x = new Vertex("1");
@@ -35,6 +42,9 @@ public class TestObjects {
         assertTrue(a.equals(a));
     }
 
+    /**
+     * Тесты для рёбер.
+     */
     void createEdge() {
         Vertex x = new Vertex("1");
         Vertex y = new Vertex("2");

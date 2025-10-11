@@ -6,27 +6,45 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+/**
+ * Матрица смежности.
+ */
 public class AdjacencyMatrix implements Graph {
     private ArrayList<Vertex> vertexList;
 
+    /**
+     * Конструктор.
+     */
     public AdjacencyMatrix() {
         vertexList = new ArrayList<>();
     }
 
-    public ArrayList<Vertex> getVertexList(){
+    /**
+     * Получение списка вершин.
+     */
+    public ArrayList<Vertex> getVertexList() {
         return vertexList;
     }
 
-    public void setVertexList(ArrayList<Vertex> vertexList){
+    /**
+     * Присваивание списка вершин.
+     */
+    public void setVertexList(ArrayList<Vertex> vertexList) {
         this.vertexList = vertexList;
     }
 
+    /**
+     * Добавить вершину.
+     */
     public void addVertex(Vertex vertex) {
         if (!vertexList.contains(vertex)) {
             vertexList.add(vertex);
         }
     }
 
+    /**
+     * Удаление вершины.
+     */
     public void deleteVertex(Vertex v) {
         for (Vertex vertex : vertexList) {
             if (!vertex.getEdges().isEmpty()) {
@@ -43,11 +61,17 @@ public class AdjacencyMatrix implements Graph {
         }
     }
 
+    /**
+     * Добавить ребро.
+     */
     public void addEdge(String nameEdge, Vertex firstVertex, Vertex secondVertex) {
         firstVertex.addEdge(nameEdge, secondVertex);
     }
 
-    public void deleteEdge(String nameEdge,Vertex firstVertex,Vertex secondVertex){
+    /**
+     * Удалить ребро.
+     */
+    public void deleteEdge(String nameEdge, Vertex firstVertex, Vertex secondVertex) {
         for (Edge edges : firstVertex.getEdges()) {
             if (edges.getTarget().equals(secondVertex)) {
                 firstVertex.deleteEdge(edges);
@@ -56,6 +80,9 @@ public class AdjacencyMatrix implements Graph {
         }
     }
 
+    /**
+     * Получение смежных вершин.
+     */
     public ArrayList<Vertex> getNeighbors(Vertex vertex) {
         ArrayList<Vertex> adjacent = new ArrayList<>();
         if (vertexList.contains(vertex)) {
@@ -66,22 +93,25 @@ public class AdjacencyMatrix implements Graph {
         return adjacent;
     }
 
-    public String[][] getAdjacencyMatrix(){
-        String[][] IncidenceMatrix = new String[vertexList.size()+1][vertexList.size()+1];
+    /**
+     * Получение матрицы смежности.
+     */
+    public String[][] getAdjacencyMatrix() {
+        String[][] IncidenceMatrix = new String[vertexList.size() + 1][vertexList.size() + 1];
         for (int i = 0; i <= vertexList.size(); i++) {
             if (i == 0) {
                 IncidenceMatrix[i][0] = "";
             } else {
-                IncidenceMatrix[i][0] = vertexList.get(i-1).getName();
-                IncidenceMatrix[0][i] = vertexList.get(i-1).getName();
+                IncidenceMatrix[i][0] = vertexList.get(i - 1).getName();
+                IncidenceMatrix[0][i] = vertexList.get(i - 1).getName();
             }
         }
         for (int i = 1; i <= vertexList.size(); i++) {
-            Vertex vertex = vertexList.get(i-1);
+            Vertex vertex = vertexList.get(i - 1);
             for (int j = 1; j <= vertexList.size(); j++) {
                 if (!vertex.getEdges().isEmpty()) {
-                    for (Edge edge: vertex.getEdges()) {
-                        if (edge.getTarget().equals(vertexList.get(j-1))) {
+                    for (Edge edge : vertex.getEdges()) {
+                        if (edge.getTarget().equals(vertexList.get(j - 1))) {
                             IncidenceMatrix[i][j] = "1";
                             break;
                         } else {
@@ -96,6 +126,9 @@ public class AdjacencyMatrix implements Graph {
         return IncidenceMatrix;
     }
 
+    /**
+     * Вывод графа.
+     */
     public void printGraph() {
         String[][] matrix = getAdjacencyMatrix();
         int maxLen = 1;
@@ -115,12 +148,15 @@ public class AdjacencyMatrix implements Graph {
         }
     }
 
+    /**
+     * Чтение файла фиксированного формата.
+     */
     public void fileReader(String filePath) {
         try (Scanner scanner = new Scanner(new File(filePath))) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 if (!line.isEmpty()) {
-                    ParseDataFile.parseData(line,this,false);
+                    ParseDataFile.parseData(line, this, false);
                 }
             }
         } catch (FileNotFoundException e) {
@@ -128,6 +164,9 @@ public class AdjacencyMatrix implements Graph {
         }
     }
 
+    /**
+     * Топологическая сортировка графа.
+     */
     public void topologicalSort() {
         ArrayList<Vertex> sortedList = new ArrayList<>();
         for (Vertex vertex : vertexList) {

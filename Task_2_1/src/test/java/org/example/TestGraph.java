@@ -1,16 +1,28 @@
 package org.example;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Тесты для различных представлений графа.
+ */
+
 public class TestGraph {
+    /**
+     * Вершины для тестировки.
+     */
     Vertex A = new Vertex("A");
     Vertex B = new Vertex("B");
     Vertex C = new Vertex("C");
     Vertex D = new Vertex("D");
     Vertex E = new Vertex("E");
     Vertex F = new Vertex("F");
+
+    /**
+     * Тесты для Матрицы смежности.
+     */
     @Test
     void testAdjacencyMatrix() {
         AdjacencyMatrix graph = new AdjacencyMatrix();
@@ -29,14 +41,14 @@ public class TestGraph {
         graph.addEdge("edge6", B, F);
         graph.addEdge("edge7", C, E);
         int i = 0;
-        String[] cur = {"F","D", "B", "C", "E", "A"};
+        String[] cur = {"F", "D", "B", "C", "E", "A"};
         for (Vertex vertex : graph.getVertexList()) {
             assertEquals(cur[i], vertex.getName());
             i++;
         }
         i = 0;
         graph.topologicalSort();
-        String[] sort = {"A","B", "C", "E", "D", "F"};
+        String[] sort = {"A", "B", "C", "E", "D", "F"};
         for (Vertex vertex : graph.getVertexList()) {
             assertEquals(sort[i], vertex.getName());
             i++;
@@ -57,16 +69,19 @@ public class TestGraph {
             }
         }
 
-        graph.deleteEdge("edge7",C,E);
+        graph.deleteEdge("edge7", C, E);
         i = 0;
         graph.topologicalSort();
-        String[] sortDelEge= {"A","E", "B", "F", "C", "D"};
+        String[] sortDelEge = {"A", "E", "B", "F", "C", "D"};
         for (Vertex vertex : graph.getVertexList()) {
             assertEquals(sortDelEge[i], vertex.getName());
             i++;
         }
     }
 
+    /**
+     * Тесты для Списка смежности.
+     */
     @Test
     void testAdjacencyList() {
         AdjacencyList graph = new AdjacencyList();
@@ -85,14 +100,14 @@ public class TestGraph {
         graph.addEdge("edge6", B, F);
         graph.addEdge("edge7", C, E);
         int i = 0;
-        String[] cur = {"F","D", "B", "C", "E", "A"};
+        String[] cur = {"F", "D", "B", "C", "E", "A"};
         for (Vertex vertex : graph.getVertexList()) {
             assertEquals(cur[i], vertex.getName());
             i++;
         }
         i = 0;
         graph.topologicalSort();
-        String[] sort = {"A","B", "C", "E", "D", "F"};
+        String[] sort = {"A", "B", "C", "E", "D", "F"};
         for (Vertex vertex : graph.getVertexList()) {
             assertEquals(sort[i], vertex.getName());
             i++;
@@ -116,7 +131,7 @@ public class TestGraph {
             }
             j++;
         }
-        graph.deleteEdge("edge7",C,E);
+        graph.deleteEdge("edge7", C, E);
 
         i = 0;
         j = 0;
@@ -157,6 +172,9 @@ public class TestGraph {
         }
     }
 
+    /**
+     * Тесты для Матрицы инцидентности.
+     */
     void testIncidenceMatrix() {
         IncidenceMatrix graph = new IncidenceMatrix();
         graph.addVertex(F);
@@ -174,26 +192,26 @@ public class TestGraph {
         graph.addEdge("edge6", B, F);
         graph.addEdge("edge7", C, E);
         int i = 0;
-        String[] cur = {"F","D", "B", "C", "E", "A"};
+        String[] cur = {"F", "D", "B", "C", "E", "A"};
         for (Vertex vertex : graph.getVertexList()) {
             assertEquals(cur[i], vertex.getName());
             i++;
         }
         i = 0;
         graph.topologicalSort();
-        String[] sort = {"A","B", "C", "E", "D", "F"};
+        String[] sort = {"A", "B", "C", "E", "D", "F"};
         for (Vertex vertex : graph.getVertexList()) {
             assertEquals(sort[i], vertex.getName());
             i++;
         }
         String[][] expectedMatrix = {
             {" ", "edge1", "edge2", "edge3", "edge4", "edge5", "edge6", "edge7"},
-            {"A", "1",    "0",     "0",     "1",     "0",     "0",     "0"},
-            {"B", "0",    "1",     "0",     "0",     "0",     "1",     "0"},
-            {"C", "0",    "0",     "1",     "0",     "0",     "0",     "1"},
-            {"E", "0",    "0",     "0",     "0",     "1",     "0",     "0"},
-            {"D", "0",    "0",     "0",     "0",     "0",     "0",     "0"},
-            {"F", "0",    "0",     "0",     "0",     "0",     "0",     "0"}
+            {"A", "1", "0", "0", "1", "0", "0", "0"},
+            {"B", "0", "1", "0", "0", "0", "1", "0"},
+            {"C", "0", "0", "1", "0", "0", "0", "1"},
+            {"E", "0", "0", "0", "0", "1", "0", "0"},
+            {"D", "0", "0", "0", "0", "0", "0", "0"},
+            {"F", "0", "0", "0", "0", "0", "0", "0"}
         };
         String[][] matrix = graph.getIncidenceMatrix();
         for (i = 1; i < matrix.length; i++) {
@@ -202,10 +220,10 @@ public class TestGraph {
             }
         }
 
-        graph.deleteEdge("edge7",C,E);
+        graph.deleteEdge("edge7", C, E);
         i = 0;
         graph.topologicalSort();
-        String[] sortDelEge= {"A","E", "B", "F", "C", "D"};
+        String[] sortDelEge = {"A", "E", "B", "F", "C", "D"};
         for (Vertex vertex : graph.getVertexList()) {
             assertEquals(sortDelEge[i], vertex.getName());
             i++;

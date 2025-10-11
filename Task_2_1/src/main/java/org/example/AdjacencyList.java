@@ -6,27 +6,45 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class AdjacencyList implements Graph{
+/**
+ * Список смежности.
+ */
+public class AdjacencyList implements Graph {
     private ArrayList<Vertex> vertexList;
 
+    /**
+     * Конструктор.
+     */
     public AdjacencyList() {
         vertexList = new ArrayList<>();
     }
 
-    public ArrayList<Vertex> getVertexList(){
+    /**
+     * Получение списка вершин.
+     */
+    public ArrayList<Vertex> getVertexList() {
         return vertexList;
     }
 
-    public void setVertexList(ArrayList<Vertex> vertexList){
+    /**
+     * Присваивание списка вершин.
+     */
+    public void setVertexList(ArrayList<Vertex> vertexList) {
         this.vertexList = vertexList;
     }
 
+    /**
+     * Добавить вершину.
+     */
     public void addVertex(Vertex vertex) {
         if (!vertexList.contains(vertex)) {
             vertexList.add(vertex);
         }
     }
 
+    /**
+     * Удаление вершины.
+     */
     public void deleteVertex(Vertex v) {
         for (Vertex vertex : vertexList) {
             if (!vertex.getEdges().isEmpty()) {
@@ -43,11 +61,17 @@ public class AdjacencyList implements Graph{
         }
     }
 
-   public void addEdge(String nameEdge, Vertex firstVertex, Vertex secondVertex) {
-       firstVertex.addEdge(nameEdge, secondVertex);
-   }
+    /**
+     * Добавить ребро.
+     */
+    public void addEdge(String nameEdge, Vertex firstVertex, Vertex secondVertex) {
+        firstVertex.addEdge(nameEdge, secondVertex);
+    }
 
-    public void deleteEdge(String nameEdge,Vertex firstVertex,Vertex secondVertex){
+    /**
+     * Удалить ребро.
+     */
+    public void deleteEdge(String nameEdge, Vertex firstVertex, Vertex secondVertex) {
         for (Edge edges : firstVertex.getEdges()) {
             if (edges.getTarget().equals(secondVertex)) {
                 firstVertex.deleteEdge(edges);
@@ -56,6 +80,9 @@ public class AdjacencyList implements Graph{
         }
     }
 
+    /**
+     * Получение смежных вершин.
+     */
     public ArrayList<Vertex> getNeighbors(Vertex vertex) {
         ArrayList<Vertex> adjacent = new ArrayList<>();
         if (vertexList.contains(vertex)) {
@@ -66,7 +93,10 @@ public class AdjacencyList implements Graph{
         return adjacent;
     }
 
-    private void printAdjacentVertices(Vertex vertex){
+    /**
+     * Вывод смежных вершин.
+     */
+    private void printAdjacentVertices(Vertex vertex) {
         System.out.print(vertex.getName() + ": ");
         if (!vertex.getEdges().isEmpty()) {
             for (Edge neighbor : vertex.getEdges()) {
@@ -76,6 +106,9 @@ public class AdjacencyList implements Graph{
         System.out.println();
     }
 
+    /**
+     * Вывод графа.
+     */
     public void printGraph() {
         if (vertexList.isEmpty()) {
             System.out.println("Список вершин пуст");
@@ -90,12 +123,15 @@ public class AdjacencyList implements Graph{
         }
     }
 
+    /**
+     * Чтение файла фиксированного формата.
+     */
     public void fileReader(String filePath) {
         try (Scanner scanner = new Scanner(new File(filePath))) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 if (!line.isEmpty()) {
-                    ParseDataFile.parseData(line,this,false);
+                    ParseDataFile.parseData(line, this, false);
                 }
             }
         } catch (FileNotFoundException e) {
@@ -103,6 +139,9 @@ public class AdjacencyList implements Graph{
         }
     }
 
+    /**
+     * Топологическая сортировка графа.
+     */
     public void topologicalSort() {
         ArrayList<Vertex> sortedList = new ArrayList<>();
         for (Vertex vertex : vertexList) {

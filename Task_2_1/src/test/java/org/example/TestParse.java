@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Тесты для парсинга файлов с данными.
+ */
 public class TestParse {
     @Test
     void testFileReader() {

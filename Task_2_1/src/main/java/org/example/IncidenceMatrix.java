@@ -6,29 +6,47 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class IncidenceMatrix implements Graph{
-    private ArrayList<Vertex> vertexList;
+/**
+ * Матрица инцидентности.
+ */
+public class IncidenceMatrix implements Graph {
     private final ArrayList<Edge> edgeList;
+    private ArrayList<Vertex> vertexList;
 
+    /**
+     * Конструктор.
+     */
     public IncidenceMatrix() {
         vertexList = new ArrayList<>();
         edgeList = new ArrayList<>();
     }
 
-    public ArrayList<Vertex> getVertexList(){
+    /**
+     * Получение списка вершин.
+     */
+    public ArrayList<Vertex> getVertexList() {
         return vertexList;
     }
 
-    public void setVertexList(ArrayList<Vertex> vertexList){
+    /**
+     * Присваивание списка вершин.
+     */
+    public void setVertexList(ArrayList<Vertex> vertexList) {
         this.vertexList = vertexList;
     }
 
+    /**
+     * Добавить вершину.
+     */
     public void addVertex(Vertex vertex) {
         if (!vertexList.contains(vertex)) {
             vertexList.add(vertex);
         }
     }
 
+    /**
+     * Удаление вершины.
+     */
     public void deleteVertex(Vertex v) {
         for (Vertex vertex : vertexList) {
             if (!vertex.getEdges().isEmpty()) {
@@ -41,7 +59,7 @@ public class IncidenceMatrix implements Graph{
             }
         }
         edgeList.removeIf(edge -> edge.getTarget().equals(v));
-        for (Edge edge:v.getEdges()){
+        for (Edge edge : v.getEdges()) {
             edgeList.removeIf(e -> e.equals(edge));
         }
         if (!vertexList.isEmpty()) {
@@ -50,13 +68,19 @@ public class IncidenceMatrix implements Graph{
 
     }
 
+    /**
+     * Добавить ребро.
+     */
     public void addEdge(String nameEdge, Vertex firstVertex, Vertex secondVertex) {
         Edge newEdge = new Edge(nameEdge, secondVertex);
         firstVertex.addEdge(nameEdge, secondVertex);
         edgeList.add(newEdge);
     }
 
-    public void deleteEdge(String nameEdge,Vertex firstVertex,Vertex secondVertex){
+    /**
+     * Удалить ребро.
+     */
+    public void deleteEdge(String nameEdge, Vertex firstVertex, Vertex secondVertex) {
         for (Edge edges : firstVertex.getEdges()) {
             if (edges.getTarget().equals(secondVertex)) {
                 firstVertex.deleteEdge(edges);
@@ -71,6 +95,9 @@ public class IncidenceMatrix implements Graph{
         }
     }
 
+    /**
+     * Получение смежных вершин.
+     */
     public ArrayList<Vertex> getNeighbors(Vertex vertex) {
         ArrayList<Vertex> adjacent = new ArrayList<>();
         if (vertexList.contains(vertex)) {
@@ -81,28 +108,31 @@ public class IncidenceMatrix implements Graph{
         return adjacent;
     }
 
-    public String[][] getIncidenceMatrix(){
-        String[][] IncidenceMatrix = new String[vertexList.size()+1][edgeList.size()+1];
+    /**
+     * Получение матрицы инцидентности.
+     */
+    public String[][] getIncidenceMatrix() {
+        String[][] IncidenceMatrix = new String[vertexList.size() + 1][edgeList.size() + 1];
         for (int i = 0; i <= vertexList.size(); i++) {
             if (i == 0) {
                 IncidenceMatrix[i][0] = "";
             } else {
-                IncidenceMatrix[i][0] = vertexList.get(i-1).getName();
+                IncidenceMatrix[i][0] = vertexList.get(i - 1).getName();
             }
         }
         for (int j = 0; j <= edgeList.size(); j++) {
             if (j == 0) {
                 IncidenceMatrix[0][j] = "";
             } else {
-                IncidenceMatrix[0][j] = edgeList.get(j-1).nameEdge;
+                IncidenceMatrix[0][j] = edgeList.get(j - 1).nameEdge;
             }
         }
         for (int i = 1; i <= vertexList.size(); i++) {
-            Vertex vertex = vertexList.get(i-1);
+            Vertex vertex = vertexList.get(i - 1);
             for (int j = 1; j <= edgeList.size(); j++) {
                 if (!vertex.getEdges().isEmpty()) {
-                    for (Edge edge: vertex.getEdges()) {
-                        if (edge.equals(edgeList.get(j-1))) {
+                    for (Edge edge : vertex.getEdges()) {
+                        if (edge.equals(edgeList.get(j - 1))) {
                             IncidenceMatrix[i][j] = "1";
                             break;
                         } else {
@@ -117,6 +147,9 @@ public class IncidenceMatrix implements Graph{
         return IncidenceMatrix;
     }
 
+    /**
+     * Вывод графа.
+     */
     public void printGraph() {
         String[][] matrix = getIncidenceMatrix();
         int maxLen = 1;
@@ -136,12 +169,15 @@ public class IncidenceMatrix implements Graph{
         }
     }
 
+    /**
+     * Чтение файла фиксированного формата.
+     */
     public void fileReader(String filePath) {
         try (Scanner scanner = new Scanner(new File(filePath))) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 if (!line.isEmpty()) {
-                    ParseDataFile.parseData(line,this,true);
+                    ParseDataFile.parseData(line, this, true);
                 }
             }
         } catch (FileNotFoundException e) {
@@ -149,6 +185,9 @@ public class IncidenceMatrix implements Graph{
         }
     }
 
+    /**
+     * Топологическая сортировка графа.
+     */
     public void topologicalSort() {
         ArrayList<Vertex> sortedList = new ArrayList<>();
         for (Vertex vertex : vertexList) {
