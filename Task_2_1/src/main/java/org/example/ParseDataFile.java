@@ -3,7 +3,13 @@ package org.example;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Разбор строки из файла.
+ */
 public class ParseDataFile {
+    /**
+     * Разбор строки из файла.
+     */
     public static void parseData(String input, Graph list, boolean needNameEdge) {
         Pattern pattern1 = Pattern.compile("^(\\S+) (\\S+)$");
 
@@ -13,16 +19,20 @@ public class ParseDataFile {
         Matcher matcher2 = pattern2.matcher(input);
 
         if (matcher1.matches() && !needNameEdge) {
-            VertexAndVertex(matcher1.group(1), matcher1.group(2), list);
+            vertexAndVertex(matcher1.group(1), matcher1.group(2), list);
         } else if (matcher2.matches()) {
-            VertexAndVertexAndEdge(matcher2.group(1), matcher2.group(2), matcher2.group(3), list);
+            vertexAndVertexAndEdge(matcher2.group(1), matcher2.group(2), matcher2.group(3), list);
         } else {
             System.out.println("ОШИБКА: Неверный формат данных!");
         }
     }
 
-    public static void VertexAndVertex(String vertex1, String vertex2, Graph list) {
-        Vertex a, b;
+    /**
+     * Ситуация виршина+вершина.
+     */
+    public static void vertexAndVertex(String vertex1, String vertex2, Graph list) {
+        Vertex a;
+        Vertex b;
         if (!list.getVertexList().contains(new Vertex(vertex1))) {
             a = new Vertex(vertex1);
             list.addVertex(a);
@@ -38,9 +48,13 @@ public class ParseDataFile {
         list.addEdge(a.getName() + "-" + b.getName(), a, b);
     }
 
-    public static void VertexAndVertexAndEdge(String vertex1, String vertex2, String edgeName,
-                                              Graph list) {
-        Vertex a, b;
+    /**
+     * Ситуация виршина+вершина+ребро.
+     */
+    public static void vertexAndVertexAndEdge(String vertex1, String vertex2,
+                                              String edgeName, Graph list) {
+        Vertex a;
+        Vertex b;
         if (!list.getVertexList().contains(new Vertex(vertex1))) {
             a = new Vertex(vertex1);
             list.addVertex(a);

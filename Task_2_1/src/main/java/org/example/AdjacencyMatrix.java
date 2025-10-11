@@ -97,13 +97,13 @@ public class AdjacencyMatrix implements Graph {
      * Получение матрицы смежности.
      */
     public String[][] getAdjacencyMatrix() {
-        String[][] IncidenceMatrix = new String[vertexList.size() + 1][vertexList.size() + 1];
+        String[][] incidenceMatrix = new String[vertexList.size() + 1][vertexList.size() + 1];
         for (int i = 0; i <= vertexList.size(); i++) {
             if (i == 0) {
-                IncidenceMatrix[i][0] = "";
+                incidenceMatrix[i][0] = "";
             } else {
-                IncidenceMatrix[i][0] = vertexList.get(i - 1).getName();
-                IncidenceMatrix[0][i] = vertexList.get(i - 1).getName();
+                incidenceMatrix[i][0] = vertexList.get(i - 1).getName();
+                incidenceMatrix[0][i] = vertexList.get(i - 1).getName();
             }
         }
         for (int i = 1; i <= vertexList.size(); i++) {
@@ -112,18 +112,18 @@ public class AdjacencyMatrix implements Graph {
                 if (!vertex.getEdges().isEmpty()) {
                     for (Edge edge : vertex.getEdges()) {
                         if (edge.getTarget().equals(vertexList.get(j - 1))) {
-                            IncidenceMatrix[i][j] = "1";
+                            incidenceMatrix[i][j] = "1";
                             break;
                         } else {
-                            IncidenceMatrix[i][j] = "0";
+                            incidenceMatrix[i][j] = "0";
                         }
                     }
                 } else {
-                    IncidenceMatrix[i][j] = "0";
+                    incidenceMatrix[i][j] = "0";
                 }
             }
         }
-        return IncidenceMatrix;
+        return incidenceMatrix;
     }
 
     /**
@@ -173,7 +173,7 @@ public class AdjacencyMatrix implements Graph {
             vertex.setColor(Color.WHITE);
         }
         for (Vertex vertex : vertexList) {
-            TopSort.DFS(vertex, sortedList);
+            TopSort.depthFirstSearch(vertex, sortedList);
         }
         Collections.reverse(sortedList);
         this.setVertexList(sortedList);

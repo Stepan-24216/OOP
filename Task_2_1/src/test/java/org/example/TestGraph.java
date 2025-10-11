@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 /**
  * Тесты для различных представлений графа.
  */
@@ -13,12 +12,13 @@ public class TestGraph {
     /**
      * Вершины для тестировки.
      */
-    Vertex A = new Vertex("A");
-    Vertex B = new Vertex("B");
-    Vertex C = new Vertex("C");
-    Vertex D = new Vertex("D");
-    Vertex E = new Vertex("E");
-    Vertex F = new Vertex("F");
+    Vertex vertexA = new Vertex("A");
+    Vertex vertexB = new Vertex("B");
+    Vertex vertexC = new Vertex("C");
+    Vertex vertexD = new Vertex("D");
+    Vertex vertexE = new Vertex("E");
+    Vertex vertexF = new Vertex("F");
+
 
     /**
      * Тесты для Матрицы смежности.
@@ -26,20 +26,20 @@ public class TestGraph {
     @Test
     void testAdjacencyMatrix() {
         AdjacencyMatrix graph = new AdjacencyMatrix();
-        graph.addVertex(F);
-        graph.addVertex(D);
-        graph.addVertex(B);
-        graph.addVertex(C);
-        graph.addVertex(E);
-        graph.addVertex(A);
+        graph.addVertex(vertexF);
+        graph.addVertex(vertexD);
+        graph.addVertex(vertexB);
+        graph.addVertex(vertexC);
+        graph.addVertex(vertexE);
+        graph.addVertex(vertexA);
 
-        graph.addEdge("edge1", A, B);
-        graph.addEdge("edge2", B, C);
-        graph.addEdge("edge3", C, D);
-        graph.addEdge("edge4", A, E);
-        graph.addEdge("edge5", E, F);
-        graph.addEdge("edge6", B, F);
-        graph.addEdge("edge7", C, E);
+        graph.addEdge("edge1", vertexA, vertexB);
+        graph.addEdge("edge2", vertexB, vertexC);
+        graph.addEdge("edge3", vertexC, vertexD);
+        graph.addEdge("edge4", vertexA, vertexE);
+        graph.addEdge("edge5", vertexE, vertexF);
+        graph.addEdge("edge6", vertexB, vertexF);
+        graph.addEdge("edge7", vertexC, vertexE);
         int i = 0;
         String[] cur = {"F", "D", "B", "C", "E", "A"};
         for (Vertex vertex : graph.getVertexList()) {
@@ -69,7 +69,7 @@ public class TestGraph {
             }
         }
 
-        graph.deleteEdge("edge7", C, E);
+        graph.deleteEdge("edge7", vertexC, vertexE);
         i = 0;
         graph.topologicalSort();
         String[] sortDelEge = {"A", "E", "B", "F", "C", "D"};
@@ -85,20 +85,20 @@ public class TestGraph {
     @Test
     void testAdjacencyList() {
         AdjacencyList graph = new AdjacencyList();
-        graph.addVertex(F);
-        graph.addVertex(D);
-        graph.addVertex(B);
-        graph.addVertex(C);
-        graph.addVertex(E);
-        graph.addVertex(A);
+        graph.addVertex(vertexF);
+        graph.addVertex(vertexD);
+        graph.addVertex(vertexB);
+        graph.addVertex(vertexC);
+        graph.addVertex(vertexE);
+        graph.addVertex(vertexA);
 
-        graph.addEdge("edge1", A, B);
-        graph.addEdge("edge2", B, C);
-        graph.addEdge("edge3", C, D);
-        graph.addEdge("edge4", A, E);
-        graph.addEdge("edge5", E, F);
-        graph.addEdge("edge6", B, F);
-        graph.addEdge("edge7", C, E);
+        graph.addEdge("edge1", vertexA, vertexB);
+        graph.addEdge("edge2", vertexB, vertexC);
+        graph.addEdge("edge3", vertexC, vertexD);
+        graph.addEdge("edge4", vertexA, vertexE);
+        graph.addEdge("edge5", vertexE, vertexF);
+        graph.addEdge("edge6", vertexB, vertexF);
+        graph.addEdge("edge7", vertexC, vertexE);
         int i = 0;
         String[] cur = {"F", "D", "B", "C", "E", "A"};
         for (Vertex vertex : graph.getVertexList()) {
@@ -131,7 +131,7 @@ public class TestGraph {
             }
             j++;
         }
-        graph.deleteEdge("edge7", C, E);
+        graph.deleteEdge("edge7", vertexC, vertexE);
 
         i = 0;
         j = 0;
@@ -152,7 +152,7 @@ public class TestGraph {
             j++;
         }
 
-        graph.deleteVertex(C);
+        graph.deleteVertex(vertexC);
         i = 0;
         j = 0;
         String[][] adjacencyList3 = {
@@ -177,20 +177,20 @@ public class TestGraph {
      */
     void testIncidenceMatrix() {
         IncidenceMatrix graph = new IncidenceMatrix();
-        graph.addVertex(F);
-        graph.addVertex(D);
-        graph.addVertex(B);
-        graph.addVertex(C);
-        graph.addVertex(E);
-        graph.addVertex(A);
+        graph.addVertex(vertexF);
+        graph.addVertex(vertexD);
+        graph.addVertex(vertexB);
+        graph.addVertex(vertexC);
+        graph.addVertex(vertexE);
+        graph.addVertex(vertexA);
 
-        graph.addEdge("edge1", A, B);
-        graph.addEdge("edge2", B, C);
-        graph.addEdge("edge3", C, D);
-        graph.addEdge("edge4", A, E);
-        graph.addEdge("edge5", E, F);
-        graph.addEdge("edge6", B, F);
-        graph.addEdge("edge7", C, E);
+        graph.addEdge("edge1", vertexA, vertexB);
+        graph.addEdge("edge2", vertexB, vertexC);
+        graph.addEdge("edge3", vertexC, vertexD);
+        graph.addEdge("edge4", vertexA, vertexE);
+        graph.addEdge("edge5", vertexE, vertexF);
+        graph.addEdge("edge6", vertexB, vertexF);
+        graph.addEdge("edge7", vertexC, vertexE);
         int i = 0;
         String[] cur = {"F", "D", "B", "C", "E", "A"};
         for (Vertex vertex : graph.getVertexList()) {
@@ -220,7 +220,7 @@ public class TestGraph {
             }
         }
 
-        graph.deleteEdge("edge7", C, E);
+        graph.deleteEdge("edge7", vertexC, vertexE);
         i = 0;
         graph.topologicalSort();
         String[] sortDelEge = {"A", "E", "B", "F", "C", "D"};

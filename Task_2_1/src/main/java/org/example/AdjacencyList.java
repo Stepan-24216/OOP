@@ -148,7 +148,7 @@ public class AdjacencyList implements Graph {
             vertex.setColor(Color.WHITE);
         }
         for (Vertex vertex : vertexList) {
-            TopSort.DFS(vertex, sortedList);
+            TopSort.depthFirstSearch(vertex, sortedList);
         }
         Collections.reverse(sortedList);
         this.setVertexList(sortedList);

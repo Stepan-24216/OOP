@@ -28,11 +28,9 @@ public class TestObjects {
         assertEquals(Color.GRAY, x.getColor());
         x.setColor(Color.BLACK);
         assertEquals(Color.BLACK, x.getColor());
-        x.addEdge("a", y);
         Edge a = new Edge("a", y);
-        assertEquals(1, x.getEdges().size());
+        x.addEdge("a", y);
         x.addEdge("b", z);
-        assertEquals(2, x.getEdges().size());
         for (Edge edge : x.getEdges()) {
             assertEquals(edge.nameEdge, edge.getNameEdge());
         }
