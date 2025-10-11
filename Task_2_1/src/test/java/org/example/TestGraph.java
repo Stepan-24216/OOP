@@ -175,6 +175,7 @@ public class TestGraph {
     /**
      * Тесты для Матрицы инцидентности.
      */
+    @Test
     void testIncidenceMatrix() {
         IncidenceMatrix graph = new IncidenceMatrix();
         graph.addVertex(vertexF);
@@ -228,5 +229,20 @@ public class TestGraph {
             assertEquals(sortDelEge[i], vertex.getName());
             i++;
         }
+
+        // Удаление вершины
+        graph.deleteVertex(vertexB);
+        String[] afterDeleteVertex = {"A", "E", "F", "C", "D"};
+        i = 0;
+        for (Vertex vertex : graph.getVertexList()) {
+            assertEquals(afterDeleteVertex[i], vertex.getName());
+            i++;
+        }
+
+        // Добавление новой вершины и ребра
+        Vertex vertexG = new Vertex("G");
+        graph.addVertex(vertexG);
+        graph.addEdge("edge8", vertexG, vertexA);
+        assertTrue(graph.getVertexList().contains(vertexG));
     }
 }
