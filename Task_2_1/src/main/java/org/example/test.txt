@@ -1,0 +1,8 @@
+E F edge5
+B F edge6
+B C edge2
+A B edge1
+C E edge7
+C D edge3
+A E edge4
+
