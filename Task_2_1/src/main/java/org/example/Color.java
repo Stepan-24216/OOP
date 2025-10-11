@@ -1,7 +1,7 @@
 package org.example;
 
 /**
- * Enum для цветов вершин при обходе графа
+ * Enum для цветов вершин при обходе графа.
  */
 public enum Color {
     WHITE,

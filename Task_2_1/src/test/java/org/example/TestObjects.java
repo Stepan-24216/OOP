@@ -28,12 +28,12 @@ public class TestObjects {
         assertEquals(Color.GRAY, x.getColor());
         x.setColor(Color.BLACK);
         assertEquals(Color.BLACK, x.getColor());
-        Edge a = new Edge("a", y);
         x.addEdge("a", y);
         x.addEdge("b", z);
         for (Edge edge : x.getEdges()) {
             assertEquals(edge.nameEdge, edge.getNameEdge());
         }
+        Edge a = new Edge("a", y);
         x.deleteEdge(a);
         assertEquals(1, x.getEdges().size());
         assertEquals("b", x.getEdges().get(0).getNameEdge());
