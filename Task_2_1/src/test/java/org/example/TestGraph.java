@@ -86,14 +86,14 @@ public class TestGraph {
         graph.printGraph();
         String output = outContent.toString();
 
-        assertTrue(output.contains
-            ("   A  E  B  F  C  D  \n" +
-                "A  0  1  1  0  0  0  \n" +
-                "E  0  0  0  1  0  0  \n" +
-                "B  0  0  0  1  1  0  \n" +
-                "F  0  0  0  0  0  0  \n" +
-                "C  0  0  0  0  0  1  \n" +
-                "D  0  0  0  0  0  0  "));
+        assertTrue(output.contains(
+                  "   A  E  B  F  C  D  \n"
+                + "A  0  1  1  0  0  0  \n"
+                + "E  0  0  0  1  0  0  \n"
+                + "B  0  0  0  1  1  0  \n"
+                + "F  0  0  0  0  0  0  \n"
+                + "C  0  0  0  0  0  1  \n"
+                + "D  0  0  0  0  0  0  "));
     }
 
     /**
@@ -193,11 +193,11 @@ public class TestGraph {
         graph.printGraph();
         String output = outContent.toString();
 
-        assertTrue(output.contains("A: B E \n" +
-                                    "B: F \n" +
-                                    "E: F \n" +
-                                    "D: \n" +
-                                    "F: "));
+        assertTrue(output.contains("A: B E \n"
+                                + "B: F \n"
+                                + "E: F \n"
+                                + "D: \n"
+                                + "F: "));
     }
 
     /**
@@ -278,13 +278,13 @@ public class TestGraph {
         graph.printGraph();
         String output = outContent.toString();
 
-        assertTrue(output.contains
-            ("       edge3  edge4  edge5  edge8  \n" +
-                "A      0      1      0      0      \n" +
-                "E      0      0      1      0      \n" +
-                "F      0      0      0      0      \n" +
-                "C      1      0      0      0      \n" +
-                "D      0      0      0      0      \n" +
-                "G      0      0      0      1  "));
+        assertTrue(output.contains(
+                "       edge3  edge4  edge5  edge8  \n"
+                + "A      0      1      0      0      \n"
+                + "E      0      0      1      0      \n"
+                + "F      0      0      0      0      \n"
+                + "C      1      0      0      0      \n"
+                + "D      0      0      0      0      \n"
+                + "G      0      0      0      1  "));
     }
 }
