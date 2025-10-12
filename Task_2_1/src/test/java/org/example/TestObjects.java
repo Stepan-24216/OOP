@@ -2,10 +2,11 @@ package org.example;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.Test;
+
 import org.example.objects.Color;
 import org.example.objects.Edge;
 import org.example.objects.Vertex;
+import org.junit.jupiter.api.Test;
 
 /**
  * Тесты для составляющих граф объектов.
