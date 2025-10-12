@@ -1,16 +1,20 @@
 package org.example;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.example.Objects.Edge;
-import org.example.Objects.Vertex;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import org.junit.jupiter.api.Test;
+
+
 import org.example.GraphStorageMethods.AdjacencyList;
 import org.example.GraphStorageMethods.AdjacencyMatrix;
 import org.example.GraphStorageMethods.IncidenceMatrix;
+import org.example.Objects.Edge;
+import org.example.Objects.Vertex;
+
 /**
  * Тесты для различных представлений графа.
  */
