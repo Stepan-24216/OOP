@@ -8,12 +8,11 @@ import java.io.PrintStream;
 
 import org.junit.jupiter.api.Test;
 
-
-import org.example.GraphStorageMethods.AdjacencyList;
-import org.example.GraphStorageMethods.AdjacencyMatrix;
-import org.example.GraphStorageMethods.IncidenceMatrix;
-import org.example.Objects.Edge;
-import org.example.Objects.Vertex;
+import org.example.graphStorageMethods.AdjacencyList;
+import org.example.graphStorageMethods.AdjacencyMatrix;
+import org.example.graphStorageMethods.IncidenceMatrix;
+import org.example.objects.Edge;
+import org.example.objects.Vertex;
 
 /**
  * Тесты для различных представлений графа.

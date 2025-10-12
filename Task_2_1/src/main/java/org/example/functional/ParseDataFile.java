@@ -1,9 +1,9 @@
-package org.example.Functional;
+package org.example.functional;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.example.GraphStorageMethods.Graph;
-import org.example.Objects.Vertex;
+import org.example.graphStorageMethods.Graph;
+import org.example.objects.Vertex;
 
 /**
  * Разбор строки из файла.

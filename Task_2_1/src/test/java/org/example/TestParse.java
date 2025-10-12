@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import org.example.Functional.ParseDataFile;
-import org.example.GraphStorageMethods.AdjacencyMatrix;
-import org.example.GraphStorageMethods.Graph;
-import org.example.Objects.Vertex;
+import org.example.functional.ParseDataFile;
+import org.example.graphStorageMethods.AdjacencyMatrix;
+import org.example.graphStorageMethods.Graph;
+import org.example.objects.Vertex;
 
 /**
  * Тесты для парсинга файлов с данными.

@@ -1,7 +1,6 @@
-package org.example.GraphStorageMethods;
+package org.example.graphStorageMethods;
 
-import org.example.Objects.Edge;
-import org.example.Objects.Vertex;
+import org.example.objects.Vertex;
 import java.util.ArrayList;
 
 /**

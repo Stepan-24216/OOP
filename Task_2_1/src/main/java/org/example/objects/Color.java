@@ -1,4 +1,4 @@
-package org.example.Objects;
+package org.example.objects;
 
 /**
  * Enum для цветов вершин при обходе графа.
