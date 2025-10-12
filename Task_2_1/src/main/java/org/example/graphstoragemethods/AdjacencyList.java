@@ -1,25 +1,27 @@
-package org.example.graphStorageMethods;
+package org.example.graphstoragemethods;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
+
 import org.example.functional.ParseDataFile;
 import org.example.functional.TopSort;
 import org.example.objects.Color;
 import org.example.objects.Edge;
 import org.example.objects.Vertex;
+
 /**
- * Матрица смежности.
+ * Список смежности.
  */
-public class AdjacencyMatrix implements Graph {
+public class AdjacencyList implements Graph {
     private ArrayList<Vertex> vertexList;
 
     /**
      * Конструктор.
      */
-    public AdjacencyMatrix() {
+    public AdjacencyList() {
         vertexList = new ArrayList<>();
     }
 
@@ -98,57 +100,32 @@ public class AdjacencyMatrix implements Graph {
     }
 
     /**
-     * Получение матрицы смежности.
+     * Вывод смежных вершин.
      */
-    public String[][] getAdjacencyMatrix() {
-        String[][] incidenceMatrix = new String[vertexList.size() + 1][vertexList.size() + 1];
-        for (int i = 0; i <= vertexList.size(); i++) {
-            if (i == 0) {
-                incidenceMatrix[i][0] = "";
-            } else {
-                incidenceMatrix[i][0] = vertexList.get(i - 1).getName();
-                incidenceMatrix[0][i] = vertexList.get(i - 1).getName();
+    private void printAdjacentVertices(Vertex vertex) {
+        System.out.print(vertex.getName() + ": ");
+        if (!vertex.getEdges().isEmpty()) {
+            for (Edge neighbor : vertex.getEdges()) {
+                System.out.print(neighbor.getNameVertex() + " ");
             }
         }
-        for (int i = 1; i <= vertexList.size(); i++) {
-            Vertex vertex = vertexList.get(i - 1);
-            for (int j = 1; j <= vertexList.size(); j++) {
-                if (!vertex.getEdges().isEmpty()) {
-                    for (Edge edge : vertex.getEdges()) {
-                        if (edge.getTarget().equals(vertexList.get(j - 1))) {
-                            incidenceMatrix[i][j] = "1";
-                            break;
-                        } else {
-                            incidenceMatrix[i][j] = "0";
-                        }
-                    }
-                } else {
-                    incidenceMatrix[i][j] = "0";
-                }
-            }
-        }
-        return incidenceMatrix;
+        System.out.println();
     }
 
     /**
      * Вывод графа.
      */
     public void printGraph() {
-        String[][] matrix = getAdjacencyMatrix();
-        int maxLen = 1;
-        for (String[] row : matrix) {
-            for (String cell : row) {
-                if (!cell.isEmpty() && cell.length() > maxLen) {
-                    maxLen = cell.length();
-                }
-            }
+        if (vertexList.isEmpty()) {
+            System.out.println("Список вершин пуст");
+            return;
         }
-        String format = "%-" + (maxLen + 2) + "s";
-        for (String[] row : matrix) {
-            for (String cell : row) {
-                System.out.printf(format, cell == null ? "" : cell);
+        for (Vertex vertex : vertexList) {
+            if (vertex == null || vertex.getName() == null) {
+                System.out.println("Вершина не инициализирована");
+                continue;
             }
-            System.out.println();
+            printAdjacentVertices(vertex);
         }
     }
 

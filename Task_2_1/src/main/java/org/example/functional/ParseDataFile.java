@@ -2,7 +2,7 @@ package org.example.functional;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.example.graphStorageMethods.Graph;
+import org.example.graphstoragemethods.Graph;
 import org.example.objects.Vertex;
 
 /**

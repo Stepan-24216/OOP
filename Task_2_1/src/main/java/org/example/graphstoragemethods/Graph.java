@@ -1,7 +1,8 @@
-package org.example.graphStorageMethods;
+package org.example.graphstoragemethods;
+
+import java.util.ArrayList;
 
 import org.example.objects.Vertex;
-import java.util.ArrayList;
 
 /**
  * Интерфейс граф.

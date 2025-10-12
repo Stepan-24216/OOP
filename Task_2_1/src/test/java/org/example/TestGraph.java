@@ -8,9 +8,9 @@ import java.io.PrintStream;
 
 import org.junit.jupiter.api.Test;
 
-import org.example.graphStorageMethods.AdjacencyList;
-import org.example.graphStorageMethods.AdjacencyMatrix;
-import org.example.graphStorageMethods.IncidenceMatrix;
+import org.example.graphstoragemethods.AdjacencyList;
+import org.example.graphstoragemethods.AdjacencyMatrix;
+import org.example.graphstoragemethods.IncidenceMatrix;
 import org.example.objects.Edge;
 import org.example.objects.Vertex;
 
