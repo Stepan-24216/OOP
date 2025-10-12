@@ -6,6 +6,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.example.Objects.Edge;
+import org.example.Objects.Vertex;
+import org.example.GraphStorageMethods.AdjacencyList;
+import org.example.GraphStorageMethods.AdjacencyMatrix;
+import org.example.GraphStorageMethods.IncidenceMatrix;
 /**
  * Тесты для различных представлений графа.
  */
@@ -132,7 +137,6 @@ public class TestGraph {
             i++;
         }
 
-        i = 0;
         int j = 0;
         String[][] adjacencyList = {
             {"A", "B", "E"},
@@ -152,7 +156,6 @@ public class TestGraph {
         }
         graph.deleteEdge("edge7", vertexC, vertexE);
 
-        i = 0;
         j = 0;
         String[][] adjacencyList2 = {
             {"A", "B", "E"},
@@ -172,7 +175,6 @@ public class TestGraph {
         }
 
         graph.deleteVertex(vertexC);
-        i = 0;
         j = 0;
         String[][] adjacencyList3 = {
             {"A", "B", "E"},

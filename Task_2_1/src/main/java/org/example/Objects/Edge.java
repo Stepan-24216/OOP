@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Objects;
 
 /**
  * Класс ребра.
@@ -10,7 +10,7 @@ public class Edge {
     /**
      * Конструктор ребра.
      */
-    Edge(String nameEdge, Vertex vertex) {
+    public Edge(String nameEdge, Vertex vertex) {
         this.nameEdge = nameEdge;
         this.target = vertex;
     }

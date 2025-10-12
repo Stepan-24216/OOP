@@ -1,10 +1,16 @@
-package org.example;
+package org.example.GraphStorageMethods;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
+
+import org.example.Objects.Color;
+import org.example.Functional.ParseDataFile;
+import org.example.Functional.TopSort;
+import org.example.Objects.Edge;
+import org.example.Objects.Vertex;
 
 /**
  * Список смежности.

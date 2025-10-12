@@ -1,6 +1,9 @@
-package org.example;
+package org.example.Functional;
 
 import java.util.ArrayList;
+import org.example.Objects.Color;
+import org.example.Objects.Edge;
+import org.example.Objects.Vertex;
 
 /**
  * Поиск в глубину для топологической сортировки.

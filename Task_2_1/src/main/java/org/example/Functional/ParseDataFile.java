@@ -1,7 +1,9 @@
-package org.example;
+package org.example.Functional;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.example.GraphStorageMethods.Graph;
+import org.example.Objects.Vertex;
 
 /**
  * Разбор строки из файла.
@@ -28,7 +30,7 @@ public class ParseDataFile {
     }
 
     /**
-     * Ситуация виршина+вершина.
+     * Ситуация вeршина + вершина.
      */
     public static void vertexAndVertex(String vertex1, String vertex2, Graph list) {
         Vertex a;

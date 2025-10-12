@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Objects;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ public class Vertex {
     /**
      * Конструктор вершины.
      */
-    Vertex(String name) {
+    public Vertex(String name) {
         this.vertexName = name;
         this.edges = new ArrayList<Edge>();
         this.color = Color.WHITE;

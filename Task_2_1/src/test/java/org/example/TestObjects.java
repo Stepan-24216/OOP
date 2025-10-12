@@ -5,6 +5,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.example.Objects.Color;
+import org.example.Objects.Edge;
+import org.example.Objects.Vertex;
+
 /**
  * Тесты для составляющих граф объектов.
  */
@@ -30,9 +34,6 @@ public class TestObjects {
         assertEquals(Color.BLACK, x.getColor());
         x.addEdge("a", y);
         x.addEdge("b", z);
-        for (Edge edge : x.getEdges()) {
-            assertEquals(edge.nameEdge, edge.getNameEdge());
-        }
         Edge a = new Edge("a", y);
         x.deleteEdge(a);
         assertEquals(1, x.getEdges().size());
@@ -43,6 +44,7 @@ public class TestObjects {
     /**
      * Тесты для рёбер.
      */
+    @Test
     void createEdge() {
         Vertex x = new Vertex("1");
         Vertex y = new Vertex("2");
