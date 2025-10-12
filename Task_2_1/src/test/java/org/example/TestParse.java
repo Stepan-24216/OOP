@@ -1,9 +1,7 @@
 package org.example;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.Test;
-
 import org.example.functional.ParseDataFile;
 import org.example.graphstoragemethods.AdjacencyMatrix;
 import org.example.graphstoragemethods.Graph;

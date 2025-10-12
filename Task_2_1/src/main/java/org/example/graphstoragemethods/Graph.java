@@ -1,7 +1,6 @@
 package org.example.graphstoragemethods;
 
 import java.util.ArrayList;
-
 import org.example.objects.Vertex;
 
 /**

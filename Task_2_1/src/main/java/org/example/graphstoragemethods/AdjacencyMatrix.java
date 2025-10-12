@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-
 import org.example.functional.ParseDataFile;
 import org.example.functional.TopSort;
 import org.example.objects.Color;
