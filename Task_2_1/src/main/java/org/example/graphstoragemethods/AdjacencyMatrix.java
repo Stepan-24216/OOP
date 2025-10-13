@@ -101,7 +101,7 @@ public class AdjacencyMatrix implements Graph {
     /**
      * Получение матрицы смежности.
      */
-    public String[][] getAdjacencyMatrix() {
+    protected String[][] getAdjacencyMatrix() {
         String[][] incidenceMatrix = new String[vertexList.size() + 1][vertexList.size() + 1];
         for (int i = 0; i <= vertexList.size(); i++) {
             if (i == 0) {

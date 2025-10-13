@@ -117,7 +117,7 @@ public class IncidenceMatrix implements Graph {
     /**
      * Получение матрицы инцидентности.
      */
-    public String[][] getIncidenceMatrix() {
+    protected String[][] getIncidenceMatrix() {
         String[][] incidenceMatrix = new String[vertexList.size() + 1][edgeList.size() + 1];
         for (int i = 0; i <= vertexList.size(); i++) {
             if (i == 0) {

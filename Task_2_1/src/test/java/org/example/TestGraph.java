@@ -27,6 +27,11 @@ public class TestGraph {
     Vertex vertexE = new Vertex("E");
     Vertex vertexF = new Vertex("F");
 
+    private static class TestableAdjacencyMatrix extends AdjacencyMatrix {
+        public String[][] publiclyGetAdjacencyMatrix() {
+            return super.getAdjacencyMatrix();
+        }
+    }
 
     /**
      * Тесты для Матрицы смежности.
@@ -36,7 +41,7 @@ public class TestGraph {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        AdjacencyMatrix graph = new AdjacencyMatrix();
+        TestableAdjacencyMatrix graph = new TestableAdjacencyMatrix();
         graph.addVertex(vertexF);
         graph.addVertex(vertexD);
         graph.addVertex(vertexB);
@@ -73,7 +78,7 @@ public class TestGraph {
             {"D", "0", "0", "0", "0", "0", "0"}, // D
             {"F", "0", "0", "0", "0", "0", "0"}  // F
         };
-        String[][] matrix = graph.getAdjacencyMatrix();
+        String[][] matrix = graph.publiclyGetAdjacencyMatrix();
         for (i = 1; i < matrix.length; i++) {
             for (int j = 1; j < matrix[i].length; j++) {
                 assertEquals(expectedMatrix[i][j], matrix[i][j]);
@@ -203,6 +208,12 @@ public class TestGraph {
             + "F: "));
     }
 
+    private static class TestableIncidenceMatrix extends IncidenceMatrix {
+        public String[][] publiclyGetIncidenceMatrix() {
+            return super.getIncidenceMatrix();
+        }
+    }
+
     /**
      * Тесты для Матрицы инцидентности.
      */
@@ -210,7 +221,7 @@ public class TestGraph {
     void testIncidenceMatrix() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        IncidenceMatrix graph = new IncidenceMatrix();
+        TestableIncidenceMatrix graph = new TestableIncidenceMatrix();
         graph.addVertex(vertexF);
         graph.addVertex(vertexD);
         graph.addVertex(vertexB);
@@ -247,7 +258,7 @@ public class TestGraph {
             {"D", "0", "0", "0", "0", "0", "0", "0"},
             {"F", "0", "0", "0", "0", "0", "0", "0"}
         };
-        String[][] matrix = graph.getIncidenceMatrix();
+        String[][] matrix = graph.publiclyGetIncidenceMatrix();
         for (i = 1; i < matrix.length; i++) {
             for (int j = 1; j < matrix[i].length; j++) {
                 assertEquals(expectedMatrix[i][j], matrix[i][j]);

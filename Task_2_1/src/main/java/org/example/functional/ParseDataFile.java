@@ -14,8 +14,10 @@ public class ParseDataFile {
      */
     public static void parseData(String input, Graph list, boolean needNameEdge) {
         Pattern pattern1 = Pattern.compile("^(\\S+) (\\S+)$");
+        // Первый шаблон для регулярного выражения.
 
         Pattern pattern2 = Pattern.compile("^(\\S+) (\\S+) (\\S+)$");
+        // Второй шаблон для регулярного выражения.
 
         Matcher matcher1 = pattern1.matcher(input);
         Matcher matcher2 = pattern2.matcher(input);
