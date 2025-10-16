@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HandLogic.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Task_1_2</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">HandLogic.java</span></div><h1>HandLogic.java</h1><pre class="source lang-java linenums">package org.example;
+
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+<span class="nc" id="L8">public class HandLogic {</span>
+    public static class Hand {
+        private List&lt;DeckLogic.TopCard&gt; cards;
+        private int handValue;
+        private int handCount;
+        private boolean hasAce;
+        private int handScore;
+
+<span class="fc" id="L16">        public Hand() {</span>
+<span class="fc" id="L17">            this.cards = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L18">            this.handValue = 0;</span>
+<span class="fc" id="L19">            this.handCount = 0;</span>
+<span class="fc" id="L20">            this.handScore = 0;</span>
+<span class="fc" id="L21">            this.hasAce = false;</span>
+<span class="fc" id="L22">        }</span>
+
+        public boolean AddCard(DeckLogic.TopCard card) {
+<span class="pc bpc" id="L25" title="1 of 2 branches missed.">            if (card != null){</span>
+<span class="fc" id="L26">                cards.add(card);</span>
+<span class="fc" id="L27">                handCount++;</span>
+<span class="fc" id="L28">                calculateValue();</span>
+<span class="fc" id="L29">                return true;</span>
+            }
+<span class="nc" id="L31">            return false;</span>
+        }
+
+        public void newGame(){
+<span class="nc" id="L35">            this.cards = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L36">            this.handValue = 0;</span>
+<span class="nc" id="L37">            this.handCount = 0;</span>
+<span class="nc" id="L38">            this.hasAce = false;</span>
+<span class="nc" id="L39">        }</span>
+
+<span class="fc" id="L41">        public int getValue(){ return handValue; }</span>
+<span class="fc" id="L42">        public int getScore(){ return handScore; }</span>
+<span class="fc" id="L43">        public void win() { handScore++;}</span>
+
+        private void calculateValue(){
+<span class="fc" id="L46">            handValue = 0;</span>
+<span class="fc" id="L47">            hasAce = false;</span>
+<span class="fc" id="L48">            int acecnt = 0;</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">            for (DeckLogic.TopCard topCard: cards){</span>
+<span class="fc" id="L50">                handValue += topCard.getValue();</span>
+<span class="pc bpc" id="L51" title="2 of 4 branches missed.">                if (topCard.getCard().getRank() == 14 &amp;&amp; topCard.getCard().getValue() == 11){</span>
+<span class="fc" id="L52">                    hasAce = true;</span>
+<span class="fc" id="L53">                    acecnt++;</span>
+                }
+<span class="pc bpc" id="L55" title="1 of 4 branches missed.">                if (handValue &gt; 21 &amp;&amp; hasAce){</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">                    for (DeckLogic.TopCard aceCard: cards){</span>
+<span class="pc bpc" id="L57" title="1 of 4 branches missed.">                        if (aceCard.getCard().getRank() == 14 &amp;&amp; aceCard.getCard().getValue() == 11){</span>
+<span class="fc" id="L58">                            aceCard.getCard().setValue(1);</span>
+                        }
+<span class="fc" id="L60">                    }</span>
+<span class="fc" id="L61">                    handValue -= 10;</span>
+<span class="fc" id="L62">                    acecnt--;</span>
+<span class="pc bpc" id="L63" title="1 of 2 branches missed.">                    if (acecnt == 0){</span>
+<span class="nc" id="L64">                        hasAce = false;</span>
+                    }
+                }
+<span class="fc" id="L67">            }</span>
+<span class="fc" id="L68">        }</span>
+
+        public void printHandPlayer(){
+<span class="nc" id="L71">            System.out.print(&quot;    Ваши карты: &quot;);</span>
+<span class="nc" id="L72">            System.out.print(cards.toString() + &quot; =&gt; &quot; + handValue);</span>
+<span class="nc" id="L73">            System.out.print(&quot;\n&quot;);</span>
+<span class="nc" id="L74">        }</span>
+
+        public void printHandDiler(int countMove){
+<span class="nc bnc" id="L77" title="All 2 branches missed.">            if (countMove == 1){</span>
+<span class="nc" id="L78">                System.out.print(&quot;    Карты диллера: [&quot;);</span>
+<span class="nc" id="L79">                System.out.print(cards.get(0).toString() + &quot; &lt;SecreteCard&gt;]&quot;);</span>
+            }
+            else {
+<span class="nc" id="L82">                System.out.print(&quot;    Карты диллера: &quot;);</span>
+<span class="nc" id="L83">                System.out.print(cards.toString() + &quot; =&gt; &quot; + handValue);</span>
+            }
+<span class="nc" id="L85">            System.out.print(&quot;\n&quot;);</span>
+<span class="nc" id="L86">        }</span>
+    }
+
+    public static boolean movePlayer(DeckLogic.Deck deck, Scanner scanner) {
+<span class="nc" id="L90">        System.out.println(&quot;Ваш ход:\n-------&quot;);</span>
+<span class="nc" id="L91">        int action = 1;</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        while (action != 0){</span>
+<span class="nc" id="L93">            System.out.println(&quot;Введите “1”, чтобы взять карту, и “0”, чтобы остановиться...&quot;);</span>
+<span class="nc" id="L94">            action = scanner.nextInt();</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">            if (action == 1){</span>
+<span class="nc" id="L96">                DeckLogic.TopCard cur = deck.TakeCard();</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">                if (!Main.Player.AddCard(cur)){ Game.noCard();}</span>
+<span class="nc" id="L98">                System.out.println(&quot;Вы открыли карту &quot;+ cur.toString());</span>
+<span class="nc" id="L99">                Game.printStatistics(1);</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">                if (Main.Player.getValue() &gt; 21) { return false; }</span>
+<span class="nc" id="L101">            }</span>
+        }
+<span class="nc" id="L103">        return true;</span>
+    }
+
+    public static boolean moveDiler(DeckLogic.Deck deck) {
+<span class="nc" id="L107">        System.out.println(&quot;Ход дилера:\n-------\nДилер открыл свою вторую карту&quot;);</span>
+<span class="nc" id="L108">        Game.printStatistics(2);</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">        while (Main.Diler.getValue() &lt; 17){</span>
+<span class="nc" id="L110">            DeckLogic.TopCard cur = deck.TakeCard();</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">            if (!Main.Diler.AddCard(cur)){ Game.noCard();}</span>
+<span class="nc" id="L112">            System.out.println(&quot;Дилер открыл карту &quot;+ cur.toString());</span>
+<span class="nc" id="L113">            Game.printStatistics(2);</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">            if (Main.Diler.getValue() &gt; 21) { return false; }</span>
+<span class="nc" id="L115">        }</span>
+<span class="nc" id="L116">        return true;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
