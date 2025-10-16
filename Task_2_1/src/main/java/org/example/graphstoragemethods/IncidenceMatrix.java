@@ -157,9 +157,9 @@ public class IncidenceMatrix implements Graph {
     /**
      * Вывод списка вершин.
      */
-    public void printVertexList(){
-        for (Vertex vertex: vertexList){
-            System.out.print(vertex.getName()+" ");
+    public void printVertexList() {
+        for (Vertex vertex : vertexList) {
+            System.out.print(vertex.getName() + " ");
         }
         System.out.println();
     }

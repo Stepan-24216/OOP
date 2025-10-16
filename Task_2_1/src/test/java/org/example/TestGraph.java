@@ -309,6 +309,9 @@ public class TestGraph {
                 + "G      0      0      0      1  "));
     }
 
+    /**
+     * Тесты для сравнения графов.
+     */
     @Test
     void testEqualsGraph() {
         Graph graph1 = new AdjacencyMatrix();
