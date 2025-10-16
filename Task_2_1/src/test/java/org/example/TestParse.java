@@ -2,6 +2,7 @@ package org.example;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.example.functional.TopSort;
 import org.junit.jupiter.api.Test;
 import org.example.functional.ParseDataFile;
 import org.example.graphstoragemethods.AdjacencyMatrix;
@@ -15,7 +16,7 @@ public class TestParse {
     @Test
     void testFileReaderCase1() {
         Graph graph2 = new AdjacencyMatrix();
-        graph2.fileReader("src/main/java/org/example/test1.txt");
+        graph2.fileReader("src/test/java/org/example/test1.txt");
         String[] cur2 = {"E", "F", "B", "C", "A", "D"};
         int i = 0;
         for (Vertex vertex : graph2.getVertexList()) {
@@ -23,7 +24,8 @@ public class TestParse {
             i++;
         }
         i = 0;
-        graph2.topologicalSort();
+        TopSort sorted = new TopSort();
+        sorted.sorted(graph2);
         String[] sort2 = {"A", "B", "C", "D", "E", "F"};
         for (Vertex vertex : graph2.getVertexList()) {
             assertEquals(sort2[i], vertex.getName());
@@ -34,7 +36,7 @@ public class TestParse {
     @Test
     void testFileReaderCase2() {
         Graph graph2 = new AdjacencyMatrix();
-        graph2.fileReader("src/main/java/org/example/test2.txt");
+        graph2.fileReader("src/test/java/org/example/test1.txt");
         String[] cur2 = {"E", "F", "B", "C", "A", "D"};
         int i = 0;
         for (Vertex vertex : graph2.getVertexList()) {
@@ -42,7 +44,8 @@ public class TestParse {
             i++;
         }
         i = 0;
-        graph2.topologicalSort();
+        TopSort sorted = new TopSort();
+        sorted.sorted(graph2);
         String[] sort2 = {"A", "B", "C", "D", "E", "F"};
         for (Vertex vertex : graph2.getVertexList()) {
             assertEquals(sort2[i], vertex.getName());
@@ -72,7 +75,8 @@ public class TestParse {
             i++;
         }
         i = 0;
-        graph2.topologicalSort();
+        TopSort sorted = new TopSort();
+        sorted.sorted(graph2);
         String[] sort2 = {"A", "B", "C", "D", "E", "F"};
         for (Vertex vertex : graph2.getVertexList()) {
             assertEquals(sort2[i], vertex.getName());
@@ -102,7 +106,8 @@ public class TestParse {
             i++;
         }
         i = 0;
-        graph2.topologicalSort();
+        TopSort sorted = new TopSort();
+        sorted.sorted(graph2);
         String[] sort2 = {"A", "B", "C", "D", "E", "F"};
         for (Vertex vertex : graph2.getVertexList()) {
             assertEquals(sort2[i], vertex.getName());

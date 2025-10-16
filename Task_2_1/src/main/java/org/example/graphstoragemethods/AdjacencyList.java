@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 import org.example.functional.ParseDataFile;
+import org.example.functional.Sort;
 import org.example.functional.TopSort;
 import org.example.objects.Color;
 import org.example.objects.Edge;
@@ -113,6 +115,16 @@ public class AdjacencyList implements Graph {
     }
 
     /**
+     * Вывод списка вершин.
+     */
+    public void printVertexList(){
+        for (Vertex vertex: vertexList){
+            System.out.print(vertex.getName()+" ");
+        }
+        System.out.println();
+    }
+
+    /**
      * Вывод графа.
      */
     public void printGraph() {
@@ -132,31 +144,12 @@ public class AdjacencyList implements Graph {
     /**
      * Чтение файла фиксированного формата.
      */
-    public void fileReader(String filePath) {
-        try (Scanner scanner = new Scanner(new File(filePath))) {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                if (!line.isEmpty()) {
-                    ParseDataFile.parseData(line, this, false);
-                }
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Файл не найден: " + e.getMessage());
-        }
-    }
+
 
     /**
-     * Топологическая сортировка графа.
+     * Метод сортировки графа.
      */
-    public void topologicalSort() {
-        ArrayList<Vertex> sortedList = new ArrayList<>();
-        for (Vertex vertex : vertexList) {
-            vertex.setColor(Color.WHITE);
-        }
-        for (Vertex vertex : vertexList) {
-            TopSort.depthFirstSearch(vertex, sortedList);
-        }
-        Collections.reverse(sortedList);
-        this.setVertexList(sortedList);
+    public void sort(Sort sort) {
+        sort.sorted(this);
     }
 }

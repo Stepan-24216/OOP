@@ -1,12 +1,16 @@
 package org.example;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import org.example.functional.ParseDataFile;
+import org.example.functional.TopSort;
 import org.example.graphstoragemethods.AdjacencyList;
 import org.example.graphstoragemethods.AdjacencyMatrix;
+import org.example.graphstoragemethods.Graph;
 import org.example.graphstoragemethods.IncidenceMatrix;
 import org.example.objects.Edge;
 import org.example.objects.Vertex;
@@ -63,7 +67,8 @@ public class TestGraph {
             i++;
         }
         i = 0;
-        graph.topologicalSort();
+        TopSort sorted = new TopSort();
+        sorted.sorted(graph);
         String[] sort = {"A", "B", "C", "E", "D", "F"};
         for (Vertex vertex : graph.getVertexList()) {
             assertEquals(sort[i], vertex.getName());
@@ -87,7 +92,7 @@ public class TestGraph {
 
         graph.deleteEdge("edge7", vertexC, vertexE);
         i = 0;
-        graph.topologicalSort();
+        sorted.sorted(graph);
         String[] sortDelEge = {"A", "E", "B", "F", "C", "D"};
         for (Vertex vertex : graph.getVertexList()) {
             assertEquals(sortDelEge[i], vertex.getName());
@@ -136,7 +141,8 @@ public class TestGraph {
             i++;
         }
         i = 0;
-        graph.topologicalSort();
+        TopSort sorted = new TopSort();
+        sorted.sorted(graph);
         String[] sort = {"A", "B", "C", "E", "D", "F"};
         for (Vertex vertex : graph.getVertexList()) {
             assertEquals(sort[i], vertex.getName());
@@ -243,7 +249,8 @@ public class TestGraph {
             i++;
         }
         i = 0;
-        graph.topologicalSort();
+        TopSort sorted = new TopSort();
+        sorted.sorted(graph);
         String[] sort = {"A", "B", "C", "E", "D", "F"};
         for (Vertex vertex : graph.getVertexList()) {
             assertEquals(sort[i], vertex.getName());
@@ -267,7 +274,7 @@ public class TestGraph {
 
         graph.deleteEdge("edge7", vertexC, vertexE);
         i = 0;
-        graph.topologicalSort();
+        sorted.sorted(graph);
         String[] sortDelEge = {"A", "E", "B", "F", "C", "D"};
         for (Vertex vertex : graph.getVertexList()) {
             assertEquals(sortDelEge[i], vertex.getName());
@@ -300,5 +307,40 @@ public class TestGraph {
                 + "C      1      0      0      0      \n"
                 + "D      0      0      0      0      \n"
                 + "G      0      0      0      1  "));
+    }
+
+    @Test
+    void testEqualsGraph() {
+        Graph graph1 = new AdjacencyMatrix();
+        Graph graph2 = new IncidenceMatrix();
+        Graph graph3 = new AdjacencyList();
+        String[] data = {
+            "E F edge5",
+            "B F edge6",
+            "B C edge2",
+            "A B edge1",
+            "C E edge7",
+            "C D edge3",
+            "A E edge4"
+        };
+
+        String[] data2 = {
+            "E F edge5",
+            "B F edge6",
+            "B C edge2",
+            "A B edge1",
+            "C E edge7",
+            "C D edge3",
+            "A E edge4"
+        };
+        for (String line : data) {
+            ParseDataFile.parseData(line, graph1, false);
+            ParseDataFile.parseData(line, graph2, false);
+        }
+        for (String line : data2) {
+            ParseDataFile.parseData(line, graph3, false);
+        }
+        assertTrue(graph1.equalsGraph(graph2));
+        assertFalse(graph1.equalsGraph(graph3));
     }
 }

@@ -5,4 +5,3 @@ A B
 C E
 C D
 A E
-
