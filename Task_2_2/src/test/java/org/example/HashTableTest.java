@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Тестирование Хэш-Таблицы.
+ */
 public class HashTableTest {
     @Test
     public void testCreateEmptyHashTable() {

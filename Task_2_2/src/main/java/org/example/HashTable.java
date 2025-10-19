@@ -3,26 +3,41 @@ package org.example;
 import java.util.Iterator;
 import java.util.ConcurrentModificationException;
 
+/**
+ * Класс Хэш-Таблицы.
+ */
 public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
 
     private Entry<K, V>[] table;
     private int size;
     private int capacity;
 
+    /**
+     * Конструктор Хэш-Таблицы.
+     */
     public HashTable() {
         this.capacity = 16;
         this.table = (Entry<K, V>[]) new Entry[this.capacity];
         this.size = 0;
     }
 
+    /**
+     * Гетер для получения размера.
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     * Гетер для получения размера выделенного места.
+     */
     public int getCapacity() {
         return capacity;
     }
 
+    /**
+     * Добавить элемент.
+     */
     public void put(K key, V value) {
         int index = Math.abs(key.hashCode()) % capacity;
         Entry<K, V> current = table[index];
@@ -41,6 +56,9 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
         resize();
     }
 
+    /**
+     * Удаление элемента.
+     */
     public void deleteEntry(K key, V value) {
         Entry<K, V> entry = new Entry<>(key, value);
         if (capacity <= 0 || table == null || entry == null) {
@@ -65,6 +83,9 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
         }
     }
 
+    /**
+     * Обновить значение.
+     */
     public void update(K key, V value) {
         if (capacity <= 0 || table == null || key == null) {
             return;
@@ -82,6 +103,9 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
         put(key, value);
     }
 
+    /**
+     * Проверка соответствия ключа и значения.
+     */
     public boolean checkValueWithKey(K key, V value) {
         if (capacity <= 0 || table == null || key == null) {
             return false;
@@ -97,6 +121,9 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
         return false;
     }
 
+    /**
+     * Получение значения.
+     */
     public V get(K key) {
         if (capacity <= 0 || table == null || key == null) {
             return null;
@@ -112,6 +139,9 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
         return null;
     }
 
+    /**
+     * Проверка на надобность расширения таблицы.
+     */
     private void resize() {
         double loadFactor = 0.75;
         if (size >= capacity * loadFactor) {
@@ -130,6 +160,9 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
         }
     }
 
+    /**
+     * Сравнение двух Хэш-таблиц.
+     */
     public boolean equals(HashTable<K, V> table) {
         for (HashTable.Entry<K, V> e : this) {
             if (!table.checkValueWithKey(e.getKey(), e.getValue())) {
@@ -144,7 +177,9 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
         return true;
     }
 
-
+    /**
+     * Получение строки с хранящимися значениями.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -159,6 +194,9 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
         return sb.toString();
     }
 
+    /**
+     * Итератор.
+     */
     @Override
     public Iterator<Entry<K, V>> iterator() {
         return new Iterator<Entry<K, V>>() {
@@ -206,37 +244,62 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
         };
     }
 
+    /**
+     * Класс ячейки с значением и ключом.
+     */
     public static class Entry<K, V> {
         private final K key;
         private V value;
         private Entry<K, V> next;
 
+        /**
+         * Конструктор ячейки.
+         */
         public Entry(K key, V value) {
             this.key = key;
             this.value = value;
             this.next = null;
         }
 
+        /**
+         * Получение ключа.
+         */
         public K getKey() {
             return key;
         }
 
+        /**
+         * Получение значения.
+         */
         public V getValue() {
             return value;
         }
 
+        /**
+         * Присвоить значение.
+         */
         public void setValue(V value) {
             this.value = value;
         }
 
+        /**
+         * Получение следущего в цепочке элемента.
+         */
         public Entry<K, V> getNext() {
             return next;
         }
 
+        /**
+         * Присвоить следующий элемент.
+         */
         public void setNext(Entry<K, V> next) {
             this.next = next;
         }
 
+        /**
+         * Строковое представление ячейки.
+         */
+        @Override
         public String toString() {
             return "{" + key + ": " + value + "} ";
         }
