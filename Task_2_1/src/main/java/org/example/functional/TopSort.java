@@ -14,7 +14,7 @@ public class TopSort implements Sort {
     /**
      * Поиск в глубину.
      */
-    public static void depthFirstSearch(Vertex vertex, ArrayList<Vertex> sortedList) {
+    private void depthFirstSearch(Vertex vertex, ArrayList<Vertex> sortedList) {
         if (vertex.getColor() != Color.BLACK) {
             vertex.setColor(Color.GRAY);
             for (Edge edge : vertex.getEdges()) {
@@ -37,7 +37,7 @@ public class TopSort implements Sort {
             vertex.setColor(Color.WHITE);
         }
         for (Vertex vertex : graph.getVertexList()) {
-            TopSort.depthFirstSearch(vertex, sortedList);
+            depthFirstSearch(vertex, sortedList);
         }
         Collections.reverse(sortedList);
         graph.setVertexList(sortedList);

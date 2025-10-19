@@ -14,10 +14,12 @@ public class ParseDataFile {
      */
     public static void parseData(String input, Graph list, boolean needNameEdge) {
         Pattern pattern1 = Pattern.compile("^(\\S+) (\\S+)$");
-        // Первый шаблон для регулярного выражения.
+        // Шаблон для обработки ситуации когда в файле задаётся имя двух вершин соединённых
+        // ребром без определённого названия.
 
         Pattern pattern2 = Pattern.compile("^(\\S+) (\\S+) (\\S+)$");
-        // Второй шаблон для регулярного выражения.
+        // Шаблон для обработки ситуации когда в файле задаётся имя двух вершин соединённых
+        // ребром с заданным называнием.
 
         Matcher matcher1 = pattern1.matcher(input);
         Matcher matcher2 = pattern2.matcher(input);
