@@ -9,52 +9,24 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
     private int size;
     private int capacity;
 
-    public static class Entry<K, V> {
-        private final K key;
-        private V value;
-        private Entry<K, V> next;
-
-        public Entry(K key, V value) {
-            this.key = key;
-            this.value = value;
-            this.next = null;
-        }
-
-        public K getKey() {
-            return key;
-        }
-
-        public V getValue() {
-            return value;
-        }
-
-        public Entry<K, V> getNext() {
-            return next;
-        }
-
-        public void setNext(Entry<K, V> next) {
-            this.next = next;
-        }
-
-        public void setValue(V value) {
-            this.value = value;
-        }
-
-        public void print(){
-            System.out.println("{" + key + ": " + value + "} ");
-        }
+    public HashTable() {
+        this.capacity = 16;
+        this.table = (Entry<K, V>[]) new Entry[this.capacity];
+        this.size = 0;
     }
 
-    public HashTable(int initialCapacity){
-        this.table = (Entry<K, V>[]) new Entry[initialCapacity];
-        size = 0;
-        capacity = initialCapacity;
+    public int getSize() {
+        return size;
     }
 
-    public void put(K key, V value){
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void put(K key, V value) {
         int index = Math.abs(key.hashCode()) % capacity;
         Entry<K, V> current = table[index];
-        while (current.getNext() != null) {
+        while (current != null) {
             if (current.getKey().equals(key)) {
                 current.setValue(value);
                 return;
@@ -69,13 +41,17 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
         resize();
     }
 
-    public void deleteEntry(Entry<K, V> entry){
-        if (capacity <= 0 || table == null || entry == null) return;
+    public void deleteEntry(K key, V value) {
+        Entry<K, V> entry = new Entry<>(key, value);
+        if (capacity <= 0 || table == null || entry == null) {
+            return;
+        }
         int index = Math.abs(entry.getKey().hashCode()) % capacity;
         Entry<K, V> current = table[index];
         Entry<K, V> previous = null;
         while (current != null) {
-            if (current.getKey().equals(entry.getKey()) && current.getValue().equals(entry.getValue())) {
+            if (current.getKey().equals(entry.getKey()) &&
+                current.getValue().equals(entry.getValue())) {
                 if (previous == null) {
                     table[index] = current.getNext();
                 } else {
@@ -89,8 +65,10 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
         }
     }
 
-    public void updateValue(K key, V value) {
-        if (capacity <= 0 || table == null || key == null) return;
+    public void update(K key, V value) {
+        if (capacity <= 0 || table == null || key == null) {
+            return;
+        }
         int index = Math.abs(key.hashCode()) % capacity;
         Entry<K, V> current = table[index];
         while (current != null) {
@@ -100,10 +78,14 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
             }
             current = current.getNext();
         }
+
+        put(key, value);
     }
 
     public boolean checkValueWithKey(K key, V value) {
-        if (capacity <= 0 || table == null || key == null) return false;
+        if (capacity <= 0 || table == null || key == null) {
+            return false;
+        }
         int index = Math.abs(key.hashCode()) % capacity;
         Entry<K, V> current = table[index];
         while (current != null) {
@@ -116,7 +98,9 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
     }
 
     public V get(K key) {
-        if (capacity <= 0 || table == null || key == null) return null;
+        if (capacity <= 0 || table == null || key == null) {
+            return null;
+        }
         int index = Math.abs(key.hashCode()) % capacity;
         Entry<K, V> current = table[index];
         while (current != null) {
@@ -128,7 +112,7 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
         return null;
     }
 
-    private void resize(){
+    private void resize() {
         double loadFactor = 0.75;
         if (size >= capacity * loadFactor) {
             capacity = capacity * 2;
@@ -147,12 +131,12 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
     }
 
     public boolean equals(HashTable<K, V> table) {
-        for (HashTable.Entry<K, V> e : this){
+        for (HashTable.Entry<K, V> e : this) {
             if (!table.checkValueWithKey(e.getKey(), e.getValue())) {
                 return false;
             }
         }
-        for (HashTable.Entry<K, V> e : table){
+        for (HashTable.Entry<K, V> e : table) {
             if (!this.checkValueWithKey(e.getKey(), e.getValue())) {
                 return false;
             }
@@ -160,23 +144,42 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
         return true;
     }
 
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("HashTable[");
+        for (Entry<K, V> entry : this) {
+            sb.append(entry.toString()).append(", ");
+        }
+        if (size > 0) {
+            sb.setLength(sb.length() - 2); // Удаляем последнюю запятую
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
     @Override
     public Iterator<Entry<K, V>> iterator() {
         return new Iterator<Entry<K, V>>() {
+            private final int expectedSize = size;
             private int currentIndex = 0;
             private Entry<K, V> currentEntry = null;
-            private final int expectedSize = size;
 
             @Override
             public boolean hasNext() {
                 if (expectedSize != size) {
                     throw new ConcurrentModificationException();
                 }
+
                 while (currentIndex < capacity) {
                     if (currentEntry != null) {
                         return true;
                     }
                     currentEntry = table[currentIndex++];
+                    if (currentEntry != null) {
+                        return true;
+                    }
                 }
                 return false;
             }
@@ -201,5 +204,41 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
                 return entryToReturn;
             }
         };
+    }
+
+    public static class Entry<K, V> {
+        private final K key;
+        private V value;
+        private Entry<K, V> next;
+
+        public Entry(K key, V value) {
+            this.key = key;
+            this.value = value;
+            this.next = null;
+        }
+
+        public K getKey() {
+            return key;
+        }
+
+        public V getValue() {
+            return value;
+        }
+
+        public void setValue(V value) {
+            this.value = value;
+        }
+
+        public Entry<K, V> getNext() {
+            return next;
+        }
+
+        public void setNext(Entry<K, V> next) {
+            this.next = next;
+        }
+
+        public String toString() {
+            return "{" + key + ": " + value + "} ";
+        }
     }
 }
