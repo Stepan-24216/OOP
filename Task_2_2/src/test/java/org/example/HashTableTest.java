@@ -65,10 +65,10 @@ public class HashTableTest {
         table.put("price", 19.99);
         table.put("discount", 5.0);
 
-        assertTrue(table.checkValueWithKey("price", 19.99));
-        assertTrue(table.checkValueWithKey("discount", 5.0));
-        assertFalse(table.checkValueWithKey("price", 20.0));
-        assertFalse(table.checkValueWithKey("gg", 19.99));
+        assertTrue(table.checkEntry("price", 19.99));
+        assertTrue(table.checkEntry("discount", 5.0));
+        assertFalse(table.checkEntry("price", 20.0));
+        assertFalse(table.checkEntry("gg", 19.99));
     }
 
     @Test
@@ -109,7 +109,7 @@ public class HashTableTest {
         table.put("c", 3);
 
         int count = 0;
-        for (HashTable.Entry<String, Integer> entry : table) {
+        for (Entry<String, Integer> entry : table) {
             assertNotNull(entry.getKey());
             assertNotNull(entry.getValue());
             count++;
