@@ -51,7 +51,7 @@ loadScripts(document, 'script');</script>
 <a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a>
 <h2 class="title" id="I:C">C</h2>
 <dl class="index">
-<dt><a href="org/example/HashTable.html#checkValueWithKey(K,V)" class="member-name-link">checkValueWithKey(K, V)</a> - Method in class org.example.<a href="org/example/HashTable.html" title="class in org.example">HashTable</a></dt>
+<dt><a href="org/example/HashTable.html#checkEntry(K,V)" class="member-name-link">checkEntry(K, V)</a> - Method in class org.example.<a href="org/example/HashTable.html" title="class in org.example">HashTable</a></dt>
 <dd>
 <div class="block">Проверка соответствия ключа и значения.</div>
 </dd>
@@ -65,7 +65,11 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:E">E</h2>
 <dl class="index">
-<dt><a href="org/example/HashTable.Entry.html#%3Cinit%3E(K,V)" class="member-name-link">Entry(K, V)</a> - Constructor for class org.example.<a href="org/example/HashTable.Entry.html" title="class in org.example">HashTable.Entry</a></dt>
+<dt><a href="org/example/Entry.html" class="type-name-link" title="class in org.example">Entry</a>&lt;<a href="org/example/Entry.html" title="type parameter in Entry">K</a>,<wbr><a href="org/example/Entry.html" title="type parameter in Entry">V</a>&gt; - Class in <a href="org/example/package-summary.html">org.example</a></dt>
+<dd>
+<div class="block">Класс ячейки с значением и ключом.</div>
+</dd>
+<dt><a href="org/example/Entry.html#%3Cinit%3E(K,V)" class="member-name-link">Entry(K, V)</a> - Constructor for class org.example.<a href="org/example/Entry.html" title="class in org.example">Entry</a></dt>
 <dd>
 <div class="block">Конструктор ячейки.</div>
 </dd>
@@ -84,11 +88,11 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Гетер для получения размера выделенного места.</div>
 </dd>
-<dt><a href="org/example/HashTable.Entry.html#getKey()" class="member-name-link">getKey()</a> - Method in class org.example.<a href="org/example/HashTable.Entry.html" title="class in org.example">HashTable.Entry</a></dt>
+<dt><a href="org/example/Entry.html#getKey()" class="member-name-link">getKey()</a> - Method in class org.example.<a href="org/example/Entry.html" title="class in org.example">Entry</a></dt>
 <dd>
 <div class="block">Получение ключа.</div>
 </dd>
-<dt><a href="org/example/HashTable.Entry.html#getNext()" class="member-name-link">getNext()</a> - Method in class org.example.<a href="org/example/HashTable.Entry.html" title="class in org.example">HashTable.Entry</a></dt>
+<dt><a href="org/example/Entry.html#getNext()" class="member-name-link">getNext()</a> - Method in class org.example.<a href="org/example/Entry.html" title="class in org.example">Entry</a></dt>
 <dd>
 <div class="block">Получение следущего в цепочке элемента.</div>
 </dd>
@@ -96,7 +100,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Гетер для получения размера.</div>
 </dd>
-<dt><a href="org/example/HashTable.Entry.html#getValue()" class="member-name-link">getValue()</a> - Method in class org.example.<a href="org/example/HashTable.Entry.html" title="class in org.example">HashTable.Entry</a></dt>
+<dt><a href="org/example/Entry.html#getValue()" class="member-name-link">getValue()</a> - Method in class org.example.<a href="org/example/Entry.html" title="class in org.example">Entry</a></dt>
 <dd>
 <div class="block">Получение значения.</div>
 </dd>
@@ -110,10 +114,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="org/example/HashTable.html#%3Cinit%3E()" class="member-name-link">HashTable()</a> - Constructor for class org.example.<a href="org/example/HashTable.html" title="class in org.example">HashTable</a></dt>
 <dd>
 <div class="block">Конструктор Хэш-Таблицы.</div>
-</dd>
-<dt><a href="org/example/HashTable.Entry.html" class="type-name-link" title="class in org.example">HashTable.Entry</a>&lt;<a href="org/example/HashTable.Entry.html" title="type parameter in HashTable.Entry">K</a>,<wbr><a href="org/example/HashTable.Entry.html" title="type parameter in HashTable.Entry">V</a>&gt; - Class in <a href="org/example/package-summary.html">org.example</a></dt>
-<dd>
-<div class="block">Класс ячейки с значением и ключом.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:I">I</h2>
@@ -137,18 +137,18 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:S">S</h2>
 <dl class="index">
-<dt><a href="org/example/HashTable.Entry.html#setNext(org.example.HashTable.Entry)" class="member-name-link">setNext(HashTable.Entry&lt;K, V&gt;)</a> - Method in class org.example.<a href="org/example/HashTable.Entry.html" title="class in org.example">HashTable.Entry</a></dt>
+<dt><a href="org/example/Entry.html#setNext(org.example.Entry)" class="member-name-link">setNext(Entry&lt;K, V&gt;)</a> - Method in class org.example.<a href="org/example/Entry.html" title="class in org.example">Entry</a></dt>
 <dd>
 <div class="block">Присвоить следующий элемент.</div>
 </dd>
-<dt><a href="org/example/HashTable.Entry.html#setValue(V)" class="member-name-link">setValue(V)</a> - Method in class org.example.<a href="org/example/HashTable.Entry.html" title="class in org.example">HashTable.Entry</a></dt>
+<dt><a href="org/example/Entry.html#setValue(V)" class="member-name-link">setValue(V)</a> - Method in class org.example.<a href="org/example/Entry.html" title="class in org.example">Entry</a></dt>
 <dd>
 <div class="block">Присвоить значение.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:T">T</h2>
 <dl class="index">
-<dt><a href="org/example/HashTable.Entry.html#toString()" class="member-name-link">toString()</a> - Method in class org.example.<a href="org/example/HashTable.Entry.html" title="class in org.example">HashTable.Entry</a></dt>
+<dt><a href="org/example/Entry.html#toString()" class="member-name-link">toString()</a> - Method in class org.example.<a href="org/example/Entry.html" title="class in org.example">Entry</a></dt>
 <dd>
 <div class="block">Строковое представление ячейки.</div>
 </dd>
