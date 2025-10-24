@@ -1,0 +1,27 @@
+# Gradle
+.gradle/
+build/
+out/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Gradle Wrapper
+!gradle/wrapper/gradle-wrapper.jar
+
+# Avoid ignoring gradlew and gradlew.bat
+!gradlew
+!gradlew.bat
+
+# Local configuration
+local.properties
+
+test.txt
