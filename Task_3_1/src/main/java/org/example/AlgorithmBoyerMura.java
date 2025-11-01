@@ -1,96 +1,97 @@
 package org.example;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class AlgorithmBoyerMura {
-    private Scanner scanner;
-    private int lengthString;
-    private int lengthSubstrings;
-    private int indexSubstrings;
-    private int indexString;
-    private String filePathString;
-    private String fileString;
-    private String subStrings;
+    private long globalOffset;// Для перекрывающегося чтения
 
-    public ArrayList<Integer> find(String filePathString, String subStrings){
-        ArrayList<Integer> result = new ArrayList<>();
-        int indicator = 0;
-        this.filePathString = filePathString;
-        this.subStrings = subStrings;
-        this.lengthSubstrings = subStrings.length();
-        nextString();
-        while (this.fileString != null) {
-            this.lengthString = this.fileString.length();
-            this.indexString = 0;
-            while (this.indexString <= this.lengthString - this.lengthSubstrings) {
-                this.indexSubstrings = this.lengthSubstrings - 1;
-                while (this.indexSubstrings >= 0 && this.subStrings.charAt(this.indexSubstrings) == this.fileString.charAt(this.indexString + this.indexSubstrings)) {
-                    this.indexSubstrings--;
-                }
-                if (this.indexSubstrings < 0) {
-                    result.add(indicator + this.indexString);
-                    this.indexString += (this.indexString + this.lengthSubstrings < this.lengthString) ? this.lengthSubstrings - shift(this.fileString.substring(this.indexString + this.lengthSubstrings, this.indexString + this.lengthSubstrings + 1)) : 1;
-                } else {
-                    this.indexString += Math.max(1, this.indexSubstrings - shift(String.valueOf(this.fileString.charAt(this.indexString + this.indexSubstrings))));
-                }
-            }
-            indicator += this.lengthString - this.lengthSubstrings + 1;
-            nextString();
-        }
-        return result;
+    public AlgorithmBoyerMura() {
+        this.globalOffset = 0;
     }
 
-   private String readFile(String filePathString,int bufferSize) {
-        StringBuilder sb = new StringBuilder();
-        try (java.io.FileReader fr = new java.io.FileReader(filePathString);
-             BufferedReader reader = new BufferedReader(fr)) {
+    public Set<Integer> find(String filePath, String pattern) {
+        Set<Integer> results = new HashSet<>();
+        int[] badCharTable = buildBadCharTable(pattern);
+        int patternLength = pattern.length();
 
-            if (this.indexString > 0) {
-                long toSkip = this.indexString;
-                while (toSkip > 0) {
-                    long skipped = fr.skip(toSkip);
-                    if (skipped <= 0) break;
-                    toSkip -= skipped;
-                }
+        globalOffset = 0;
+        String currentChunk = readChunk(filePath, patternLength * 2 + patternLength);
+
+        while (currentChunk != null) {
+            List<Integer> chunkResults = boyerMooreSearch(currentChunk, pattern, badCharTable);
+
+            for (int pos : chunkResults) {
+                results.add((int) globalOffset - currentChunk.length() + pos);
             }
 
-            char[] buffer = new char[bufferSize];
-            int charsRead;
-            int counter = 0;
-            while (((charsRead = reader.read(buffer)) != -1) && counter <= bufferSize * 2 - 1) {
-                sb.append(buffer, 0, charsRead);
-                counter += charsRead;
+            if (currentChunk.length() > patternLength) {
+                globalOffset -= patternLength;
             }
-            if (counter == 0) {
+            currentChunk = readChunk(filePath, patternLength * 2 + patternLength); // С учётом перекрытия
+        }
+
+        return results;
+    }
+
+    private List<Integer> boyerMooreSearch(String text, String pattern, int[] badCharTable) {
+        List<Integer> results = new ArrayList<>();
+        int patternLength = pattern.length();
+        int textLength = text.length();
+
+        int shift = 0;
+        while (shift <= textLength - patternLength) {
+            int j = patternLength - 1;
+
+            while (j >= 0 && pattern.charAt(j) == text.charAt(shift + j)) {
+                j--;
+            }
+
+            if (j < 0) {
+                results.add(shift);
+                shift += (shift + patternLength < textLength) ?
+                    patternLength - badCharTable[text.charAt(shift + patternLength)] : 1;
+            } else {
+                shift += Math.max(1, j - badCharTable[text.charAt(shift + j)]);
+            }
+        }
+
+        return results;
+    }
+
+    private int[] buildBadCharTable(String pattern) {
+        int[] table = new int[256];
+        Arrays.fill(table, -1);
+
+        for (int i = 0; i < pattern.length(); i++) {
+            table[pattern.charAt(i)] = i;
+        }
+        return table;
+    }
+
+    private String readChunk(String filePath, int chunkSize) {
+        try (RandomAccessFile raf = new RandomAccessFile(filePath, "r")) {
+            raf.seek(globalOffset);
+
+            byte[] buffer = new byte[chunkSize];
+            int bytesRead = raf.read(buffer);
+
+            if (bytesRead <= 0) {
                 return null;
             }
 
-
-            this.indexString += counter;
+            globalOffset += bytesRead;
+            return new String(buffer, 0, bytesRead, StandardCharsets.UTF_8);
 
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return sb.toString();
-    }
-
-    private int shift(String s){
-        return 0;
-    }
-
-    private void nextString(){
-        if (this.indexString >= this.lengthString - this.lengthSubstrings - 1) {
-            this.fileString = fileString.substring(indexString) +
-                readFile(this.filePathString, this.lengthSubstrings * 2);
-            this.lengthString = this.fileString.length();
-            this
+            System.err.printf("Ошибка чтения: %s%n", e.getMessage());
+            return null;
         }
     }
 }
