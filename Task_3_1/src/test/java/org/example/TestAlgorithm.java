@@ -14,13 +14,13 @@ public class TestAlgorithm {
      * Множество искомых подстрок подряд.
      */
     @Test
-    void testMoreEqualsPattern(){
+    void testMoreEqualsPattern() {
         String filePath = "/home/rend/java/OOP/Task_3_1/src/test/java/org/example/test";
         AlgorithmBoyerMura a = new AlgorithmBoyerMura();
         int[] expected = {0, 2, 4, 6, 8, 10, 12};
         int i = 0;
-        for (int num:a.find(filePath, "aba")){
-            assertEquals(expected[i++],num);
+        for (int num : a.find(filePath, "aba")) {
+            assertEquals(expected[i++], num);
         }
     }
 
@@ -28,7 +28,7 @@ public class TestAlgorithm {
      * Пустой файл.
      */
     @Test
-    void testEmptyFile(){
+    void testEmptyFile() {
         String filePath = "/home/rend/java/OOP/Task_3_1/src/test/java/org/example/test1";
         AlgorithmBoyerMura a = new AlgorithmBoyerMura();
         Set<Integer> test = a.find(filePath, "aba");
@@ -39,7 +39,7 @@ public class TestAlgorithm {
      * Отсутствие шаблонов в тексте.
      */
     @Test
-    void testNothingPattern(){
+    void testNothingPattern() {
         String filePath = "/home/rend/java/OOP/Task_3_1/src/test/java/org/example/test2";
         AlgorithmBoyerMura a = new AlgorithmBoyerMura();
         Set<Integer> test = a.find(filePath, "aba");
@@ -50,13 +50,13 @@ public class TestAlgorithm {
      * Обычный текст.
      */
     @Test
-    void testCommonFile(){
+    void testCommonFile() {
         String filePath = "/home/rend/java/OOP/Task_3_1/src/test/java/org/example/test3";
         AlgorithmBoyerMura a = new AlgorithmBoyerMura();
         int[] expected = {3, 8, 12};
         int i = 0;
-        for (int num:a.find(filePath, "cat")){
-            assertEquals(expected[i++],num);
+        for (int num : a.find(filePath, "cat")) {
+            assertEquals(expected[i++], num);
         }
     }
 }

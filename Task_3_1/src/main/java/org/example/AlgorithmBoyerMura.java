@@ -43,7 +43,8 @@ public class AlgorithmBoyerMura {
             if (currentChunk.length() > patternLength) {
                 globalOffset -= patternLength;
             }
-            currentChunk = readChunk(filePath, patternLength * 2 + patternLength); // С учётом перекрытия
+            currentChunk =
+                readChunk(filePath, patternLength * 2 + patternLength); // С учётом перекрытия
         }
 
         return results;
