@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Алгоритм Боера Мура.
@@ -26,7 +27,7 @@ public class AlgorithmBoyerMura {
      * Функция поиска.
      */
     public Set<Integer> find(String filePath, String pattern) {
-        Set<Integer> results = new HashSet<>();
+        Set<Integer> results = new TreeSet<>();
         int[] badCharTable = buildBadCharTable(pattern);
         int patternLength = pattern.length();
 
