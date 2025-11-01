@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"org.example","c":"AlgorithmBoyerMura","l":"AlgorithmBoyerMura()","u":"%3Cinit%3E()"},{"p":"org.example","c":"AlgorithmBoyerMura","l":"find(String, String)","u":"find(java.lang.String,java.lang.String)"}];updateSearchResults();
