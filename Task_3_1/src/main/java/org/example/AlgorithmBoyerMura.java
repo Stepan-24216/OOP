@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 public class AlgorithmBoyerMura {
-    private long globalOffset;// Для перекрывающегося чтения
+    private long globalOffset; // Для перекрывающегося чтения
 
     public AlgorithmBoyerMura() {
         this.globalOffset = 0;
