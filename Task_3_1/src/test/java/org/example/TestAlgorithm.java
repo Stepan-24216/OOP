@@ -6,7 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Тесты для Алгоритма.
+ */
 public class TestAlgorithm {
+    /**
+     * Множество искомых подстрок подряд.
+     */
     @Test
     void testMoreEqualsPattern(){
         String filePath = "/home/rend/java/OOP/Task_3_1/src/test/java/org/example/test";
@@ -18,6 +24,9 @@ public class TestAlgorithm {
         }
     }
 
+    /**
+     * Пустой файл.
+     */
     @Test
     void testEmptyFile(){
         String filePath = "/home/rend/java/OOP/Task_3_1/src/test/java/org/example/test1";
@@ -26,6 +35,9 @@ public class TestAlgorithm {
         assertTrue(test.isEmpty());
     }
 
+    /**
+     * Отсутствие шаблонов в тексте.
+     */
     @Test
     void testNothingPattern(){
         String filePath = "/home/rend/java/OOP/Task_3_1/src/test/java/org/example/test2";
@@ -34,6 +46,9 @@ public class TestAlgorithm {
         assertTrue(test.isEmpty());
     }
 
+    /**
+     * Обычный текст.
+     */
     @Test
     void testCommonFile(){
         String filePath = "/home/rend/java/OOP/Task_3_1/src/test/java/org/example/test3";

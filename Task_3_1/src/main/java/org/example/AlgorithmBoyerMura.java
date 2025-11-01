@@ -9,13 +9,22 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Алгоритм Боера Мура.
+ */
 public class AlgorithmBoyerMura {
     private long globalOffset; // Для перекрывающегося чтения
 
+    /**
+     * Конструктор.
+     */
     public AlgorithmBoyerMura() {
         this.globalOffset = 0;
     }
 
+    /**
+     * Функция поиска.
+     */
     public Set<Integer> find(String filePath, String pattern) {
         Set<Integer> results = new HashSet<>();
         int[] badCharTable = buildBadCharTable(pattern);
@@ -40,6 +49,9 @@ public class AlgorithmBoyerMura {
         return results;
     }
 
+    /**
+     * Функция поиска.
+     */
     private List<Integer> boyerMooreSearch(String text, String pattern, int[] badCharTable) {
         List<Integer> results = new ArrayList<>();
         int patternLength = pattern.length();
@@ -65,6 +77,9 @@ public class AlgorithmBoyerMura {
         return results;
     }
 
+    /**
+     * Алгоритм Боера Мура.
+     */
     private int[] buildBadCharTable(String pattern) {
         int[] table = new int[256];
         Arrays.fill(table, -1);
@@ -75,6 +90,9 @@ public class AlgorithmBoyerMura {
         return table;
     }
 
+    /**
+     * Чтение куска текста.
+     */
     private String readChunk(String filePath, int chunkSize) {
         try (RandomAccessFile raf = new RandomAccessFile(filePath, "r")) {
             raf.seek(globalOffset);
