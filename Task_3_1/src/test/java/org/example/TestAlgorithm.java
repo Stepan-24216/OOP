@@ -15,7 +15,7 @@ public class TestAlgorithm {
      */
     @Test
     void testMoreEqualsPattern() {
-        String filePath = "/home/rend/java/OOP/Task_3_1/src/test/java/org/example/test";
+        String filePath = "src/test/java/org/example/test";
         AlgorithmBoyerMura a = new AlgorithmBoyerMura();
         int[] expected = {0, 2, 4, 6, 8, 10, 12};
         int i = 0;
@@ -29,7 +29,7 @@ public class TestAlgorithm {
      */
     @Test
     void testEmptyFile() {
-        String filePath = "/home/rend/java/OOP/Task_3_1/src/test/java/org/example/test1";
+        String filePath = "src/test/java/org/example/test1";
         AlgorithmBoyerMura a = new AlgorithmBoyerMura();
         Set<Integer> test = a.find(filePath, "aba");
         assertTrue(test.isEmpty());
@@ -40,7 +40,7 @@ public class TestAlgorithm {
      */
     @Test
     void testNothingPattern() {
-        String filePath = "/home/rend/java/OOP/Task_3_1/src/test/java/org/example/test2";
+        String filePath = "src/test/java/org/example/test2";
         AlgorithmBoyerMura a = new AlgorithmBoyerMura();
         Set<Integer> test = a.find(filePath, "aba");
         assertTrue(test.isEmpty());
@@ -51,7 +51,7 @@ public class TestAlgorithm {
      */
     @Test
     void testCommonFile() {
-        String filePath = "/home/rend/java/OOP/Task_3_1/src/test/java/org/example/test3";
+        String filePath = "src/test/java/org/example/test3";
         AlgorithmBoyerMura a = new AlgorithmBoyerMura();
         int[] expected = {3, 8, 12, 18, 23, 27, 33, 38, 42, 48, 53, 57, 63, 68, 72, 78, 83, 87, 93, 98, 102, 108, 113, 117};
         int i = 0;
