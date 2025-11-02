@@ -14,18 +14,21 @@ import java.util.TreeSet;
  */
 public class AlgorithmBoyerMura {
     private long globalOffset; // Для перекрывающегося чтения
-
+    private RandomAccessFile raf;
+    private String filePath;
     /**
      * Конструктор.
      */
-    public AlgorithmBoyerMura() {
+    public AlgorithmBoyerMura(String filePath) throws IOException {
         this.globalOffset = 0;
+        this.filePath = filePath;
+        this.raf = new RandomAccessFile(filePath, "r");
     }
 
     /**
      * Функция поиска.
      */
-    public Set<Integer> find(String filePath, String pattern) {
+    public Set<Integer> find(String pattern) {
         Set<Integer> results = new TreeSet<>();
         int[] badCharTable = buildBadCharTable(pattern);
         int patternLength = pattern.length();
@@ -46,6 +49,8 @@ public class AlgorithmBoyerMura {
             currentChunk =
                 readChunk(filePath, patternLength * 2 + patternLength); // С учётом перекрытия
         }
+
+        close();
 
         return results;
     }
@@ -95,7 +100,7 @@ public class AlgorithmBoyerMura {
      * Чтение куска текста.
      */
     private String readChunk(String filePath, int chunkSize) {
-        try (RandomAccessFile raf = new RandomAccessFile(filePath, "r")) {
+        try  {
             raf.seek(globalOffset);
 
             byte[] buffer = new byte[chunkSize];
@@ -111,6 +116,16 @@ public class AlgorithmBoyerMura {
         } catch (IOException e) {
             System.err.printf("Ошибка чтения: %s%n", e.getMessage());
             return null;
+        }
+    }
+
+    public void close() {
+        try {
+            if (raf != null) {
+                raf.close();
+            }
+        } catch (IOException e) {
+            System.err.printf("Ошибка закрытия файла: %s%n", e.getMessage());
         }
     }
 }
