@@ -15,26 +15,19 @@ import java.util.TreeSet;
 public class AlgorithmBoyerMura {
     private long globalOffset; // Для перекрывающегося чтения
     private RandomAccessFile raf;
-    private String filePath;
-    /**
-     * Конструктор.
-     */
-    public AlgorithmBoyerMura(String filePath) throws IOException {
-        this.globalOffset = 0;
-        this.filePath = filePath;
-        this.raf = new RandomAccessFile(filePath, "r");
-    }
+    private String currentChunk;
 
     /**
      * Функция поиска.
      */
-    public Set<Integer> find(String pattern) {
+    public Set<Integer> find(String pattern, String filePath) throws IOException{
         Set<Integer> results = new TreeSet<>();
         int[] badCharTable = buildBadCharTable(pattern);
         int patternLength = pattern.length();
+        raf = new RandomAccessFile(filePath, "r");
 
         globalOffset = 0;
-        String currentChunk = readChunk(filePath, patternLength * 2 + patternLength);
+        currentChunk = readChunk(patternLength * 2 + patternLength);
 
         while (currentChunk != null) {
             List<Integer> chunkResults = boyerMooreSearch(currentChunk, pattern, badCharTable);
@@ -47,7 +40,7 @@ public class AlgorithmBoyerMura {
                 globalOffset -= patternLength;
             }
             currentChunk =
-                readChunk(filePath, patternLength * 2 + patternLength); // С учётом перекрытия
+                readChunk(patternLength * 2 + patternLength); // С учётом перекрытия
         }
 
         close();
@@ -99,7 +92,7 @@ public class AlgorithmBoyerMura {
     /**
      * Чтение куска текста.
      */
-    private String readChunk(String filePath, int chunkSize) {
+    private String readChunk(int chunkSize) {
         try  {
             raf.seek(globalOffset);
 
