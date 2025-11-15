@@ -1,7 +1,7 @@
 package org.example;
 
 /**
- * Тройка <Дисциплины, Оценки, Флага экзамен ли>.
+ * Класс Trio представляет тройку значений: дисциплина, оценка и флаг экзамена.
  */
 public class Trio<Subject, Score, flagExam> {
     private Discipline Subject;
