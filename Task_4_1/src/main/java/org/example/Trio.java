@@ -3,7 +3,7 @@ package org.example;
 /**
  * Класс Trio представляет тройку значений: дисциплина, оценка и флаг экзамена.
  */
-public class Trio<Subject, Score, flagExam> {
+public class Trio {
     private Discipline Subject;
     private int Score;
     private boolean flagExam;

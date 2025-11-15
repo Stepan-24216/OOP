@@ -14,7 +14,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Тестовый класс для проверки функциональности.
+ */
 public class TestCreditCard {
+
     /**
      * Тестирование дисциплин.
      */
