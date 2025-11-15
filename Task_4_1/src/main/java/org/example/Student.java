@@ -60,8 +60,8 @@ public class Student {
                 Semester semester = semesters.get(i);
 
                 for (Trio discipline : semester.getDisciplines()) {
-                    if (discipline.getFlagExam() &&
-                        (discipline.getEstimation() == 2 || discipline.getEstimation() == 3)) {
+                    if (discipline.getFlagExam()
+                        && (discipline.getEstimation() == 2 || discipline.getEstimation() == 3)) {
                         hasBadEstimation = true;
                     }
                 }
@@ -69,8 +69,8 @@ public class Student {
         } else {
             for (Semester semester : semesters) {
                 for (Trio discipline : semester.getDisciplines()) {
-                    if (discipline.getFlagExam() &&
-                        (discipline.getEstimation() == 2 || discipline.getEstimation() == 3)) {
+                    if (discipline.getFlagExam()
+                        && (discipline.getEstimation() == 2 || discipline.getEstimation() == 3)) {
                         hasBadEstimation = true;
                     }
                 }

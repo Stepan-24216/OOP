@@ -20,8 +20,8 @@ public class Semester {
     /**
      * Добавление дисциплины.
      */
-    public void addDiscipline(Discipline Subject, int Score, boolean flagExam) {
-        Trio trio = new Trio(Subject, Score, flagExam);
+    public void addDiscipline(Discipline subject, int score, boolean flagExam) {
+        Trio trio = new Trio(subject, score, flagExam);
         disciplines.add(trio);
     }
 
