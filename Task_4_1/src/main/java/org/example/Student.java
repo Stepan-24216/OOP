@@ -2,23 +2,38 @@ package org.example;
 
 import java.util.ArrayList;
 
+/**
+ * Класс студента.
+ */
 public class Student {
     private ArrayList<Semester> semesters;
     private boolean budgetStudy;
 
+    /**
+     * Конструктор класса студент.
+     */
     public Student(boolean budgetStudy) {
         semesters = new ArrayList<>();
         this.budgetStudy = budgetStudy;
     }
 
+    /**
+     * Получение константы обучается ли человек на бюджете.
+     */
     public boolean getBudgetStudy() {
         return budgetStudy;
     }
 
+    /**
+     * Добавление семестра.
+     */
     public void addSemesters(Semester semester) {
         semesters.add(semester);
     }
 
+    /**
+     * Получение среднего балла студента.
+     */
     public double getAvgAllSemesters() {
         int sum = 0;
         int count = 0;
@@ -31,6 +46,9 @@ public class Student {
         return ((double) sum) / count;
     }
 
+    /**
+     * Функция проверки возможности перевода на бюджет.
+     */
     public boolean possibleStudyOnBudget() {
         boolean hasBadEstimation = false;
 
@@ -62,6 +80,9 @@ public class Student {
         return !hasBadEstimation;
     }
 
+    /**
+     * Функция проверки возможности получения красного диплома.
+     */
     public boolean possibleGetRedDiploma(boolean qualifyingWorkIsExcellent) {
         if (!qualifyingWorkIsExcellent) {
             return false;
@@ -86,6 +107,9 @@ public class Student {
         return true;
     }
 
+    /**
+     * Функция проверки возможности получения повышенной стипендии.
+     */
     public boolean possibleIncreasedScholarship() {
         if (!budgetStudy) {
             return false;

@@ -1,5 +1,8 @@
 package org.example;
 
+/**
+ * Енам для дисциплин.
+ */
 public enum Discipline {
     TASK("Задание"),
     CONTROL("Контрольная работа"),
@@ -12,10 +15,16 @@ public enum Discipline {
 
     private final String disciplineName;
 
+    /**
+     * Конструктор для дисциплины.
+     */
     Discipline(String string) {
         this.disciplineName = string;
     }
 
+    /**
+     * Получение имени.
+     */
     public String getDisciplineName() {
         return disciplineName;
     }

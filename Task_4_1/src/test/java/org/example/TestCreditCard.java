@@ -15,6 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class TestCreditCard {
+    /**
+     * Тестирование дисциплин.
+     */
     @Test
     void testDiscipline() {
         assertEquals("Задание", TASK.getDisciplineName());
@@ -27,10 +30,13 @@ public class TestCreditCard {
         assertEquals("Защита ВКР", PROTECTION_WRK.getDisciplineName());
     }
 
+    /**
+     * Человек учится на платке и имеет возможность перевестись на бюджет.
+     */
     @Test
     void testPossibleStudyOnBudget() {
         Student student = new Student(
-            false); // человек учится на платке и имеет возможность перевестись на бюджет
+            false);
         Semester semester1 = new Semester(1);
         semester1.addDiscipline(TASK, 4, false);
         semester1.addDiscipline(CONTROL, 4, false);
@@ -47,6 +53,9 @@ public class TestCreditCard {
         assertFalse(student.possibleIncreasedScholarship());
     }
 
+    /**
+     * Человек учится на платке более трёх семестров и имеет возможность перевестись на бюджет.
+     */
     @Test
     void testPossibleStudyOnBudgetMoreTwoSemesters() {
         Student student = new Student(false);
@@ -71,10 +80,13 @@ public class TestCreditCard {
         assertFalse(student.possibleIncreasedScholarship());
     }
 
+    /**
+     * Человек учится на бюджете => перевод на бюждет всегда правда.
+     */
     @Test
     void testPossibleStudyOnBudgetForBudgetStudent() {
         Student student =
-            new Student(true); // человек учится на бюджете => перевод на бюждет всегда правда
+            new Student(true);
         Semester semester1 = new Semester(1);
         semester1.addDiscipline(TASK, 3, false);
         semester1.addDiscipline(CONTROL, 4, false);
@@ -91,6 +103,9 @@ public class TestCreditCard {
         assertFalse(student.possibleIncreasedScholarship());
     }
 
+    /**
+     * Проверка, что человек может получить диплом если он имеет квалификационную работу.
+     */
     @Test
     void testPossibleGetRedDiploma() {
         Student student = new Student(true);
@@ -116,6 +131,31 @@ public class TestCreditCard {
         assertFalse(student.possibleIncreasedScholarship());
     }
 
+    /**
+     * Проверка, что человек не может получить диплом если он не имеет квалификационную работу.
+     */
+    @Test
+    void testPossibleGetRedDiplomaWithoutQualifyingWork() {
+        Student student = new Student(true);
+        Semester semester1 = new Semester(1);
+        semester1.addDiscipline(TASK, 5, false);
+        semester1.addDiscipline(CONTROL, 5, false);
+        semester1.addDiscipline(EXAM, 5, true);
+        Semester semester2 = new Semester(2);
+        semester2.addDiscipline(TASK, 5, false);
+        semester2.addDiscipline(CONTROL, 5, false);
+        semester2.addDiscipline(EXAM, 5, true);
+        student.addSemesters(semester1);
+        student.addSemesters(semester2);
+        assertEquals(5.0, student.getAvgAllSemesters());
+        assertTrue(student.possibleStudyOnBudget());
+        assertFalse(student.possibleGetRedDiploma(false));
+        assertTrue(student.possibleIncreasedScholarship());
+    }
+
+    /**
+     * Проверка, что человек может получать повышенную стипендию если учится на одни пятёрки.
+     */
     @Test
     void testPossibleIncreasedScholarship() {
         Student student = new Student(true);
@@ -132,25 +172,6 @@ public class TestCreditCard {
         assertEquals(5.0, student.getAvgAllSemesters());
         assertTrue(student.possibleStudyOnBudget());
         assertTrue(student.possibleGetRedDiploma(true));
-        assertTrue(student.possibleIncreasedScholarship());
-    }
-
-    @Test
-    void testPossibleIncreasedScholarshipWithoutQualifyingWork() {
-        Student student = new Student(true);
-        Semester semester1 = new Semester(1);
-        semester1.addDiscipline(TASK, 5, false);
-        semester1.addDiscipline(CONTROL, 5, false);
-        semester1.addDiscipline(EXAM, 5, true);
-        Semester semester2 = new Semester(2);
-        semester2.addDiscipline(TASK, 5, false);
-        semester2.addDiscipline(CONTROL, 5, false);
-        semester2.addDiscipline(EXAM, 5, true);
-        student.addSemesters(semester1);
-        student.addSemesters(semester2);
-        assertEquals(5.0, student.getAvgAllSemesters());
-        assertTrue(student.possibleStudyOnBudget());
-        assertFalse(student.possibleGetRedDiploma(false));
         assertTrue(student.possibleIncreasedScholarship());
     }
 }
