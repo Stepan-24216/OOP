@@ -4,35 +4,45 @@ package org.example;
  * Класс Trio представляет тройку значений: дисциплина, оценка и флаг экзамена.
  */
 public class Trio {
-    private Discipline Subject;
-    private int Score;
-    private boolean flagExam;
+    private final Discipline subject;
+    private final int score;
+    private final boolean flagExam;
 
     /**
      * Конструктор тройки.
+     *
+     * @param subject дисциплина
+     * @param score оценка
+     * @param flagExam флаг экзамена
      */
-    Trio(Discipline Subject, int Score, boolean flagExam) {
-        this.Subject = Subject;
-        this.Score = Score;
+    public Trio(Discipline subject, int score, boolean flagExam) {
+        this.subject = subject;
+        this.score = score;
         this.flagExam = flagExam;
     }
 
     /**
-     * Получение имени дисциплины.
+     * Получение дисциплины.
+     *
+     * @return дисциплина
      */
-    public Discipline getName() {
-        return Subject;
+    public Discipline getSubject() {
+        return subject;
     }
 
     /**
      * Получение оценки.
+     *
+     * @return оценка
      */
     public int getEstimation() {
-        return Score;
+        return score;
     }
 
     /**
-     * Поулчение флага экзамен ли наша дисциплина.
+     * Получение флага экзамена.
+     *
+     * @return флаг экзамена
      */
     public boolean getFlagExam() {
         return flagExam;
