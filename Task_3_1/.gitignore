@@ -1,0 +1,41 @@
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Gradle Wrapper
+!gradlew
+!gradlew.bat
+
+# Local configuration
+local.properties
+
+# Файлы окружения
+*.env
+
+# Логи
+*.log
+
+# Временные файлы
+*.tmp
+*.temp
+
+# Файлы сборки
+out/
+dist/
+target/
+
+# Системные файлы
+*.swp
+*.swo
+
