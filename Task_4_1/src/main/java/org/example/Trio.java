@@ -5,17 +5,17 @@ package org.example;
  */
 public class Trio {
     private final Discipline subject;
-    private final int score;
+    private final Score score;
     private final boolean flagExam;
 
     /**
      * Конструктор тройки.
      *
-     * @param subject дисциплина
-     * @param score оценка
+     * @param subject  дисциплина
+     * @param score    оценка
      * @param flagExam флаг экзамена
      */
-    public Trio(Discipline subject, int score, boolean flagExam) {
+    public Trio(Discipline subject, Score score, boolean flagExam) {
         this.subject = subject;
         this.score = score;
         this.flagExam = flagExam;
@@ -35,8 +35,8 @@ public class Trio {
      *
      * @return оценка
      */
-    public int getEstimation() {
-        return score;
+    public Integer getEstimation() {
+        return score.getNumericValue();
     }
 
     /**
