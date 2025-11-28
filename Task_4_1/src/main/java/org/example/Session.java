@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Session {
-    private final String sessionName; // Например: "Летняя 2025"
+    private final String sessionName;
     private final LocalDate sessionDate;
     ArrayList<SubjectEntry> exams;
 
