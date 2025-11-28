@@ -1,5 +1,8 @@
 package org.example;
 
+/**
+ * Енам для оценок.
+ */
 public enum Score {
     TWO(2, "Неудовлетворительно"),
     THREE(3, "Удовлетворительно"),
@@ -22,17 +25,16 @@ public enum Score {
     }
 
     /**
-     * Получить числовое значение оценки
+     * Получить числовое значение оценки.
      */
     public Integer getNumericValue() {
         return numericValue;
     }
 
     /**
-     * Получить текстовое описание оценки
+     * Получить текстовое описание оценки.
      */
     public String getDescription() {
         return description;
     }
-
 }

@@ -64,6 +64,9 @@ public class Semester {
         return semesterNumber;
     }
 
+    /**
+     * Получение оценки за семестр.
+     */
     public int getSumSemesterScore() {
         int sum = 0;
         int count = 0;
@@ -86,6 +89,9 @@ public class Semester {
         return count > 0 ? sum : 0;
     }
 
+    /**
+     * Получение количества дисциплин.
+     */
     public int getCountDiscipline() {
         int count = 0;
         for (SubjectEntry discipline : disciplines) {
@@ -101,6 +107,9 @@ public class Semester {
         return count;
     }
 
+    /**
+     * Все пятёрки.
+     */
     public boolean haveAllFiveEstimation() {
         for (SubjectEntry discipline : disciplines) {
             Integer estimation = discipline.getEstimation();
@@ -117,6 +126,9 @@ public class Semester {
         return true;
     }
 
+    /**
+     * Все оценки хорошие.
+     */
     public boolean haveAllExamGoodEstimation() {
         return session.haveAllExamGoodEstimation();
     }

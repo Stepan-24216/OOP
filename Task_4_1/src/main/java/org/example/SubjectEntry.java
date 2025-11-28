@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Класс SubjectEntry представляет предмет с историей оценок.
+ * Предмет с историей оценок.
  */
 public class SubjectEntry {
     private final Discipline subject;
@@ -38,11 +38,11 @@ public class SubjectEntry {
                 return record;
             }
         }
-        return null; // Нет положительных оценок
+        return null;
     }
 
     /**
-     * Получение последней оценки (любой).
+     * Получение последней оценки.
      */
     public GradeRecord getLastGrade() {
         if (gradeHistory.isEmpty()) {
@@ -81,17 +81,23 @@ public class SubjectEntry {
         return new ArrayList<>(gradeHistory);
     }
 
+    /**
+     * Получение дисциплины.
+     */
     public Discipline getSubject() {
         return subject;
     }
 
+    /**
+     * Получение флага экзамена.
+     */
     public boolean getFlagExam() {
         return flagExam;
     }
 
     private boolean isPositiveGrade(Score score) {
-        return score != Score.FAIL &&
-            (score.getNumericValue() == null || score.getNumericValue() >= 3);
+        return score != Score.FAIL
+            && (score.getNumericValue() == null || score.getNumericValue() >= 3);
     }
 
     @Override
