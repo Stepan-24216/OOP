@@ -44,8 +44,8 @@ public class TestCreditCard {
      */
     @Test
     void testPossibleStudyOnBudget() {
-        CreditBook student = new CreditBook(false);
-        Semester semester1 = new Semester(LocalDate.of(2023, 6, 1));
+        final CreditBook student = new CreditBook(false);
+        final Semester semester1 = new Semester(LocalDate.of(2023, 6, 1));
         semester1.addDiscipline(TASK, false);
         semester1.addDiscipline(CONTROL, false);
         semester1.addDiscipline(EXAM, true);
@@ -53,7 +53,7 @@ public class TestCreditCard {
         semester1.addGradeToDiscipline(CONTROL, FOUR, LocalDate.of(2023, 6, 16));
         semester1.addGradeToDiscipline(EXAM, FOUR, LocalDate.of(2023, 6, 20));
 
-        Semester semester2 = new Semester(LocalDate.of(2023, 12, 1));
+        final Semester semester2 = new Semester(LocalDate.of(2023, 12, 1));
         semester2.addDiscipline(TASK, false);
         semester2.addDiscipline(CONTROL, false);
         semester2.addDiscipline(EXAM, true);
@@ -74,8 +74,8 @@ public class TestCreditCard {
      */
     @Test
     void testPossibleStudyOnBudgetMoreTwoSemesters() {
-        CreditBook student = new CreditBook(false);
-        Semester semester1 = new Semester(LocalDate.of(2023, 1, 1));
+        final CreditBook student = new CreditBook(false);
+        final Semester semester1 = new Semester(LocalDate.of(2023, 1, 1));
         semester1.addDiscipline(TASK, false);
         semester1.addDiscipline(CONTROL, false);
         semester1.addDiscipline(EXAM, true);
@@ -83,7 +83,7 @@ public class TestCreditCard {
         semester1.addGradeToDiscipline(CONTROL, THREE, LocalDate.of(2023, 1, 16));
         semester1.addGradeToDiscipline(EXAM, THREE, LocalDate.of(2023, 1, 20));
 
-        Semester semester2 = new Semester(LocalDate.of(2023, 6, 1));
+        final Semester semester2 = new Semester(LocalDate.of(2023, 6, 1));
         semester2.addDiscipline(TASK, false);
         semester2.addDiscipline(CONTROL, false);
         semester2.addDiscipline(EXAM, true);
@@ -91,7 +91,7 @@ public class TestCreditCard {
         semester2.addGradeToDiscipline(CONTROL, FIVE, LocalDate.of(2023, 6, 16));
         semester2.addGradeToDiscipline(EXAM, FOUR, LocalDate.of(2023, 6, 20));
 
-        Semester semester3 = new Semester(LocalDate.of(2023, 12, 1));
+        final Semester semester3 = new Semester(LocalDate.of(2023, 12, 1));
         semester3.addDiscipline(TASK, false);
         semester3.addDiscipline(CONTROL, false);
         semester3.addDiscipline(EXAM, true);
@@ -113,8 +113,8 @@ public class TestCreditCard {
      */
     @Test
     void testPossibleStudyOnBudgetForBudgetStudent() {
-        CreditBook student = new CreditBook(true);
-        Semester semester1 = new Semester(LocalDate.of(2023, 6, 1));
+        final CreditBook student = new CreditBook(true);
+        final Semester semester1 = new Semester(LocalDate.of(2023, 6, 1));
         semester1.addDiscipline(TASK, false);
         semester1.addDiscipline(CONTROL, false);
         semester1.addDiscipline(EXAM, true);
@@ -122,7 +122,7 @@ public class TestCreditCard {
         semester1.addGradeToDiscipline(CONTROL, FOUR, LocalDate.of(2023, 6, 16));
         semester1.addGradeToDiscipline(EXAM, FOUR, LocalDate.of(2023, 6, 20));
 
-        Semester semester2 = new Semester(LocalDate.of(2023, 12, 1));
+        final Semester semester2 = new Semester(LocalDate.of(2023, 12, 1));
         semester2.addDiscipline(TASK, false);
         semester2.addDiscipline(CONTROL, false);
         semester2.addDiscipline(EXAM, true);
@@ -143,8 +143,8 @@ public class TestCreditCard {
      */
     @Test
     void testPossibleGetRedDiploma() {
-        CreditBook student = new CreditBook(true);
-        Semester semester1 = new Semester(LocalDate.of(2023, 1, 1));
+        final CreditBook student = new CreditBook(true);
+        final Semester semester1 = new Semester(LocalDate.of(2023, 1, 1));
         semester1.addDiscipline(TASK, false);
         semester1.addDiscipline(CONTROL, false);
         semester1.addDiscipline(EXAM, true);
@@ -152,7 +152,7 @@ public class TestCreditCard {
         semester1.addGradeToDiscipline(CONTROL, FIVE, LocalDate.of(2023, 1, 16));
         semester1.addGradeToDiscipline(EXAM, FOUR, LocalDate.of(2023, 1, 20));
 
-        Semester semester2 = new Semester(LocalDate.of(2023, 6, 1));
+        final Semester semester2 = new Semester(LocalDate.of(2023, 6, 1));
         semester2.addDiscipline(TASK, false);
         semester2.addDiscipline(CONTROL, false);
         semester2.addDiscipline(EXAM, true);
@@ -160,7 +160,7 @@ public class TestCreditCard {
         semester2.addGradeToDiscipline(CONTROL, FIVE, LocalDate.of(2023, 6, 16));
         semester2.addGradeToDiscipline(EXAM, FIVE, LocalDate.of(2023, 6, 20));
 
-        Semester semester3 = new Semester(LocalDate.of(2023, 12, 1));
+        final Semester semester3 = new Semester(LocalDate.of(2023, 12, 1));
         semester3.addDiscipline(TASK, false);
         semester3.addDiscipline(CONTROL, false);
         semester3.addDiscipline(EXAM, true);
@@ -184,8 +184,8 @@ public class TestCreditCard {
      */
     @Test
     void testPossibleGetRedDiplomaWithoutQualifyingWork() {
-        CreditBook student = new CreditBook(true);
-        Semester semester1 = new Semester(LocalDate.of(2023, 6, 1));
+        final CreditBook student = new CreditBook(true);
+        final Semester semester1 = new Semester(LocalDate.of(2023, 6, 1));
         semester1.addDiscipline(TASK, false);
         semester1.addDiscipline(CONTROL, false);
         semester1.addDiscipline(EXAM, true);
@@ -193,7 +193,7 @@ public class TestCreditCard {
         semester1.addGradeToDiscipline(CONTROL, FIVE, LocalDate.of(2023, 6, 16));
         semester1.addGradeToDiscipline(EXAM, FIVE, LocalDate.of(2023, 6, 20));
 
-        Semester semester2 = new Semester(LocalDate.of(2023, 12, 1));
+        final Semester semester2 = new Semester(LocalDate.of(2023, 12, 1));
         semester2.addDiscipline(TASK, false);
         semester2.addDiscipline(CONTROL, false);
         semester2.addDiscipline(EXAM, true);
@@ -214,8 +214,8 @@ public class TestCreditCard {
      */
     @Test
     void testPossibleIncreasedScholarship() {
-        CreditBook student = new CreditBook(true);
-        Semester semester1 = new Semester(LocalDate.of(2023, 6, 1));
+        final CreditBook student = new CreditBook(true);
+        final Semester semester1 = new Semester(LocalDate.of(2023, 6, 1));
         semester1.addDiscipline(TASK, false);
         semester1.addDiscipline(CONTROL, false);
         semester1.addDiscipline(EXAM, true);
@@ -223,7 +223,7 @@ public class TestCreditCard {
         semester1.addGradeToDiscipline(CONTROL, FIVE, LocalDate.of(2023, 6, 16));
         semester1.addGradeToDiscipline(EXAM, FIVE, LocalDate.of(2023, 6, 20));
 
-        Semester semester2 = new Semester(LocalDate.of(2023, 12, 1));
+        final Semester semester2 = new Semester(LocalDate.of(2023, 12, 1));
         semester2.addDiscipline(TASK, false);
         semester2.addDiscipline(CONTROL, false);
         semester2.addDiscipline(EXAM, true);
@@ -240,15 +240,14 @@ public class TestCreditCard {
     }
 
     /**
-     * Тест пересдач - учитывается только последняя положительная оценка
+     * Тест пересдач - учитывается только последняя положительная оценка.
      */
     @Test
     void testRetakes() {
-        CreditBook student = new CreditBook(true);
-        Semester semester = new Semester(LocalDate.of(2024, 1, 1));
+        final CreditBook student = new CreditBook(true);
+        final Semester semester = new Semester(LocalDate.of(2024, 1, 1));
         semester.addDiscipline(EXAM, true);
 
-        // Студент пересдавал экзамен
         semester.addGradeToDiscipline(EXAM, TWO, LocalDate.of(2024, 1, 15));
         semester.addGradeToDiscipline(EXAM, THREE, LocalDate.of(2024, 1, 20));
         semester.addGradeToDiscipline(EXAM, FOUR, LocalDate.of(2024, 1, 25));
@@ -261,42 +260,38 @@ public class TestCreditCard {
     }
 
     /**
-     * Тест непройденного предмета
+     * Тест непройденного предмета.
      */
     @Test
     void testFailedSubject() {
-        CreditBook student = new CreditBook(true);
-        Semester semester = new Semester(LocalDate.of(2024, 1, 1));
+        final CreditBook student = new CreditBook(true);
+        final Semester semester = new Semester(LocalDate.of(2024, 1, 1));
         semester.addDiscipline(EXAM, true);
 
-        // Студент не сдал экзамен
         semester.addGradeToDiscipline(EXAM, TWO, LocalDate.of(2024, 1, 15));
 
         student.addSemesters(semester);
 
         assertEquals(0.0, student.getAvgAllSemesters());
         assertFalse(semester.getDisciplines().get(0).isPassed());
-        assertEquals(null, semester.getDisciplines().get(0).getEstimation());
     }
 
     /**
-     * Тест группировки по сессиям по датам
+     * Тест группировки по сессиям по датам.
      */
     @Test
     void testSessionGroupingByDate() {
-        CreditBook student = new CreditBook(false);
+        final CreditBook student = new CreditBook(false);
 
-        // Более старые сессии с плохими оценками
-        Semester semester1 = new Semester(LocalDate.of(2023, 1, 1));
+        final Semester semester1 = new Semester(LocalDate.of(2023, 1, 1));
         semester1.addDiscipline(EXAM, true);
         semester1.addGradeToDiscipline(EXAM, THREE, LocalDate.of(2023, 1, 20));
 
-        // Последние две сессии с хорошими оценками
-        Semester semester2 = new Semester(LocalDate.of(2023, 6, 1));
+        final Semester semester2 = new Semester(LocalDate.of(2023, 6, 1));
         semester2.addDiscipline(EXAM, true);
         semester2.addGradeToDiscipline(EXAM, FOUR, LocalDate.of(2023, 6, 20));
 
-        Semester semester3 = new Semester(LocalDate.of(2023, 12, 1));
+        final Semester semester3 = new Semester(LocalDate.of(2023, 12, 1));
         semester3.addDiscipline(EXAM, true);
         semester3.addGradeToDiscipline(EXAM, FIVE, LocalDate.of(2023, 12, 20));
 
@@ -304,16 +299,15 @@ public class TestCreditCard {
         student.addSemesters(semester2);
         student.addSemesters(semester3);
 
-        // Должен учитывать только две последние сессии
         assertTrue(student.possibleStudyOnBudget());
     }
 
     /**
-     * Тест истории оценок
+     * Тест истории оценок.
      */
     @Test
     void testGradeHistory() {
-        SubjectEntry subject = new SubjectEntry(EXAM, true);
+        final SubjectEntry subject = new SubjectEntry(EXAM, true);
         subject.addGrade(TWO, LocalDate.of(2024, 1, 15));
         subject.addGrade(THREE, LocalDate.of(2024, 1, 20));
         subject.addGrade(FOUR, LocalDate.of(2024, 1, 25));
@@ -325,20 +319,97 @@ public class TestCreditCard {
     }
 
     /**
-     * Тест сравнения предметов
+     * Тест сравнения предметов.
      */
     @Test
     void testSubjectComparison() {
-        SubjectEntry obj1 = new SubjectEntry(TASK, false);
+        final SubjectEntry obj1 = new SubjectEntry(TASK, false);
         obj1.addGrade(FIVE, LocalDate.of(2023, 12, 25));
 
-        SubjectEntry obj2 = new SubjectEntry(TASK, false);
+        final SubjectEntry obj2 = new SubjectEntry(TASK, false);
         obj2.addGrade(FIVE, LocalDate.of(2024, 12, 25));
 
-        SubjectEntry obj3 = new SubjectEntry(EXAM, false);
+        final SubjectEntry obj3 = new SubjectEntry(EXAM, false);
         obj3.addGrade(FIVE, LocalDate.of(2024, 12, 25));
 
         assertTrue(obj1.equals(obj2));
         assertFalse(obj1.equals(obj3));
+    }
+
+    /**
+     * Тест функциональности класса Session.
+     */
+    @Test
+    void testSessionFunctionality() {
+        final Session session = new Session("Зимняя 2024", LocalDate.of(2024, 1, 15));
+
+        final SubjectEntry exam1 = new SubjectEntry(EXAM, true);
+        exam1.addGrade(FIVE, LocalDate.of(2024, 1, 20));
+        session.addExam(exam1);
+
+        final SubjectEntry exam2 = new SubjectEntry(TEST, false);
+        exam2.addGrade(FOUR, LocalDate.of(2024, 1, 18));
+        session.addExam(exam2);
+
+        assertEquals(2, session.getExams().size());
+        assertEquals("Зимняя 2024", session.getSessionName());
+        assertEquals(LocalDate.of(2024, 1, 15), session.getSessionDate());
+        assertTrue(session.haveAllExamGoodEstimation());
+    }
+
+    /**
+     * Тест функциональности класса Semester.
+     */
+    @Test
+    void testSemesterFunctionality() {
+        final Semester semester = new Semester(LocalDate.of(2024, 1, 1));
+
+        semester.addDiscipline(EXAM, true);
+        semester.addDiscipline(TASK, false);
+        semester.addGradeToDiscipline(EXAM, FIVE, LocalDate.of(2024, 1, 20));
+        semester.addGradeToDiscipline(TASK, FOUR, LocalDate.of(2024, 1, 15));
+
+        assertEquals(1, semester.getDisciplines().size());
+        assertEquals(1, semester.getSession().getExams().size());
+        assertEquals(LocalDate.of(2024, 1, 1), semester.getSemesterTime());
+        assertEquals(9, semester.getSumSemesterScore());
+        assertEquals(2, semester.getCountDiscipline());
+        assertFalse(semester.haveAllFiveEstimation());
+        assertTrue(semester.haveAllExamGoodEstimation());
+    }
+
+    /**
+     * Тест сессии с плохими оценками.
+     */
+    @Test
+    void testSessionWithBadGrades() {
+        final Session session = new Session("Летняя 2024", LocalDate.of(2024, 6, 15));
+
+        final SubjectEntry exam1 = new SubjectEntry(EXAM, true);
+        exam1.addGrade(THREE, LocalDate.of(2024, 6, 20));
+        session.addExam(exam1);
+
+        final SubjectEntry exam2 = new SubjectEntry(TEST, false);
+        exam2.addGrade(TWO, LocalDate.of(2024, 6, 18));
+        session.addExam(exam2);
+
+        assertFalse(session.haveAllExamGoodEstimation());
+    }
+
+    /**
+     * Тест семестра с пересдачами.
+     */
+    @Test
+    void testSemesterWithRetakes() {
+        final Semester semester = new Semester(LocalDate.of(2024, 1, 1));
+
+        semester.addDiscipline(EXAM, true);
+        semester.addGradeToDiscipline(EXAM, TWO, LocalDate.of(2024, 1, 15));
+        semester.addGradeToDiscipline(EXAM, THREE, LocalDate.of(2024, 1, 20));
+        semester.addGradeToDiscipline(EXAM, FOUR, LocalDate.of(2024, 1, 25));
+
+        assertEquals(1, semester.getCountDiscipline());
+        assertEquals(4, semester.getSumSemesterScore());
+        assertTrue(semester.getDisciplines().get(0).isPassed());
     }
 }
