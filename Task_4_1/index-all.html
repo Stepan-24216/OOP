@@ -48,14 +48,24 @@ loadScripts(document, 'script');</script>
 <div class="header">
 <h1>Index</h1>
 </div>
-<a href="#I:A">A</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a>
+<a href="#I:A">A</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a>
 <h2 class="title" id="I:A">A</h2>
 <dl class="index">
-<dt><a href="org/example/Semester.html#addDiscipline(org.example.Discipline,org.example.Score,boolean)" class="member-name-link">addDiscipline(Discipline, Score, boolean)</a> - Method in class org.example.<a href="org/example/Semester.html" title="class in org.example">Semester</a></dt>
+<dt><a href="org/example/Semester.html#addDiscipline(org.example.Discipline,boolean)" class="member-name-link">addDiscipline(Discipline, boolean)</a> - Method in class org.example.<a href="org/example/Semester.html" title="class in org.example">Semester</a></dt>
 <dd>
 <div class="block">Добавление дисциплины.</div>
 </dd>
-<dt><a href="org/example/Student.html#addSemesters(org.example.Semester)" class="member-name-link">addSemesters(Semester)</a> - Method in class org.example.<a href="org/example/Student.html" title="class in org.example">Student</a></dt>
+<dt><a href="org/example/Session.html#addExam(org.example.SubjectEntry)" class="member-name-link">addExam(SubjectEntry)</a> - Method in class org.example.<a href="org/example/Session.html" title="class in org.example">Session</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/example/SubjectEntry.html#addGrade(org.example.Score,java.time.LocalDate)" class="member-name-link">addGrade(Score, LocalDate)</a> - Method in class org.example.<a href="org/example/SubjectEntry.html" title="class in org.example">SubjectEntry</a></dt>
+<dd>
+<div class="block">Добавление оценки с датой.</div>
+</dd>
+<dt><a href="org/example/Semester.html#addGradeToDiscipline(org.example.Discipline,org.example.Score,java.time.LocalDate)" class="member-name-link">addGradeToDiscipline(Discipline, Score, LocalDate)</a> - Method in class org.example.<a href="org/example/Semester.html" title="class in org.example">Semester</a></dt>
+<dd>
+<div class="block">Добавление оценки к дисциплине.</div>
+</dd>
+<dt><a href="org/example/CreditBook.html#addSemesters(org.example.Semester)" class="member-name-link">addSemesters(Semester)</a> - Method in class org.example.<a href="org/example/CreditBook.html" title="class in org.example">CreditBook</a></dt>
 <dd>
 <div class="block">Добавление семестра.</div>
 </dd>
@@ -69,6 +79,14 @@ loadScripts(document, 'script');</script>
 <dt><a href="org/example/Discipline.html#CONTROL" class="member-name-link">CONTROL</a> - Enum constant in enum class org.example.<a href="org/example/Discipline.html" title="enum class in org.example">Discipline</a></dt>
 <dd>
 <div class="block">Контрольная работа.</div>
+</dd>
+<dt><a href="org/example/CreditBook.html" class="type-name-link" title="class in org.example">CreditBook</a> - Class in <a href="org/example/package-summary.html">org.example</a></dt>
+<dd>
+<div class="block">Класс студента.</div>
+</dd>
+<dt><a href="org/example/CreditBook.html#%3Cinit%3E(boolean)" class="member-name-link">CreditBook(boolean)</a> - Constructor for class org.example.<a href="org/example/CreditBook.html" title="class in org.example">CreditBook</a></dt>
+<dd>
+<div class="block">Конструктор класса студент.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:D">D</h2>
@@ -84,6 +102,8 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:E">E</h2>
 <dl class="index">
+<dt><a href="org/example/SubjectEntry.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in class org.example.<a href="org/example/SubjectEntry.html" title="class in org.example">SubjectEntry</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/example/Discipline.html#EXAM" class="member-name-link">EXAM</a> - Enum constant in enum class org.example.<a href="org/example/Discipline.html" title="enum class in org.example">Discipline</a></dt>
 <dd>
 <div class="block">Экзамен.</div>
@@ -100,14 +120,18 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:G">G</h2>
 <dl class="index">
-<dt><a href="org/example/Student.html#getAvgAllSemesters()" class="member-name-link">getAvgAllSemesters()</a> - Method in class org.example.<a href="org/example/Student.html" title="class in org.example">Student</a></dt>
+<dt><a href="org/example/CreditBook.html#getAvgAllSemesters()" class="member-name-link">getAvgAllSemesters()</a> - Method in class org.example.<a href="org/example/CreditBook.html" title="class in org.example">CreditBook</a></dt>
 <dd>
-<div class="block">Получение среднего балла студента.</div>
+<div class="block">Получение среднего балла студента (только по последним положительным оценкам).</div>
 </dd>
-<dt><a href="org/example/Student.html#getBudgetStudy()" class="member-name-link">getBudgetStudy()</a> - Method in class org.example.<a href="org/example/Student.html" title="class in org.example">Student</a></dt>
+<dt><a href="org/example/CreditBook.html#getBudgetStudy()" class="member-name-link">getBudgetStudy()</a> - Method in class org.example.<a href="org/example/CreditBook.html" title="class in org.example">CreditBook</a></dt>
 <dd>
 <div class="block">Получение константы обучается ли человек на бюджете.</div>
 </dd>
+<dt><a href="org/example/Semester.html#getCountDiscipline()" class="member-name-link">getCountDiscipline()</a> - Method in class org.example.<a href="org/example/Semester.html" title="class in org.example">Semester</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/example/GradeRecord.html#getDate()" class="member-name-link">getDate()</a> - Method in class org.example.<a href="org/example/GradeRecord.html" title="class in org.example">GradeRecord</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/example/Score.html#getDescription()" class="member-name-link">getDescription()</a> - Method in enum class org.example.<a href="org/example/Score.html" title="enum class in org.example">Score</a></dt>
 <dd>
 <div class="block">Получить текстовое описание оценки</div>
@@ -120,25 +144,77 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Получения массива дисциплин.</div>
 </dd>
-<dt><a href="org/example/Trio.html#getEstimation()" class="member-name-link">getEstimation()</a> - Method in class org.example.<a href="org/example/Trio.html" title="class in org.example">Trio</a></dt>
+<dt><a href="org/example/SubjectEntry.html#getEstimation()" class="member-name-link">getEstimation()</a> - Method in class org.example.<a href="org/example/SubjectEntry.html" title="class in org.example">SubjectEntry</a></dt>
 <dd>
-<div class="block">Получение оценки.</div>
+<div class="block">Получение числового значения последней положительной оценки.</div>
 </dd>
-<dt><a href="org/example/Trio.html#getFlagExam()" class="member-name-link">getFlagExam()</a> - Method in class org.example.<a href="org/example/Trio.html" title="class in org.example">Trio</a></dt>
+<dt><a href="org/example/Session.html#getExams()" class="member-name-link">getExams()</a> - Method in class org.example.<a href="org/example/Session.html" title="class in org.example">Session</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/example/SubjectEntry.html#getFlagExam()" class="member-name-link">getFlagExam()</a> - Method in class org.example.<a href="org/example/SubjectEntry.html" title="class in org.example">SubjectEntry</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/example/SubjectEntry.html#getGradeHistory()" class="member-name-link">getGradeHistory()</a> - Method in class org.example.<a href="org/example/SubjectEntry.html" title="class in org.example">SubjectEntry</a></dt>
 <dd>
-<div class="block">Получение флага экзамена.</div>
+<div class="block">Получение истории оценок.</div>
 </dd>
+<dt><a href="org/example/SubjectEntry.html#getLastGrade()" class="member-name-link">getLastGrade()</a> - Method in class org.example.<a href="org/example/SubjectEntry.html" title="class in org.example">SubjectEntry</a></dt>
+<dd>
+<div class="block">Получение последней оценки (любой).</div>
+</dd>
+<dt><a href="org/example/SubjectEntry.html#getLastPositiveDate()" class="member-name-link">getLastPositiveDate()</a> - Method in class org.example.<a href="org/example/SubjectEntry.html" title="class in org.example">SubjectEntry</a></dt>
+<dd>
+<div class="block">Получение даты последней положительной оценки.</div>
+</dd>
+<dt><a href="org/example/SubjectEntry.html#getLastPositiveGrade()" class="member-name-link">getLastPositiveGrade()</a> - Method in class org.example.<a href="org/example/SubjectEntry.html" title="class in org.example">SubjectEntry</a></dt>
+<dd>
+<div class="block">Получение последней положительной оценки.</div>
+</dd>
+<dt><a href="org/example/CreditBook.html#getLastTwoSessions()" class="member-name-link">getLastTwoSessions()</a> - Method in class org.example.<a href="org/example/CreditBook.html" title="class in org.example">CreditBook</a></dt>
+<dd>
+<div class="block">Получение двух последних сессий по дате.</div>
+</dd>
+<dt><a href="org/example/GradeRecord.html#getNumericValue()" class="member-name-link">getNumericValue()</a> - Method in class org.example.<a href="org/example/GradeRecord.html" title="class in org.example">GradeRecord</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/example/Score.html#getNumericValue()" class="member-name-link">getNumericValue()</a> - Method in enum class org.example.<a href="org/example/Score.html" title="enum class in org.example">Score</a></dt>
 <dd>
 <div class="block">Получить числовое значение оценки</div>
 </dd>
-<dt><a href="org/example/Semester.html#getSemesterNumber()" class="member-name-link">getSemesterNumber()</a> - Method in class org.example.<a href="org/example/Semester.html" title="class in org.example">Semester</a></dt>
+<dt><a href="org/example/GradeRecord.html#getScore()" class="member-name-link">getScore()</a> - Method in class org.example.<a href="org/example/GradeRecord.html" title="class in org.example">GradeRecord</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/example/Semester.html#getSemesterTime()" class="member-name-link">getSemesterTime()</a> - Method in class org.example.<a href="org/example/Semester.html" title="class in org.example">Semester</a></dt>
 <dd>
 <div class="block">Получение номера семестра.</div>
 </dd>
-<dt><a href="org/example/Trio.html#getSubject()" class="member-name-link">getSubject()</a> - Method in class org.example.<a href="org/example/Trio.html" title="class in org.example">Trio</a></dt>
+<dt><a href="org/example/Semester.html#getSession()" class="member-name-link">getSession()</a> - Method in class org.example.<a href="org/example/Semester.html" title="class in org.example">Semester</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/example/Session.html#getSessionDate()" class="member-name-link">getSessionDate()</a> - Method in class org.example.<a href="org/example/Session.html" title="class in org.example">Session</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/example/Session.html#getSessionName()" class="member-name-link">getSessionName()</a> - Method in class org.example.<a href="org/example/Session.html" title="class in org.example">Session</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/example/SubjectEntry.html#getSubject()" class="member-name-link">getSubject()</a> - Method in class org.example.<a href="org/example/SubjectEntry.html" title="class in org.example">SubjectEntry</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/example/Semester.html#getSumSemesterScore()" class="member-name-link">getSumSemesterScore()</a> - Method in class org.example.<a href="org/example/Semester.html" title="class in org.example">Semester</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/example/GradeRecord.html" class="type-name-link" title="class in org.example">GradeRecord</a> - Class in <a href="org/example/package-summary.html">org.example</a></dt>
 <dd>
-<div class="block">Получение дисциплины.</div>
+<div class="block">Класс для хранения оценки с датой.</div>
+</dd>
+<dt><a href="org/example/GradeRecord.html#%3Cinit%3E(org.example.Score,java.time.LocalDate)" class="member-name-link">GradeRecord(Score, LocalDate)</a> - Constructor for class org.example.<a href="org/example/GradeRecord.html" title="class in org.example">GradeRecord</a></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 class="title" id="I:H">H</h2>
+<dl class="index">
+<dt><a href="org/example/Semester.html#haveAllExamGoodEstimation()" class="member-name-link">haveAllExamGoodEstimation()</a> - Method in class org.example.<a href="org/example/Semester.html" title="class in org.example">Semester</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/example/Session.html#haveAllExamGoodEstimation()" class="member-name-link">haveAllExamGoodEstimation()</a> - Method in class org.example.<a href="org/example/Session.html" title="class in org.example">Session</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/example/Semester.html#haveAllFiveEstimation()" class="member-name-link">haveAllFiveEstimation()</a> - Method in class org.example.<a href="org/example/Semester.html" title="class in org.example">Semester</a></dt>
+<dd>&nbsp;</dd>
+</dl>
+<h2 class="title" id="I:I">I</h2>
+<dl class="index">
+<dt><a href="org/example/SubjectEntry.html#isPassed()" class="member-name-link">isPassed()</a> - Method in class org.example.<a href="org/example/SubjectEntry.html" title="class in org.example">SubjectEntry</a></dt>
+<dd>
+<div class="block">Проверка, сдан ли предмет.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:O">O</h2>
@@ -150,15 +226,15 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="org/example/Score.html#PASS" class="member-name-link">PASS</a> - Enum constant in enum class org.example.<a href="org/example/Score.html" title="enum class in org.example">Score</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="org/example/Student.html#possibleGetRedDiploma(boolean)" class="member-name-link">possibleGetRedDiploma(boolean)</a> - Method in class org.example.<a href="org/example/Student.html" title="class in org.example">Student</a></dt>
+<dt><a href="org/example/CreditBook.html#possibleGetRedDiploma(boolean)" class="member-name-link">possibleGetRedDiploma(boolean)</a> - Method in class org.example.<a href="org/example/CreditBook.html" title="class in org.example">CreditBook</a></dt>
 <dd>
 <div class="block">Функция проверки возможности получения красного диплома.</div>
 </dd>
-<dt><a href="org/example/Student.html#possibleIncreasedScholarship()" class="member-name-link">possibleIncreasedScholarship()</a> - Method in class org.example.<a href="org/example/Student.html" title="class in org.example">Student</a></dt>
+<dt><a href="org/example/CreditBook.html#possibleIncreasedScholarship()" class="member-name-link">possibleIncreasedScholarship()</a> - Method in class org.example.<a href="org/example/CreditBook.html" title="class in org.example">CreditBook</a></dt>
 <dd>
 <div class="block">Функция проверки возможности получения повышенной стипендии.</div>
 </dd>
-<dt><a href="org/example/Student.html#possibleStudyOnBudget()" class="member-name-link">possibleStudyOnBudget()</a> - Method in class org.example.<a href="org/example/Student.html" title="class in org.example">Student</a></dt>
+<dt><a href="org/example/CreditBook.html#possibleStudyOnBudget()" class="member-name-link">possibleStudyOnBudget()</a> - Method in class org.example.<a href="org/example/CreditBook.html" title="class in org.example">CreditBook</a></dt>
 <dd>
 <div class="block">Функция проверки возможности перевода на бюджет.</div>
 </dd>
@@ -179,13 +255,15 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Класс семестра.</div>
 </dd>
-<dt><a href="org/example/Student.html" class="type-name-link" title="class in org.example">Student</a> - Class in <a href="org/example/package-summary.html">org.example</a></dt>
+<dt><a href="org/example/Session.html" class="type-name-link" title="class in org.example">Session</a> - Class in <a href="org/example/package-summary.html">org.example</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/example/SubjectEntry.html" class="type-name-link" title="class in org.example">SubjectEntry</a> - Class in <a href="org/example/package-summary.html">org.example</a></dt>
 <dd>
-<div class="block">Класс студента.</div>
+<div class="block">Класс SubjectEntry представляет предмет с историей оценок.</div>
 </dd>
-<dt><a href="org/example/Student.html#%3Cinit%3E(boolean)" class="member-name-link">Student(boolean)</a> - Constructor for class org.example.<a href="org/example/Student.html" title="class in org.example">Student</a></dt>
+<dt><a href="org/example/SubjectEntry.html#%3Cinit%3E(org.example.Discipline,boolean)" class="member-name-link">SubjectEntry(Discipline, boolean)</a> - Constructor for class org.example.<a href="org/example/SubjectEntry.html" title="class in org.example">SubjectEntry</a></dt>
 <dd>
-<div class="block">Конструктор класса студент.</div>
+<div class="block">Конструктор предмета.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:T">T</h2>
@@ -200,14 +278,6 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="org/example/Score.html#THREE" class="member-name-link">THREE</a> - Enum constant in enum class org.example.<a href="org/example/Score.html" title="enum class in org.example">Score</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="org/example/Trio.html" class="type-name-link" title="class in org.example">Trio</a> - Class in <a href="org/example/package-summary.html">org.example</a></dt>
-<dd>
-<div class="block">Класс Trio представляет тройку значений: дисциплина, оценка и флаг экзамена.</div>
-</dd>
-<dt><a href="org/example/Trio.html#%3Cinit%3E(org.example.Discipline,org.example.Score,boolean)" class="member-name-link">Trio(Discipline, Score, boolean)</a> - Constructor for class org.example.<a href="org/example/Trio.html" title="class in org.example">Trio</a></dt>
-<dd>
-<div class="block">Конструктор тройки.</div>
-</dd>
 <dt><a href="org/example/Score.html#TWO" class="member-name-link">TWO</a> - Enum constant in enum class org.example.<a href="org/example/Score.html" title="enum class in org.example">Score</a></dt>
 <dd>&nbsp;</dd>
 </dl>
@@ -232,7 +302,7 @@ the order they are declared.</div>
 the order they are declared.</div>
 </dd>
 </dl>
-<a href="#I:A">A</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a></main>
+<a href="#I:A">A</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:V">V</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a></main>
 </div>
 </div>
 </body>
