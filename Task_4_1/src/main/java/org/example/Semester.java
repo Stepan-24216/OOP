@@ -7,17 +7,17 @@ import java.util.ArrayList;
  * Класс семестра.
  */
 public class Semester {
-    private final LocalDate semesterNumber;
+    private final LocalDate semesterDate;
     ArrayList<SubjectEntry> disciplines;
     Session session;
 
     /**
      * Конструктор класса семестр.
      */
-    Semester(LocalDate semesterNumber) {
-        this.semesterNumber = semesterNumber;
+    Semester(LocalDate semesterDate) {
+        this.semesterDate = semesterDate;
         disciplines = new ArrayList<>();
-        this.session = new Session("Сессия " + semesterNumber, semesterNumber);
+        this.session = new Session("Сессия " + semesterDate, semesterDate);
     }
 
     /**
@@ -57,83 +57,55 @@ public class Semester {
         return disciplines;
     }
 
-    /**
-     * Получение номера семестра.
-     */
-    public LocalDate getSemesterTime() {
-        return semesterNumber;
-    }
-
-    /**
-     * Получение оценки за семестр.
-     */
-    public int getSumSemesterScore() {
-        int sum = 0;
-        int count = 0;
-
-        for (SubjectEntry discipline : disciplines) {
-            Integer estimation = discipline.getEstimation();
-            if (estimation != null) {
-                sum += estimation;
-                count++;
-            }
-        }
-        for (SubjectEntry discipline : session.getExams()) {
-            Integer estimation = discipline.getEstimation();
-            if (estimation != null) {
-                sum += estimation;
-                count++;
-            }
-        }
-
-        return count > 0 ? sum : 0;
-    }
-
-    /**
-     * Получение количества дисциплин.
-     */
-    public int getCountDiscipline() {
-        int count = 0;
-        for (SubjectEntry discipline : disciplines) {
-            if (discipline.isPassed()) {
-                count++;
-            }
-        }
-        for (SubjectEntry discipline : session.getExams()) {
-            if (discipline.isPassed()) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    /**
-     * Все пятёрки.
-     */
-    public boolean haveAllFiveEstimation() {
-        for (SubjectEntry discipline : disciplines) {
-            Integer estimation = discipline.getEstimation();
-            if (estimation == null || estimation != 5) {
-                return false;
-            }
-        }
-        for (SubjectEntry discipline : session.getExams()) {
-            Integer estimation = discipline.getEstimation();
-            if (estimation == null || estimation != 5) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Все оценки хорошие.
-     */
-    public boolean haveAllExamGoodEstimation() {
-        return session.haveAllExamGoodEstimation();
-    }
-
     public Session getSession() {
         return session;
+    }
+
+    public LocalDate getSemesterTime() {
+        return semesterDate;
+    }
+
+    /**
+     * Получение суммы баллов за семестр.
+     */
+    public int getSemesterScoreSum() {
+        int sum = 0;
+
+        for (SubjectEntry discipline : disciplines) {
+            Integer estimation = discipline.getEstimation();
+            if (estimation != null) {
+                sum += estimation;
+            }
+        }
+
+        for (SubjectEntry exam : session.getExams()) {
+            Integer estimation = exam.getEstimation();
+            if (estimation != null) {
+                sum += estimation;
+            }
+        }
+
+        return sum;
+    }
+
+    /**
+     * Получение количества сданных предметов за семестр.
+     */
+    public int getPassedSubjectsCount() {
+        int count = 0;
+
+        for (SubjectEntry discipline : disciplines) {
+            if (discipline.isPassed()) {
+                count++;
+            }
+        }
+
+        for (SubjectEntry exam : session.getExams()) {
+            if (exam.isPassed()) {
+                count++;
+            }
+        }
+
+        return count;
     }
 }
