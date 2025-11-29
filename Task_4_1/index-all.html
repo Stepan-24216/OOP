@@ -124,15 +124,15 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="org/example/CreditBook.html#getAvgAllSemesters()" class="member-name-link">getAvgAllSemesters()</a> - Method in class org.example.<a href="org/example/CreditBook.html" title="class in org.example">CreditBook</a></dt>
 <dd>
-<div class="block">Получение среднего балла студента (только по последним положительным оценкам).</div>
+<div class="block">Получение среднего балла студента.</div>
 </dd>
 <dt><a href="org/example/CreditBook.html#getBudgetStudy()" class="member-name-link">getBudgetStudy()</a> - Method in class org.example.<a href="org/example/CreditBook.html" title="class in org.example">CreditBook</a></dt>
 <dd>
-<div class="block">Получение константы обучается ли человек на бюджете.</div>
+<div class="block">Получение предиката обучается ли человек на бюджете.</div>
 </dd>
-<dt><a href="org/example/Semester.html#getCountDiscipline()" class="member-name-link">getCountDiscipline()</a> - Method in class org.example.<a href="org/example/Semester.html" title="class in org.example">Semester</a></dt>
+<dt><a href="org/example/CreditBook.html#getCurrentSemester()" class="member-name-link">getCurrentSemester()</a> - Method in class org.example.<a href="org/example/CreditBook.html" title="class in org.example">CreditBook</a></dt>
 <dd>
-<div class="block">Получение количества дисциплин.</div>
+<div class="block">Получение самого последнего семестра по дате.</div>
 </dd>
 <dt><a href="org/example/GradeRecord.html#getDate()" class="member-name-link">getDate()</a> - Method in class org.example.<a href="org/example/GradeRecord.html" title="class in org.example">GradeRecord</a></dt>
 <dd>
@@ -190,14 +190,20 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Получить числовое значение оценки.</div>
 </dd>
+<dt><a href="org/example/Semester.html#getPassedSubjectsCount()" class="member-name-link">getPassedSubjectsCount()</a> - Method in class org.example.<a href="org/example/Semester.html" title="class in org.example">Semester</a></dt>
+<dd>
+<div class="block">Получение количества сданных предметов за семестр.</div>
+</dd>
 <dt><a href="org/example/GradeRecord.html#getScore()" class="member-name-link">getScore()</a> - Method in class org.example.<a href="org/example/GradeRecord.html" title="class in org.example">GradeRecord</a></dt>
 <dd>
 <div class="block">Получение оценки.</div>
 </dd>
-<dt><a href="org/example/Semester.html#getSemesterTime()" class="member-name-link">getSemesterTime()</a> - Method in class org.example.<a href="org/example/Semester.html" title="class in org.example">Semester</a></dt>
+<dt><a href="org/example/Semester.html#getSemesterScoreSum()" class="member-name-link">getSemesterScoreSum()</a> - Method in class org.example.<a href="org/example/Semester.html" title="class in org.example">Semester</a></dt>
 <dd>
-<div class="block">Получение номера семестра.</div>
+<div class="block">Получение суммы баллов за семестр.</div>
 </dd>
+<dt><a href="org/example/Semester.html#getSemesterTime()" class="member-name-link">getSemesterTime()</a> - Method in class org.example.<a href="org/example/Semester.html" title="class in org.example">Semester</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/example/Semester.html#getSession()" class="member-name-link">getSession()</a> - Method in class org.example.<a href="org/example/Semester.html" title="class in org.example">Semester</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/example/Session.html#getSessionDate()" class="member-name-link">getSessionDate()</a> - Method in class org.example.<a href="org/example/Session.html" title="class in org.example">Session</a></dt>
@@ -212,10 +218,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Получение дисциплины.</div>
 </dd>
-<dt><a href="org/example/Semester.html#getSumSemesterScore()" class="member-name-link">getSumSemesterScore()</a> - Method in class org.example.<a href="org/example/Semester.html" title="class in org.example">Semester</a></dt>
-<dd>
-<div class="block">Получение оценки за семестр.</div>
-</dd>
 <dt><a href="org/example/GradeRecord.html" class="type-name-link" title="class in org.example">GradeRecord</a> - Class in <a href="org/example/package-summary.html">org.example</a></dt>
 <dd>
 <div class="block">Класс для хранения оценки с датой.</div>
@@ -227,17 +229,9 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:H">H</h2>
 <dl class="index">
-<dt><a href="org/example/Semester.html#haveAllExamGoodEstimation()" class="member-name-link">haveAllExamGoodEstimation()</a> - Method in class org.example.<a href="org/example/Semester.html" title="class in org.example">Semester</a></dt>
-<dd>
-<div class="block">Все оценки хорошие.</div>
-</dd>
 <dt><a href="org/example/Session.html#haveAllExamGoodEstimation()" class="member-name-link">haveAllExamGoodEstimation()</a> - Method in class org.example.<a href="org/example/Session.html" title="class in org.example">Session</a></dt>
 <dd>
 <div class="block">Проверка все ли оценки хорошие.</div>
-</dd>
-<dt><a href="org/example/Semester.html#haveAllFiveEstimation()" class="member-name-link">haveAllFiveEstimation()</a> - Method in class org.example.<a href="org/example/Semester.html" title="class in org.example">Semester</a></dt>
-<dd>
-<div class="block">Все пятёрки.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:I">I</h2>
