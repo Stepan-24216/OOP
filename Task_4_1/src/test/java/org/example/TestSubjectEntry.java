@@ -1,9 +1,17 @@
 package org.example;
 
+import static org.example.grading.Score.FAIL;
+import static org.example.grading.Score.FOUR;
+import static org.example.grading.Score.PASS;
+import static org.example.grading.Score.THREE;
+import static org.example.grading.Score.TWO;
 import static org.example.model.Discipline.EXAM;
 import static org.example.model.Discipline.TASK;
-import static org.example.grading.Score.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 import java.time.LocalDate;
 import org.example.academic.SubjectEntry;

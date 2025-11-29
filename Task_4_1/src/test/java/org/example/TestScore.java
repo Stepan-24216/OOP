@@ -1,6 +1,12 @@
 package org.example;
 
-import static org.example.grading.Score.*;
+
+import static org.example.grading.Score.FAIL;
+import static org.example.grading.Score.FIVE;
+import static org.example.grading.Score.FOUR;
+import static org.example.grading.Score.PASS;
+import static org.example.grading.Score.THREE;
+import static org.example.grading.Score.TWO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
