@@ -1,12 +1,15 @@
 package org.example;
 
-import static org.example.Discipline.EXAM;
-import static org.example.Discipline.TASK;
-import static org.example.Score.*;
+import static org.example.model.Discipline.EXAM;
+import static org.example.model.Discipline.TASK;
+import static org.example.grading.Score.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import org.example.model.CreditBook;
+import org.example.model.Semester;
+import org.example.model.Session;
 import org.junit.jupiter.api.Test;
 
 /**

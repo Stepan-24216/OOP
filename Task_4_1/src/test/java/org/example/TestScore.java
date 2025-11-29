@@ -1,6 +1,6 @@
 package org.example;
 
-import static org.example.Score.*;
+import static org.example.grading.Score.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 

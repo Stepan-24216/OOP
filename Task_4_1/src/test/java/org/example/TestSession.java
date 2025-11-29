@@ -1,11 +1,13 @@
 package org.example;
 
-import static org.example.Discipline.EXAM;
-import static org.example.Discipline.TEST;
-import static org.example.Score.*;
+import static org.example.model.Discipline.EXAM;
+import static org.example.model.Discipline.TEST;
+import static org.example.grading.Score.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import org.example.academic.SubjectEntry;
+import org.example.model.Session;
 import org.junit.jupiter.api.Test;
 
 /**

@@ -1,7 +1,9 @@
-package org.example;
+package org.example.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import org.example.academic.SubjectEntry;
+import org.example.grading.Score;
 
 /**
  * Класс семестра.
@@ -14,7 +16,7 @@ public class Semester {
     /**
      * Конструктор класса семестр.
      */
-    Semester(LocalDate semesterDate) {
+    public Semester(LocalDate semesterDate) {
         this.semesterDate = semesterDate;
         disciplines = new ArrayList<>();
         this.session = new Session("Сессия " + semesterDate, semesterDate);

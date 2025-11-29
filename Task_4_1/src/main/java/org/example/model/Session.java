@@ -1,7 +1,8 @@
-package org.example;
+package org.example.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import org.example.academic.SubjectEntry;
 
 /**
  * Класс сессии.
@@ -14,7 +15,7 @@ public class Session {
     /**
      * Конструктор сессии.
      */
-    Session(String sessionName, LocalDate sessionDate) {
+    public Session(String sessionName, LocalDate sessionDate) {
         this.exams = new ArrayList<>();
         this.sessionName = sessionName;
         this.sessionDate = sessionDate;

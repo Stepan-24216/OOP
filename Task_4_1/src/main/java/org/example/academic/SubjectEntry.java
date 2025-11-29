@@ -1,8 +1,11 @@
-package org.example;
+package org.example.academic;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import org.example.grading.GradeRecord;
+import org.example.grading.Score;
+import org.example.model.Discipline;
 
 /**
  * Предмет с историей оценок.
@@ -42,16 +45,6 @@ public class SubjectEntry {
     }
 
     /**
-     * Получение последней оценки.
-     */
-    public GradeRecord getLastGrade() {
-        if (gradeHistory.isEmpty()) {
-            return null;
-        }
-        return gradeHistory.get(gradeHistory.size() - 1);
-    }
-
-    /**
      * Проверка, сдан ли предмет.
      */
     public boolean isPassed() {
@@ -64,14 +57,6 @@ public class SubjectEntry {
     public Integer getEstimation() {
         GradeRecord lastPositive = getLastPositiveGrade();
         return lastPositive != null ? lastPositive.getScore().getNumericValue() : null;
-    }
-
-    /**
-     * Получение даты последней положительной оценки.
-     */
-    public LocalDate getLastPositiveDate() {
-        GradeRecord lastPositive = getLastPositiveGrade();
-        return lastPositive != null ? lastPositive.getDate() : null;
     }
 
     /**

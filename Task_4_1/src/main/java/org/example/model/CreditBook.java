@@ -1,9 +1,8 @@
-package org.example;
+package org.example.model;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
+import org.example.academic.SubjectEntry;
 
 /**
  * Класс студента.
@@ -104,7 +103,6 @@ public class CreditBook {
      * Проверяет, что все предметы семестра имеют хорошие оценки.
      */
     private boolean hasAllGoodGrades(Semester semester) {
-        // Проверяем дисциплины
         for (SubjectEntry discipline : semester.getDisciplines()) {
             Integer estimation = discipline.getEstimation();
             if (estimation == null || estimation <= 3) {
@@ -112,7 +110,6 @@ public class CreditBook {
             }
         }
 
-        // Проверяем экзамены в сессии
         for (SubjectEntry exam : semester.getSession().getExams()) {
             Integer estimation = exam.getEstimation();
             if (estimation == null || estimation <= 3) {
@@ -187,7 +184,7 @@ public class CreditBook {
     }
 
     /**
-     * Получение самого последнего семестра по дате.
+     * Получение самого последнего семестра.
      */
     public Semester getCurrentSemester() {
         if (semesters.isEmpty()) {

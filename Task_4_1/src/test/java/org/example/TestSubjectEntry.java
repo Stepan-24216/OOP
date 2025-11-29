@@ -1,11 +1,12 @@
 package org.example;
 
-import static org.example.Discipline.EXAM;
-import static org.example.Discipline.TASK;
-import static org.example.Score.*;
+import static org.example.model.Discipline.EXAM;
+import static org.example.model.Discipline.TASK;
+import static org.example.grading.Score.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import org.example.academic.SubjectEntry;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -34,9 +35,7 @@ public class TestSubjectEntry {
         assertEquals(3, subject.getGradeHistory().size());
         assertTrue(subject.isPassed());
         assertEquals(4, subject.getEstimation());
-        assertEquals(FOUR, subject.getLastGrade().getScore());
         assertEquals(FOUR, subject.getLastPositiveGrade().getScore());
-        assertEquals(LocalDate.of(2024, 1, 25), subject.getLastPositiveDate());
     }
 
     @Test

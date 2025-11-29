@@ -1,9 +1,10 @@
 package org.example;
 
-import static org.example.Score.FIVE;
+import static org.example.grading.Score.FIVE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
+import org.example.grading.GradeRecord;
 import org.junit.jupiter.api.Test;
 
 /**

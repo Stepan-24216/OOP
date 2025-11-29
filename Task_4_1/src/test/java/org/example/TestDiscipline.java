@@ -1,6 +1,6 @@
 package org.example;
 
-import static org.example.Discipline.*;
+import static org.example.model.Discipline.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;

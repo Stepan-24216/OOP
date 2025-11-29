@@ -1,4 +1,4 @@
-package org.example;
+package org.example.grading;
 
 /**
  * Енам для оценок.
