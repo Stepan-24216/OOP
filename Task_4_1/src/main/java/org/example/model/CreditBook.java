@@ -1,6 +1,7 @@
 package org.example.model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import org.example.academic.SubjectEntry;
 
@@ -29,8 +30,13 @@ public class CreditBook {
     /**
      * Добавление семестра.
      */
-    public void addSemesters(Semester semester) {
-        semesters.add(semester);
+    public void addSemesters(Semester newSemester) {
+        semesters.add(newSemester);
+
+        semesters.sort(Comparator.comparing(
+            semester -> semester.getSession().getSessionDate(),
+            Comparator.reverseOrder()
+        ));
     }
 
     /**
@@ -57,10 +63,6 @@ public class CreditBook {
         for (Semester semester : semesters) {
             allSessions.add(semester.getSession());
         }
-
-        allSessions.sort((session1, session2) -> {
-            return session2.getSessionDate().compareTo(session1.getSessionDate());
-        });
 
         if (allSessions.size() <= 2) {
             return allSessions;
@@ -132,32 +134,26 @@ public class CreditBook {
         int countEvaluation = 0;
 
         for (Semester semester : semesters) {
+            countEvaluation += semester.getDisciplines().size()
+                + semester.getSession().getExams().size();
+            if (!semester.haveAllGoodEstimation()) {
+                return false;
+            }
             for (SubjectEntry discipline : semester.getDisciplines()) {
                 if (discipline.isPassed()) {
-                    Integer estimation = discipline.getEstimation();
-                    if (estimation == 3 || estimation == 2) {
-                        return false;
-                    }
-                    countEvaluation++;
-                    if (estimation == 5) {
+                    if (discipline.getEstimation() == 5) {
                         countExcellentEvaluation++;
                     }
                 }
             }
             for (SubjectEntry exam : semester.getSession().getExams()) {
                 if (exam.isPassed()) {
-                    Integer estimation = exam.getEstimation();
-                    if (estimation == 3 || estimation == 2) {
-                        return false;
-                    }
-                    countEvaluation++;
-                    if (estimation == 5) {
+                    if (exam.getEstimation() == 5) {
                         countExcellentEvaluation++;
                     }
                 }
             }
         }
-
         return countEvaluation > 0 && (countExcellentEvaluation * 100) / countEvaluation >= 75;
     }
 

@@ -110,4 +110,17 @@ public class Semester {
 
         return count;
     }
+
+    /**
+     * Проверка все ли оценки хорошие.
+     */
+    public boolean haveAllGoodEstimation() {
+        for (SubjectEntry discipline : disciplines) {
+            Integer estimation = discipline.getEstimation();
+            if (estimation == null || estimation <= 3) {
+                return false;
+            }
+        }
+        return session.haveAllExamGoodEstimation();
+    }
 }
