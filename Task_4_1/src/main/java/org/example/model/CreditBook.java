@@ -94,11 +94,9 @@ public class CreditBook {
      * Получение двух последних семестров по дате.
      */
     private List<Semester> getLastTwoSemesters() {
-        List<Semester> sortedSemesters = new ArrayList<>(semesters);
-        sortedSemesters.sort((sem1, sem2) ->
-            sem2.getSemesterTime().compareTo(sem1.getSemesterTime()));
-
-        return sortedSemesters.size() <= 2 ? sortedSemesters : sortedSemesters.subList(0, 2);
+        return semesters.size() <= 2
+            ? new ArrayList<>(semesters)
+            : semesters.subList(0, 2);
     }
 
     /**
@@ -134,8 +132,7 @@ public class CreditBook {
         int countEvaluation = 0;
 
         for (Semester semester : semesters) {
-            countEvaluation += semester.getDisciplines().size()
-                + semester.getSession().getExams().size();
+            countEvaluation += semester.getPassedSubjectsCount();
             if (!semester.haveAllGoodEstimation()) {
                 return false;
             }
@@ -187,13 +184,6 @@ public class CreditBook {
             return null;
         }
 
-        Semester latestSemester = semesters.get(0);
-        for (Semester semester : semesters) {
-            if (semester.getSemesterTime().isAfter(latestSemester.getSemesterTime())) {
-                latestSemester = semester;
-            }
-        }
-
-        return latestSemester;
+        return semesters.get(0);
     }
 }
