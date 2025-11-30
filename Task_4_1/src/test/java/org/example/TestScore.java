@@ -1,0 +1,39 @@
+package org.example;
+
+
+import static org.example.grading.Score.FAIL;
+import static org.example.grading.Score.FIVE;
+import static org.example.grading.Score.FOUR;
+import static org.example.grading.Score.PASS;
+import static org.example.grading.Score.THREE;
+import static org.example.grading.Score.TWO;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+import org.junit.jupiter.api.Test;
+
+/**
+ * Тесты для класса Score.
+ */
+public class TestScore {
+
+    @Test
+    void testScoreValues() {
+        assertEquals(2, TWO.getNumericValue());
+        assertEquals(3, THREE.getNumericValue());
+        assertEquals(4, FOUR.getNumericValue());
+        assertEquals(5, FIVE.getNumericValue());
+        assertNull(PASS.getNumericValue());
+        assertNull(FAIL.getNumericValue());
+    }
+
+    @Test
+    void testScoreDescriptions() {
+        assertEquals("Неудовлетворительно", TWO.getDescription());
+        assertEquals("Удовлетворительно", THREE.getDescription());
+        assertEquals("Хорошо", FOUR.getDescription());
+        assertEquals("Отлично", FIVE.getDescription());
+        assertEquals("Зачёт", PASS.getDescription());
+        assertEquals("Незачёт", FAIL.getDescription());
+    }
+}
