@@ -25,6 +25,7 @@ public class TestSequentiallySearchPrime {
 
         ArrayList<Integer> noHavePrimeNum = new ArrayList<>();
         noHavePrimeNum.add(2);
+        noHavePrimeNum.add(3);
         noHavePrimeNum.add(4);
         noHavePrimeNum.add(5);
         assertTrue(SequentiallySearchPrime.checkPrimeArray(noHavePrimeNum));
