@@ -1,13 +1,19 @@
 package org.example;
 
-import java.util.ArrayList;
-import org.junit.jupiter.api.Test;
-
 import static org.example.Tools.readFile;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+import org.junit.jupiter.api.Test;
+
+/**
+ * Поиск не простых чисел с помощью метода Stream.
+ */
 public class TestStreamSearchPrime {
+    /**
+     * Тест на маленьких данных.
+     */
     @Test
     public void testCheckPrimeSmallArray() {
         ArrayList<Integer> primeNumbers = new ArrayList<>();
@@ -32,6 +38,9 @@ public class TestStreamSearchPrime {
         assertTrue(StreamSearchPrime.checkPrimeArray(numbers));
     }
 
+    /**
+     * Тест на больших данных.
+     */
     @Test
     public void testCheckPrimeBigArray() {
         ArrayList<Integer> numbers;

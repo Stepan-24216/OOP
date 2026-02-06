@@ -1,5 +1,8 @@
 package org.example;
 
+/**
+ * Один рабочий поток.
+ */
 public class PrimeWorker extends Thread {
     static volatile boolean notPrimeNumber = false;
     private final int startIndex;

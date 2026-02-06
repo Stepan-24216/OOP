@@ -2,6 +2,9 @@ package org.example;
 
 import java.util.ArrayList;
 
+/**
+ * Поиск не простых чисел с помощью кастомного количества потоков.
+ */
 public class ThreadSearchPrime {
     public static boolean checkPrimeArray(int threadsCount, ArrayList<Integer> numbers) {
         PrimeWorker.notPrimeNumber = false;
