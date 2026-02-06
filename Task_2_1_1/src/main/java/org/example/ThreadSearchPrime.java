@@ -20,7 +20,8 @@ public class ThreadSearchPrime {
             try {
                 threads[i].join();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
+                throw new RuntimeException("Не удалось дождаться завершения потока " + i, e);
             }
         }
         for (int i = 0; i < threadsCount; i++) {
