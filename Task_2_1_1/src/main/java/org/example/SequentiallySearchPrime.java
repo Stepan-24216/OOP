@@ -1,17 +1,15 @@
 package org.example;
 
-import static org.example.Tools.isPrime;
-
 import java.util.ArrayList;
 
 /**
  * Поиск с помощью последовательной проверки.
  */
-public class SequentiallySearchPrime {
-    public static boolean checkPrimeArray(ArrayList<Integer> numbers) {
+public class SequentiallySearchPrime implements NoPrimeSearches{
+    public boolean hasCompositeNumber(ArrayList<Integer> numbers) {
         boolean flagNotPrimeNumber = false;
         for (int number : numbers) {
-            if (!isPrime(number)) {
+            if (!NoPrimeSearches.isPrime(number)) {
                 flagNotPrimeNumber = true;
                 break;
             }

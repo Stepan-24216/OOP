@@ -8,22 +8,7 @@ import java.util.Scanner;
 /**
  * Вспомогательные функции.
  */
-public class Tools {
-    /**
-     * Проверка простоты.
-     */
-    public static boolean isPrime(int number) {
-        if (number <= 1 || (number % 2 == 0 && number != 2)) {
-            return false;
-        }
-        for (int i = 3; i <= Math.sqrt(number) + 1; i += 2) {
-            if (number % i == 0) {
-                return false;
-            }
-        }
-        return true;
-    }
-
+public class ToolsReadFiles {
     /**
      * Чтение файла.
      */

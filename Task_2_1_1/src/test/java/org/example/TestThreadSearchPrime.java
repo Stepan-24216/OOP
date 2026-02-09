@@ -1,6 +1,6 @@
 package org.example;
 
-import static org.example.Tools.readFile;
+import static org.example.ToolsReadFiles.readFile;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -16,26 +16,27 @@ public class TestThreadSearchPrime {
      */
     @Test
     public void testCheckPrimeSmallArray() {
+        ThreadSearchPrime threadSearchPrime = new ThreadSearchPrime(8);
         ArrayList<Integer> primeNumbers = new ArrayList<>();
         primeNumbers.add(2);
         primeNumbers.add(3);
         primeNumbers.add(5);
         primeNumbers.add(7);
-        assertFalse(ThreadSearchPrime.checkPrimeArray(8, primeNumbers));
+        assertFalse(threadSearchPrime.hasCompositeNumber(primeNumbers));
 
         ArrayList<Integer> noHavePrimeNum = new ArrayList<>();
         noHavePrimeNum.add(2);
         noHavePrimeNum.add(4);
         noHavePrimeNum.add(5);
-        assertTrue(ThreadSearchPrime.checkPrimeArray(8, noHavePrimeNum));
+        assertTrue(threadSearchPrime.hasCompositeNumber(noHavePrimeNum));
 
         ArrayList<Integer> emptyArray = new ArrayList<>();
-        assertFalse(ThreadSearchPrime.checkPrimeArray(8, emptyArray));
+        assertFalse(threadSearchPrime.hasCompositeNumber(emptyArray));
 
         ArrayList<Integer> numbers;
         numbers = readFile("src/test/java/org/example/test.txt");
 
-        assertTrue(ThreadSearchPrime.checkPrimeArray(8, numbers));
+        assertTrue(threadSearchPrime.hasCompositeNumber( numbers));
     }
 
     /**
@@ -43,13 +44,14 @@ public class TestThreadSearchPrime {
      */
     @Test
     public void testCheckPrimeBigArray() {
+        ThreadSearchPrime threadSearchPrime = new ThreadSearchPrime(8);
         ArrayList<Integer> numbers;
         numbers = readFile("src/test/java/org/example/test3.txt");
 
-        assertTrue(ThreadSearchPrime.checkPrimeArray(8, numbers));
+        assertTrue(threadSearchPrime.hasCompositeNumber(numbers));
 
         numbers = readFile("src/test/java/org/example/test2.txt");
 
-        assertFalse(ThreadSearchPrime.checkPrimeArray(8, numbers));
+        assertFalse(threadSearchPrime.hasCompositeNumber(numbers));
     }
 }

@@ -4,7 +4,7 @@ package org.example;
  * Один рабочий поток.
  */
 public class PrimeWorker extends Thread {
-    static volatile boolean notPrimeNumber = false;
+    private volatile boolean notPrimeNumber = false;
     private final int startIndex;
     private final int endIndex;
     private final java.util.ArrayList<Integer> numbers;
@@ -22,7 +22,7 @@ public class PrimeWorker extends Thread {
     @Override
     public void run() {
         for (int i = startIndex; i < endIndex; i++) {
-            if (!Tools.isPrime(numbers.get(i))) {
+            if (!NoPrimeSearches.isPrime(numbers.get(i))) {
                 notPrimeNumber = true;
                 break;
             }

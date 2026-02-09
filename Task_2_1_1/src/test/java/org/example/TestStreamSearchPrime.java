@@ -1,6 +1,6 @@
 package org.example;
 
-import static org.example.Tools.readFile;
+import static org.example.ToolsReadFiles.readFile;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -16,26 +16,27 @@ public class TestStreamSearchPrime {
      */
     @Test
     public void testCheckPrimeSmallArray() {
+        StreamSearchPrime streamSearchPrime = new StreamSearchPrime();
         ArrayList<Integer> primeNumbers = new ArrayList<>();
         primeNumbers.add(2);
         primeNumbers.add(3);
         primeNumbers.add(5);
         primeNumbers.add(7);
-        assertFalse(StreamSearchPrime.checkPrimeArray(primeNumbers));
+        assertFalse(streamSearchPrime.hasCompositeNumber(primeNumbers));
 
         ArrayList<Integer> noHavePrimeNum = new ArrayList<>();
         noHavePrimeNum.add(2);
         noHavePrimeNum.add(4);
         noHavePrimeNum.add(5);
-        assertTrue(StreamSearchPrime.checkPrimeArray(noHavePrimeNum));
+        assertTrue(streamSearchPrime.hasCompositeNumber(noHavePrimeNum));
 
         ArrayList<Integer> emptyArray = new ArrayList<>();
-        assertFalse(StreamSearchPrime.checkPrimeArray(emptyArray));
+        assertFalse(streamSearchPrime.hasCompositeNumber(emptyArray));
 
         ArrayList<Integer> numbers;
         numbers = readFile("src/test/java/org/example/test.txt");
 
-        assertTrue(StreamSearchPrime.checkPrimeArray(numbers));
+        assertTrue(streamSearchPrime.hasCompositeNumber(numbers));
     }
 
     /**
@@ -43,13 +44,14 @@ public class TestStreamSearchPrime {
      */
     @Test
     public void testCheckPrimeBigArray() {
+        StreamSearchPrime streamSearchPrime = new StreamSearchPrime();
         ArrayList<Integer> numbers;
         numbers = readFile("src/test/java/org/example/test3.txt");
 
-        assertTrue(StreamSearchPrime.checkPrimeArray(numbers));
+        assertTrue(streamSearchPrime.hasCompositeNumber(numbers));
 
         numbers = readFile("src/test/java/org/example/test2.txt");
 
-        assertFalse(StreamSearchPrime.checkPrimeArray(numbers));
+        assertFalse(streamSearchPrime.hasCompositeNumber(numbers));
     }
 }

@@ -5,9 +5,9 @@ import java.util.ArrayList;
 /**
  * Поиск не простых чисел с помощью метода Stream.
  */
-public class StreamSearchPrime {
-    public static boolean checkPrimeArray(ArrayList<Integer> numbers) {
+public class StreamSearchPrime implements NoPrimeSearches {
+    public boolean hasCompositeNumber(ArrayList<Integer> numbers) {
         return numbers.parallelStream()
-            .anyMatch(n -> !Tools.isPrime(n));
+            .anyMatch(n -> !NoPrimeSearches.isPrime(n));
     }
 }
