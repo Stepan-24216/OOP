@@ -13,12 +13,13 @@ public class ThreadSearchPrime implements NoPrimeSearches {
     }
 
     public boolean hasCompositeNumber(ArrayList<Integer> numbers) {
+        SearchState sharedState = new SearchState();
         PrimeWorker[] threads = new PrimeWorker[threadsCount];
         int numbersPerThread = numbers.size() / threadsCount;
         for (int i = 0; i < threadsCount; i++) {
             int startIndex = i * numbersPerThread;
             int endIndex = (i == threadsCount - 1) ? numbers.size() : startIndex + numbersPerThread;
-            threads[i] = new PrimeWorker(numbers, startIndex, endIndex);
+            threads[i] = new PrimeWorker(numbers, startIndex, endIndex, sharedState);
             threads[i].start();
         }
         for (int i = 0; i < threadsCount; i++) {
@@ -29,11 +30,7 @@ public class ThreadSearchPrime implements NoPrimeSearches {
                 throw new RuntimeException("Не удалось дождаться завершения потока " + i, e);
             }
         }
-        for (int i = 0; i < threadsCount; i++) {
-            if (threads[i].getNotPrimeNumber()) {
-                return true;
-            }
-        }
-        return false;
+
+        return sharedState.isCompositeFound();
     }
 }
