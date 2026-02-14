@@ -1,6 +1,7 @@
-package org.example;
+package org.example.checkers;
 
 import java.util.ArrayList;
+import org.example.NoPrimeSearches;
 
 /**
  * Поиск не простых чисел с помощью метода Stream.

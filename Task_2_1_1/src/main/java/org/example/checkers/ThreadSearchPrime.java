@@ -1,6 +1,9 @@
-package org.example;
+package org.example.checkers;
 
 import java.util.ArrayList;
+import org.example.NoPrimeSearches;
+import org.example.PrimeWorker;
+import org.example.SearchState;
 
 /**
  * Поиск не простых чисел с помощью кастомного количества потоков.

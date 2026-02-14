@@ -9,7 +9,11 @@ public class PrimeWorker extends Thread {
     private final int endIndex;
     private final java.util.ArrayList<Integer> numbers;
 
-    public PrimeWorker(java.util.ArrayList<Integer> numbers, int startIndex, int endIndex, SearchState sharedState) {
+    /**
+     * Конструктор.
+     */
+    public PrimeWorker(java.util.ArrayList<Integer> numbers, int startIndex, int endIndex,
+                       SearchState sharedState) {
         this.numbers = numbers;
         this.startIndex = startIndex;
         this.endIndex = endIndex;

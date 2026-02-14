@@ -2,6 +2,9 @@ package org.example;
 
 import java.util.ArrayList;
 
+/**
+ * Интерфейс для проверки наличия не простого числа.
+ */
 public interface NoPrimeSearches {
     /**
      * Проверка простоты.
@@ -18,5 +21,8 @@ public interface NoPrimeSearches {
         return true;
     }
 
+    /**
+     * Метод проверки.
+     */
     boolean hasCompositeNumber(ArrayList<Integer> numbers);
 }
