@@ -1,7 +1,8 @@
 package org.example;
 
-import static org.example.Condition.cooked;
-import static org.example.Condition.delivered;
+import static org.example.Condition.Cooking;
+import static org.example.Condition.Delivering;
+import static org.example.Condition.WaitingCourier;
 
 import java.util.Queue;
 
@@ -32,25 +33,32 @@ public class Warehouse {
         return capacity - countPizzas;
     }
 
-    public void addOrder(Order order) {
-        if (isFull()) {
-            return;
+    public synchronized void addOrder(Order order) {
+        while (capacity - countPizzas < order.getCountPizzas()) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
         storage.add(order);
         countPizzas += order.getPizzas().size();
+        order.setCondition(WaitingCourier);
+        notifyAll();
     }
 
-    public Order takeOrder(int capacity) {
+    public synchronized Order takeOrder(int capacity) {
         if (isEmpty()) {
             return null;
         }
         Order order = storage.peek();
-        if (order != null && capacity >= order.getCountPizzas() && order.getCondition() == cooked) {;
-            order.setCondition(delivered);
+        if (order != null && capacity >= order.getCountPizzas() && order.getCondition() == WaitingCourier) {
+            storage.poll();
+            order.setCondition(Delivering);
             countPizzas -= order.getCountPizzas();
-        } else {
-            return null;
+            notifyAll();
+            return order;
         }
-        return storage.poll();
+        return null;
     }
 }

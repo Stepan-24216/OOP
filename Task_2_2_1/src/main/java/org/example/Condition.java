@@ -1,8 +1,9 @@
 package org.example;
 
 public enum Condition {
-    adopted,
-    cooked,
-    delivered,
-    ready
+    Accepted,
+    Cooking,
+    WaitingCourier,
+    Delivering,
+    Completed
 }
