@@ -10,6 +10,9 @@ public class Order {
     private Condition condition;
     private final ArrayList<Pizza> pizzas;
 
+    /**
+     * Конструктор заказа.
+     */
     public Order(int orderNimber, ArrayList<Pizza> pizzas) {
         this.orderNumber = orderNimber;
         this.condition = Condition.Accepted;

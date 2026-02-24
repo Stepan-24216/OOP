@@ -18,6 +18,9 @@ public class Pizzeria {
     private final String pathToConfig;
     private final List<Runnable> workers = new ArrayList<>();
 
+    /**
+     * Конструктор пиццерии.
+     */
     public Pizzeria(String pathToConfig, int endTime) {
         this.pathToConfig = pathToConfig;
         this.endTime = endTime;

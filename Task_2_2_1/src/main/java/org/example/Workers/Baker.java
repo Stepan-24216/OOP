@@ -14,6 +14,9 @@ public class Baker implements Runnable {
     private final Warehouse warehouse;
     private final Pizzeria pizzeria;
 
+    /**
+     * Конструктор пекаря.
+     */
     public Baker(int id, int cookingSpeed, Warehouse warehouse, Pizzeria pizzeria) {
         this.id = id;
         this.cookingSpeed = cookingSpeed;

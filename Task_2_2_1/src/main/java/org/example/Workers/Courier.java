@@ -16,6 +16,9 @@ public class Courier implements Runnable {
     private final Warehouse warehouse;
     private final Pizzeria pizzeria;
 
+    /**
+     * Конструктор курьера.
+     */
     public Courier(int id, int speed, int capacity, Warehouse warehouse, Pizzeria pizzeria) {
         this.id = id;
         this.speed = speed;
