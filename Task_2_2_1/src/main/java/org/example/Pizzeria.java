@@ -6,14 +6,17 @@ import java.util.Queue;
 import org.example.Workers.Baker;
 import org.example.Workers.Courier;
 
+/**
+ * Класс моей пиццерии.
+ */
 public class Pizzeria {
-    private volatile Queue<Order> orders = new java.util.LinkedList<>();
-    private volatile Warehouse warehouse;
-    private String pathToConfig;
-    private List<Runnable> workers = new ArrayList<>();
     private final List<Thread> threads = new ArrayList<>();
     public volatile boolean isOpen = true;
     public int endTime;
+    private final Queue<Order> orders = new java.util.LinkedList<>();
+    private volatile Warehouse warehouse;
+    private final String pathToConfig;
+    private final List<Runnable> workers = new ArrayList<>();
 
     public Pizzeria(String pathToConfig, int endTime) {
         this.pathToConfig = pathToConfig;
@@ -24,6 +27,9 @@ public class Pizzeria {
         return orders.isEmpty();
     }
 
+    /**
+     * Метод добавляения заказа в очередь на приготовление.
+     */
     public synchronized void addOrder(Order order) {
         if (!isOpen) {
             return; // Заказ не принимается, так как пиццерия закрыта
@@ -36,6 +42,9 @@ public class Pizzeria {
         return isOpen;
     }
 
+    /**
+     * Метод взятия заказа при наличии.
+     */
     public synchronized Order takeOrder() {
         if (orders.isEmpty()) {
             return null;
@@ -43,6 +52,9 @@ public class Pizzeria {
         return orders.poll();
     }
 
+    /**
+     * Начало работы пиццерии.
+     */
     public void pizzeriaWork() {
         System.out.println("Pizzeria is open!");
         start();
@@ -56,6 +68,9 @@ public class Pizzeria {
         System.out.println("Pizzeria is closed!");
     }
 
+    /**
+     * Метод стартовых действий.
+     */
     private void start() {
         ConfigCreate configCreate = new ConfigCreate();
         configCreate.createConfig(pathToConfig);
@@ -65,7 +80,9 @@ public class Pizzeria {
             workers.add(backer);
         }
         for (PizzeriaConfig.CourierConfig courierConf : configCreate.getCouriers()) {
-            Courier courier = new Courier(courierConf.id, courierConf.speed, courierConf.trunkCapacity, warehouse,this);
+            Courier courier =
+                new Courier(courierConf.id, courierConf.speed, courierConf.trunkCapacity, warehouse,
+                    this);
             workers.add(courier);
         }
         for (Runnable worker : workers) {
@@ -75,6 +92,9 @@ public class Pizzeria {
         }
     }
 
+    /**
+     * Конец рабочего дня.
+     */
     private void stop() {
         for (Thread thread : threads) {
             try {

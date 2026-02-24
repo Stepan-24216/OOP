@@ -2,6 +2,9 @@ package org.example;
 
 import java.util.List;
 
+/**
+ * Конфиг пиццерии для записи данных из Json.
+ */
 public class PizzeriaConfig {
     public WarehouseConfig warehouse;
     public List<BakerConfig> bakers;

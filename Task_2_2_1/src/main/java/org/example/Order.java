@@ -2,20 +2,18 @@ package org.example;
 
 import java.util.ArrayList;
 
+/**
+ * Класс заказа.
+ */
 public class Order {
     private final int orderNumber;
     private Condition condition;
-    private ArrayList<Pizza> pizzas;
+    private final ArrayList<Pizza> pizzas;
 
     public Order(int orderNimber, ArrayList<Pizza> pizzas) {
         this.orderNumber = orderNimber;
         this.condition = Condition.Accepted;
         this.pizzas = pizzas;
-    }
-
-    public void setCondition(Condition condition) {
-        this.condition = condition;
-        System.out.println("Заказ " + orderNumber + " статус: " + condition);
     }
 
     public void addPizza(Pizza pizza) {
@@ -32,6 +30,14 @@ public class Order {
 
     public Condition getCondition() {
         return condition;
+    }
+
+    /**
+     * Смена состояния заказа.
+     */
+    public void setCondition(Condition condition) {
+        this.condition = condition;
+        System.out.println("Заказ " + orderNumber + " статус: " + condition);
     }
 
     public int getCountPizzas() {

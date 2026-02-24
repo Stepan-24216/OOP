@@ -1,20 +1,22 @@
 package org.example.Workers;
 
 import static org.example.Condition.Completed;
-import static org.example.Condition.Delivering;
 
 import org.example.Order;
 import org.example.Pizzeria;
 import org.example.Warehouse;
 
-public class Courier implements Runnable{
+/**
+ * Класс моего курьера.
+ */
+public class Courier implements Runnable {
     private final int id;
     private final int speed;
     private final int capacity;
-    private Warehouse warehouse;
-    private Pizzeria pizzeria;
+    private final Warehouse warehouse;
+    private final Pizzeria pizzeria;
 
-    public Courier(int id, int speed, int capacity, Warehouse warehouse,Pizzeria pizzeria) {
+    public Courier(int id, int speed, int capacity, Warehouse warehouse, Pizzeria pizzeria) {
         this.id = id;
         this.speed = speed;
         this.capacity = capacity;
@@ -22,12 +24,13 @@ public class Courier implements Runnable{
         this.pizzeria = pizzeria;
     }
 
+    /**
+     * Рабочий день курьера.
+     */
     @Override
     public void run() {
-        while (!Thread.currentThread().isInterrupted() && (pizzeria.isOpen() || !warehouse.isEmpty())) {
-//            if (!pizzeria.isOpen() && warehouse.isEmpty()) {
-//                break;
-//            }
+        while (!Thread.currentThread().isInterrupted() &&
+            (pizzeria.isOpen() || !warehouse.isEmpty() || !pizzeria.orderIsEmpty())) {
             Order order = warehouse.takeOrder(capacity);
             if (order != null) {
                 try {

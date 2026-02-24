@@ -1,17 +1,19 @@
 package org.example;
 
-import static org.example.Condition.Cooking;
 import static org.example.Condition.Delivering;
 import static org.example.Condition.WaitingCourier;
 
 import java.util.Queue;
 
+/**
+ * Класс склада для хранения приготовленных заказов.
+ */
 public class Warehouse {
     private final int capacity;
     private int countPizzas;
-    private Queue<Order> storage;
+    private final Queue<Order> storage;
 
-    Warehouse ( int capacity ) {
+    Warehouse(int capacity) {
         this.capacity = capacity;
         this.countPizzas = 0;
         this.storage = new java.util.LinkedList<>();
@@ -33,6 +35,9 @@ public class Warehouse {
         return capacity - countPizzas;
     }
 
+    /**
+     * Добавление заказа на склад после освобождения места.
+     */
     public synchronized void addOrder(Order order) {
         while (capacity - countPizzas < order.getCountPizzas()) {
             try {
@@ -47,12 +52,16 @@ public class Warehouse {
         notifyAll();
     }
 
+    /**
+     * Взятие заказа со склада.
+     */
     public synchronized Order takeOrder(int capacity) {
         if (isEmpty()) {
             return null;
         }
         Order order = storage.peek();
-        if (order != null && capacity >= order.getCountPizzas() && order.getCondition() == WaitingCourier) {
+        if (order != null && capacity >= order.getCountPizzas() &&
+            order.getCondition() == WaitingCourier) {
             storage.poll();
             order.setCondition(Delivering);
             countPizzas -= order.getCountPizzas();

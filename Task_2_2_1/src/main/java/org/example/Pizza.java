@@ -1,5 +1,8 @@
 package org.example;
 
+/**
+ * Енам для моей пиццы.
+ */
 public enum Pizza {
     MARGHERITA,
     PEPPERONI,

@@ -5,12 +5,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Парсинг Json.
+ */
 public class ConfigCreate {
     private PizzeriaConfig config;
 
     public ConfigCreate() {
         this.config = null;
     }
+
     public void createConfig(String path) {
         ObjectMapper mapper = new ObjectMapper();
         try {

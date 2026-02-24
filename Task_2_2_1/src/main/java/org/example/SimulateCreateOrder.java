@@ -3,6 +3,9 @@ package org.example;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Класс симуляции поступления заказов.
+ */
 public class SimulateCreateOrder implements Runnable {
     private final Pizzeria pizzeria;
     private final int n; // общее количество заказов для генерации
@@ -14,6 +17,10 @@ public class SimulateCreateOrder implements Runnable {
         this.m = m;
     }
 
+    /**
+     * Симуляция поступления заказов в пиццерию. Генерирует n заказов, каждый с случайным
+     * количеством пицц от 1 до m.
+     */
     @Override
     public void run() {
         Random random = new Random();
