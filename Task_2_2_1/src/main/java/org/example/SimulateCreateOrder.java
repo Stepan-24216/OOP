@@ -11,6 +11,9 @@ public class SimulateCreateOrder implements Runnable {
     private final int n; // общее количество заказов для генерации
     private final int m; // макс. количество пицц в заказе
 
+    /**
+     * Конструктор симулятора создания заказов.
+     */
     public SimulateCreateOrder(Pizzeria pizzeria, int n, int m) {
         this.pizzeria = pizzeria;
         this.n = n;

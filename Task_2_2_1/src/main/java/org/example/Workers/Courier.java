@@ -33,7 +33,7 @@ public class Courier implements Runnable {
     @Override
     public void run() {
         while (!Thread.currentThread().isInterrupted() &&
-            (pizzeria.isOpen() || !warehouse.isEmpty() || !pizzeria.orderIsEmpty())) {
+            (pizzeria.isOpen() || !warehouse.isEmpty() || pizzeria.orderNotEmpty())) {
             Order order = warehouse.takeOrder(capacity);
             if (order != null) {
                 try {

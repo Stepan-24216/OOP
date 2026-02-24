@@ -22,6 +22,9 @@ public class TestWork {
         pizzeria.pizzeriaWork();
     }
 
+    /**
+     * Тест баззовой работы с маленьким количеством заказов.
+     */
     @Test
     public void testBaseWorking() {
         Pizzeria pizzeria = new Pizzeria("src/main/resources/config.json", 5000);

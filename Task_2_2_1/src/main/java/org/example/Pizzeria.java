@@ -26,8 +26,11 @@ public class Pizzeria {
         this.endTime = endTime;
     }
 
-    public boolean orderIsEmpty() {
-        return orders.isEmpty();
+    /**
+     * Проверка пустая ли очередь заказов.
+     */
+    public boolean orderNotEmpty() {
+        return !orders.isEmpty();
     }
 
     /**

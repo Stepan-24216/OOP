@@ -13,24 +13,25 @@ public class Warehouse {
     private int countPizzas;
     private final Queue<Order> storage;
 
-    Warehouse(int capacity) {
+    /**
+     * Конструктор склада.
+     */
+    public Warehouse(int capacity) {
         this.capacity = capacity;
         this.countPizzas = 0;
         this.storage = new java.util.LinkedList<>();
     }
 
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public boolean isFull() {
-        return countPizzas >= capacity;
-    }
-
+    /**
+     * Проверка пустой ли склад.
+     */
     public boolean isEmpty() {
         return countPizzas == 0;
     }
 
+    /**
+     * Получить количество свободных мест для пиццы.
+     */
     public int getFreeSpace() {
         return capacity - countPizzas;
     }

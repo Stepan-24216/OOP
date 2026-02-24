@@ -19,18 +19,30 @@ public class Order {
         this.pizzas = pizzas;
     }
 
+    /**
+     * Добавление пицц в заказ.
+     */
     public void addPizza(Pizza pizza) {
         pizzas.add(pizza);
     }
 
+    /**
+     * Получить номер заказа.
+     */
     public int getOrderNimber() {
         return orderNumber;
     }
 
+    /**
+     * Получить список пицц из заказа.
+     */
     public ArrayList<Pizza> getPizzas() {
         return pizzas;
     }
 
+    /**
+     * Получить состояние заказа.
+     */
     public Condition getCondition() {
         return condition;
     }
@@ -43,6 +55,9 @@ public class Order {
         System.out.println("Заказ " + orderNumber + " статус: " + condition);
     }
 
+    /**
+     * Получение количества пицц.
+     */
     public int getCountPizzas() {
         return pizzas.size();
     }

@@ -15,6 +15,9 @@ public class ConfigCreate {
         this.config = null;
     }
 
+    /**
+     * Создание конфига.
+     */
     public void createConfig(String path) {
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -24,14 +27,23 @@ public class ConfigCreate {
         }
     }
 
+    /**
+     * Получить список пекарей.
+     */
     public List<PizzeriaConfig.BakerConfig> getBakers() {
         return config.bakers;
     }
 
+    /**
+     * Получить список курьеров.
+     */
     public List<PizzeriaConfig.CourierConfig> getCouriers() {
         return config.couriers;
     }
 
+    /**
+     * Получить вместимость склада.
+     */
     public int getWarehouseCapacity() {
         return config.warehouse.capacity;
     }

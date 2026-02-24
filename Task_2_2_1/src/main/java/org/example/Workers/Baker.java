@@ -30,7 +30,7 @@ public class Baker implements Runnable {
     @Override
     public void run() {
         while (!Thread.currentThread().isInterrupted() &&
-            (pizzeria.isOpen() || !pizzeria.orderIsEmpty())) {
+            (pizzeria.isOpen() || pizzeria.orderNotEmpty())) {
             Order order = pizzeria.takeOrder();
             if (order != null) {
                 order.setCondition(Condition.Cooking);
