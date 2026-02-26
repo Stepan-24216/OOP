@@ -1,10 +1,10 @@
 package org.example.Workers;
 
-import static org.example.Condition.Completed;
+import static org.example.Enums.Condition.Completed;
 
 import org.example.Order;
-import org.example.Pizzeria;
-import org.example.Warehouse;
+import org.example.Building.Pizzeria;
+import org.example.Building.Warehouse;
 
 /**
  * Класс моего курьера.
@@ -34,16 +34,34 @@ public class Courier implements Runnable {
     public void run() {
         while (!Thread.currentThread().isInterrupted() &&
             (pizzeria.isOpen() || !warehouse.isEmpty() || pizzeria.orderNotEmpty())) {
-            Order order = warehouse.takeOrder(capacity);
+            Order order;
+            synchronized (warehouse) {
+                while (warehouse.isEmpty() && pizzeria.isOpen()) {
+                    try {
+                        warehouse.wait();
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        return;
+                    }
+                }
+                order = warehouse.takeOrder(capacity);
+                if (order != null) {
+                    warehouse.notifyAll();
+                }
+            }
             if (order != null) {
                 try {
                     Thread.sleep(speed);
                 } catch (InterruptedException e) {
+                    System.err.println("Ошибка доставки заказа, ваш курьер съел пиццу :)" + e.getMessage());
                     Thread.currentThread().interrupt();
                     break;
                 }
                 order.setCondition(Completed);
             }
+        }
+        synchronized (warehouse) {
+            warehouse.notifyAll();
         }
     }
 }

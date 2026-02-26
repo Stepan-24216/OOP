@@ -1,9 +1,9 @@
 package org.example.Workers;
 
-import org.example.Condition;
+import org.example.Enums.Condition;
 import org.example.Order;
-import org.example.Pizzeria;
-import org.example.Warehouse;
+import org.example.Building.Pizzeria;
+import org.example.Building.Warehouse;
 
 /**
  * Класс моих пекарей.
@@ -37,17 +37,27 @@ public class Baker implements Runnable {
                 try {
                     Thread.sleep(cookingSpeed);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    System.err.println("Ошибка доставки заказа, пекарь сжёг пиццу :(" + e.getMessage());
+                    Thread.currentThread().interrupt();
+                    break;
                 }
-                while (warehouse.getFreeSpace() < order.getCountPizzas()) {
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                synchronized (warehouse) {
+                    while (warehouse.getFreeSpace() < order.getCountPizzas()) {
+                        try {
+                            warehouse.wait();
+                        } catch (InterruptedException e) {
+                            System.err.println("Пекарь прерван при ожидании склада: " + e.getMessage());
+                            Thread.currentThread().interrupt();
+                            return;
+                        }
                     }
+                    warehouse.addOrder(order);
+                    warehouse.notifyAll();
                 }
-                warehouse.addOrder(order);
             }
+        }
+        synchronized (warehouse) {
+            warehouse.notifyAll();
         }
     }
 }

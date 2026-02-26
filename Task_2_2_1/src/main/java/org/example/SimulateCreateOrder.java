@@ -2,6 +2,8 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.Random;
+import org.example.Building.Pizzeria;
+import org.example.Enums.Pizza;
 
 /**
  * Класс симуляции поступления заказов.

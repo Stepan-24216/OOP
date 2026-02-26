@@ -1,9 +1,10 @@
-package org.example;
+package org.example.Building;
 
-import static org.example.Condition.Delivering;
-import static org.example.Condition.WaitingCourier;
+import static org.example.Enums.Condition.Delivering;
+import static org.example.Enums.Condition.WaitingCourier;
 
 import java.util.Queue;
+import org.example.Order;
 
 /**
  * Класс склада для хранения приготовленных заказов.
@@ -39,7 +40,7 @@ public class Warehouse {
     /**
      * Добавление заказа на склад после освобождения места.
      */
-    public synchronized void addOrder(Order order) {
+    public void addOrder(Order order) {
         while (capacity - countPizzas < order.getCountPizzas()) {
             try {
                 wait();

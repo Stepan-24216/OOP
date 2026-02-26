@@ -1,6 +1,8 @@
 package org.example;
 
 import java.util.ArrayList;
+import org.example.Enums.Condition;
+import org.example.Enums.Pizza;
 
 /**
  * Класс заказа.

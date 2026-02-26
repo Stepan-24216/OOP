@@ -1,8 +1,11 @@
-package org.example;
+package org.example.Building;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
+import org.example.Config.ConfigCreate;
+import org.example.Config.PizzeriaConfig;
+import org.example.Order;
 import org.example.Workers.Baker;
 import org.example.Workers.Courier;
 
@@ -12,7 +15,7 @@ import org.example.Workers.Courier;
 public class Pizzeria {
     private final List<Thread> threads = new ArrayList<>();
     public volatile boolean isOpen = true;
-    public int endTime;
+    private final int endTime;
     private final Queue<Order> orders = new java.util.LinkedList<>();
     private volatile Warehouse warehouse;
     private final String pathToConfig;
@@ -79,15 +82,15 @@ public class Pizzeria {
      */
     private void start() {
         ConfigCreate configCreate = new ConfigCreate();
-        configCreate.createConfig(pathToConfig);
-        warehouse = new Warehouse(configCreate.getWarehouseCapacity());
-        for (PizzeriaConfig.BakerConfig backerConf : configCreate.getBakers()) {
-            Baker backer = new Baker(backerConf.id, backerConf.cookingSpeed, warehouse, this);
+        PizzeriaConfig config = configCreate.createConfig(pathToConfig);
+        warehouse = new Warehouse(config.getWarehouse().getCapacity());
+        for (PizzeriaConfig.BakerConfig backerConf : config.getBakers()) {
+            Baker backer = new Baker(backerConf.getId(), backerConf.getCookingSpeed(), warehouse, this);
             workers.add(backer);
         }
-        for (PizzeriaConfig.CourierConfig courierConf : configCreate.getCouriers()) {
+        for (PizzeriaConfig.CourierConfig courierConf : config.getCouriers()) {
             Courier courier =
-                new Courier(courierConf.id, courierConf.speed, courierConf.trunkCapacity, warehouse,
+                new Courier(courierConf.getId(), courierConf.getSpeed(), courierConf.getTrunkCapacity(), warehouse,
                     this);
             workers.add(courier);
         }
@@ -107,6 +110,7 @@ public class Pizzeria {
                 thread.join();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
+                throw new RuntimeException("Не удалось дождаться завершения потока ", e);
             }
         }
     }

@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Enums;
 
 /**
  * Енам для моей пиццы.
