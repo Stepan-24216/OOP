@@ -11,8 +11,8 @@ import org.example.Order;
  */
 public class Warehouse {
     private final int capacity;
-    private int countPizzas;
     private final Queue<Order> storage;
+    private int countPizzas;
 
     /**
      * Конструктор склада.

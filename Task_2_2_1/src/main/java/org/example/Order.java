@@ -9,8 +9,8 @@ import org.example.Enums.Pizza;
  */
 public class Order {
     private final int orderNumber;
-    private Condition condition;
     private final ArrayList<Pizza> pizzas;
+    private Condition condition;
 
     /**
      * Конструктор заказа.

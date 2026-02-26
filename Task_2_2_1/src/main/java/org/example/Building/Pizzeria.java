@@ -14,12 +14,12 @@ import org.example.Workers.Courier;
  */
 public class Pizzeria {
     private final List<Thread> threads = new ArrayList<>();
-    public volatile boolean isOpen = true;
     private final int endTime;
     private final Queue<Order> orders = new java.util.LinkedList<>();
-    private volatile Warehouse warehouse;
     private final String pathToConfig;
     private final List<Runnable> workers = new ArrayList<>();
+    public volatile boolean isOpen = true;
+    private volatile Warehouse warehouse;
 
     /**
      * Конструктор пиццерии.
@@ -85,12 +85,14 @@ public class Pizzeria {
         PizzeriaConfig config = configCreate.createConfig(pathToConfig);
         warehouse = new Warehouse(config.getWarehouse().getCapacity());
         for (PizzeriaConfig.BakerConfig backerConf : config.getBakers()) {
-            Baker backer = new Baker(backerConf.getId(), backerConf.getCookingSpeed(), warehouse, this);
+            Baker backer =
+                new Baker(backerConf.getId(), backerConf.getCookingSpeed(), warehouse, this);
             workers.add(backer);
         }
         for (PizzeriaConfig.CourierConfig courierConf : config.getCouriers()) {
             Courier courier =
-                new Courier(courierConf.getId(), courierConf.getSpeed(), courierConf.getTrunkCapacity(), warehouse,
+                new Courier(courierConf.getId(), courierConf.getSpeed(),
+                    courierConf.getTrunkCapacity(), warehouse,
                     this);
             workers.add(courier);
         }

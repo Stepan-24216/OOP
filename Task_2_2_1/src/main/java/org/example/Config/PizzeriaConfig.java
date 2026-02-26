@@ -13,15 +13,23 @@ public class PizzeriaConfig {
     /**
      * Получить вместимость склада.
      */
-    public WarehouseConfig getWarehouse() { return warehouse; }
+    public WarehouseConfig getWarehouse() {
+        return warehouse;
+    }
+
     /**
      * Получить список пекарей.
      */
-    public List<BakerConfig> getBakers() { return bakers; }
+    public List<BakerConfig> getBakers() {
+        return bakers;
+    }
+
     /**
      * Получить список курьеров.
      */
-    public List<CourierConfig> getCouriers() { return couriers; }
+    public List<CourierConfig> getCouriers() {
+        return couriers;
+    }
 
     /**
      * Конфиг с важными полями склада.
@@ -29,7 +37,9 @@ public class PizzeriaConfig {
     public static class WarehouseConfig {
         private int capacity;
 
-        public int getCapacity() { return capacity; }
+        public int getCapacity() {
+            return capacity;
+        }
     }
 
     /**
@@ -39,8 +49,13 @@ public class PizzeriaConfig {
         private int id;
         private int cookingSpeed;
 
-        public int getId() { return id; }
-        public int getCookingSpeed() { return cookingSpeed; }
+        public int getId() {
+            return id;
+        }
+
+        public int getCookingSpeed() {
+            return cookingSpeed;
+        }
     }
 
     /**
@@ -51,9 +66,17 @@ public class PizzeriaConfig {
         private int trunkCapacity;
         private int speed;
 
-        public int getId() { return id; }
-        public int getTrunkCapacity() { return trunkCapacity; }
-        public int getSpeed() { return speed; }
+        public int getId() {
+            return id;
+        }
+
+        public int getTrunkCapacity() {
+            return trunkCapacity;
+        }
+
+        public int getSpeed() {
+            return speed;
+        }
     }
 
 

@@ -2,9 +2,9 @@ package org.example.Workers;
 
 import static org.example.Enums.Condition.Completed;
 
-import org.example.Order;
 import org.example.Building.Pizzeria;
 import org.example.Building.Warehouse;
+import org.example.Order;
 
 /**
  * Класс моего курьера.
@@ -53,7 +53,8 @@ public class Courier implements Runnable {
                 try {
                     Thread.sleep(speed);
                 } catch (InterruptedException e) {
-                    System.err.println("Ошибка доставки заказа, ваш курьер съел пиццу :)" + e.getMessage());
+                    System.err.println(
+                        "Ошибка доставки заказа, ваш курьер съел пиццу :)" + e.getMessage());
                     Thread.currentThread().interrupt();
                     break;
                 }

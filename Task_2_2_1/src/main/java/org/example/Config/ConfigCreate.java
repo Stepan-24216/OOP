@@ -3,7 +3,6 @@ package org.example.Config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Парсинг Json.
@@ -18,7 +17,8 @@ public class ConfigCreate {
         try {
             return mapper.readValue(new File(path), PizzeriaConfig.class);
         } catch (IOException e) {
-            throw new RuntimeException("Не удалось загрузить файл конфигурации по пути: " + path, e);
+            throw new RuntimeException("Не удалось загрузить файл конфигурации по пути: " + path,
+                e);
         }
     }
 }

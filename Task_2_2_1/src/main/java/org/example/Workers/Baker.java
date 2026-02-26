@@ -1,9 +1,9 @@
 package org.example.Workers;
 
-import org.example.Enums.Condition;
-import org.example.Order;
 import org.example.Building.Pizzeria;
 import org.example.Building.Warehouse;
+import org.example.Enums.Condition;
+import org.example.Order;
 
 /**
  * Класс моих пекарей.
@@ -37,7 +37,8 @@ public class Baker implements Runnable {
                 try {
                     Thread.sleep(cookingSpeed);
                 } catch (InterruptedException e) {
-                    System.err.println("Ошибка доставки заказа, пекарь сжёг пиццу :(" + e.getMessage());
+                    System.err.println(
+                        "Ошибка доставки заказа, пекарь сжёг пиццу :(" + e.getMessage());
                     Thread.currentThread().interrupt();
                     break;
                 }
@@ -46,7 +47,8 @@ public class Baker implements Runnable {
                         try {
                             warehouse.wait();
                         } catch (InterruptedException e) {
-                            System.err.println("Пекарь прерван при ожидании склада: " + e.getMessage());
+                            System.err.println(
+                                "Пекарь прерван при ожидании склада: " + e.getMessage());
                             Thread.currentThread().interrupt();
                             return;
                         }
