@@ -3,9 +3,9 @@ package org.example;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
-import org.example.Building.Pizzeria;
-import org.example.Enums.Condition;
-import org.example.Enums.Pizza;
+import org.example.building.Pizzeria;
+import org.example.enums.Condition;
+import org.example.enums.Pizza;
 import org.junit.jupiter.api.Test;
 
 /**

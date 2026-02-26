@@ -2,24 +2,24 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.Random;
-import org.example.Building.Pizzeria;
-import org.example.Enums.Pizza;
+import org.example.building.Pizzeria;
+import org.example.enums.Pizza;
 
 /**
  * Класс симуляции поступления заказов.
  */
 public class SimulateCreateOrder implements Runnable {
     private final Pizzeria pizzeria;
-    private final int n; // общее количество заказов для генерации
-    private final int m; // макс. количество пицц в заказе
+    private final int countOrderForGenerate; // общее количество заказов для генерации
+    private final int countPizzaInOrder; // макс. количество пицц в заказе
 
     /**
      * Конструктор симулятора создания заказов.
      */
     public SimulateCreateOrder(Pizzeria pizzeria, int n, int m) {
         this.pizzeria = pizzeria;
-        this.n = n;
-        this.m = m;
+        this.countOrderForGenerate = n;
+        this.countPizzaInOrder = m;
     }
 
     /**
@@ -31,9 +31,9 @@ public class SimulateCreateOrder implements Runnable {
         Random random = new Random();
         Pizza[] menu = Pizza.values();
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < countOrderForGenerate; i++) {
             ArrayList<Pizza> pizzas = new ArrayList<>();
-            int count = random.nextInt(m) + 1;
+            int count = random.nextInt(countPizzaInOrder) + 1;
 
             for (int j = 0; j < count; j++) {
                 pizzas.add(menu[random.nextInt(menu.length)]);
