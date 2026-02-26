@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.example"},{"l":"org.example.Building"},{"l":"org.example.Config"},{"l":"org.example.Enums"},{"l":"org.example.Workers"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.example"},{"l":"org.example.building"},{"l":"org.example.config"},{"l":"org.example.enums"},{"l":"org.example.workers"}];updateSearchResults();

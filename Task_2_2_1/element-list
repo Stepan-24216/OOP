@@ -1,5 +1,5 @@
 org.example
-org.example.Building
-org.example.Config
-org.example.Enums
-org.example.Workers
+org.example.building
+org.example.config
+org.example.enums
+org.example.workers
