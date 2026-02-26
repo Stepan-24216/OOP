@@ -1,2 +1,5 @@
 org.example
+org.example.Building
+org.example.Config
+org.example.Enums
 org.example.Workers
