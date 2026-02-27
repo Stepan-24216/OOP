@@ -41,6 +41,8 @@ public class Pizzeria {
      */
     public synchronized void addOrder(Order order) {
         if (!isOpen) {
+            System.out.println("Заказ номер " + order.getOrderNimber() +
+                " отклонен т.к Пиццерия закрыта. Приходите завтра!");
             return; // Заказ не принимается, так как пиццерия закрыта
         }
         orders.add(order);
