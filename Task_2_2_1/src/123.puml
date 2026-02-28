@@ -1,0 +1,31 @@
+@startuml
+
+package "org.example" {
+    class Main
+    class Order
+    class SimulateCreateOrder
+
+    package "building" {
+        class Pizzeria
+        class Warehouse
+    }
+
+    package "workers" {
+        class Baker
+        class Courier
+    }
+
+    package "config" {
+        class ConfigCreate
+        class PizzeriaConfig
+    }
+
+    package "enums" {
+        enum Condition
+        enum Pizza
+    }
+}
+
+
+
+@enduml
