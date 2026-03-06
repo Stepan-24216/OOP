@@ -26,14 +26,14 @@ public class Warehouse {
     /**
      * Проверка пустой ли склад.
      */
-    public boolean isEmpty() {
+    public synchronized boolean isEmpty() {
         return countPizzas == 0;
     }
 
     /**
      * Получить количество свободных мест для пиццы.
      */
-    public int getFreeSpace() {
+    public synchronized int getFreeSpace() {
         return capacity - countPizzas;
     }
 

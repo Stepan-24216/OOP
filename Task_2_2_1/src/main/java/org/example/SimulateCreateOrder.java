@@ -11,7 +11,7 @@ import org.example.enums.Pizza;
 public class SimulateCreateOrder implements Runnable {
     private final Pizzeria pizzeria;
     private final int countOrderForGenerate; // общее количество заказов для генерации
-    private final int countPizzaInOrder; // макс. количество пицц в заказе
+    private final int countPizzaInOrder; // максимальное количество пицц в заказе
 
     /**
      * Конструктор симулятора создания заказов.
@@ -23,7 +23,7 @@ public class SimulateCreateOrder implements Runnable {
     }
 
     /**
-     * Симуляция поступления заказов в пиццерию. Генерирует n заказов, каждый с случайным
+     * Симуляция поступления заказов в пиццерию. Генерирует n заказов, каждый со случайным
      * количеством пицц от 1 до m.
      */
     @Override
@@ -40,7 +40,13 @@ public class SimulateCreateOrder implements Runnable {
             }
 
             Order order = new Order(i, pizzas);
-            pizzeria.addOrder(order);
+            try {
+                pizzeria.addOrder(order);
+            } catch (
+                IllegalStateException e) {
+                System.out.println("Пиццерия закрыта. Заказ " + order.getOrderNimber() + " не был добавлен.");
+                break;
+            }
 
             try {
                 Thread.sleep(random.nextInt(50));
