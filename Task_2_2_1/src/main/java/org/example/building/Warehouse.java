@@ -33,7 +33,7 @@ public class Warehouse {
     /**
      * Получить количество свободных мест для пиццы.
      */
-    public synchronized int getFreeSpace() {
+    public int getFreeSpace() {
         return capacity - countPizzas;
     }
 
@@ -57,7 +57,7 @@ public class Warehouse {
     /**
      * Взятие заказа со склада.
      */
-    public synchronized Order takeOrder(int capacity) {
+    public Order takeOrder(int capacity) {
         if (isEmpty()) {
             return null;
         }
