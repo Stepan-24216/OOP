@@ -11,7 +11,7 @@ import org.example.enums.Pizza;
 public class SimulateCreateOrder implements Runnable {
     private final Pizzeria pizzeria;
     private final int countOrderForGenerate; // общее количество заказов для генерации
-    private final int countPizzaInOrder; // максимальное количество пицц в заказе
+    private final int maxCountPizzaInOrder; // максимальное количество пицц в заказе
 
     /**
      * Конструктор симулятора создания заказов.
@@ -19,7 +19,7 @@ public class SimulateCreateOrder implements Runnable {
     public SimulateCreateOrder(Pizzeria pizzeria, int n, int m) {
         this.pizzeria = pizzeria;
         this.countOrderForGenerate = n;
-        this.countPizzaInOrder = m;
+        this.maxCountPizzaInOrder = m;
     }
 
     /**
@@ -33,7 +33,7 @@ public class SimulateCreateOrder implements Runnable {
 
         for (int i = 0; i < countOrderForGenerate; i++) {
             ArrayList<Pizza> pizzas = new ArrayList<>();
-            int count = random.nextInt(countPizzaInOrder) + 1;
+            int count = random.nextInt(maxCountPizzaInOrder) + 1;
 
             for (int j = 0; j < count; j++) {
                 pizzas.add(menu[random.nextInt(menu.length)]);

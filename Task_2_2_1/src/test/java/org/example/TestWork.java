@@ -49,4 +49,16 @@ public class TestWork {
         assertEquals(Condition.Completed, order2.getCondition());
     }
 
+    /**
+     * Тест корректного завершения при закрытии пиццерии до того как все заказы будут приняты и приготовлены.
+     */
+    @Test
+    public void testCorrectWorking() {
+        Pizzeria pizzeria = new Pizzeria("src/main/resources/config.json", 10);
+        SimulateCreateOrder simulateCreateOrder = new SimulateCreateOrder(pizzeria, 1000, 5);
+        Thread thread = new Thread(simulateCreateOrder);
+        thread.start();
+
+        pizzeria.pizzeriaWork();
+    }
 }

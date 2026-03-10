@@ -13,12 +13,12 @@ import org.example.workers.Courier;
  * Класс моей пиццерии.
  */
 public class Pizzeria {
-    private final List<Thread> threads = new ArrayList<>();
+    private final List<Thread> threads;
     private final int endTime;
-    private final Queue<Order> orders = new java.util.LinkedList<>();
+    private final Queue<Order> orders;
     private final String pathToConfig;
-    private final List<Runnable> workers = new ArrayList<>();
-    public volatile boolean isOpen = true;
+    private final List<Runnable> workers;
+    public volatile boolean isOpen;
     private volatile Warehouse warehouse;
 
     /**
@@ -27,6 +27,10 @@ public class Pizzeria {
     public Pizzeria(String pathToConfig, int endTime) {
         this.pathToConfig = pathToConfig;
         this.endTime = endTime;
+        this.isOpen = true;
+        this.threads = new ArrayList<>();
+        this.orders = new java.util.LinkedList<>();
+        this.workers = new ArrayList<>();
     }
 
     /**
@@ -37,7 +41,7 @@ public class Pizzeria {
     }
 
     /**
-     * Метод добавляения заказа в очередь на приготовление.
+     * Метод добавления заказа в очередь на приготовление.
      */
     public synchronized void addOrder(Order order) {
         if (!isOpen) {
