@@ -44,7 +44,8 @@ public class SimulateCreateOrder implements Runnable {
                 pizzeria.addOrder(order);
             } catch (
                 IllegalStateException e) {
-                System.out.println("Пиццерия закрыта. Заказ " + order.getOrderNimber() + " не был добавлен.");
+                System.out.println(
+                    "Пиццерия закрыта. Заказ " + order.getOrderNimber() + " не был добавлен.");
                 break;
             }
 

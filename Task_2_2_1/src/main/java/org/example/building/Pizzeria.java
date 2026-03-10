@@ -3,9 +3,9 @@ package org.example.building;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
+import org.example.Order;
 import org.example.config.ConfigCreate;
 import org.example.config.PizzeriaConfig;
-import org.example.Order;
 import org.example.workers.Baker;
 import org.example.workers.Courier;
 
@@ -45,7 +45,9 @@ public class Pizzeria {
      */
     public synchronized void addOrder(Order order) {
         if (!isOpen) {
-            throw new IllegalStateException("Не удалось добавить заказ: пиццерия закрыта.");// Заказ не принимается, так как пиццерия закрыта
+            throw new IllegalStateException(
+                "Не удалось добавить заказ: пиццерия закрыта.");// Заказ не принимается, так как
+            // пиццерия закрыта
         }
         orders.add(order);
         System.out.println("Заказ " + order.getOrderNimber() + " статус: " + order.getCondition());

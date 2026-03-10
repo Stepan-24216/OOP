@@ -2,9 +2,9 @@ package org.example.workers;
 
 import static org.example.enums.Condition.Completed;
 
+import org.example.Order;
 import org.example.building.Pizzeria;
 import org.example.building.Warehouse;
-import org.example.Order;
 
 /**
  * Класс моего курьера.
