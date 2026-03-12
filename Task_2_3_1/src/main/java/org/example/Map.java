@@ -30,6 +30,7 @@ public class Map {
             if (cell.hasApple()) {
                 this.paintApple(gc, cell.getPosition().getX(), cell.getPosition().getY(), this.cellSize);
             }
+            // рисуй камень!
         }
         for (Snake snake : snakes) {
             snake.paintSnake(gc);
@@ -43,7 +44,7 @@ public class Map {
         while (flag) {
             int randomIndex = (int) (Math.random() * cellMap.size());
             if (!cellMap.get(randomIndex).hasApple() && !cellMap.get(randomIndex).hasBody()) {
-                cellMap.get(randomIndex).setHaveApple(true);
+                cellMap.get(randomIndex).setType(TypeCell.Apple);
                 paintApple(gc, cellMap.get(randomIndex).getPosition().getX(), cellMap.get(randomIndex).getPosition().getY(),
                     cellSize);
                 flag = false;
@@ -58,7 +59,7 @@ public class Map {
 
         for (int y = 2; y < cellsInColumn; y++) {
             for (int x = 0; x < cellsInRow; x++) {
-                cellMap.add(new Cell(x * 30, y * 30));
+                cellMap.add(new Cell(x * 30, y * 30,TypeCell.Cell));
             }
         }
         return cellMap;

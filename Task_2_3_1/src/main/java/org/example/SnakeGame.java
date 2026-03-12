@@ -14,10 +14,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class SnakeGame extends Application {
-    private final int GAME_WIDTH = 600;
+    private final int GAME_WIDTH = 600; //180 мин
     private final int GAME_HEIGHT = 660;
     private final int cellSize = 30;
-    private ArrayList<Cell> cellMap;
+    private volatile ArrayList<Cell> cellMap;
     public volatile boolean upPressed, downPressed, leftPressed, rightPressed;
     private Snake snake;
     private final Map map;
@@ -54,13 +54,12 @@ public class SnakeGame extends Application {
         gameLayer.getChildren().add(canvas); // Холст на нижнем слое
         root.getChildren().add(gameLayer);   // Добавляем этот "слоеный пирог" в главный VBox
 
-        setupControls(canvas, scene);
         cellMap = map.createCellMap(GAME_WIDTH, GAME_HEIGHT);
-        this.snake = new Snake();
+        this.snake = new Snake(GAME_WIDTH, GAME_HEIGHT);
         snakes.add(snake);
         this.gamepadController = new GamepadController();
 
-        MainMenu mainMenu = new MainMenu();
+        mainMenu = new MainMenu();
         mainMenu.printMainMenu(gc, gameLayer);
         Thread waitThread = new Thread(() -> {
             while (mainMenu.buttonIsNotPressed()) {
@@ -70,6 +69,7 @@ public class SnakeGame extends Application {
                     e.printStackTrace();
                 }
             }javafx.application.Platform.runLater(() -> {
+                setupControls(canvas, scene);
                 mainMenu.closeMainMenu(gameLayer);
                 randomSpawnApple(gc);
                 map.paintMap(gc,snakes);
@@ -172,7 +172,7 @@ public class SnakeGame extends Application {
         while (flag) {
             int randomIndex = (int) (Math.random() * cellMap.size());
             if (!cellMap.get(randomIndex).hasApple() && !cellMap.get(randomIndex).hasBody()) {
-                cellMap.get(randomIndex).setHaveApple(true);
+                cellMap.get(randomIndex).setType(TypeCell.Apple);
                 map.paintApple(gc, cellMap.get(randomIndex).getPosition().getX(), cellMap.get(randomIndex).getPosition().getY(),
                     cellSize);
                 flag = false;
@@ -219,7 +219,6 @@ public class SnakeGame extends Application {
     }
 
     public static void updateScore(int score) {
-        // Platform.runLater нужен, если ты вызываешь это из другого потока (Thread)
         javafx.application.Platform.runLater(() -> {
             scoreLabel.setText("Очки: " + score);
         });
@@ -229,12 +228,11 @@ public class SnakeGame extends Application {
         this.scoreLabel = new Label("Очки: 0");
         this.scoreLabel.setStyle(
             "-fx-font-size: 40px; " +
-                "-fx-text-fill: #39FF14; " + // Неоновый зеленый
+                "-fx-text-fill: #39FF14; " +
                 "-fx-font-weight: bold; " +
                 "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0, 0, 0);"
         );
 
-        // Располагаем сверху по центру
         StackPane.setAlignment(scoreLabel, Pos.TOP_CENTER);
         StackPane.setMargin(scoreLabel, new Insets(5, 0, 0, 0));
 

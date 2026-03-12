@@ -1,37 +1,37 @@
 package org.example;
 
 public class Cell {
-    private Position position;
-    private boolean haveApple;
-    private boolean haveBody;
-
-    public Cell(int x, int y) {
+    private final Position position;
+    private TypeCell type;
+    
+    public Cell(int x, int y,TypeCell type) {
         this.position = new Position(x, y);
+        this.type = type;
     }
-
+    
+    public void setType(TypeCell type) {
+        this.type = type;
+    }
+    
     public Position getPosition() {
         return position;
     }
 
     public boolean hasApple() {
-        return haveApple;
+        return type == TypeCell.Apple;
     }
-
-    public void setHaveApple(boolean haveApple) {
-        this.haveApple = haveApple;
-    }
-
+    
     public boolean hasBody() {
-        return haveBody;
+        return type == TypeCell.Body;
     }
 
-    public void setHaveBody(boolean haveBody) {
-        this.haveBody = haveBody;
+    public boolean hasStone() {
+        return type == TypeCell.Stone;
     }
-
+    
     class Position {
-        private int x;
-        private int y;
+        private final int x;
+        private final int y;
 
         public Position(int x, int y) {
             this.x = x;

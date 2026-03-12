@@ -10,22 +10,21 @@ public class Snake {
     private final int SNAKE_SIZE = 30;
     ArrayList<Tail> tails;
 
-    public Snake() {
+    public Snake(int GAME_WIDTH, int GAME_HEIGHT) {
         this.score = 0;
-        this.head = new Tail(300, 300);
+        this.head = new Tail(GAME_WIDTH/2+(GAME_WIDTH/2)%30, GAME_HEIGHT/2+(GAME_HEIGHT/2)%30);
         this.tails = new ArrayList<>();
         this.tails.add(head);
     }
 
     public void move(int coordX, int coordY, ArrayList<Cell> cellMap, int GAME_WIDTH, int offsetRows) {
-        int SNAKE_SIZE = 30;
         int tailX = tails.get(tails.size() - 1).getCoordX();
         int tailY = tails.get(tails.size() - 1).getCoordY();
         int cellsInRow = GAME_WIDTH / SNAKE_SIZE;
 
         int tailIndex = (tailY / SNAKE_SIZE - offsetRows) * cellsInRow + (tailX / SNAKE_SIZE);
         if (tailIndex >= 0 && tailIndex < cellMap.size()) {
-            cellMap.get(tailIndex).setHaveBody(false);
+            cellMap.get(tailIndex).setType(TypeCell.Cell);
         }
 
         if (tails.size() > 1) {
@@ -36,7 +35,7 @@ public class Snake {
                     int idx = (tails.get(i).getCoordY() / SNAKE_SIZE - offsetRows) * cellsInRow
                         + (tails.get(i).getCoordX() / SNAKE_SIZE);
                     if (idx >= 0 && idx < cellMap.size()) {
-                        cellMap.get(idx).setHaveBody(true);
+                        cellMap.get(idx).setType(TypeCell.Body);
                     }
                 }
             }
@@ -57,7 +56,7 @@ public class Snake {
         if (headIndex < 0 || headIndex >= cellMap.size()) return;
 
         if (cellMap.get(headIndex).hasApple()) {
-            cellMap.get(headIndex).setHaveApple(false);
+            cellMap.get(headIndex).setType(TypeCell.Cell);
             this.eatApple();
             SnakeGame.updateScore(this.getScore());
             map.randomSpawnApple(gc);
