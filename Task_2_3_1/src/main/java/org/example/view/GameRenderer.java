@@ -74,11 +74,11 @@ public class GameRenderer {
         }
         for (Cell cell : map.getCellMap()) {
             if (cell.hasApple()) {
-                paintApple(cell.getPosition().getX(), cell.getPosition().getY(), this.cellSize);
+                paintApple(cell.getPosition().getCordX(), cell.getPosition().getCordY(), this.cellSize);
             }
             if (cell.hasStone()) {
                 gc.setFill(Color.GRAY);
-                gc.fillRect(cell.getPosition().getX(), cell.getPosition().getY(), cellSize,
+                gc.fillRect(cell.getPosition().getCordX(), cell.getPosition().getCordY(), cellSize,
                     cellSize);
             }
         }

@@ -28,8 +28,8 @@ public class Map {
         boolean flag = true;
         while (flag) {
             int randomIndex = (int) (Math.random() * cellMap.size());
-            if (!cellMap.get(randomIndex).hasApple() && !cellMap.get(randomIndex).hasBody() &&
-                !cellMap.get(randomIndex).hasStone()) {
+            if (!cellMap.get(randomIndex).hasApple() && !cellMap.get(randomIndex).hasBody()
+                && !cellMap.get(randomIndex).hasStone()) {
                 cellMap.get(randomIndex).setType(TypeCell.Apple);
                 flag = false;
             }

@@ -1,5 +1,7 @@
 package org.example;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.example.config.LevelConfig;
 import org.example.config.LevelConfigCreate;
 import org.example.map.Map;
@@ -7,7 +9,6 @@ import org.example.tool.LevelPath;
 import org.example.tool.SearchLevelInDir;
 import org.example.tool.Tools;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Тест вспомогательных инструментов.
@@ -32,7 +33,7 @@ public class ToolTest {
      */
     @Test
     void testLevelPath() {
-        LevelPath levelPath = new LevelPath("123","456");
+        LevelPath levelPath = new LevelPath("123", "456");
         assertEquals("123", levelPath.getNameFile());
         assertEquals("456", levelPath.getPath());
     }
@@ -42,7 +43,6 @@ public class ToolTest {
      */
     @Test
     void testSearchLevelPath() {
-        SearchLevelInDir searchLevelInDir = new SearchLevelInDir();
-        assertEquals(3, searchLevelInDir.searchLevelInDir("src/main/resources").size());
+        assertEquals(3, SearchLevelInDir.searchLevelInDir("src/main/resources").size());
     }
 }

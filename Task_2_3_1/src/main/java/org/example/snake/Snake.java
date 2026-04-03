@@ -17,10 +17,10 @@ public class Snake {
     /**
      * Конструктор.
      */
-    public Snake(int GAME_WIDTH, int GAME_HEIGHT) {
+    public Snake(int gameWidth, int gameHeight) {
         this.score = 0;
-        this.head = new Tail(GAME_WIDTH / 2 + (GAME_WIDTH / 2) % 30,
-            GAME_HEIGHT / 2 + (GAME_HEIGHT / 2) % 30);
+        this.head = new Tail(gameWidth / 2 + (gameWidth / 2) % 30,
+            gameHeight / 2 + (gameHeight / 2) % 30);
         this.tails = new ArrayList<>();
         this.tails.add(head);
     }
@@ -28,14 +28,14 @@ public class Snake {
     /**
      * Двигаемся.
      */
-    public void move(int cordX, int cordY, ArrayList<Cell> cellMap, int GAME_WIDTH,
+    public void move(int cordX, int cordY, ArrayList<Cell> cellMap, int gameWidth,
                      int offsetRows) {
         int tailX = tails.get(tails.size() - 1).getCordX();
         int tailY = tails.get(tails.size() - 1).getCordY();
-        int SNAKE_SIZE = 30;
-        int cellsInRow = GAME_WIDTH / SNAKE_SIZE;
+        int snakeSize = 30;
+        int cellsInRow = gameWidth / snakeSize;
 
-        int tailIndex = (tailY / SNAKE_SIZE - offsetRows) * cellsInRow + (tailX / SNAKE_SIZE);
+        int tailIndex = (tailY / snakeSize - offsetRows) * cellsInRow + (tailX / snakeSize);
         if (tailIndex >= 0 && tailIndex < cellMap.size()) {
             cellMap.get(tailIndex).setType(TypeCell.Cell);
         }
@@ -45,8 +45,8 @@ public class Snake {
                 tails.get(i).setCordX(tails.get(i - 1).getCordX());
                 tails.get(i).setCordY(tails.get(i - 1).getCordY());
                 if (i <= tails.size() - 2) {
-                    int idx = (tails.get(i).getCordY() / SNAKE_SIZE - offsetRows) * cellsInRow
-                        + (tails.get(i).getCordX() / SNAKE_SIZE);
+                    int idx = (tails.get(i).getCordY() / snakeSize - offsetRows) * cellsInRow
+                        + (tails.get(i).getCordX() / snakeSize);
                     if (idx >= 0 && idx < cellMap.size()) {
                         cellMap.get(idx).setType(TypeCell.Body);
                     }

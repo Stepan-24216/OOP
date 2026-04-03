@@ -32,8 +32,8 @@ public class MapAndConfigTest {
         assertEquals(TypeCell.Cell, cell1);
 
         Cell cell = new Cell(0, 60, apple);
-        assertEquals(0, cell.getPosition().getX());
-        assertEquals(60, cell.getPosition().getY());
+        assertEquals(0, cell.getPosition().getCordX());
+        assertEquals(60, cell.getPosition().getCordY());
         assertTrue(cell.hasApple());
         assertFalse(cell.hasBody());
         assertFalse(cell.hasStone());

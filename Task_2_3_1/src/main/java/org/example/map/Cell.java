@@ -61,20 +61,20 @@ public class Cell {
      * Класс позиции.
      */
     public class Position {
-        private final int x;
-        private final int y;
+        private final int cordX;
+        private final int cordY;
 
         public Position(int x, int y) {
-            this.x = x;
-            this.y = y;
+            this.cordX = x;
+            this.cordY = y;
         }
 
-        public int getX() {
-            return x;
+        public int getCordX() {
+            return cordX;
         }
 
-        public int getY() {
-            return y;
+        public int getCordY() {
+            return cordY;
         }
     }
 }
