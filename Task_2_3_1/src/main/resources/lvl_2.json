@@ -1,0 +1,16 @@
+{
+  "size": {
+    "height": 20,
+    "width": 20
+  },
+  "stones": [
+    {
+      "numString": 5,
+      "numCell": 10
+    },
+    {
+      "numString": 15,
+      "numCell": 5
+    }
+  ]
+}

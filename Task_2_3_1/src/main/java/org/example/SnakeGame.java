@@ -1,248 +1,114 @@
 package org.example;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.config.LevelConfig;
+import org.example.config.LevelConfigCreate;
+import org.example.map.Map;
+import org.example.snake.Snake;
+import org.example.view.GameRenderer;
+import org.example.view.MainMenuController;
+import org.example.view.ScoreView;
 
+/**
+ * Главный класс нашей игры.
+ */
 public class SnakeGame extends Application {
-    private final int GAME_WIDTH = 600; //180 мин
-    private final int GAME_HEIGHT = 660;
-    private final int cellSize = 30;
-    private volatile ArrayList<Cell> cellMap;
-    public volatile boolean upPressed, downPressed, leftPressed, rightPressed;
-    private Snake snake;
-    private final Map map;
-    ArrayList <Snake> snakes = new ArrayList<>();
-    Canvas canvas;
-    GraphicsContext gc;
-    VBox root;
-    Scene scene;
-    Stage primaryStage;
-    StackPane gameLayer;
-    MainMenu mainMenu;
-    private static Label scoreLabel;
-    private boolean gamePaused;
-    private GamepadController gamepadController;
+    private final ArrayList<Snake> snakes = new ArrayList<>();
+    private Map map;
+    private Canvas canvas;
+    private Scene scene;
+    private Stage primaryStage;
+    private StackPane gameLayer;
+    private ScoreView score;
+    private GameRenderer gameRenderer;
+    private GameController gameController;
+    private MainMenuController mainMenuController;
 
-    public SnakeGame() {
-        this.map = new Map(GAME_WIDTH, GAME_HEIGHT, cellSize);
+    /**
+     * Инициализируем нужные нам классы и присваиваем .
+     */
+    public void initLevelDate() {
+        LevelConfigCreate configCreate = new LevelConfigCreate();
+        String path = mainMenuController.getSelectedLevel().getPath();
+        LevelConfig config = configCreate.createConfig(path);
+        score = new ScoreView();
+
+        int cellSize = 30;
+        int GAME_WIDTH = config.getSize().getWidth() * cellSize;
+        int GAME_HEIGHT = config.getSize().getHeight() * cellSize + 60;
+
         this.canvas = new Canvas(GAME_WIDTH, GAME_HEIGHT);
-        this.gc = canvas.getGraphicsContext2D();
-        this.gamePaused = false;
-        this.root = new VBox(10);
-        this.scene = new Scene(root, GAME_WIDTH, GAME_HEIGHT);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        gameLayer.getChildren().clear();
+        gameLayer.getChildren().add(canvas);
+
+        map = new Map(GAME_WIDTH, GAME_HEIGHT, config.getStones());
+        Snake snake = new Snake(GAME_WIDTH, GAME_HEIGHT);
+        snakes.add(snake);
+        gameRenderer = new GameRenderer(gc, map, snakes);
+        gameController = new GameController(map, snakes, gameRenderer, score);
+        gameLayer.requestFocus();
+
+        primaryStage.setWidth(GAME_WIDTH);
+        primaryStage.setHeight(GAME_HEIGHT + 60);
+        primaryStage.centerOnScreen();
     }
 
+    /**
+     * Метод с которого начинается игра, устанавливаем нужные нам конфигурации.
+     */
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("SnakeGame");
+        this.primaryStage.setFullScreen(true);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/main_menu.fxml"));
+        Parent menuRoot = loader.load();
+
+        this.mainMenuController = loader.getController();
+        this.mainMenuController.setGame(this);
+
+        this.gameLayer = (StackPane) menuRoot.lookup("#container");
+
+        this.scene = new Scene(menuRoot, 600, 600);
         this.primaryStage.setScene(scene);
         this.primaryStage.show();
-        this.primaryStage.setResizable(false);
-        // В конструкторе или методе start:
-        this.gameLayer = new StackPane();
-        gameLayer.getChildren().add(canvas); // Холст на нижнем слое
-        root.getChildren().add(gameLayer);   // Добавляем этот "слоеный пирог" в главный VBox
 
-        cellMap = map.createCellMap(GAME_WIDTH, GAME_HEIGHT);
-        this.snake = new Snake(GAME_WIDTH, GAME_HEIGHT);
-        snakes.add(snake);
-        this.gamepadController = new GamepadController();
-
-        mainMenu = new MainMenu();
-        mainMenu.printMainMenu(gc, gameLayer);
-        Thread waitThread = new Thread(() -> {
-            while (mainMenu.buttonIsNotPressed()) {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }javafx.application.Platform.runLater(() -> {
-                setupControls(canvas, scene);
-                mainMenu.closeMainMenu(gameLayer);
-                randomSpawnApple(gc);
-                map.paintMap(gc,snakes);
-                initScoreLabel(gameLayer);
-                startGameLoop(gc);
-            });
-        });
-        waitThread.setDaemon(true);
-        waitThread.start();
+        startFromMenu();
     }
 
-    private void startGameLoop(GraphicsContext gc) {
-
-        Thread gameThread = new Thread(() -> {
-            while (!gamePaused) {
-                updateGame(gc,snake);
-                try {
-                    Thread.sleep(150);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+    /**
+     * Метод загрузки главного меню и начала игры.
+     */
+    public void startFromMenu() {
+        Platform.runLater(() -> {
+            if (canvas != null) {
+                return;
             }
-        });
-
-        gameThread.start();
-    }
-
-    private void setupControls(Canvas canvas, Scene scene) {
-        canvas.setFocusTraversable(true);
-        canvas.requestFocus();
-        scene.setOnKeyPressed(e -> handleKeyPress(e.getCode()));
-    }
-
-    private void handleKeyPress(KeyCode e) {
-        switch (e) {
-            case W:
-            case UP:
-                offPauseInGame();
-                if (downPressed) {
-                    break;
-                }
-                upPressed = true;
-                leftPressed = false;
-                rightPressed = false;
-                break;
-            case S:
-            case DOWN:
-                offPauseInGame();
-                if (upPressed) {
-                    break;
-                }
-                downPressed = true;
-                leftPressed = false;
-                rightPressed = false;
-                break;
-            case A:
-            case LEFT:
-                offPauseInGame();
-                if (rightPressed) {
-                    break;
-                }
-                leftPressed = true;
-                upPressed = false;
-                downPressed = false;
-                break;
-            case D:
-            case RIGHT:
-                offPauseInGame();
-                if (leftPressed) {
-                    break;
-                }
-                rightPressed = true;
-                upPressed = false;
-                downPressed = false;
-                break;
-            case SPACE:
-                gamePaused = !gamePaused;
-                if (!gamePaused){
-//                    MainMenu.closeMainMenu(gameLayer);
-                    startGameLoop(gc);
-                } else {
-//                    MainMenu.printMainMenu(gc,gameLayer);
-                }
-                break;
-            case ESCAPE:
-                System.exit(0);
-                break;
-        }
-    }
-
-    private void offPauseInGame() {
-        if (gamePaused) {
-            gamePaused = false;
-            startGameLoop(gc);
-        }
-    }
-
-    private void randomSpawnApple(GraphicsContext gc) {
-        boolean flag = true;
-        while (flag) {
-            int randomIndex = (int) (Math.random() * cellMap.size());
-            if (!cellMap.get(randomIndex).hasApple() && !cellMap.get(randomIndex).hasBody()) {
-                cellMap.get(randomIndex).setType(TypeCell.Apple);
-                map.paintApple(gc, cellMap.get(randomIndex).getPosition().getX(), cellMap.get(randomIndex).getPosition().getY(),
-                    cellSize);
-                flag = false;
+            if (mainMenuController == null || mainMenuController.getSelectedLevel() == null) {
+                return;
             }
-        }
-    }
 
-    private void updateGame(GraphicsContext gc, Snake snake) {
-        // Обновляем состояние геймпада
-        gamepadController.updateGamepadState();
+            initLevelDate();
+            gameController.setupControls(canvas, scene);
+            map.randomSpawnApple();
+            gameRenderer.paintMap(snakes);
+            score.initScoreLabel(gameLayer);
 
-        // Проверяем ввод с геймпада в дополнение к клавиатуре
-//        if (gamepadController.isUpPressed()) upPressed = true;
-//        if (gamepadController.isDownPressed()) downPressed = true;
-//        if (gamepadController.isLeftPressed()) leftPressed = true;
-//        if (gamepadController.isRightPressed()) rightPressed = true;
-
-        int speed = 30; // Пикселей за шаг
-        int snakeX = snake.getHead().getCoordX();
-        int snakeY = snake.getHead().getCoordY();
-        if (upPressed) {
-            snakeY -= speed;
-        }
-        if (downPressed) {
-            snakeY += speed;
-        }
-        if (leftPressed) {
-            snakeX -= speed;
-        }
-        if (rightPressed) {
-            snakeX += speed;
-        }
-
-        if (snakeX < 0 || snakeX > GAME_WIDTH - cellSize){
-            System.exit(0);
-        }
-        if (snakeY < 60 || snakeY > GAME_HEIGHT - cellSize){
-            System.exit(0);
-        }
-
-        snake.move(snakeX, snakeY, cellMap, GAME_WIDTH,map.getOffsetRows());
-        // Перерисовываем экран
-        map.paintMap(gc,snakes);
-    }
-
-    public static void updateScore(int score) {
-        javafx.application.Platform.runLater(() -> {
-            scoreLabel.setText("Очки: " + score);
+            gameController.setGamePaused(false);
+            gameController.startGameLoop();
         });
-    }
-
-    public void initScoreLabel(StackPane gameLayer) {
-        this.scoreLabel = new Label("Очки: 0");
-        this.scoreLabel.setStyle(
-            "-fx-font-size: 40px; " +
-                "-fx-text-fill: #39FF14; " +
-                "-fx-font-weight: bold; " +
-                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0, 0, 0);"
-        );
-
-        StackPane.setAlignment(scoreLabel, Pos.TOP_CENTER);
-        StackPane.setMargin(scoreLabel, new Insets(5, 0, 0, 0));
-
-        gameLayer.getChildren().add(scoreLabel);
-    }
-
-    @Override
-    public void stop() {
-        if (gamepadController != null) {
-            gamepadController.shutdown();
-        }
     }
 }
