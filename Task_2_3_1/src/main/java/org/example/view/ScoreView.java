@@ -15,10 +15,10 @@ public class ScoreView {
     public void initScoreLabel(StackPane gameLayer) {
         this.scoreLabel = new Label("Очки: 0");
         this.scoreLabel.setStyle(
-            "-fx-font-size: 40px; " +
-                "-fx-text-fill: #39FF14; " +
-                "-fx-font-weight: bold; " +
-                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0, 0, 0);"
+            "-fx-font-size: 40px; "
+                + "-fx-text-fill: #39FF14; "
+                + "-fx-font-weight: bold; "
+                + "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0, 0, 0);"
         );
 
         StackPane.setAlignment(scoreLabel, Pos.TOP_CENTER);

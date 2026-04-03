@@ -24,10 +24,16 @@ public class LevelConfig {
         private int height;
         private int width;
 
+        /**
+         * Получить высоту.
+         */
         public int getHeight() {
             return height;
         }
 
+        /**
+         * Получить ширину.
+         */
         public int getWidth() {
             return width;
         }
@@ -40,10 +46,16 @@ public class LevelConfig {
         private int numString;
         private int numCell;
 
+        /**
+         * Получить номер строки.
+         */
         public int getNumString() {
             return numString;
         }
 
+        /**
+         * Получить номер клетки.
+         */
         public int getNumCell() {
             return numCell;
         }
