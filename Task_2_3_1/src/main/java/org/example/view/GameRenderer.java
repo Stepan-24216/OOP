@@ -53,8 +53,8 @@ public class GameRenderer {
         gc.fillRect(x, y, 30, 30);
 
         gc.setFill(Color.MAGENTA);
-        gc.fillRect(x + 4, y + 6, 6, 6);    // Левый глаз
-        gc.fillRect(x + 20, y + 6, 6, 6);   // Правый глаз
+        gc.fillRect(x + 4, y + 6, 6, 6);
+        gc.fillRect(x + 20, y + 6, 6, 6);
 
         gc.setFill(Color.RED);
         gc.fillArc(x + 5, y + 15, 20, 10, 0, -180, javafx.scene.shape.ArcType.ROUND);
@@ -63,14 +63,14 @@ public class GameRenderer {
     /**
      * Отрисовка карты.
      */
-    public void paintMap(ArrayList<Snake> snakes) {
+    public void paintMap() {
         gc.setFill(Color.rgb(57, 255, 20));
-        gc.fillRect(0, 60, map.getGAME_WIDTH(), map.getGAME_HEIGHT());
-        for (int x = 0; x <= map.getGAME_WIDTH(); x += cellSize) {
-            gc.strokeLine(x, 60, x, map.getGAME_HEIGHT());
+        gc.fillRect(0, 60, map.getgameWidth(), map.getgameHeight());
+        for (int x = 0; x <= map.getgameWidth(); x += cellSize) {
+            gc.strokeLine(x, 60, x, map.getgameHeight());
         }
-        for (int y = 60; y <= map.getGAME_HEIGHT(); y += cellSize) {
-            gc.strokeLine(0, y, map.getGAME_WIDTH(), y);
+        for (int y = 60; y <= map.getgameHeight(); y += cellSize) {
+            gc.strokeLine(0, y, map.getgameWidth(), y);
         }
         for (Cell cell : map.getCellMap()) {
             if (cell.hasApple()) {

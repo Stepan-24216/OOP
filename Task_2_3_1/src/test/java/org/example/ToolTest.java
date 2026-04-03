@@ -20,9 +20,9 @@ public class ToolTest {
     void testTools() {
         LevelConfigCreate configCreate = new LevelConfigCreate();
         LevelConfig config = configCreate.createConfig("src/main/resources/lvl_3.json");
-        int GAME_WIDTH = config.getSize().getWidth() * 30;
-        int GAME_HEIGHT = config.getSize().getHeight() * 30 + 60;
-        Map map = new Map(GAME_WIDTH, GAME_HEIGHT, config.getStones());
+        int gameWidth = config.getSize().getWidth() * 30;
+        int gameHeight = config.getSize().getHeight() * 30 + 60;
+        Map map = new Map(gameWidth, gameHeight, config.getStones());
         Tools.getCellIndex(map, 60, 60);
         assertEquals(2, Tools.getCellIndex(map, 60, 60));
     }

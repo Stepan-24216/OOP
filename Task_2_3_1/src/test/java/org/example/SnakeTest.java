@@ -4,7 +4,6 @@ import org.example.config.LevelConfig;
 import org.example.config.LevelConfigCreate;
 import org.example.map.Cell;
 import org.example.map.Map;
-import org.example.map.TypeCell;
 import org.example.snake.Snake;
 import org.example.snake.Tail;
 import org.junit.jupiter.api.Test;
@@ -39,11 +38,11 @@ public class SnakeTest {
     void testCreateSnake() {
         LevelConfigCreate configCreate = new LevelConfigCreate();
         LevelConfig config = configCreate.createConfig("src/main/resources/lvl_3.json");
-        int GAME_WIDTH = config.getSize().getWidth() * 30;
-        int GAME_HEIGHT = config.getSize().getHeight() * 30 + 60;
-        Map map = new Map(GAME_WIDTH, GAME_HEIGHT, config.getStones());
-        Snake snake = new Snake(GAME_WIDTH,GAME_HEIGHT);
-        snake.move(0,120,map.getCellMap(),GAME_WIDTH,map.getOffsetRows());
+        int gameWidth = config.getSize().getWidth() * 30;
+        int gameHeight = config.getSize().getHeight() * 30 + 60;
+        Map map = new Map(gameWidth, gameHeight, config.getStones());
+        Snake snake = new Snake(gameWidth,gameHeight);
+        snake.move(0,120,map.getCellMap(),gameWidth,map.getOffsetRows());
         assertEquals(0,snake.getCordX());
         assertEquals(120,snake.getCordY());
         assertEquals(1,snake.getTails().size());
@@ -59,13 +58,13 @@ public class SnakeTest {
     void testEatAppleInMap() {
         LevelConfigCreate configCreate = new LevelConfigCreate();
         LevelConfig config = configCreate.createConfig("src/main/resources/lvl_3.json");
-        int GAME_WIDTH = config.getSize().getWidth() * 30;
-        int GAME_HEIGHT = config.getSize().getHeight() * 30 + 60;
-        Map map = new Map(GAME_WIDTH, GAME_HEIGHT, config.getStones());
+        int gameWidth = config.getSize().getWidth() * 30;
+        int gameHeight = config.getSize().getHeight() * 30 + 60;
+        Map map = new Map(gameWidth, gameHeight, config.getStones());
         map.randomSpawnApple();
-        Snake snake = new Snake(GAME_WIDTH,GAME_HEIGHT);
+        Snake snake = new Snake(gameWidth,gameHeight);
         for (Cell cell : map.getCellMap()) {
-            snake.move(cell.getPosition().getX(),cell.getPosition().getY(),map.getCellMap(),map.getGAME_WIDTH(),
+            snake.move(cell.getPosition().getX(),cell.getPosition().getY(),map.getCellMap(),map.getgameWidth(),
                 map.getOffsetRows());
             if (cell.hasApple()) {
                 assertTrue(snake.tryEatApple(map));
@@ -76,7 +75,7 @@ public class SnakeTest {
         }
         assertEquals(2,snake.getTails().size());
         assertFalse(snake.checkDefeat(map));
-        snake.move(1000,1000,map.getCellMap(),map.getGAME_WIDTH(),
+        snake.move(1000,1000,map.getCellMap(),map.getgameWidth(),
             map.getOffsetRows());
         assertTrue(snake.checkDefeat(map));
     }

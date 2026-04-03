@@ -8,16 +8,16 @@ import org.example.config.LevelConfig;
  * Класс карты игры.
  */
 public class Map {
-    private final int GAME_WIDTH;
-    private final int GAME_HEIGHT;
+    private final int gameWidth;
+    private final int gameHeight;
     private ArrayList<Cell> cellMap;
 
     /**
      * Конструктор.
      */
     public Map(int GAME_WIDTH, int GAME_HEIGHT, List<LevelConfig.StonePositionConfig> stones) {
-        this.GAME_HEIGHT = GAME_HEIGHT;
-        this.GAME_WIDTH = GAME_WIDTH;
+        this.gameHeight = GAME_HEIGHT;
+        this.gameWidth = GAME_WIDTH;
         createCellMap(GAME_WIDTH, GAME_HEIGHT, stones);
     }
 
@@ -75,21 +75,21 @@ public class Map {
      * Получение числа клеток в строке.
      */
     public int getCellsInRow() {
-        return GAME_WIDTH / 30;
+        return gameWidth / 30;
     }
 
     /**
      * Ширина поля.
      */
-    public int getGAME_WIDTH() {
-        return GAME_WIDTH;
+    public int getgameWidth() {
+        return gameWidth;
     }
 
     /**
      * Высота поля.
      */
-    public int getGAME_HEIGHT() {
-        return GAME_HEIGHT;
+    public int getgameHeight() {
+        return gameHeight;
     }
 
     /**

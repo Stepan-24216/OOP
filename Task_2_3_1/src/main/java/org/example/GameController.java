@@ -20,8 +20,8 @@ public class GameController {
     private final ArrayList<Snake> snakes;
     private final GameRenderer gameRenderer;
     private final ScoreView scoreView;
-    private final int GAME_WIDTH;
-    private final int GAME_HEIGHT;
+    private final int gameWidth;
+    private final int gameHeight;
     private final ArrayList<Cell> cellMap;
     private final GamepadController gamepadController;
     private boolean upPressed;
@@ -39,8 +39,8 @@ public class GameController {
         this.snakes = snakes;
         this.gameRenderer = gameRenderer;
         this.scoreView = scoreView;
-        this.GAME_WIDTH = map.getGAME_WIDTH();
-        this.GAME_HEIGHT = map.getGAME_HEIGHT();
+        this.gameWidth = map.getgameWidth();
+        this.gameHeight = map.getgameHeight();
         this.cellMap = map.getCellMap();
         this.gamepadController = new GamepadController(this);
     }
@@ -86,16 +86,16 @@ public class GameController {
             }
 
             int cellSize = 30;
-            if (snakeX < 0 || snakeX > GAME_WIDTH - cellSize) {
+            if (snakeX < 0 || snakeX > gameWidth - cellSize) {
                 System.exit(0);
             }
-            if (snakeY < 60 || snakeY > GAME_HEIGHT - cellSize) {
+            if (snakeY < 60 || snakeY > gameHeight - cellSize) {
                 System.exit(0);
             }
             updateLogic();
-            snake.move(snakeX, snakeY, cellMap, GAME_WIDTH, map.getOffsetRows());
+            snake.move(snakeX, snakeY, cellMap, gameWidth, map.getOffsetRows());
 
-            gameRenderer.paintMap(snakes);
+            gameRenderer.paintMap();
         }
     }
 

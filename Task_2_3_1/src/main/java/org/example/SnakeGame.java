@@ -44,24 +44,24 @@ public class SnakeGame extends Application {
         score = new ScoreView();
 
         int cellSize = 30;
-        int GAME_WIDTH = config.getSize().getWidth() * cellSize;
-        int GAME_HEIGHT = config.getSize().getHeight() * cellSize + 60;
+        int gameWidth = config.getSize().getWidth() * cellSize;
+        int gameHeight = config.getSize().getHeight() * cellSize + 60;
 
-        this.canvas = new Canvas(GAME_WIDTH, GAME_HEIGHT);
+        this.canvas = new Canvas(gameWidth, gameHeight);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
         gameLayer.getChildren().clear();
         gameLayer.getChildren().add(canvas);
 
-        map = new Map(GAME_WIDTH, GAME_HEIGHT, config.getStones());
-        Snake snake = new Snake(GAME_WIDTH, GAME_HEIGHT);
+        map = new Map(gameWidth, gameHeight, config.getStones());
+        Snake snake = new Snake(gameWidth, gameHeight);
         snakes.add(snake);
         gameRenderer = new GameRenderer(gc, map, snakes);
         gameController = new GameController(map, snakes, gameRenderer, score);
         gameLayer.requestFocus();
 
-        primaryStage.setWidth(GAME_WIDTH);
-        primaryStage.setHeight(GAME_HEIGHT + 60);
+        primaryStage.setWidth(gameWidth);
+        primaryStage.setHeight(gameHeight + 60);
         primaryStage.centerOnScreen();
     }
 
@@ -104,7 +104,7 @@ public class SnakeGame extends Application {
             initLevelDate();
             gameController.setupControls(canvas, scene);
             map.randomSpawnApple();
-            gameRenderer.paintMap(snakes);
+            gameRenderer.paintMap();
             score.initScoreLabel(gameLayer);
 
             gameController.setGamePaused(false);
