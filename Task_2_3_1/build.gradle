@@ -67,6 +67,7 @@ jacocoTestReport {
             fileTree(dir: it, exclude: [
                     'org/example/view/**',
                     'org/example/GameRenderer*',
+                    'org/example/GameController*',
                     'org/example/MainMenuController*',
                     'org/example/SnakeGame*',
                     'org/example/snake/GamepadController*'

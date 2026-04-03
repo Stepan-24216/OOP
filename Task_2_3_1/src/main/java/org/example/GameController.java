@@ -180,6 +180,8 @@ public class GameController {
             case ESCAPE:
                 System.exit(0);
                 break;
+            default:
+                break;
         }
     }
 

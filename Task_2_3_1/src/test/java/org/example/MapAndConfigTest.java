@@ -87,10 +87,10 @@ public class MapAndConfigTest {
     void testGetters() {
         LevelConfigCreate configCreate = new LevelConfigCreate();
         LevelConfig config = configCreate.createConfig("src/main/resources/lvl_2.json");
-        assertEquals(5,config.getStones().get(0).getNumString());
-        assertEquals(10,config.getStones().get(0).getNumCell());
-        assertEquals(15,config.getStones().get(1).getNumString());
-        assertEquals(5,config.getStones().get(1).getNumCell());
+        assertEquals(5, config.getStones().get(0).getNumString());
+        assertEquals(10, config.getStones().get(0).getNumCell());
+        assertEquals(15, config.getStones().get(1).getNumString());
+        assertEquals(5, config.getStones().get(1).getNumCell());
         int gameWidth = config.getSize().getWidth() * 30;
         int gameHeight = config.getSize().getHeight() * 30 + 60;
         Map map = new Map(gameWidth, gameHeight, config.getStones());

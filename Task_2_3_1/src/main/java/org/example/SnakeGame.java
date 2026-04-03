@@ -48,7 +48,6 @@ public class SnakeGame extends Application {
         int gameHeight = config.getSize().getHeight() * cellSize + 60;
 
         this.canvas = new Canvas(gameWidth, gameHeight);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
 
         gameLayer.getChildren().clear();
         gameLayer.getChildren().add(canvas);
@@ -56,6 +55,7 @@ public class SnakeGame extends Application {
         map = new Map(gameWidth, gameHeight, config.getStones());
         Snake snake = new Snake(gameWidth, gameHeight);
         snakes.add(snake);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
         gameRenderer = new GameRenderer(gc, map, snakes);
         gameController = new GameController(map, snakes, gameRenderer, score);
         gameLayer.requestFocus();

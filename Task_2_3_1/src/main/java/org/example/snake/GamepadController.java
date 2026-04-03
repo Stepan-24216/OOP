@@ -151,7 +151,7 @@ public class GamepadController {
                 }
                 break;
             default:
-                // Игнорируем другие оси
+                break;
         }
     }
 
