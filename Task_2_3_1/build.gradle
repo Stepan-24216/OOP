@@ -62,4 +62,15 @@ jacocoTestReport {
         xml.required = true
         html.required = true
     }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    'org/example/view/**',
+                    'org/example/GameRenderer*',
+                    'org/example/MainMenuController*',
+                    'org/example/SnakeGame*',
+                    'org/example/snake/GamepadController*'
+            ])
+        }))
+    }
 }
