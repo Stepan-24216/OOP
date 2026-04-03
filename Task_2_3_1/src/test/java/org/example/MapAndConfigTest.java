@@ -23,12 +23,12 @@ public class MapAndConfigTest {
     @Test
     void testCell() {
         TypeCell body = TypeCell.Body;
-        TypeCell stone = TypeCell.Stone;
-        TypeCell apple = TypeCell.Apple;
-        TypeCell cell1 = TypeCell.Cell;
         assertEquals(TypeCell.Body, body);
+        TypeCell stone = TypeCell.Stone;
         assertEquals(TypeCell.Stone, stone);
+        TypeCell apple = TypeCell.Apple;
         assertEquals(TypeCell.Apple, apple);
+        TypeCell cell1 = TypeCell.Cell;
         assertEquals(TypeCell.Cell, cell1);
 
         Cell cell = new Cell(0, 60, apple);
@@ -90,8 +90,8 @@ public class MapAndConfigTest {
         int gameWidth = config.getSize().getWidth() * 30;
         int gameHeight = config.getSize().getHeight() * 30 + 60;
         Map map = new Map(gameWidth, gameHeight, config.getStones());
-        assertEquals(gameWidth, map.getgameWidth());
-        assertEquals(gameHeight, map.getgameHeight());
+        assertEquals(gameWidth, map.getGameWidth());
+        assertEquals(gameHeight, map.getGameHeight());
         assertEquals(100, map.getCellMap().size());
         assertEquals(gameWidth / 30, map.getCellsInRow());
         assertEquals(2, map.getOffsetRows());

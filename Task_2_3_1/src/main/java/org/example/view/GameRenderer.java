@@ -65,21 +65,22 @@ public class GameRenderer {
      */
     public void paintMap() {
         gc.setFill(Color.rgb(57, 255, 20));
-        gc.fillRect(0, 60, map.getgameWidth(), map.getgameHeight());
-        for (int x = 0; x <= map.getgameWidth(); x += cellSize) {
-            gc.strokeLine(x, 60, x, map.getgameHeight());
+        gc.fillRect(0, 60, map.getGameWidth(), map.getGameHeight());
+        for (int x = 0; x <= map.getGameWidth(); x += cellSize) {
+            gc.strokeLine(x, 60, x, map.getGameHeight());
         }
-        for (int y = 60; y <= map.getgameHeight(); y += cellSize) {
-            gc.strokeLine(0, y, map.getgameWidth(), y);
+        for (int y = 60; y <= map.getGameHeight(); y += cellSize) {
+            gc.strokeLine(0, y, map.getGameWidth(), y);
         }
         for (Cell cell : map.getCellMap()) {
             if (cell.hasApple()) {
-                paintApple(cell.getPosition().getCordX(), cell.getPosition().getCordY(), this.cellSize);
+                paintApple(cell.getPosition().getCordX(),
+                    cell.getPosition().getCordY(), this.cellSize);
             }
             if (cell.hasStone()) {
                 gc.setFill(Color.GRAY);
-                gc.fillRect(cell.getPosition().getCordX(), cell.getPosition().getCordY(), cellSize,
-                    cellSize);
+                gc.fillRect(cell.getPosition().getCordX(),
+                    cell.getPosition().getCordY(), cellSize, cellSize);
             }
         }
         for (Snake snake : snakes) {

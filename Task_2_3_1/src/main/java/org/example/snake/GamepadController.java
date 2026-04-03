@@ -21,6 +21,9 @@ public class GamepadController {
     private volatile boolean gamepadConnected = false;
     private FileInputStream inputStream;
 
+    /**
+     * Конструктор.
+     */
     public GamepadController(GameController gameController) {
         initializeGamepad();
         this.gameController = gameController;
@@ -147,6 +150,8 @@ public class GamepadController {
                     break;
                 }
                 break;
+            default:
+                // Игнорируем другие оси
         }
     }
 

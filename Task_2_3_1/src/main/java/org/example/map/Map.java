@@ -15,10 +15,10 @@ public class Map {
     /**
      * Конструктор.
      */
-    public Map(int GAME_WIDTH, int GAME_HEIGHT, List<LevelConfig.StonePositionConfig> stones) {
-        this.gameHeight = GAME_HEIGHT;
-        this.gameWidth = GAME_WIDTH;
-        createCellMap(GAME_WIDTH, GAME_HEIGHT, stones);
+    public Map(int gameWidth, int gameHeight, List<LevelConfig.StonePositionConfig> stones) {
+        this.gameHeight = gameHeight;
+        this.gameWidth = gameWidth;
+        createCellMap(gameWidth, gameHeight, stones);
     }
 
     /**
@@ -39,11 +39,11 @@ public class Map {
     /**
      * Создание массива клеток нашего поля карты.
      */
-    public void createCellMap(int GAME_WIDTH, int GAME_HEIGHT,
+    public void createCellMap(int gameWidth, int gameHeight,
                               List<LevelConfig.StonePositionConfig> stones) {
         cellMap = new ArrayList<>();
-        int cellsInRow = GAME_WIDTH / 30;
-        int cellsInColumn = GAME_HEIGHT / 30;
+        int cellsInRow = gameWidth / 30;
+        int cellsInColumn = gameHeight / 30;
 
         for (int y = 2; y < cellsInColumn; y++) {
             for (int x = 0; x < cellsInRow; x++) {
@@ -81,14 +81,14 @@ public class Map {
     /**
      * Ширина поля.
      */
-    public int getgameWidth() {
+    public int getGameWidth() {
         return gameWidth;
     }
 
     /**
      * Высота поля.
      */
-    public int getgameHeight() {
+    public int getGameHeight() {
         return gameHeight;
     }
 

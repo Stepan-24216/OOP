@@ -12,6 +12,9 @@ import javafx.scene.layout.StackPane;
 public class ScoreView {
     private Label scoreLabel;
 
+    /**
+     * Инициализация счётчика.
+     */
     public void initScoreLabel(StackPane gameLayer) {
         this.scoreLabel = new Label("Очки: 0");
         this.scoreLabel.setStyle(
@@ -27,6 +30,9 @@ public class ScoreView {
         gameLayer.getChildren().add(scoreLabel);
     }
 
+    /**
+     * Обновление числа.
+     */
     public void updateScore(int score) {
         Platform.runLater(() -> {
             scoreLabel.setText("Очки: " + score);

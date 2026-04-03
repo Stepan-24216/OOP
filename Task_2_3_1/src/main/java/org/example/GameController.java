@@ -39,8 +39,8 @@ public class GameController {
         this.snakes = snakes;
         this.gameRenderer = gameRenderer;
         this.scoreView = scoreView;
-        this.gameWidth = map.getgameWidth();
-        this.gameHeight = map.getgameHeight();
+        this.gameWidth = map.getGameWidth();
+        this.gameHeight = map.getGameHeight();
         this.cellMap = map.getCellMap();
         this.gamepadController = new GamepadController(this);
     }

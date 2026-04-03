@@ -65,9 +65,8 @@ public class SnakeTest {
         map.randomSpawnApple();
         Snake snake = new Snake(gameWidth, gameHeight);
         for (Cell cell : map.getCellMap()) {
-            snake.move(cell.getPosition().getCordX(), cell.getPosition().getCordY(), map.getCellMap(),
-                map.getgameWidth(),
-                map.getOffsetRows());
+            snake.move(cell.getPosition().getCordX(), cell.getPosition().getCordY(),
+                map.getCellMap(), map.getGameWidth(), map.getOffsetRows());
             if (cell.hasApple()) {
                 assertTrue(snake.tryEatApple(map));
                 break;
@@ -77,7 +76,7 @@ public class SnakeTest {
         }
         assertEquals(2, snake.getTails().size());
         assertFalse(snake.checkDefeat(map));
-        snake.move(1000, 1000, map.getCellMap(), map.getgameWidth(),
+        snake.move(1000, 1000, map.getCellMap(), map.getGameWidth(),
             map.getOffsetRows());
         assertTrue(snake.checkDefeat(map));
     }

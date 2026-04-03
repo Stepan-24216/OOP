@@ -3,7 +3,7 @@ package org.example.tool;
 import org.example.map.Map;
 
 /**
- * Получение номера ичейки в массиве клеток.
+ * Получение номера ячейки в массиве клеток.
  */
 public class Tools {
     public static int getCellIndex(Map map, int pixelX, int pixelY) {
