@@ -40,21 +40,21 @@ public class Cell {
      * Проверка на яблоко.
      */
     public boolean hasApple() {
-        return type == TypeCell.Apple;
+        return type == TypeCell.APPLE;
     }
 
     /**
      * Проверка на тело.
      */
     public boolean hasBody() {
-        return type == TypeCell.Body;
+        return type == TypeCell.BODY;
     }
 
     /**
      * Проверка на камень.
      */
     public boolean hasStone() {
-        return type == TypeCell.Stone;
+        return type == TypeCell.STONE;
     }
 
     /**

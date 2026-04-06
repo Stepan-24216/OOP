@@ -4,8 +4,8 @@ package org.example.map;
  * Енам типов наших клеток.
  */
 public enum TypeCell {
-    Body,
-    Stone,
-    Apple,
-    Cell
+    BODY,
+    STONE,
+    APPLE,
+    CELL
 }

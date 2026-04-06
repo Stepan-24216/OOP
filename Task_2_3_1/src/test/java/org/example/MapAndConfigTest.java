@@ -22,14 +22,14 @@ public class MapAndConfigTest {
      */
     @Test
     void testCell() {
-        TypeCell body = TypeCell.Body;
-        assertEquals(TypeCell.Body, body);
-        TypeCell stone = TypeCell.Stone;
-        assertEquals(TypeCell.Stone, stone);
-        TypeCell apple = TypeCell.Apple;
-        assertEquals(TypeCell.Apple, apple);
-        TypeCell cell1 = TypeCell.Cell;
-        assertEquals(TypeCell.Cell, cell1);
+        TypeCell body = TypeCell.BODY;
+        assertEquals(TypeCell.BODY, body);
+        TypeCell stone = TypeCell.STONE;
+        assertEquals(TypeCell.STONE, stone);
+        TypeCell apple = TypeCell.APPLE;
+        assertEquals(TypeCell.APPLE, apple);
+        TypeCell cell1 = TypeCell.CELL;
+        assertEquals(TypeCell.CELL, cell1);
 
         Cell cell = new Cell(0, 60, apple);
         assertEquals(0, cell.getPosition().getCordX());
@@ -55,7 +55,7 @@ public class MapAndConfigTest {
         assertEquals(10, config.getSize().getWidth());
         Map map = new Map(gameWidth, gameHeight, config.getStones());
         for (Cell cell : map.getCellMap()) {
-            assertEquals(TypeCell.Cell, cell.getType());
+            assertEquals(TypeCell.CELL, cell.getType());
         }
     }
 

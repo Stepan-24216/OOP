@@ -37,7 +37,7 @@ public class Snake {
 
         int tailIndex = (tailY / snakeSize - offsetRows) * cellsInRow + (tailX / snakeSize);
         if (tailIndex >= 0 && tailIndex < cellMap.size()) {
-            cellMap.get(tailIndex).setType(TypeCell.Cell);
+            cellMap.get(tailIndex).setType(TypeCell.CELL);
         }
 
         if (tails.size() > 1) {
@@ -48,7 +48,7 @@ public class Snake {
                     int idx = (tails.get(i).getCordY() / snakeSize - offsetRows) * cellsInRow
                         + (tails.get(i).getCordX() / snakeSize);
                     if (idx >= 0 && idx < cellMap.size()) {
-                        cellMap.get(idx).setType(TypeCell.Body);
+                        cellMap.get(idx).setType(TypeCell.BODY);
                     }
                 }
             }
@@ -75,7 +75,7 @@ public class Snake {
         int headIndex = Tools.getCellIndex(map, this.getCordX(), this.getCordY());
 
         if (map.getCellMap().get(headIndex).hasApple()) {
-            map.getCellMap().get(headIndex).setType(TypeCell.Cell);
+            map.getCellMap().get(headIndex).setType(TypeCell.CELL);
             this.eatApple();
             return true;
         }

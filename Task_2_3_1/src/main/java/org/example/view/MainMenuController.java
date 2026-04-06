@@ -89,7 +89,7 @@ public class MainMenuController {
             gc.fillRect(0, 0, 600, 600);
         }
         levels =
-            SearchLevelInDir.searchLevelInDir("/home/rend/java/OOP/Task_2_3_1/src/main/resources");
+            SearchLevelInDir.searchLevelInDir("src/main/resources");
 
         List<String> levelNames = levels.stream().map(LevelPath::getNameFile).toList();
         levelComboBox.setItems(FXCollections.observableArrayList(levelNames));

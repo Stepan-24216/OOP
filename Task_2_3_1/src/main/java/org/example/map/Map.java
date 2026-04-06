@@ -30,7 +30,7 @@ public class Map {
             int randomIndex = (int) (Math.random() * cellMap.size());
             if (!cellMap.get(randomIndex).hasApple() && !cellMap.get(randomIndex).hasBody()
                 && !cellMap.get(randomIndex).hasStone()) {
-                cellMap.get(randomIndex).setType(TypeCell.Apple);
+                cellMap.get(randomIndex).setType(TypeCell.APPLE);
                 flag = false;
             }
         }
@@ -47,7 +47,7 @@ public class Map {
 
         for (int y = 2; y < cellsInColumn; y++) {
             for (int x = 0; x < cellsInRow; x++) {
-                cellMap.add(new Cell(x * 30, y * 30, TypeCell.Cell));
+                cellMap.add(new Cell(x * 30, y * 30, TypeCell.CELL));
             }
         }
         for (LevelConfig.StonePositionConfig stone : stones) {
@@ -60,7 +60,7 @@ public class Map {
             }
 
             int index = row * cellsInRow + col;
-            cellMap.get(index).setType(TypeCell.Stone);
+            cellMap.get(index).setType(TypeCell.STONE);
         }
     }
 

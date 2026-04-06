@@ -17,7 +17,7 @@ public class GamepadController {
     private static final int JS_EVENT_AXIS = 0x02;
     private static final int JS_EVENT_INIT = 0x80;
     private final boolean running;
-    GameController gameController;
+    private final GameController gameController;
     private volatile boolean gamepadConnected = false;
     private FileInputStream inputStream;
 
