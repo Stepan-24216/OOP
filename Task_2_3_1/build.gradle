@@ -67,9 +67,9 @@ jacocoTestReport {
             fileTree(dir: it, exclude: [
                     'org/example/view/**',
                     'org/example/GameRenderer*',
-                    'org/example/GameController*',
+                    'org/example/game/GameController*',
                     'org/example/MainMenuController*',
-                    'org/example/SnakeGame*',
+                    'org/example/game/SnakeGame*',
                     'org/example/snake/GamepadController*',
                     'org/example/game/GameOverException*',
                     'org/example/view/GameEndView.java',
