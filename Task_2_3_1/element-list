@@ -1,5 +1,5 @@
-org.example
 org.example.config
+org.example.game
 org.example.map
 org.example.snake
 org.example.tool

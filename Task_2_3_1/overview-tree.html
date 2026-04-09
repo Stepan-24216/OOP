@@ -50,8 +50,8 @@ loadScripts(document, 'script');</script>
 <h1 class="title">Hierarchy For All Packages</h1>
 <span class="package-hierarchy-label">Package Hierarchies:</span>
 <ul class="horizontal">
-<li><a href="org/example/package-tree.html">org.example</a>, </li>
 <li><a href="org/example/config/package-tree.html">org.example.config</a>, </li>
+<li><a href="org/example/game/package-tree.html">org.example.game</a>, </li>
 <li><a href="org/example/map/package-tree.html">org.example.map</a>, </li>
 <li><a href="org/example/snake/package-tree.html">org.example.snake</a>, </li>
 <li><a href="org/example/tool/package-tree.html">org.example.tool</a>, </li>
@@ -65,12 +65,13 @@ loadScripts(document, 'script');</script>
 <ul>
 <li class="circle">javafx.application.Application
 <ul>
-<li class="circle">org.example.<a href="org/example/SnakeGame.html" class="type-name-link" title="class in org.example">SnakeGame</a></li>
+<li class="circle">org.example.game.<a href="org/example/game/SnakeGame.html" class="type-name-link" title="class in org.example.game">SnakeGame</a></li>
 </ul>
 </li>
 <li class="circle">org.example.map.<a href="org/example/map/Cell.html" class="type-name-link" title="class in org.example.map">Cell</a></li>
 <li class="circle">org.example.map.<a href="org/example/map/Cell.Position.html" class="type-name-link" title="class in org.example.map">Cell.Position</a></li>
-<li class="circle">org.example.<a href="org/example/GameController.html" class="type-name-link" title="class in org.example">GameController</a></li>
+<li class="circle">org.example.game.<a href="org/example/game/GameController.html" class="type-name-link" title="class in org.example.game">GameController</a></li>
+<li class="circle">org.example.view.<a href="org/example/view/GameEndView.html" class="type-name-link" title="class in org.example.view">GameEndView</a></li>
 <li class="circle">org.example.snake.<a href="org/example/snake/GamepadController.html" class="type-name-link" title="class in org.example.snake">GamepadController</a></li>
 <li class="circle">org.example.view.<a href="org/example/view/GameRenderer.html" class="type-name-link" title="class in org.example.view">GameRenderer</a></li>
 <li class="circle">org.example.config.<a href="org/example/config/LevelConfig.html" class="type-name-link" title="class in org.example.config">LevelConfig</a></li>
@@ -84,6 +85,19 @@ loadScripts(document, 'script');</script>
 <li class="circle">org.example.tool.<a href="org/example/tool/SearchLevelInDir.html" class="type-name-link" title="class in org.example.tool">SearchLevelInDir</a></li>
 <li class="circle">org.example.snake.<a href="org/example/snake/Snake.html" class="type-name-link" title="class in org.example.snake">Snake</a></li>
 <li class="circle">org.example.snake.<a href="org/example/snake/Tail.html" class="type-name-link" title="class in org.example.snake">Tail</a></li>
+<li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Throwable.html" class="type-name-link external-link" title="class or interface in java.lang">Throwable</a> (implements java.io.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a>)
+<ul>
+<li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" class="type-name-link external-link" title="class or interface in java.lang">Exception</a>
+<ul>
+<li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/RuntimeException.html" class="type-name-link external-link" title="class or interface in java.lang">RuntimeException</a>
+<ul>
+<li class="circle">org.example.game.<a href="org/example/game/GameOverException.html" class="type-name-link" title="class in org.example.game">GameOverException</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="circle">org.example.tool.<a href="org/example/tool/Tools.html" class="type-name-link" title="class in org.example.tool">Tools</a></li>
 </ul>
 </li>
@@ -96,6 +110,7 @@ loadScripts(document, 'script');</script>
 <ul>
 <li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Enum.html" class="type-name-link external-link" title="class or interface in java.lang">Enum</a>&lt;E&gt; (implements java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;T&gt;, java.lang.constant.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/constant/Constable.html" title="class or interface in java.lang.constant" class="external-link">Constable</a>, java.io.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a>)
 <ul>
+<li class="circle">org.example.game.<a href="org/example/game/GameState.html" class="type-name-link" title="enum class in org.example.game">GameState</a></li>
 <li class="circle">org.example.map.<a href="org/example/map/TypeCell.html" class="type-name-link" title="enum class in org.example.map">TypeCell</a></li>
 </ul>
 </li>
