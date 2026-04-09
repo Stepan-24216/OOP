@@ -8,11 +8,25 @@ import java.util.List;
 public class LevelConfig {
     private GameSizeConfig size;
     private List<StonePositionConfig> stones;
+    private int goal;
 
+    /**
+     * Получение цели игры.
+     */
+    public int getGoal() {
+        return goal;
+    }
+
+    /**
+     * Получение размера.
+     */
     public GameSizeConfig getSize() {
         return size;
     }
 
+    /**
+     * Получение камней на поле.
+     */
     public List<StonePositionConfig> getStones() {
         return stones;
     }

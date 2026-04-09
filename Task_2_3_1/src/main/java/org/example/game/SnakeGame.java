@@ -1,4 +1,4 @@
-package org.example;
+package org.example.game;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,14 +35,13 @@ public class SnakeGame extends Application {
     private MainMenuController mainMenuController;
 
     /**
-     * Инициализируем нужные нам классы и присваиваем .
+     * Инициализируем нужные нам классы и присваиваем.
      */
     public void initLevelDate() {
         LevelConfigCreate configCreate = new LevelConfigCreate();
         String path = mainMenuController.getSelectedLevel().getPath();
         LevelConfig config = configCreate.createConfig(path);
         score = new ScoreView();
-
         int cellSize = 30;
         int gameWidth = config.getSize().getWidth() * cellSize;
         int gameHeight = config.getSize().getHeight() * cellSize + 60;
@@ -57,7 +56,7 @@ public class SnakeGame extends Application {
         snakes.add(snake);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gameRenderer = new GameRenderer(gc, map, snakes);
-        gameController = new GameController(map, snakes, gameRenderer, score);
+        gameController = new GameController(map, snakes, gameRenderer, score, config.getGoal());
         gameLayer.requestFocus();
 
         primaryStage.setWidth(gameWidth);
@@ -107,7 +106,7 @@ public class SnakeGame extends Application {
             gameRenderer.paintMap();
             score.initScoreLabel(gameLayer);
 
-            gameController.setGamePaused(false);
+            gameController.setGameState(GameState.PLAY);
             gameController.startGameLoop();
         });
     }

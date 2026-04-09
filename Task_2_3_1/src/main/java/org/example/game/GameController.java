@@ -1,4 +1,4 @@
-package org.example;
+package org.example.game;
 
 import java.util.ArrayList;
 import javafx.application.Platform;
@@ -9,6 +9,7 @@ import org.example.map.Cell;
 import org.example.map.Map;
 import org.example.snake.GamepadController;
 import org.example.snake.Snake;
+import org.example.view.GameEndView;
 import org.example.view.GameRenderer;
 import org.example.view.ScoreView;
 
@@ -28,13 +29,15 @@ public class GameController {
     private boolean downPressed;
     private boolean leftPressed;
     private boolean rightPressed;
-    private volatile boolean gamePaused = true;
+    private volatile GameState gameState = GameState.PAUSE;
+    private GameEndView gameEndView;
+    private int gameGoal;
 
     /**
      * Конструктор.
      */
     public GameController(Map map, ArrayList<Snake> snakes, GameRenderer gameRenderer,
-                          ScoreView scoreView) {
+                          ScoreView scoreView, int gameGoal) {
         this.map = map;
         this.snakes = snakes;
         this.gameRenderer = gameRenderer;
@@ -43,15 +46,20 @@ public class GameController {
         this.gameHeight = map.getGameHeight();
         this.cellMap = map.getCellMap();
         this.gamepadController = new GamepadController(this);
+        this.gameEndView = new GameEndView();
+        this.gameGoal = gameGoal;
     }
 
     /**
      * Начало цикла игры.
      */
     public void startGameLoop() {
+        if (gameState != GameState.PLAY) {
+            return;
+        }
 
         Thread gameThread = new Thread(() -> {
-            while (!gamePaused) {
+            while (gameState == GameState.PLAY) {
                 Platform.runLater(this::updateGame);
                 try {
                     Thread.sleep(150);
@@ -61,6 +69,7 @@ public class GameController {
             }
         });
 
+        gameThread.setDaemon(true);
         gameThread.start();
     }
 
@@ -68,34 +77,43 @@ public class GameController {
      * Обновление игры.
      */
     private void updateGame() {
-        for (Snake snake : snakes) {
-            int speed = 30; // Пикселей за шаг
-            int snakeX = snake.getHead().getCordX();
-            int snakeY = snake.getHead().getCordY();
-            if (upPressed) {
-                snakeY -= speed;
-            }
-            if (downPressed) {
-                snakeY += speed;
-            }
-            if (leftPressed) {
-                snakeX -= speed;
-            }
-            if (rightPressed) {
-                snakeX += speed;
-            }
+        if (gameState != GameState.PLAY) {
+            return;
+        }
+        try {
+            for (Snake snake : snakes) {
+                int speed = 30; // Пикселей за шаг
+                int snakeX = snake.getHead().getCordX();
+                int snakeY = snake.getHead().getCordY();
 
-            int cellSize = 30;
-            if (snakeX < 0 || snakeX > gameWidth - cellSize) {
-                System.exit(0);
-            }
-            if (snakeY < 60 || snakeY > gameHeight - cellSize) {
-                System.exit(0);
-            }
-            updateLogic();
-            snake.move(snakeX, snakeY, cellMap, gameWidth, map.getOffsetRows());
+                if (upPressed) {
+                    snakeY -= speed;
+                }
+                if (downPressed) {
+                    snakeY += speed;
+                }
+                if (leftPressed) {
+                    snakeX -= speed;
+                }
+                if (rightPressed) {
+                    snakeX += speed;
+                }
 
-            gameRenderer.paintMap();
+                int cellSize = 30;
+
+                if (snakeX < 0 || snakeX > gameWidth - cellSize || snakeY < 60 ||
+                    snakeY > gameHeight - cellSize) {
+                    throw new GameOverException("Змейка вышла за пределы игрового поля!");
+                }
+
+                updateLogic();
+
+                snake.move(snakeX, snakeY, cellMap, gameWidth, map.getOffsetRows());
+                gameRenderer.paintMap();
+            }
+        } catch (GameOverException e) {
+            gameState = GameState.LOSE;
+            gameEndView.handleGameOver(e.getMessage(), snakes.get(0));
         }
     }
 
@@ -106,14 +124,17 @@ public class GameController {
         for (Snake snake : snakes) {
             if (checkCollision(snake)) {
                 System.out.println("Игра окончена!");
-                System.exit(0);
-                return;
+                throw new GameOverException("Змейка врезалась в препятствие!");
             }
             if (snake.tryEatApple(map)) {
                 scoreView.updateScore(snake.getScore());
+                if (snake.getScore() >= gameGoal) {
+                    gameState = GameState.WIN;
+                    gameEndView.handleGameWin();
+                    return;
+                }
                 map.randomSpawnApple();
             }
-            snake.tryEatApple(map);
         }
     }
 
@@ -172,13 +193,15 @@ public class GameController {
                 downPressed = false;
                 break;
             case SPACE:
-                gamePaused = !gamePaused;
-                if (!gamePaused) {
+                if (gameState == GameState.PAUSE) {
+                    gameState = GameState.PLAY;
                     startGameLoop();
+                } else if (gameState == GameState.PLAY) {
+                    gameState = GameState.PAUSE;
                 }
                 break;
             case ESCAPE:
-                System.exit(0);
+                System.exit(0); // нужно лишь чтобы быстро закрывать игру не более
                 break;
             default:
                 break;
@@ -189,12 +212,9 @@ public class GameController {
      * Выключаем паузу.
      */
     private void offPauseInGame() {
-        if (gamePaused) {
-            gamePaused = false;
+        if (getGamePaused()) {
+            gameState = GameState.PLAY;
             startGameLoop();
-            if (gamepadController.isGamepadConnected()) {
-                gamepadController.startGamepadThread();
-            }
         }
     }
 
@@ -202,14 +222,14 @@ public class GameController {
      * Получение информации о состоянии паузы.
      */
     public synchronized boolean getGamePaused() {
-        return gamePaused;
+        return gameState == GameState.PAUSE;
     }
 
     /**
      * Установка состояния паузы.
      */
-    public synchronized void setGamePaused(boolean state) {
-        this.gamePaused = state;
+    public synchronized void setGameState(GameState state) {
+        this.gameState = state;
     }
 
     /**

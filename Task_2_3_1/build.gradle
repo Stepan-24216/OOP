@@ -70,7 +70,10 @@ jacocoTestReport {
                     'org/example/GameController*',
                     'org/example/MainMenuController*',
                     'org/example/SnakeGame*',
-                    'org/example/snake/GamepadController*'
+                    'org/example/snake/GamepadController*',
+                    'org/example/game/GameOverException*',
+                    'org/example/view/GameEndView.java',
+                    'org/example/game/GameState*'
             ])
         }))
     }

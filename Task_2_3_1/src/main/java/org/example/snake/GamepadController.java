@@ -5,8 +5,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
-import org.example.GameController;
+import org.example.game.GameController;
 
 /**
  * Класс для работы с геймпадом.
@@ -16,18 +17,18 @@ public class GamepadController {
     private static final int JS_EVENT_BUTTON = 0x01;
     private static final int JS_EVENT_AXIS = 0x02;
     private static final int JS_EVENT_INIT = 0x80;
-    private final boolean running;
     private final GameController gameController;
+    private volatile boolean running = true;
+    private volatile boolean readerThreadStarted = false;
     private volatile boolean gamepadConnected = false;
-    private FileInputStream inputStream;
+    private String currentDevicePath = null;
 
     /**
      * Конструктор.
      */
     public GamepadController(GameController gameController) {
-        initializeGamepad();
         this.gameController = gameController;
-        this.running = gameController.getGamePaused();
+        initializeGamepad();
     }
 
     /**
@@ -38,20 +39,11 @@ public class GamepadController {
             String devicePath = "/dev/input/js" + i;
             File device = new File(devicePath);
             if (device.exists() && device.canRead()) {
-                try {
-                    inputStream = new FileInputStream(devicePath);
-                    gamepadConnected = true;
-                    System.out.println("✅ Геймпад найден: " + devicePath);
-                    startGamepadThread();
-                    return;
-                } catch (IOException e) {
-                    try {
-                        if (inputStream != null) {
-                            inputStream.close();
-                        }
-                    } catch (IOException ignored) {
-                    }
-                }
+                currentDevicePath = devicePath;
+                gamepadConnected = true;
+                System.out.println("Геймпад найден: " + devicePath);
+                startGamepadThread();
+                return;
             }
         }
         System.out.println("Геймпад не найден. Используется только клавиатура.");
@@ -61,21 +53,26 @@ public class GamepadController {
      * Начало считывания нажатий с геймпада.
      */
     public void startGamepadThread() {
+        if (readerThreadStarted || currentDevicePath == null) {
+            return;
+        }
+        readerThreadStarted = true;
+
         Thread gamepadThread = new Thread(() -> {
             byte[] buffer = new byte[JS_EVENT_SIZE];
-
-            while (running) {
-                try {
+            try (FileInputStream inputStream = new FileInputStream(currentDevicePath)) {
+                while (running) {
                     int bytesRead = inputStream.read(buffer);
                     if (bytesRead == JS_EVENT_SIZE) {
                         processJoystickEvent(buffer);
                     }
-                } catch (IOException e) {
-                    if (running) {
-                        System.err.println("❌ Ошибка чтения геймпада: " + e.getMessage());
-                        break;
-                    }
                 }
+            } catch (IOException e) {
+                if (running) {
+                    System.err.println("Ошибка чтения геймпада: " + e.getMessage());
+                }
+            } finally {
+                readerThreadStarted = false;
             }
         });
         gamepadThread.setDaemon(true);
@@ -95,6 +92,7 @@ public class GamepadController {
         // __u8 type (1 байт) - тип события
         // __u8 number (1 байт) - номер оси или кнопки
 
+        buffer.getInt();
         short value = buffer.getShort();
         byte type = buffer.get();
         byte number = buffer.get();
@@ -117,36 +115,36 @@ public class GamepadController {
         switch (axisNumber) {
             case 0:
                 if (value < -THRESHOLD) {
-                    gameController.handleKeyPress(KeyCode.LEFT);
+                    Platform.runLater(() -> gameController.handleKeyPress(KeyCode.LEFT));
                 } else if (value > THRESHOLD) {
-                    gameController.handleKeyPress(KeyCode.RIGHT);
+                    Platform.runLater(() -> gameController.handleKeyPress(KeyCode.RIGHT));
                 }
                 break;
 
             case 1:
                 if (value < -THRESHOLD) {
-                    gameController.handleKeyPress(KeyCode.UP);
+                    Platform.runLater(() -> gameController.handleKeyPress(KeyCode.UP));
                 } else if (value > THRESHOLD) {
-                    gameController.handleKeyPress(KeyCode.DOWN);
+                    Platform.runLater(() -> gameController.handleKeyPress(KeyCode.DOWN));
                 }
                 break;
 
             case 6:
                 if (value < 0) {
-                    gameController.handleKeyPress(KeyCode.LEFT);
+                    Platform.runLater(() -> gameController.handleKeyPress(KeyCode.LEFT));
                     break;
                 } else if (value > 0) {
-                    gameController.handleKeyPress(KeyCode.RIGHT);
+                    Platform.runLater(() -> gameController.handleKeyPress(KeyCode.RIGHT));
                     break;
                 }
                 break;
 
             case 7:
                 if (value < 0) {
-                    gameController.handleKeyPress(KeyCode.UP);
+                    Platform.runLater(() -> gameController.handleKeyPress(KeyCode.UP));
                     break;
                 } else if (value > 0) {
-                    gameController.handleKeyPress(KeyCode.DOWN);
+                    Platform.runLater(() -> gameController.handleKeyPress(KeyCode.DOWN));
                     break;
                 }
                 break;
@@ -162,9 +160,13 @@ public class GamepadController {
         // value: 1 = нажата, 0 = отпущена
         boolean pressed = (value == 1);
 
+        if (!pressed) {
+            return;
+        }
+
         switch (buttonNumber) {
             case 0: // Кнопка X
-                gameController.handleKeyPress(KeyCode.SPACE);
+                Platform.runLater(() -> gameController.handleKeyPress(KeyCode.SPACE));
                 break;
             case 1: // Кнопка O
                 break;
