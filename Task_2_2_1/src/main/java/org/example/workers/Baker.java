@@ -1,6 +1,7 @@
 package org.example.workers;
 
 import org.example.Order;
+import org.example.enums.TypeWorker;
 import org.example.building.Pizzeria;
 import org.example.building.Warehouse;
 import org.example.enums.Condition;
@@ -8,7 +9,7 @@ import org.example.enums.Condition;
 /**
  * Класс моих пекарей.
  */
-public class Baker implements Runnable {
+public class Baker implements Worker {
     private final int id;
     private final int cookingSpeed;
     private final Warehouse warehouse;
@@ -29,37 +30,23 @@ public class Baker implements Runnable {
      */
     @Override
     public void run() {
-        while (!Thread.currentThread().isInterrupted()
-            && (pizzeria.isOpen() || pizzeria.orderNotEmpty())) {
+        while (!Thread.currentThread().isInterrupted()) {
             Order order = pizzeria.takeOrder();
-            if (order != null) {
-                order.setCondition(Condition.Cooking);
-                try {
-                    Thread.sleep(cookingSpeed);
-                } catch (InterruptedException e) {
-                    System.err.println(
-                        "Ошибка доставки заказа, пекарь сжёг пиццу :(" + e.getMessage());
-                    Thread.currentThread().interrupt();
-                    break;
-                }
-                synchronized (warehouse) {
-                    while (warehouse.getFreeSpace() < order.getCountPizzas()) {
-                        try {
-                            warehouse.wait();
-                        } catch (InterruptedException e) {
-                            System.err.println(
-                                "Пекарь прерван при ожидании склада: " + e.getMessage());
-                            Thread.currentThread().interrupt();
-                            return;
-                        }
-                    }
-                    warehouse.addOrder(order);
-                    warehouse.notifyAll();
-                }
+            if (order == null) break;
+            order.setCondition(Condition.Cooking);
+            try {
+                Thread.sleep(cookingSpeed);
+            } catch (InterruptedException e) {
+                System.err.println(
+                    "Ошибка доставки заказа, пекарь сжёг пиццу :(" + e.getMessage());
+                Thread.currentThread().interrupt();
+                break;
             }
+            warehouse.addOrder(order);
         }
-        synchronized (warehouse) {
-            warehouse.notifyAll();
-        }
+    }
+
+    public TypeWorker getType() {
+        return TypeWorker.BAKER;
     }
 }

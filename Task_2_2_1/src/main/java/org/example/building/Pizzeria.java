@@ -2,8 +2,10 @@ package org.example.building;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 import org.example.Order;
+import org.example.SuperQueue;
+import org.example.enums.TypeWorker;
+import org.example.workers.Worker;
 import org.example.config.ConfigCreate;
 import org.example.config.PizzeriaConfig;
 import org.example.workers.Baker;
@@ -13,12 +15,12 @@ import org.example.workers.Courier;
  * Класс моей пиццерии.
  */
 public class Pizzeria {
-    private final List<Thread> threads;
+    private final List<Worker> workers;
+    private final List<WorkerThread> workerThreads;
     private final int endTime;
-    private final Queue<Order> orders;
+    private final SuperQueue orders;
     private final String pathToConfig;
-    private final List<Runnable> workers;
-    public volatile boolean isOpen;
+    private volatile boolean isOpen;
     private volatile Warehouse warehouse;
 
     /**
@@ -28,13 +30,15 @@ public class Pizzeria {
         this.pathToConfig = pathToConfig;
         this.endTime = endTime;
         this.isOpen = true;
-        this.threads = new ArrayList<>();
-        this.orders = new java.util.LinkedList<>();
+        this.orders = new SuperQueue();
         this.workers = new ArrayList<>();
+        this.workerThreads = new ArrayList<>();
     }
 
+    private record WorkerThread(Worker worker, Thread thread) {}
+
     /**
-     * Проверка пустая ли очередь заказов.
+     * Метод проверки наличия заказов в очереди на приготовление.
      */
     public boolean orderNotEmpty() {
         return !orders.isEmpty();
@@ -43,28 +47,21 @@ public class Pizzeria {
     /**
      * Метод добавления заказа в очередь на приготовление.
      */
-    public synchronized void addOrder(Order order) {
+    public void addOrder(Order order) {
         if (!isOpen) {
             throw new IllegalStateException(
                 "Не удалось добавить заказ: пиццерия закрыта.");// Заказ не принимается, так как
             // пиццерия закрыта
         }
-        orders.add(order);
+        orders.addElement(order);
         System.out.println("Заказ " + order.getOrderNimber() + " статус: " + order.getCondition());
-    }
-
-    public boolean isOpen() {
-        return isOpen;
     }
 
     /**
      * Метод взятия заказа при наличии.
      */
-    public synchronized Order takeOrder() {
-        if (orders.isEmpty()) {
-            return null;
-        }
-        return orders.poll();
+    public Order takeOrder() {
+        return orders.takeElement();
     }
 
     /**
@@ -79,7 +76,15 @@ public class Pizzeria {
             e.printStackTrace();
         }
         isOpen = false;
-        stop();
+
+        orders.close();
+
+        waitWorkersByType(TypeWorker.BAKER);
+
+        warehouse.close();
+
+        waitWorkersByType(TypeWorker.COURIER);
+
         System.out.println("Pizzeria is closed!");
     }
 
@@ -91,34 +96,38 @@ public class Pizzeria {
         PizzeriaConfig config = configCreate.createConfig(pathToConfig);
         warehouse = new Warehouse(config.getWarehouse().getCapacity());
         for (PizzeriaConfig.BakerConfig backerConf : config.getBakers()) {
-            Baker backer =
-                new Baker(backerConf.getId(), backerConf.getCookingSpeed(), warehouse, this);
-            workers.add(backer);
+            addWorker(new Baker(backerConf.getId(), backerConf.getCookingSpeed(), warehouse, this));
         }
         for (PizzeriaConfig.CourierConfig courierConf : config.getCouriers()) {
-            Courier courier =
-                new Courier(courierConf.getId(), courierConf.getSpeed(),
-                    courierConf.getTrunkCapacity(), warehouse,
-                    this);
-            workers.add(courier);
+            addWorker(new Courier(courierConf.getId(), courierConf.getSpeed(),
+                courierConf.getTrunkCapacity(), warehouse));
         }
-        for (Runnable worker : workers) {
+
+        startAllWorkers();
+    }
+
+    public void addWorker(Worker worker) {
+        workers.add(worker);
+    }
+
+    private void startAllWorkers() {
+        for (Worker worker : workers) {
             Thread thread = new Thread(worker);
-            threads.add(thread);
+            workerThreads.add(new WorkerThread(worker, thread));
             thread.start();
         }
     }
 
-    /**
-     * Конец рабочего дня.
-     */
-    private void stop() {
-        for (Thread thread : threads) {
+    private void waitWorkersByType(TypeWorker type) {
+        for (WorkerThread workerThread : workerThreads) {
+            if (workerThread.worker.getType() != type) {
+                continue;
+            }
             try {
-                thread.join();
+                workerThread.thread.join();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-                throw new RuntimeException("Не удалось дождаться завершения потока ", e);
+                break;
             }
         }
     }
