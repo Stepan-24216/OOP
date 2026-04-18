@@ -3,9 +3,8 @@ package org.example.workers;
 import static org.example.enums.Condition.Completed;
 
 import org.example.Order;
-import org.example.enums.TypeWorker;
-import org.example.building.Pizzeria;
 import org.example.building.Warehouse;
+import org.example.enums.TypeWorker;
 
 /**
  * Класс моего курьера.
@@ -33,7 +32,9 @@ public class Courier implements Worker {
     public void run() {
         while (!Thread.currentThread().isInterrupted()) {
             Order order = warehouse.takeOrder(capacity);
-            if (order == null) break;
+            if (order == null) {
+                break;
+            }
             try {
                 Thread.sleep(speed);
                 order.setCondition(Completed);

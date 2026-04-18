@@ -1,10 +1,10 @@
 package org.example.workers;
 
 import org.example.Order;
-import org.example.enums.TypeWorker;
 import org.example.building.Pizzeria;
 import org.example.building.Warehouse;
 import org.example.enums.Condition;
+import org.example.enums.TypeWorker;
 
 /**
  * Класс моих пекарей.
@@ -32,7 +32,9 @@ public class Baker implements Worker {
     public void run() {
         while (!Thread.currentThread().isInterrupted()) {
             Order order = pizzeria.takeOrder();
-            if (order == null) break;
+            if (order == null) {
+                break;
+            }
             order.setCondition(Condition.Cooking);
             try {
                 Thread.sleep(cookingSpeed);

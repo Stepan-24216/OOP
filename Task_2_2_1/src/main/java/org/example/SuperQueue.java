@@ -47,7 +47,9 @@ public class SuperQueue {
      */
     public synchronized boolean addElement(Order order) {
         while (capacity != -1 && countPizzas + order.getCountPizzas() > capacity) {
-            if (closed) return false;
+            if (closed) {
+                return false;
+            }
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -66,7 +68,9 @@ public class SuperQueue {
      */
     public synchronized Order takeElement() {
         while (queue.isEmpty()) {
-            if (closed) return null;
+            if (closed) {
+                return null;
+            }
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -94,7 +98,9 @@ public class SuperQueue {
                         return order;
                     }
                 }
-                if (closed) return null;
+                if (closed) {
+                    return null;
+                }
                 try {
                     wait();
                 } catch (InterruptedException e) {
@@ -103,7 +109,9 @@ public class SuperQueue {
                 }
                 continue;
             }
-            if (closed) return null;
+            if (closed) {
+                return null;
+            }
             try {
                 wait();
             } catch (InterruptedException e) {

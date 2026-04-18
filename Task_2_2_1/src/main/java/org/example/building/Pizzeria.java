@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import org.example.Order;
 import org.example.SuperQueue;
-import org.example.enums.TypeWorker;
-import org.example.workers.Worker;
 import org.example.config.ConfigCreate;
 import org.example.config.PizzeriaConfig;
+import org.example.enums.TypeWorker;
 import org.example.workers.Baker;
 import org.example.workers.Courier;
+import org.example.workers.Worker;
 
 /**
  * Класс моей пиццерии.
@@ -34,8 +34,6 @@ public class Pizzeria {
         this.workers = new ArrayList<>();
         this.workerThreads = new ArrayList<>();
     }
-
-    private record WorkerThread(Worker worker, Thread thread) {}
 
     /**
      * Метод проверки наличия заказов в очереди на приготовление.
@@ -130,5 +128,8 @@ public class Pizzeria {
                 break;
             }
         }
+    }
+
+    private record WorkerThread(Worker worker, Thread thread) {
     }
 }

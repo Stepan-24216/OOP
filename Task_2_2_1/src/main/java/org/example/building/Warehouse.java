@@ -1,6 +1,5 @@
 package org.example.building;
 
-import static org.example.enums.Condition.Delivering;
 import static org.example.enums.Condition.WaitingCourier;
 
 import org.example.Order;

@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import org.example.building.Warehouse;
-import org.example.enums.TypeWorker;
 import org.example.enums.Pizza;
+import org.example.enums.TypeWorker;
 import org.example.workers.Baker;
 import org.example.workers.Courier;
 import org.example.workers.Worker;
@@ -19,6 +19,17 @@ import org.junit.jupiter.api.Test;
  * Тест новых файлов.
  */
 public class TestNewFile {
+    /**
+     * Создание заказа.
+     */
+    private static Order createOrder(int id, int pizzaCount) {
+        ArrayList<Pizza> pizzas = new ArrayList<>();
+        for (int i = 0; i < pizzaCount; i++) {
+            pizzas.add(Pizza.MARGHERITA);
+        }
+        return new Order(id, pizzas);
+    }
+
     /**
      * Проверяет, что enum работников содержит ожидаемые значения.
      */
@@ -99,16 +110,5 @@ public class TestNewFile {
 
         assertSame(small, queue.takeIfFits(2));
         assertSame(big, queue.takeElement());
-    }
-
-    /**
-     * Создание заказа.
-     */
-    private static Order createOrder(int id, int pizzaCount) {
-        ArrayList<Pizza> pizzas = new ArrayList<>();
-        for (int i = 0; i < pizzaCount; i++) {
-            pizzas.add(Pizza.MARGHERITA);
-        }
-        return new Order(id, pizzas);
     }
 }
