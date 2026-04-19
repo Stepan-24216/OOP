@@ -95,6 +95,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Кушаем яблоко.</div>
 </dd>
+<dt><a href="org/example/game/GameState.html#EXIT" class="member-name-link">EXIT</a> - Enum constant in enum class org.example.game.<a href="org/example/game/GameState.html" title="enum class in org.example.game">GameState</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:G">G</h2>
 <dl class="index">
@@ -102,7 +104,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Контролер игры.</div>
 </dd>
-<dt><a href="org/example/game/GameController.html#%3Cinit%3E(org.example.map.Map,java.util.ArrayList,org.example.view.GameRenderer,org.example.view.ScoreView,int)" class="member-name-link">GameController(Map, ArrayList&lt;Snake&gt;, GameRenderer, ScoreView, int)</a> - Constructor for class org.example.game.<a href="org/example/game/GameController.html" title="class in org.example.game">GameController</a></dt>
+<dt><a href="org/example/game/GameController.html#%3Cinit%3E(org.example.map.Map,java.util.ArrayList,org.example.view.GameRenderer,org.example.view.ScoreView,int,java.lang.Runnable)" class="member-name-link">GameController(Map, ArrayList&lt;Snake&gt;, GameRenderer, ScoreView, int, Runnable)</a> - Constructor for class org.example.game.<a href="org/example/game/GameController.html" title="class in org.example.game">GameController</a></dt>
 <dd>
 <div class="block">Конструктор.</div>
 </dd>
@@ -250,9 +252,13 @@ loadScripts(document, 'script');</script>
 <h2 class="title" id="I:H">H</h2>
 <dl class="index">
 <dt><a href="org/example/view/GameEndView.html#handleGameOver(java.lang.String,org.example.snake.Snake)" class="member-name-link">handleGameOver(String, Snake)</a> - Method in class org.example.view.<a href="org/example/view/GameEndView.html" title="class in org.example.view">GameEndView</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Окно с обработкой проигрыша.</div>
+</dd>
 <dt><a href="org/example/view/GameEndView.html#handleGameWin()" class="member-name-link">handleGameWin()</a> - Method in class org.example.view.<a href="org/example/view/GameEndView.html" title="class in org.example.view">GameEndView</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Окно с обработкой победы.</div>
+</dd>
 <dt><a href="org/example/game/GameController.html#handleKeyPress(javafx.scene.input.KeyCode)" class="member-name-link">handleKeyPress(KeyCode)</a> - Method in class org.example.game.<a href="org/example/game/GameController.html" title="class in org.example.game">GameController</a></dt>
 <dd>
 <div class="block">Создание событий для нажатия определённых клавиш.</div>
@@ -283,10 +289,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="org/example/view/ScoreView.html#initScoreLabel(javafx.scene.layout.StackPane)" class="member-name-link">initScoreLabel(StackPane)</a> - Method in class org.example.view.<a href="org/example/view/ScoreView.html" title="class in org.example.view">ScoreView</a></dt>
 <dd>
 <div class="block">Инициализация счётчика.</div>
-</dd>
-<dt><a href="org/example/snake/GamepadController.html#isGamepadConnected()" class="member-name-link">isGamepadConnected()</a> - Method in class org.example.snake.<a href="org/example/snake/GamepadController.html" title="class in org.example.snake">GamepadController</a></dt>
-<dd>
-<div class="block">Проверка на то подключен ли геймпад и работает ли он в нашей игре.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:L">L</h2>
@@ -322,6 +324,8 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:M">M</h2>
 <dl class="index">
+<dt><a href="org/example/game/GameState.html#MAIN_MENU" class="member-name-link">MAIN_MENU</a> - Enum constant in enum class org.example.game.<a href="org/example/game/GameState.html" title="enum class in org.example.game">GameState</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/example/view/MainMenuController.html" class="type-name-link" title="class in org.example.view">MainMenuController</a> - Class in <a href="org/example/view/package-summary.html">org.example.view</a></dt>
 <dd>
 <div class="block">Настройки главного меню.</div>
@@ -386,6 +390,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="org/example/map/Map.html#randomSpawnApple()" class="member-name-link">randomSpawnApple()</a> - Method in class org.example.map.<a href="org/example/map/Map.html" title="class in org.example.map">Map</a></dt>
 <dd>
 <div class="block">Рандомный спавн яблока на поле.</div>
+</dd>
+<dt><a href="org/example/game/SnakeGame.html#returnToMainMenu()" class="member-name-link">returnToMainMenu()</a> - Method in class org.example.game.<a href="org/example/game/SnakeGame.html" title="class in org.example.game">SnakeGame</a></dt>
+<dd>
+<div class="block">Возвращение в главное меню.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:S">S</h2>
