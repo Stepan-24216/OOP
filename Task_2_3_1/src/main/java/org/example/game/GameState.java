@@ -5,7 +5,9 @@ package org.example.game;
  */
 public enum GameState {
     PLAY,
+    MAIN_MENU,
     PAUSE,
     LOSE,
-    WIN
+    WIN,
+    EXIT
 }

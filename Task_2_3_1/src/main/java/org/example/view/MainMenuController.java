@@ -6,10 +6,13 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.StackPane;
 import javafx.stage.DirectoryChooser;
 import org.example.game.SnakeGame;
@@ -22,8 +25,6 @@ import org.example.tool.SearchLevelInDir;
 public class MainMenuController {
     @FXML
     private StackPane container;
-    @FXML
-    private Canvas menuCanvas;
     @FXML
     private ComboBox<String> levelComboBox;
     @FXML
@@ -81,12 +82,22 @@ public class MainMenuController {
      */
     @FXML
     public void initialize() {
-        GraphicsContext gc = menuCanvas.getGraphicsContext2D();
         try {
-            gc.drawImage(new Image(getClass().getResourceAsStream("/menu.png")), 0, 0);
+            Image bgImage = new Image(getClass().getResourceAsStream("/menu.png"));
+
+            BackgroundImage backgroundImage = new BackgroundImage(
+                bgImage,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(100, 100, true, true, true, true)
+            );
+
+            container.setBackground(new javafx.scene.layout.Background(backgroundImage));
+
         } catch (Exception e) {
-            gc.setFill(javafx.scene.paint.Color.DARKSLATEGRAY);
-            gc.fillRect(0, 0, 600, 600);
+            container.setStyle("-fx-background-color: darkslategray;");
+            System.err.println("Не удалось загрузить фон: " + e.getMessage());
         }
         levels =
             SearchLevelInDir.searchLevelInDir("src/main/resources");

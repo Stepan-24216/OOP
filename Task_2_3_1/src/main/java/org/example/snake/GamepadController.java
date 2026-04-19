@@ -176,12 +176,5 @@ public class GamepadController {
                 break;
         }
     }
-
-    /**
-     * Проверка на то подключен ли геймпад и работает ли он в нашей игре.
-     */
-    public boolean isGamepadConnected() {
-        return gamepadConnected;
-    }
 }
 

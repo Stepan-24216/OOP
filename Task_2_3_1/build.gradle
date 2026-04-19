@@ -26,12 +26,12 @@ javafx {
 }
 
 application {
-    mainClass = 'org.example.SnakeGame'
+    mainClass = 'org.example.game.SnakeGame'
 }
 
 jar {
     manifest {
-        attributes 'Main-Class': 'org.example.SnakeGame'
+        attributes 'Main-Class': 'org.example.game.SnakeGame'
     }
 
     duplicatesStrategy = 'EXCLUDE'

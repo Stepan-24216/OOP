@@ -32,12 +32,13 @@ public class GameController {
     private volatile GameState gameState = GameState.PAUSE;
     private GameEndView gameEndView;
     private int gameGoal;
+    private final Runnable returnToMenuAction;
 
     /**
      * Конструктор.
      */
     public GameController(Map map, ArrayList<Snake> snakes, GameRenderer gameRenderer,
-                          ScoreView scoreView, int gameGoal) {
+                          ScoreView scoreView, int gameGoal, Runnable returnToMenuAction) {
         this.map = map;
         this.snakes = snakes;
         this.gameRenderer = gameRenderer;
@@ -48,6 +49,7 @@ public class GameController {
         this.gamepadController = new GamepadController(this);
         this.gameEndView = new GameEndView();
         this.gameGoal = gameGoal;
+        this.returnToMenuAction = returnToMenuAction;
     }
 
     /**
@@ -112,8 +114,7 @@ public class GameController {
                 gameRenderer.paintMap();
             }
         } catch (GameOverException e) {
-            gameState = GameState.LOSE;
-            gameEndView.handleGameOver(e.getMessage(), snakes.get(0));
+            finishGame(GameState.LOSE, e.getMessage(), snakes.get(0));
         }
     }
 
@@ -129,12 +130,38 @@ public class GameController {
             if (snake.tryEatApple(map)) {
                 scoreView.updateScore(snake.getScore());
                 if (snake.getScore() >= gameGoal) {
-                    gameState = GameState.WIN;
-                    gameEndView.handleGameWin();
+                    finishGame(GameState.WIN, null, snake);
                     return;
                 }
                 map.randomSpawnApple();
             }
+        }
+    }
+
+    /**
+     * Окончание игры.
+     */
+    private void finishGame(GameState endState, String loseMessage, Snake snake) {
+        if (gameState != GameState.PLAY) {
+            return;
+        }
+
+        gameState = endState;
+
+        GameState action;
+        if (endState == GameState.WIN) {
+            action = gameEndView.handleGameWin();
+        } else {
+            action = gameEndView.handleGameOver(loseMessage, snake);
+        }
+
+        if (action == GameState.EXIT) {
+            System.exit(0);
+            return;
+        }
+
+        if (returnToMenuAction != null) {
+            returnToMenuAction.run();
         }
     }
 

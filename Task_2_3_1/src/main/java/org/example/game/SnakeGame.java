@@ -52,11 +52,19 @@ public class SnakeGame extends Application {
         gameLayer.getChildren().add(canvas);
 
         map = new Map(gameWidth, gameHeight, config.getStones());
+        snakes.clear();
         Snake snake = new Snake(gameWidth, gameHeight);
         snakes.add(snake);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gameRenderer = new GameRenderer(gc, map, snakes);
-        gameController = new GameController(map, snakes, gameRenderer, score, config.getGoal());
+        gameController = new GameController(
+            map,
+            snakes,
+            gameRenderer,
+            score,
+            config.getGoal(),
+            this::returnToMainMenu
+        );
         gameLayer.requestFocus();
 
         primaryStage.setWidth(gameWidth);
@@ -73,19 +81,10 @@ public class SnakeGame extends Application {
         this.primaryStage.setTitle("SnakeGame");
         this.primaryStage.setFullScreen(true);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/main_menu.fxml"));
-        Parent menuRoot = loader.load();
-
-        this.mainMenuController = loader.getController();
-        this.mainMenuController.setGame(this);
-
-        this.gameLayer = (StackPane) menuRoot.lookup("#container");
-
+        Parent menuRoot = loadMenuRoot();
         this.scene = new Scene(menuRoot, 600, 600);
         this.primaryStage.setScene(scene);
         this.primaryStage.show();
-
-        startFromMenu();
     }
 
     /**
@@ -109,5 +108,44 @@ public class SnakeGame extends Application {
             gameController.setGameState(GameState.PLAY);
             gameController.startGameLoop();
         });
+    }
+
+    /**
+     * Возвращение в главное меню.
+     */
+    public void returnToMainMenu() {
+        Platform.runLater(() -> {
+            if (gameController != null) {
+                gameController.setGameState(GameState.PAUSE);
+            }
+
+            canvas = null;
+            map = null;
+            score = null;
+            gameRenderer = null;
+            gameController = null;
+            snakes.clear();
+
+            Parent menuRoot = loadMenuRoot();
+            scene.setRoot(menuRoot);
+        });
+    }
+
+    /**
+     * Загрузка FXML.
+     */
+    private Parent loadMenuRoot() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main_menu.fxml"));
+            Parent menuRoot = loader.load();
+
+            this.mainMenuController = loader.getController();
+            this.mainMenuController.setGame(this);
+            this.gameLayer = (StackPane) menuRoot.lookup("#container");
+
+            return menuRoot;
+        } catch (IOException e) {
+            throw new RuntimeException("Не удалось загрузить главное меню", e);
+        }
     }
 }
