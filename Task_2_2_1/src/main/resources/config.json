@@ -1,0 +1,27 @@
+{
+  "warehouse": {
+    "capacity": 5
+  },
+  "bakers": [
+    {
+      "id": 1,
+      "cookingSpeed": 5
+    },
+    {
+      "id": 2,
+      "cookingSpeed": 3
+    }
+  ],
+  "couriers": [
+    {
+      "id": 1,
+      "trunkCapacity": 3,
+      "speed": 20
+    },
+    {
+      "id": 2,
+      "trunkCapacity": 5,
+      "speed": 20
+    }
+  ]
+}
