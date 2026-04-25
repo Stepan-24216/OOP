@@ -74,10 +74,15 @@ loadScripts(document, 'script');</script>
 <div class="inheritance">org.example.view.GameRenderer</div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>All Implemented Interfaces:</dt>
+<dd><code><a href="../game/GameObserver.html" title="interface in org.example.game">GameObserver</a></code></dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">GameRenderer</span>
-<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Класс для отрисовки объектов на карте.</div>
+<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
+implements <a href="../game/GameObserver.html" title="interface in org.example.game">GameObserver</a></span></div>
+<div class="block">Отрисовка карты и змейки.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -110,27 +115,26 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#paintApple(int,int,int)" class="member-name-link">paintApple</a><wbr>(int&nbsp;x,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onGameStateChanged()" class="member-name-link">onGameStateChanged</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Модель уведомила нас об изменении состояния.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#paintApple(int,int,int)" class="member-name-link">paintApple</a><wbr>(int&nbsp;x,
  int&nbsp;y,
  int&nbsp;size)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Отрисовка яблока.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#paintMap()" class="member-name-link">paintMap</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Отрисовка карты.</div>
-</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#paintSnake(org.example.snake.Snake)" class="member-name-link">paintSnake</a><wbr>(<a href="../snake/Snake.html" title="class in org.example.snake">Snake</a>&nbsp;snake)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#paintMap()" class="member-name-link">paintMap</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Отрисовка змейки.</div>
+<div class="block">Отрисовка карты целиком.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#paintTail(javafx.scene.canvas.GraphicsContext,org.example.snake.Tail)" class="member-name-link">paintTail</a><wbr>(javafx.scene.canvas.GraphicsContext&nbsp;gc,
- <a href="../snake/Tail.html" title="class in org.example.snake">Tail</a>&nbsp;tail)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#paintSnake(org.example.snake.Snake)" class="member-name-link">paintSnake</a><wbr>(<a href="../snake/Snake.html" title="class in org.example.snake">Snake</a>&nbsp;snake)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Отрисовка хвоста змейки.</div>
+<div class="block">Отрисовка змейки.</div>
 </div>
 </div>
 </div>
@@ -167,25 +171,28 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="paintSnake(org.example.snake.Snake)">
-<h3>paintSnake</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">paintSnake</span><wbr><span class="parameters">(<a href="../snake/Snake.html" title="class in org.example.snake">Snake</a>&nbsp;snake)</span></div>
-<div class="block">Отрисовка змейки.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="paintTail(javafx.scene.canvas.GraphicsContext,org.example.snake.Tail)">
-<h3>paintTail</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">paintTail</span><wbr><span class="parameters">(javafx.scene.canvas.GraphicsContext&nbsp;gc,
- <a href="../snake/Tail.html" title="class in org.example.snake">Tail</a>&nbsp;tail)</span></div>
-<div class="block">Отрисовка хвоста змейки.</div>
+<section class="detail" id="onGameStateChanged()">
+<h3>onGameStateChanged</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onGameStateChanged</span>()</div>
+<div class="block">Модель уведомила нас об изменении состояния.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../game/GameObserver.html#onGameStateChanged()">onGameStateChanged</a></code>&nbsp;in interface&nbsp;<code><a href="../game/GameObserver.html" title="interface in org.example.game">GameObserver</a></code></dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="paintMap()">
 <h3>paintMap</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">paintMap</span>()</div>
-<div class="block">Отрисовка карты.</div>
+<div class="block">Отрисовка карты целиком.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="paintSnake(org.example.snake.Snake)">
+<h3>paintSnake</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">paintSnake</span><wbr><span class="parameters">(<a href="../snake/Snake.html" title="class in org.example.snake">Snake</a>&nbsp;snake)</span></div>
+<div class="block">Отрисовка змейки.</div>
 </section>
 </li>
 <li>

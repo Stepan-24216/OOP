@@ -74,9 +74,14 @@ loadScripts(document, 'script');</script>
 <div class="inheritance">org.example.view.ScoreView</div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>All Implemented Interfaces:</dt>
+<dd><code><a href="../game/GameObserver.html" title="interface in org.example.game">GameObserver</a></code></dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ScoreView</span>
-<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
+implements <a href="../game/GameObserver.html" title="interface in org.example.game">GameObserver</a></span></div>
 <div class="block">Отображение очков змейки.</div>
 </section>
 <section class="summary">
@@ -106,14 +111,15 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#initScoreLabel(javafx.scene.layout.StackPane)" class="member-name-link">initScoreLabel</a><wbr>(javafx.scene.layout.StackPane&nbsp;gameLayer)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#initScoreLabel(javafx.scene.layout.StackPane,org.example.snake.Snake)" class="member-name-link">initScoreLabel</a><wbr>(javafx.scene.layout.StackPane&nbsp;gameLayer,
+ <a href="../snake/Snake.html" title="class in org.example.snake">Snake</a>&nbsp;snake)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Инициализация счётчика.</div>
+<div class="block">Инициализация метки счёта и привязка к наблюдаемой змейке.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateScore(int)" class="member-name-link">updateScore</a><wbr>(int&nbsp;score)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onGameStateChanged()" class="member-name-link">onGameStateChanged</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Обновление числа.</div>
+<div class="block">Читаем счёт и обновляем метку.</div>
 </div>
 </div>
 </div>
@@ -147,17 +153,22 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="initScoreLabel(javafx.scene.layout.StackPane)">
+<section class="detail" id="initScoreLabel(javafx.scene.layout.StackPane,org.example.snake.Snake)">
 <h3>initScoreLabel</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">initScoreLabel</span><wbr><span class="parameters">(javafx.scene.layout.StackPane&nbsp;gameLayer)</span></div>
-<div class="block">Инициализация счётчика.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">initScoreLabel</span><wbr><span class="parameters">(javafx.scene.layout.StackPane&nbsp;gameLayer,
+ <a href="../snake/Snake.html" title="class in org.example.snake">Snake</a>&nbsp;snake)</span></div>
+<div class="block">Инициализация метки счёта и привязка к наблюдаемой змейке.</div>
 </section>
 </li>
 <li>
-<section class="detail" id="updateScore(int)">
-<h3>updateScore</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">updateScore</span><wbr><span class="parameters">(int&nbsp;score)</span></div>
-<div class="block">Обновление числа.</div>
+<section class="detail" id="onGameStateChanged()">
+<h3>onGameStateChanged</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onGameStateChanged</span>()</div>
+<div class="block">Читаем счёт и обновляем метку.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../game/GameObserver.html#onGameStateChanged()">onGameStateChanged</a></code>&nbsp;in interface&nbsp;<code><a href="../game/GameObserver.html" title="interface in org.example.game">GameObserver</a></code></dd>
+</dl>
 </section>
 </li>
 </ul>
