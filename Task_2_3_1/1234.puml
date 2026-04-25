@@ -1,0 +1,263 @@
+@startuml
+' --- Настройки внешнего вида для аккуратности ---
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam nodesep 50
+skinparam ranksep 50
+
+' --- Классы (сгенерировано парсером) ---
+class org.example.game.GameController {
+- Map map
+- ArrayList<Snake> snakes
+- GameRenderer gameRenderer
+- ScoreView scoreView
+- int gameWidth
+- int gameHeight
+- ArrayList<Cell> cellMap
+- GamepadController gamepadController
+- boolean upPressed
+- boolean downPressed
+- boolean leftPressed
+- boolean rightPressed
+- GameState gameState
+- GameEndView gameEndView
+- int gameGoal
++ void startGameLoop()
+- void updateGame()
+- void updateLogic()
++ void setupControls(Canvas,Scene)
++ void handleKeyPress(KeyCode)
+- void offPauseInGame()
++ boolean getGamePaused()
++ void setGameState(GameState)
+- boolean checkCollision(Snake)
+}
+
+class org.example.config.LevelConfigCreate {
++ LevelConfig createConfig(String)
+}
+
+enum org.example.game.GameState {
++  PLAY
++  PAUSE
++  LOSE
++  WIN
+}
+
+class org.example.config.LevelConfig {
+- GameSizeConfig size
+- List<StonePositionConfig> stones
+- int goal
++ int getGoal()
++ GameSizeConfig getSize()
++ List<StonePositionConfig> getStones()
+}
+
+class org.example.config.LevelConfig$GameSizeConfig {
+- int height
+- int width
++ int getHeight()
++ int getWidth()
+}
+
+class org.example.config.LevelConfig$StonePositionConfig {
+- int numString
+- int numCell
++ int getNumString()
++ int getNumCell()
+}
+
+enum org.example.map.TypeCell {
++  BODY
++  STONE
++  APPLE
++  CELL
+}
+
+class org.example.map.Map {
+- int gameWidth
+- int gameHeight
+- ArrayList<Cell> cellMap
++ void randomSpawnApple()
++ void createCellMap(int,int,List<LevelConfig.StonePositionConfig>)
++ int getOffsetRows()
++ int getCellsInRow()
++ int getGameWidth()
++ int getGameHeight()
++ ArrayList<Cell> getCellMap()
+}
+
+class org.example.game.SnakeGame {
+- ArrayList<Snake> snakes
+- Map map
+- Canvas canvas
+- Scene scene
+- Stage primaryStage
+- StackPane gameLayer
+- ScoreView score
+- GameRenderer gameRenderer
+- GameController gameController
+- MainMenuController mainMenuController
++ void initLevelDate()
++ void start(Stage)
++ void startFromMenu()
+}
+
+class org.example.tool.Tools {
++ {static} int getCellIndex(Map,int,int)
+}
+
+class org.example.snake.Snake {
+- Tail head
+- ArrayList<Tail> tails
+- int score
++ void move(int,int,ArrayList<Cell>,int,int)
++ void eatApple()
++ boolean tryEatApple(Map)
++ boolean checkDefeat(Map)
++ int getScore()
++ Tail getHead()
++ int getCordX()
++ int getCordY()
++ ArrayList<Tail> getTails()
+}
+
+class org.example.map.Cell {
+- Position position
+- TypeCell type
++ TypeCell getType()
++ void setType(TypeCell)
++ Position getPosition()
++ boolean hasApple()
++ boolean hasBody()
++ boolean hasStone()
+}
+
+class org.example.map.Cell$Position {
+- int cordX
+- int cordY
++ int getCordX()
++ int getCordY()
+}
+
+class org.example.view.MainMenuController {
+- StackPane container
+- Canvas menuCanvas
+- ComboBox<String> levelComboBox
+- Label errorLabel
+- List<LevelPath> levels
+- LevelPath selectedLevel
+- SnakeGame game
+- void handleBrowseDirectory()
+- void loadLevelsFromDirectory(String)
++ void initialize()
+- void handleStartGame()
++ LevelPath getSelectedLevel()
++ void setGame(SnakeGame)
+}
+
+class org.example.game.GameOverException {
+}
+
+class org.example.snake.Tail {
+- int cordX
+- int cordY
++ int getCordX()
++ void setCordX(int)
++ int getCordY()
++ void setCordY(int)
+}
+
+class org.example.view.ScoreView {
+- Label scoreLabel
++ void initScoreLabel(StackPane)
++ void updateScore(int)
+}
+
+class org.example.tool.SearchLevelInDir {
++ {static} List<LevelPath> searchLevelInDir(String)
+}
+
+class org.example.view.GameRenderer {
+- GraphicsContext gc
+- Map map
+- ArrayList<Snake> snakes
+- int cellSize
++ void paintSnake(Snake)
++ void paintTail(GraphicsContext,Tail)
+- void paintHead(GraphicsContext,int,int)
++ void paintMap()
++ void paintApple(int,int,int)
+}
+
+class org.example.snake.GamepadController {
+- {static} int JS_EVENT_SIZE
+- {static} int JS_EVENT_BUTTON
+- {static} int JS_EVENT_AXIS
+- {static} int JS_EVENT_INIT
+- GameController gameController
+- boolean running
+- boolean readerThreadStarted
+- boolean gamepadConnected
+- String currentDevicePath
+- void initializeGamepad()
++ void startGamepadThread()
+- void processJoystickEvent(byte[])
+- void handleAxisEvent(int,short)
+- void handleButtonEvent(int,short)
++ boolean isGamepadConnected()
+}
+
+class org.example.view.GameEndView {
++ void handleGameOver(String,Snake)
++ void handleGameWin()
+}
+
+class org.example.tool.LevelPath {
+- String nameFile
+- String path
++ String getNameFile()
++ String getPath()
+}
+
+' --- СВЯЗИ (Добавлены вручную для правильной архитектуры) ---
+
+' 1. Наследование и вложенность (было)
+org.example.config.LevelConfig +.. org.example.config.LevelConfig$GameSizeConfig
+org.example.config.LevelConfig +.. org.example.config.LevelConfig$StonePositionConfig
+javafx.application.Application <|-- org.example.SnakeGame
+org.example.map.Cell +.. org.example.map.Cell$Position
+org.example.RuntimeException <|-- org.example.GameOverException
+
+' 2. Ядро игры (Кто кого создает и хранит: Композиция)
+org.example.SnakeGame *-- org.example.GameController : "управляет"
+org.example.SnakeGame *-- org.example.view.MainMenuController : "содержит меню"
+org.example.GameController *-- org.example.map.Map : "карта"
+org.example.GameController *-- org.example.snake.Snake : "список змеек"
+org.example.GameController *-- org.example.view.GameRenderer : "отрисовщик"
+org.example.GameController *-- org.example.view.ScoreView : "счет"
+org.example.GameController *-- org.example.snake.GamepadController : "ввод"
+org.example.GameController *-- org.example.view.GameEndView : "окна конца игры"
+org.example.GameController --> org.example.GameState : "статус"
+
+' 3. Карта и её элементы
+org.example.map.Map *-- org.example.map.Cell : "состоит из ячеек"
+org.example.map.Cell --> org.example.map.TypeCell : "имеет тип"
+org.example.map.Cell *-- org.example.map.Cell$Position : "координаты"
+
+' 4. Змейка
+org.example.snake.Snake *-- org.example.snake.Tail : "состоит из"
+
+' 5. Взаимодействие Контроллеров
+org.example.snake.GamepadController --> org.example.GameController : "шлет команды"
+org.example.view.MainMenuController --> org.example.SnakeGame : "запускает игру"
+org.example.view.MainMenuController --> org.example.tool.LevelPath : "список уровней"
+
+' 6. Зависимости (использование в методах, слабая связь)
+org.example.snake.Snake ..> org.example.map.Map : "проверка коллизий"
+org.example.view.GameEndView ..> org.example.snake.Snake : "читает счет"
+org.example.config.LevelConfigCreate ..> org.example.config.LevelConfig : "создает"
+org.example.tool.SearchLevelInDir ..> org.example.tool.LevelPath : "ищет файлы"
+org.example.tool.Tools ..> org.example.map.Map : "вычисляет индексы"
+
+@enduml

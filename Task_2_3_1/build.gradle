@@ -1,0 +1,82 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    google()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+javafx {
+    version = "17"
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics' ]
+}
+
+application {
+    mainClass = 'org.example.game.SnakeGame'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.example.game.SnakeGame'
+    }
+
+    duplicatesStrategy = 'EXCLUDE'
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+run {
+    doFirst {
+        systemProperty 'javafx.modules', 'javafx.controls,javafx.fxml,javafx.graphics'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+        html.required = true
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    'org/example/view/**',
+                    'org/example/GameRenderer*',
+                    'org/example/game/GameController*',
+                    'org/example/MainMenuController*',
+                    'org/example/game/SnakeGame*',
+                    'org/example/snake/GamepadController*',
+                    'org/example/game/GameOverException*',
+                    'org/example/view/GameEndView*',
+                    'org/example/game/GameState*',
+                    'org/example/game/GameObserver*',
+                    'org/example/game/GameModel*'
+            ])
+        }))
+    }
+}
