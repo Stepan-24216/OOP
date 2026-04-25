@@ -20,34 +20,35 @@ import org.example.view.MainMenuController;
 import org.example.view.ScoreView;
 
 /**
- * Главный класс нашей игры.
+ * Главный класс игры.
  */
 public class SnakeGame extends Application {
+
     private final ArrayList<Snake> snakes = new ArrayList<>();
     private Map map;
     private Canvas canvas;
     private Scene scene;
     private Stage primaryStage;
     private StackPane gameLayer;
-    private ScoreView score;
+    private ScoreView scoreView;
     private GameRenderer gameRenderer;
     private GameController gameController;
+    private GameModel gameModel;
     private MainMenuController mainMenuController;
 
     /**
-     * Инициализируем нужные нам классы и присваиваем.
+     * Инициализация уровня.
      */
     public void initLevelDate() {
         LevelConfigCreate configCreate = new LevelConfigCreate();
         String path = mainMenuController.getSelectedLevel().getPath();
         LevelConfig config = configCreate.createConfig(path);
-        score = new ScoreView();
+
         int cellSize = 30;
         int gameWidth = config.getSize().getWidth() * cellSize;
         int gameHeight = config.getSize().getHeight() * cellSize + 60;
 
         this.canvas = new Canvas(gameWidth, gameHeight);
-
         gameLayer.getChildren().clear();
         gameLayer.getChildren().add(canvas);
 
@@ -55,28 +56,29 @@ public class SnakeGame extends Application {
         snakes.clear();
         Snake snake = new Snake(gameWidth, gameHeight);
         snakes.add(snake);
+
+        gameModel = new GameModel(map, snakes, config.getGoal());
+
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gameRenderer = new GameRenderer(gc, map, snakes);
-        gameController = new GameController(
-            map,
-            snakes,
-            gameRenderer,
-            score,
-            config.getGoal(),
-            this::returnToMainMenu
-        );
-        gameLayer.requestFocus();
+        scoreView = new ScoreView();
 
+        gameModel.addObserver(gameRenderer);
+        gameModel.addObserver(scoreView);
+
+        gameController = new GameController(gameModel, this::returnToMainMenu);
+
+        gameLayer.requestFocus();
         primaryStage.setWidth(gameWidth);
         primaryStage.setHeight(gameHeight + 60);
         primaryStage.centerOnScreen();
     }
 
     /**
-     * Метод с которого начинается игра, устанавливаем нужные нам конфигурации.
+     * Точка входа JavaFX.
      */
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("SnakeGame");
         this.primaryStage.setFullScreen(true);
@@ -88,7 +90,7 @@ public class SnakeGame extends Application {
     }
 
     /**
-     * Метод загрузки главного меню и начала игры.
+     * Запуск игры из главного меню.
      */
     public void startFromMenu() {
         Platform.runLater(() -> {
@@ -102,8 +104,10 @@ public class SnakeGame extends Application {
             initLevelDate();
             gameController.setupControls(canvas, scene);
             map.randomSpawnApple();
+
+            scoreView.initScoreLabel(gameLayer, snakes.get(0));
+
             gameRenderer.paintMap();
-            score.initScoreLabel(gameLayer);
 
             gameController.setGameState(GameState.PLAY);
             gameController.startGameLoop();
@@ -111,7 +115,7 @@ public class SnakeGame extends Application {
     }
 
     /**
-     * Возвращение в главное меню.
+     * Возврат в главное меню.
      */
     public void returnToMainMenu() {
         Platform.runLater(() -> {
@@ -121,9 +125,10 @@ public class SnakeGame extends Application {
 
             canvas = null;
             map = null;
-            score = null;
+            scoreView = null;
             gameRenderer = null;
             gameController = null;
+            gameModel = null;
             snakes.clear();
 
             Parent menuRoot = loadMenuRoot();
@@ -132,7 +137,7 @@ public class SnakeGame extends Application {
     }
 
     /**
-     * Загрузка FXML.
+     * Загрузка FXML главного меню.
      */
     private Parent loadMenuRoot() {
         try {

@@ -4,8 +4,8 @@ package org.example.tool;
  * Класс пути к файлу.
  */
 public class LevelPath {
-    private String nameFile;
-    private String path;
+    private final String nameFile;
+    private final String path;
 
     public LevelPath(String nameFile, String path) {
         this.nameFile = nameFile;

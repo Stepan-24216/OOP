@@ -3,19 +3,21 @@ package org.example.view;
 import java.util.ArrayList;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import org.example.game.GameObserver;
 import org.example.map.Cell;
 import org.example.map.Map;
 import org.example.snake.Snake;
 import org.example.snake.Tail;
 
 /**
- * Класс для отрисовки объектов на карте.
+ * Отрисовка карты и змейки.
  */
-public class GameRenderer {
-    private GraphicsContext gc;
-    private Map map;
-    private ArrayList<Snake> snakes;
-    private int cellSize = 30;
+public class GameRenderer implements GameObserver {
+
+    private final GraphicsContext gc;
+    private final Map map;
+    private final ArrayList<Snake> snakes;
+    private final int cellSize = 30;
 
     /**
      * Конструктор.
@@ -27,28 +29,66 @@ public class GameRenderer {
     }
 
     /**
+     * Модель уведомила нас об изменении состояния.
+     */
+    @Override
+    public void onGameStateChanged() {
+        paintMap();
+    }
+
+    /**
+     * Отрисовка карты целиком.
+     */
+    public void paintMap() {
+        gc.setFill(Color.rgb(57, 255, 20));
+        gc.fillRect(0, 60, map.getGameWidth(), map.getGameHeight());
+
+        for (int x = 0; x <= map.getGameWidth(); x += cellSize) {
+            gc.strokeLine(x, 60, x, map.getGameHeight());
+        }
+        for (int y = 60; y <= map.getGameHeight(); y += cellSize) {
+            gc.strokeLine(0, y, map.getGameWidth(), y);
+        }
+
+        for (Cell cell : map.getCellMap()) {
+            if (cell.hasApple()) {
+                paintApple(cell.getPosition().getCordX(),
+                    cell.getPosition().getCordY(), cellSize);
+            }
+            if (cell.hasStone()) {
+                gc.setFill(Color.GRAY);
+                gc.fillRect(cell.getPosition().getCordX(),
+                    cell.getPosition().getCordY(), cellSize, cellSize);
+            }
+        }
+
+        for (Snake snake : snakes) {
+            paintSnake(snake);
+        }
+    }
+
+    /**
      * Отрисовка змейки.
      */
     public void paintSnake(Snake snake) {
-        paintHead(gc, snake.getHead().getCordX(), snake.getHead().getCordY());
+        paintHead(snake.getHead().getCordX(), snake.getHead().getCordY());
         for (Tail tail : snake.getTails().subList(1, snake.getTails().size())) {
-            paintTail(gc, tail);
+            paintTail(tail);
         }
     }
 
     /**
      * Отрисовка хвоста змейки.
      */
-    public void paintTail(GraphicsContext gc, Tail tail) {
+    private void paintTail(Tail tail) {
         gc.setFill(Color.BLUE);
         gc.fillRect(tail.getCordX(), tail.getCordY(), cellSize, cellSize);
-
     }
 
     /**
      * Отрисовка головы змейки.
      */
-    private void paintHead(GraphicsContext gc, int x, int y) {
+    private void paintHead(int x, int y) {
         gc.setFill(Color.BLUE);
         gc.fillRect(x, y, 30, 30);
 
@@ -58,34 +98,6 @@ public class GameRenderer {
 
         gc.setFill(Color.RED);
         gc.fillArc(x + 5, y + 15, 20, 10, 0, -180, javafx.scene.shape.ArcType.ROUND);
-    }
-
-    /**
-     * Отрисовка карты.
-     */
-    public void paintMap() {
-        gc.setFill(Color.rgb(57, 255, 20));
-        gc.fillRect(0, 60, map.getGameWidth(), map.getGameHeight());
-        for (int x = 0; x <= map.getGameWidth(); x += cellSize) {
-            gc.strokeLine(x, 60, x, map.getGameHeight());
-        }
-        for (int y = 60; y <= map.getGameHeight(); y += cellSize) {
-            gc.strokeLine(0, y, map.getGameWidth(), y);
-        }
-        for (Cell cell : map.getCellMap()) {
-            if (cell.hasApple()) {
-                paintApple(cell.getPosition().getCordX(),
-                    cell.getPosition().getCordY(), this.cellSize);
-            }
-            if (cell.hasStone()) {
-                gc.setFill(Color.GRAY);
-                gc.fillRect(cell.getPosition().getCordX(),
-                    cell.getPosition().getCordY(), cellSize, cellSize);
-            }
-        }
-        for (Snake snake : snakes) {
-            paintSnake(snake);
-        }
     }
 
     /**

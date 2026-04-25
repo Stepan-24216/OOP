@@ -18,7 +18,7 @@ public class GamepadController {
     private static final int JS_EVENT_AXIS = 0x02;
     private static final int JS_EVENT_INIT = 0x80;
     private final GameController gameController;
-    private volatile boolean running = true;
+    private final boolean running = true;
     private volatile boolean readerThreadStarted = false;
     private volatile boolean gamepadConnected = false;
     private String currentDevicePath = null;

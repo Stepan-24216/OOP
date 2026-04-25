@@ -5,17 +5,22 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import org.example.game.GameObserver;
+import org.example.snake.Snake;
 
 /**
  * Отображение очков змейки.
  */
-public class ScoreView {
+public class ScoreView implements GameObserver {
+
     private Label scoreLabel;
+    private Snake snake;
 
     /**
-     * Инициализация счётчика.
+     * Инициализация метки счёта и привязка к наблюдаемой змейке.
      */
-    public void initScoreLabel(StackPane gameLayer) {
+    public void initScoreLabel(StackPane gameLayer, Snake snake) {
+        this.snake = snake;
         this.scoreLabel = new Label("Очки: 0");
         this.scoreLabel.setStyle(
             "-fx-font-size: 40px; "
@@ -31,11 +36,12 @@ public class ScoreView {
     }
 
     /**
-     * Обновление числа.
+     * Читаем счёт и обновляем метку.
      */
-    public void updateScore(int score) {
-        Platform.runLater(() -> {
-            scoreLabel.setText("Очки: " + score);
-        });
+    @Override
+    public void onGameStateChanged() {
+        if (snake != null && scoreLabel != null) {
+            Platform.runLater(() -> scoreLabel.setText("Очки: " + snake.getScore()));
+        }
     }
 }

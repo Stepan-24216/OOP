@@ -72,8 +72,10 @@ jacocoTestReport {
                     'org/example/game/SnakeGame*',
                     'org/example/snake/GamepadController*',
                     'org/example/game/GameOverException*',
-                    'org/example/view/GameEndView.java',
-                    'org/example/game/GameState*'
+                    'org/example/view/GameEndView*',
+                    'org/example/game/GameState*',
+                    'org/example/game/GameObserver*',
+                    'org/example/game/GameModel*'
             ])
         }))
     }

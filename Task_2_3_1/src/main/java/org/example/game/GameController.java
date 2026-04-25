@@ -5,64 +5,46 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
-import org.example.map.Cell;
-import org.example.map.Map;
 import org.example.snake.GamepadController;
 import org.example.snake.Snake;
 import org.example.view.GameEndView;
-import org.example.view.GameRenderer;
-import org.example.view.ScoreView;
 
 /**
- * Контролер игры.
+ * Контроллер игры
  */
 public class GameController {
-    private final Map map;
-    private final ArrayList<Snake> snakes;
-    private final GameRenderer gameRenderer;
-    private final ScoreView scoreView;
-    private final int gameWidth;
-    private final int gameHeight;
-    private final ArrayList<Cell> cellMap;
+
+    private final GameModel model;
     private final GamepadController gamepadController;
+    private final GameEndView gameEndView;
+    private final Runnable returnToMenuAction;
+
     private boolean upPressed;
     private boolean downPressed;
     private boolean leftPressed;
     private boolean rightPressed;
-    private volatile GameState gameState = GameState.PAUSE;
-    private GameEndView gameEndView;
-    private int gameGoal;
-    private final Runnable returnToMenuAction;
 
     /**
      * Конструктор.
      */
-    public GameController(Map map, ArrayList<Snake> snakes, GameRenderer gameRenderer,
-                          ScoreView scoreView, int gameGoal, Runnable returnToMenuAction) {
-        this.map = map;
-        this.snakes = snakes;
-        this.gameRenderer = gameRenderer;
-        this.scoreView = scoreView;
-        this.gameWidth = map.getGameWidth();
-        this.gameHeight = map.getGameHeight();
-        this.cellMap = map.getCellMap();
+    public GameController(GameModel model, Runnable returnToMenuAction) {
+        this.model = model;
         this.gamepadController = new GamepadController(this);
         this.gameEndView = new GameEndView();
-        this.gameGoal = gameGoal;
         this.returnToMenuAction = returnToMenuAction;
     }
 
     /**
-     * Начало цикла игры.
+     * Запуск игрового цикла.
      */
     public void startGameLoop() {
-        if (gameState != GameState.PLAY) {
+        if (model.getGameState() != GameState.PLAY) {
             return;
         }
 
         Thread gameThread = new Thread(() -> {
-            while (gameState == GameState.PLAY) {
-                Platform.runLater(this::updateGame);
+            while (model.getGameState() == GameState.PLAY) {
+                Platform.runLater(this::tick);
                 try {
                     Thread.sleep(150);
                 } catch (InterruptedException e) {
@@ -76,64 +58,42 @@ public class GameController {
     }
 
     /**
-     * Обновление игры.
+     * Один игровой тик.
      */
-    private void updateGame() {
-        if (gameState != GameState.PLAY) {
+    private void tick() {
+        if (model.getGameState() != GameState.PLAY) {
             return;
         }
-        try {
-            for (Snake snake : snakes) {
-                int speed = 30; // Пикселей за шаг
-                int snakeX = snake.getHead().getCordX();
-                int snakeY = snake.getHead().getCordY();
 
-                if (upPressed) {
-                    snakeY -= speed;
-                }
-                if (downPressed) {
-                    snakeY += speed;
-                }
-                if (leftPressed) {
-                    snakeX -= speed;
-                }
-                if (rightPressed) {
-                    snakeX += speed;
-                }
+        ArrayList<Snake> snakes = model.getSnakes();
 
-                int cellSize = 30;
-
-                if (snakeX < 0 || snakeX > gameWidth - cellSize || snakeY < 60 ||
-                    snakeY > gameHeight - cellSize) {
-                    throw new GameOverException("Змейка вышла за пределы игрового поля!");
-                }
-
-                updateLogic();
-
-                snake.move(snakeX, snakeY, cellMap, gameWidth, map.getOffsetRows());
-                gameRenderer.paintMap();
-            }
-        } catch (GameOverException e) {
-            finishGame(GameState.LOSE, e.getMessage(), snakes.get(0));
-        }
-    }
-
-    /**
-     * Получение информации о событиях на карте.
-     */
-    private void updateLogic() {
         for (Snake snake : snakes) {
-            if (checkCollision(snake)) {
-                System.out.println("Игра окончена!");
-                throw new GameOverException("Змейка врезалась в препятствие!");
+            int speed = 30;
+            int newX = snake.getHead().getCordX();
+            int newY = snake.getHead().getCordY();
+
+            if (upPressed) {
+                newY -= speed;
             }
-            if (snake.tryEatApple(map)) {
-                scoreView.updateScore(snake.getScore());
-                if (snake.getScore() >= gameGoal) {
-                    finishGame(GameState.WIN, null, snake);
-                    return;
-                }
-                map.randomSpawnApple();
+            if (downPressed) {
+                newY += speed;
+            }
+            if (leftPressed) {
+                newX -= speed;
+            }
+            if (rightPressed) {
+                newX += speed;
+            }
+
+            GameModel.StepResult result = model.step(newX, newY, snake);
+
+            if (result.state() == GameState.LOSE) {
+                finishGame(GameState.LOSE, result.message(), snake);
+                return;
+            }
+            if (result.state() == GameState.WIN) {
+                finishGame(GameState.WIN, null, snake);
+                return;
             }
         }
     }
@@ -142,18 +102,15 @@ public class GameController {
      * Окончание игры.
      */
     private void finishGame(GameState endState, String loseMessage, Snake snake) {
-        if (gameState != GameState.PLAY) {
+        if (model.getGameState() != GameState.PLAY) {
             return;
         }
 
-        gameState = endState;
+        model.setGameState(endState);
 
-        GameState action;
-        if (endState == GameState.WIN) {
-            action = gameEndView.handleGameWin();
-        } else {
-            action = gameEndView.handleGameOver(loseMessage, snake);
-        }
+        GameState action = (endState == GameState.WIN)
+            ? gameEndView.handleGameWin()
+            : gameEndView.handleGameOver(loseMessage, snake);
 
         if (action == GameState.EXIT) {
             System.exit(0);
@@ -166,7 +123,7 @@ public class GameController {
     }
 
     /**
-     * Начинаем считывать тыканья по клавишам.
+     * Привязка обработчика клавиш к сцене.
      */
     public void setupControls(Canvas canvas, Scene scene) {
         canvas.setFocusTraversable(true);
@@ -175,56 +132,52 @@ public class GameController {
     }
 
     /**
-     * Создание событий для нажатия определённых клавиш.
+     * Обработка нажатий клавиш.
      */
     public void handleKeyPress(KeyCode e) {
         switch (e) {
             case W:
             case UP:
-                offPauseInGame();
-                if (downPressed) {
-                    break;
+                resumeIfPaused();
+                if (!downPressed) {
+                    upPressed = true;
+                    leftPressed = false;
+                    rightPressed = false;
                 }
-                upPressed = true;
-                leftPressed = false;
-                rightPressed = false;
                 break;
             case S:
             case DOWN:
-                offPauseInGame();
-                if (upPressed) {
-                    break;
+                resumeIfPaused();
+                if (!upPressed) {
+                    downPressed = true;
+                    leftPressed = false;
+                    rightPressed = false;
                 }
-                downPressed = true;
-                leftPressed = false;
-                rightPressed = false;
                 break;
             case A:
             case LEFT:
-                offPauseInGame();
-                if (rightPressed) {
-                    break;
+                resumeIfPaused();
+                if (!rightPressed) {
+                    leftPressed = true;
+                    upPressed = false;
+                    downPressed = false;
                 }
-                leftPressed = true;
-                upPressed = false;
-                downPressed = false;
                 break;
             case D:
             case RIGHT:
-                offPauseInGame();
-                if (leftPressed) {
-                    break;
+                resumeIfPaused();
+                if (!leftPressed) {
+                    rightPressed = true;
+                    upPressed = false;
+                    downPressed = false;
                 }
-                rightPressed = true;
-                upPressed = false;
-                downPressed = false;
                 break;
             case SPACE:
-                if (gameState == GameState.PAUSE) {
-                    gameState = GameState.PLAY;
+                if (model.getGameState() == GameState.PAUSE) {
+                    model.setGameState(GameState.PLAY);
                     startGameLoop();
-                } else if (gameState == GameState.PLAY) {
-                    gameState = GameState.PAUSE;
+                } else if (model.getGameState() == GameState.PLAY) {
+                    model.setGameState(GameState.PAUSE);
                 }
                 break;
             case ESCAPE:
@@ -236,33 +189,19 @@ public class GameController {
     }
 
     /**
-     * Выключаем паузу.
+     * Снимаем паузу при нажатии кнопки движения.
      */
-    private void offPauseInGame() {
-        if (getGamePaused()) {
-            gameState = GameState.PLAY;
+    private void resumeIfPaused() {
+        if (model.getGameState() == GameState.PAUSE) {
+            model.setGameState(GameState.PLAY);
             startGameLoop();
         }
     }
 
     /**
-     * Получение информации о состоянии паузы.
-     */
-    public synchronized boolean getGamePaused() {
-        return gameState == GameState.PAUSE;
-    }
-
-    /**
-     * Установка состояния паузы.
+     * Установка состояния модели.
      */
     public synchronized void setGameState(GameState state) {
-        this.gameState = state;
-    }
-
-    /**
-     * Получаем инфу о жизни и здоровье змейки.
-     */
-    private boolean checkCollision(Snake snake) {
-        return snake.checkDefeat(map);
+        model.setGameState(state);
     }
 }
