@@ -66,7 +66,7 @@ public class SnakeGame extends Application {
         gameModel.addObserver(gameRenderer);
         gameModel.addObserver(scoreView);
 
-        gameController = new GameController(gameModel, this::returnToMainMenu);
+        gameController = new GameController(gameModel, this::returnToMainMenu, this::exitGame);
 
         gameLayer.requestFocus();
         primaryStage.setWidth(gameWidth);
@@ -135,6 +135,18 @@ public class SnakeGame extends Application {
             scene.setRoot(menuRoot);
         });
     }
+
+    /**
+     * Корректное завершение приложения.
+     */
+    public void exitGame() {
+        if (gameController != null) {
+            gameController.setGameState(GameState.PAUSE);
+        }
+        primaryStage.close();
+        Platform.exit();
+    }
+
 
     /**
      * Загрузка FXML главного меню.

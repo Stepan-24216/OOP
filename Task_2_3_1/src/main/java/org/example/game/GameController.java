@@ -18,6 +18,7 @@ public class GameController {
     private final GamepadController gamepadController;
     private final GameEndView gameEndView;
     private final Runnable returnToMenuAction;
+    private final Runnable exitAction;
 
     private boolean upPressed;
     private boolean downPressed;
@@ -27,11 +28,12 @@ public class GameController {
     /**
      * Конструктор.
      */
-    public GameController(GameModel model, Runnable returnToMenuAction) {
+    public GameController(GameModel model, Runnable returnToMenuAction, Runnable exitAction) {
         this.model = model;
         this.gamepadController = new GamepadController(this);
         this.gameEndView = new GameEndView();
         this.returnToMenuAction = returnToMenuAction;
+        this.exitAction = exitAction;
     }
 
     /**
@@ -113,7 +115,7 @@ public class GameController {
             : gameEndView.handleGameOver(loseMessage, snake);
 
         if (action == GameState.EXIT) {
-            System.exit(0);
+            exitAction.run();
             return;
         }
 
@@ -181,7 +183,7 @@ public class GameController {
                 }
                 break;
             case ESCAPE:
-                System.exit(0); // нужно лишь чтобы быстро закрывать игру не более
+                exitAction.run();
                 break;
             default:
                 break;
