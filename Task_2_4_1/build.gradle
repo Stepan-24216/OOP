@@ -1,0 +1,60 @@
+plugins {
+    id 'java'
+    id 'groovy'
+    id 'application'
+    id 'jacoco'
+}
+
+group = 'ru.nsu.oopchecker'
+version = '1.0.0'
+
+application {
+    mainClass = 'org.example.Main'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.groovy:groovy-all:4.0.15'
+    implementation 'org.apache.groovy:groovy-templates:4.0.15'
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = true
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    'org/example/Main*',
+                    'org/example/config/ConfigLoader*',
+                    'org/example/dsl/**',
+                    'org/example/infra/**',
+                    'org/example/report/**',
+                    'org/example/runner/CheckRunner*'
+            ])
+        }))
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.example.Main'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
