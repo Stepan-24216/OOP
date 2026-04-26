@@ -91,7 +91,9 @@ public final class TestRunner {
             return new int[] {0, 0, 0};
         }
 
-        int tests = 0, failures = 0, skipped = 0;
+        int tests = 0;
+        int failures = 0;
+        int skipped = 0;
         try (var stream = Files.list(testResultDir)) {
             for (Path file : stream.filter(p -> p.getFileName().toString().endsWith(".xml"))
                 .toList()) {

@@ -1,10 +1,11 @@
 package org.example;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.Map;
 import org.example.domain.SystemSettings;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SystemSettingsTest {
 

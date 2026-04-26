@@ -18,8 +18,7 @@ public final class GitClient {
      *
      * @param repoUrl URL удалённого репозитория
      * @param repoDir локальная папка для клона
-     * @throws IOException          если git-процесс не удалось запустить или он завершился с
-     * ошибкой
+     * @throws IOException если git-процесс не удалось запустить или он завершился с ошибкой
      * @throws InterruptedException если поток был прерван во время ожидания
      */
     public void cloneOrPull(String repoUrl, Path repoDir) throws IOException, InterruptedException {

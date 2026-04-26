@@ -1,7 +1,8 @@
 package org.example;
 
-import java.nio.file.Path;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.nio.file.Path;
 import org.example.domain.Student;
 import org.example.domain.SystemSettings;
 import org.example.domain.Task;
@@ -9,7 +10,6 @@ import org.example.domain.TaskResult;
 import org.example.runner.ScoreCalculator;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ScoreCalculatorTest {
 

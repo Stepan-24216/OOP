@@ -17,15 +17,18 @@ final class CheckPointBuilder {
 
     private static LocalDate parseDate(String raw) {
         String value = raw == null ? "" : raw.trim();
+        DateTimeParseException isoParseException;
         try {
             return LocalDate.parse(value);
-        } catch (DateTimeParseException ignored) {
+        } catch (DateTimeParseException e) {
+            isoParseException = e;
         }
         try {
             return LocalDate.parse(value, DMY);
         } catch (DateTimeParseException e) {
             throw new IllegalArgumentException(
-                "Неверный формат даты: '" + raw + "'. Используйте yyyy-MM-dd или dd-MM-yyyy.", e);
+                "Неверный формат даты: '" + raw + "'. Используйте yyyy-MM-dd или dd-MM-yyyy.",
+                isoParseException);
         }
     }
 

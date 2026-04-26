@@ -59,8 +59,8 @@ public class Main {
         }
 
         throw new IllegalArgumentException(
-            "Default config script checker.groovy not found. " +
-                "Place it in project root or src/main/resources."
+            "Default config script checker.groovy not found. "
+                + "Place it in project root or src/main/resources."
         );
     }
 }
