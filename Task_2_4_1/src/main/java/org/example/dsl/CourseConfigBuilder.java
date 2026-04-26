@@ -8,7 +8,8 @@ import org.example.domain.CheckAssignment;
 
 /**
  * Главный DSL-билдер для Groovy-конфига.
- * Обрабатывает блоки {@code tasks}, {@code groups}, {@code check}, {@code checkPoints} и {@code settings}.
+ * Обрабатывает блоки {@code tasks}, {@code groups}, {@code check}, {@code checkPoints} и {@code
+ * settings}.
  */
 public class CourseConfigBuilder {
 
@@ -66,7 +67,7 @@ public class CourseConfigBuilder {
      * Задает, кому какие задачи проверять.
      *
      * @param studentNicks GitHub-ники студентов
-     * @param taskIds id задач для проверки
+     * @param taskIds      id задач для проверки
      */
     public void check(List<String> studentNicks, List<String> taskIds) {
         config.addAssignment(new CheckAssignment(studentNicks, taskIds));

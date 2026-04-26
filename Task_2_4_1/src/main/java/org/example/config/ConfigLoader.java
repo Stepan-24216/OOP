@@ -30,7 +30,7 @@ public class ConfigLoader {
      * Выполняет Groovy-скрипт и делегирует DSL-вызовы в билдер.
      *
      * @param scriptPath путь к Groovy-скрипту
-     * @param builder билдер, который принимает DSL-вызовы
+     * @param builder    билдер, который принимает DSL-вызовы
      */
     public void evaluateScript(Path scriptPath, CourseConfigBuilder builder) {
         Binding binding = new Binding();

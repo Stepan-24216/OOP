@@ -5,18 +5,24 @@ import java.util.List;
 import org.example.domain.Group;
 import org.example.domain.Student;
 
-/** DSL-билдер для описания группы студентов в Groovy-конфиге. */
+/**
+ * DSL-билдер для описания группы студентов в Groovy-конфиге.
+ */
 final class GroupBuilder {
 
-    private String name;
     private final List<Student> students = new ArrayList<>();
+    private String name;
 
     GroupBuilder(String name) {
         this.name = name;
     }
 
-    /** Устанавливает название группы. */
-    void name(String name) { this.name = name; }
+    /**
+     * Устанавливает название группы.
+     */
+    void name(String name) {
+        this.name = name;
+    }
 
     /**
      * Добавляет студента в группу.

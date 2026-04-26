@@ -37,7 +37,8 @@ public class Main {
             if (provided.isAbsolute() && Files.exists(provided)) {
                 return provided;
             }
-            Path fromWorkDir = Paths.get(System.getProperty("user.dir")).resolve(args[0]).normalize();
+            Path fromWorkDir =
+                Paths.get(System.getProperty("user.dir")).resolve(args[0]).normalize();
             if (Files.exists(fromWorkDir)) {
                 return fromWorkDir;
             }
@@ -46,9 +47,9 @@ public class Main {
 
         Path workDir = Paths.get(System.getProperty("user.dir"));
         List<Path> candidates = List.of(
-                workDir.resolve(DEFAULT_SCRIPT),
-                workDir.resolve("src/main/resources/" + DEFAULT_SCRIPT),
-                workDir.resolve("src/main/java/org/example/" + DEFAULT_SCRIPT)
+            workDir.resolve(DEFAULT_SCRIPT),
+            workDir.resolve("src/main/resources/" + DEFAULT_SCRIPT),
+            workDir.resolve("src/main/java/org/example/" + DEFAULT_SCRIPT)
         );
 
         for (Path candidate : candidates) {
@@ -58,7 +59,7 @@ public class Main {
         }
 
         throw new IllegalArgumentException(
-                "Default config script checker.groovy not found. " +
+            "Default config script checker.groovy not found. " +
                 "Place it in project root or src/main/resources."
         );
     }

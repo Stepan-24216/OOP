@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import org.example.config.CourseConfig;
 import org.example.domain.CheckAssignment;
 import org.example.domain.Student;
@@ -21,9 +24,10 @@ import org.example.report.HtmlReportGenerator;
  */
 public class CheckRunner {
 
-    private static final Path WORK_DIR = Paths.get(System.getProperty("user.dir"), ".oop-checker-repos");
+    private static final Path WORK_DIR =
+        Paths.get(System.getProperty("user.dir"), ".oop-checker-repos");
     private static final Path REPORT_FILE = Paths.get(
-            System.getProperty("user.dir"), "build", "reports", "checker", "report.html"
+        System.getProperty("user.dir"), "build", "reports", "checker", "report.html"
     );
 
     private final CourseConfig config;
@@ -62,7 +66,7 @@ public class CheckRunner {
         Map<String, StudentReport> reportMap = new LinkedHashMap<>();
 
         for (CheckAssignment assignment : config.getAssignments()) {
-            for (String nick : assignment.getStudentNicks()) {
+            for (String nick : assignment.studentNicks()) {
                 config.findStudent(nick).ifPresent(student -> {
                     StudentReport report = reportMap.computeIfAbsent(
                         nick, k -> new StudentReport(student));
@@ -70,7 +74,7 @@ public class CheckRunner {
                     Path repoDir = WORK_DIR.resolve(nick);
                     cloneStudentRepo(student, repoDir);
 
-                    for (String taskId : assignment.getTaskIds()) {
+                    for (String taskId : assignment.taskIds()) {
                         Task task = config.getTasks().get(taskId);
                         if (task != null) {
                             TaskResult result = checkTask(student, task, repoDir);
@@ -89,12 +93,14 @@ public class CheckRunner {
      */
     private void cloneStudentRepo(Student student, Path repoDir) {
         try {
-            gitClient.cloneOrPull(student.getRepoUrl(), repoDir);
+            gitClient.cloneOrPull(student.repoUrl(), repoDir);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            System.err.println("Failed to clone repo for " + student.getGithubNick() + ": " + e.getMessage());
+            System.err.println(
+                "Failed to clone repo for " + student.githubNick() + ": " + e.getMessage());
         } catch (IOException e) {
-            System.err.println("Failed to clone repo for " + student.getGithubNick() + ": " + e.getMessage());
+            System.err.println(
+                "Failed to clone repo for " + student.githubNick() + ": " + e.getMessage());
         }
     }
 
@@ -102,7 +108,7 @@ public class CheckRunner {
      * Проверяет одну задачу в репозитории одного студента.
      *
      * @param student студент, которого проверяем
-     * @param task задача для проверки
+     * @param task    задача для проверки
      * @param repoDir корневая папка локального репозитория студента
      * @return результат проверки задачи
      */

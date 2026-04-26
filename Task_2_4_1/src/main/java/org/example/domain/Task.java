@@ -3,7 +3,9 @@ package org.example.domain;
 import java.time.LocalDate;
 import java.util.Objects;
 
-/** Лабораторная задача курса ООП. */
+/**
+ * Лабораторная задача курса ООП.
+ */
 public final class Task {
 
     private final String id;
@@ -12,7 +14,8 @@ public final class Task {
     private final LocalDate softDeadline;
     private final LocalDate hardDeadline;
 
-    public Task(String id, String name, int maxScore, LocalDate softDeadline, LocalDate hardDeadline) {
+    public Task(String id, String name, int maxScore, LocalDate softDeadline,
+                LocalDate hardDeadline) {
         this.id = Objects.requireNonNullElse(id, "");
         this.name = Objects.requireNonNullElse(name, id);
         this.maxScore = maxScore;
@@ -20,18 +23,38 @@ public final class Task {
         this.hardDeadline = hardDeadline;
     }
 
-    /** @return уникальный идентификатор задачи */
-    public String getId() { return id; }
+    /**
+     * @return уникальный идентификатор задачи
+     */
+    public String getId() {
+        return id;
+    }
 
-    /** @return отображаемое название задачи */
-    public String getName() { return name; }
+    /**
+     * @return отображаемое название задачи
+     */
+    public String getName() {
+        return name;
+    }
 
-    /** @return максимальный балл за задачу */
-    public int getMaxScore() { return maxScore; }
+    /**
+     * @return максимальный балл за задачу
+     */
+    public int getMaxScore() {
+        return maxScore;
+    }
 
-    /** @return мягкий дедлайн, после которого балл снижается вдвое */
-    public LocalDate getSoftDeadline() { return softDeadline; }
+    /**
+     * @return мягкий дедлайн, после которого балл снижается вдвое
+     */
+    public LocalDate getSoftDeadline() {
+        return softDeadline;
+    }
 
-    /** @return жёсткий дедлайн, после которого балл становится 0 */
-    public LocalDate getHardDeadline() { return hardDeadline; }
+    /**
+     * @return жёсткий дедлайн, после которого балл становится 0
+     */
+    public LocalDate getHardDeadline() {
+        return hardDeadline;
+    }
 }

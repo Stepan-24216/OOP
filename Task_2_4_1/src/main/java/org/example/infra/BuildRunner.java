@@ -7,7 +7,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-/** Запускает Gradle-задачи компиляции, проверки стиля и генерации документации. */
+/**
+ * Запускает Gradle-задачи компиляции, проверки стиля и генерации документации.
+ */
 public class BuildRunner {
 
     /**
@@ -42,8 +44,8 @@ public class BuildRunner {
 
     private boolean runGradleTask(Path taskDir, String task, boolean allowMissingTask) {
         List<String> command = Files.isExecutable(taskDir.resolve("gradlew"))
-                ? List.of("./gradlew", "--no-daemon", task)
-                : List.of("gradle", task);
+            ? List.of("./gradlew", "--no-daemon", task)
+            : List.of("gradle", task);
 
         try {
             ProcessBuilder pb = new ProcessBuilder(command);

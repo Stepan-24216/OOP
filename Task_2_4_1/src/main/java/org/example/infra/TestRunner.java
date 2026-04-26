@@ -11,12 +11,14 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import org.example.domain.TaskResult;
 
-/** Запускает тесты и собирает статистику из XML-отчётов JUnit. */
-final class TestRunner {
+/**
+ * Запускает тесты и собирает статистику из XML-отчётов JUnit.
+ */
+public final class TestRunner {
 
     private final int timeoutSeconds;
 
-    TestRunner(int timeoutSeconds) {
+    public TestRunner(int timeoutSeconds) {
         this.timeoutSeconds = timeoutSeconds;
     }
 
@@ -26,10 +28,10 @@ final class TestRunner {
      * @param taskDir папка с задачей студента
      * @param result  объект результата для заполнения
      */
-    void runTests(Path taskDir, TaskResult result) {
+    public void runTests(Path taskDir, TaskResult result) {
         List<String> command = Files.isExecutable(taskDir.resolve("gradlew"))
-                ? List.of("./gradlew", "--no-daemon", "test")
-                : List.of("gradle", "test");
+            ? List.of("./gradlew", "--no-daemon", "test")
+            : List.of("gradle", "test");
 
         boolean finished = runWithTimeout(taskDir, command);
         if (!finished) {
@@ -67,7 +69,7 @@ final class TestRunner {
                 pb.redirectErrorStream(true);
                 Process process = pb.start();
                 process.getInputStream().transferTo(OutputStream.nullOutputStream());
-                return process.waitFor() == 0 || true;
+                return process.waitFor() == 0;
             } catch (IOException | InterruptedException e) {
                 Thread.currentThread().interrupt();
                 return false;
@@ -86,31 +88,36 @@ final class TestRunner {
 
     private int[] collectCounters(Path testResultDir) {
         if (!Files.isDirectory(testResultDir)) {
-            return new int[]{0, 0, 0};
+            return new int[] {0, 0, 0};
         }
 
         int tests = 0, failures = 0, skipped = 0;
         try (var stream = Files.list(testResultDir)) {
-            for (Path file : stream.filter(p -> p.getFileName().toString().endsWith(".xml")).toList()) {
+            for (Path file : stream.filter(p -> p.getFileName().toString().endsWith(".xml"))
+                .toList()) {
                 String xml = Files.readString(file);
-                tests    += extractInt(xml, "tests");
+                tests += extractInt(xml, "tests");
                 failures += extractInt(xml, "failures");
-                skipped  += extractInt(xml, "skipped");
+                skipped += extractInt(xml, "skipped");
             }
         } catch (IOException ignored) {
-            return new int[]{0, 0, 0};
+            return new int[] {0, 0, 0};
         }
 
-        return new int[]{Math.max(0, tests - failures - skipped), failures, skipped};
+        return new int[] {Math.max(0, tests - failures - skipped), failures, skipped};
     }
 
     private int extractInt(String xml, String attribute) {
         String needle = attribute + "=\"";
         int start = xml.indexOf(needle);
-        if (start < 0) return 0;
+        if (start < 0) {
+            return 0;
+        }
         int valueStart = start + needle.length();
         int valueEnd = xml.indexOf('"', valueStart);
-        if (valueEnd < 0) return 0;
+        if (valueEnd < 0) {
+            return 0;
+        }
         try {
             return Integer.parseInt(xml.substring(valueStart, valueEnd));
         } catch (NumberFormatException e) {

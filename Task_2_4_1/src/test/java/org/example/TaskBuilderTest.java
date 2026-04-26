@@ -1,7 +1,6 @@
-package org.example;
+package org.example.dsl;
 
 import org.example.domain.Task;
-import org.example.domain.TaskBuilder;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

@@ -3,24 +3,29 @@ package org.example.domain;
 import java.time.LocalDate;
 import java.util.Objects;
 
-/** Контрольная точка для среза оценок в отчёте. */
-public final class CheckPoint {
-
-    private final String name;
-    private final LocalDate date;
+/**
+ * Контрольная точка для среза оценок в отчёте.
+ */
+public record CheckPoint(String name, LocalDate date) {
 
     public CheckPoint(String name, LocalDate date) {
         this.name = Objects.requireNonNullElse(name, "");
         this.date = date;
     }
 
-    /** @return название контрольной точки */
-    public String getName() {
+    /**
+     * @return название контрольной точки
+     */
+    @Override
+    public String name() {
         return name;
     }
 
-    /** @return дата контрольной точки */
-    public LocalDate getDate() {
+    /**
+     * @return дата контрольной точки
+     */
+    @Override
+    public LocalDate date() {
         return date;
     }
 }

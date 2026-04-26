@@ -1,6 +1,11 @@
 package org.example.config;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import org.example.domain.CheckAssignment;
 import org.example.domain.CheckPoint;
 import org.example.domain.Group;
@@ -20,45 +25,75 @@ public class CourseConfig {
     private final List<CheckPoint> checkPoints = new ArrayList<>();
     private SystemSettings settings = new SystemSettings();
 
-    /** Добавляет задачу в конфигурацию. */
+    /**
+     * Добавляет задачу в конфигурацию.
+     */
     public void addTask(Task task) {
         tasks.put(task.getId(), task);
     }
 
-    /** Добавляет группу в конфигурацию. */
+    /**
+     * Добавляет группу в конфигурацию.
+     */
     public void addGroup(Group group) {
-        groups.put(group.getName(), group);
+        groups.put(group.name(), group);
     }
 
-    /** Добавляет запись, кого и какие задачи проверять. */
+    /**
+     * Добавляет запись, кого и какие задачи проверять.
+     */
     public void addAssignment(CheckAssignment assignment) {
         assignments.add(assignment);
     }
 
-    /** Добавляет чекпоинт для промежуточной оценки. */
+    /**
+     * Добавляет чекпоинт для промежуточной оценки.
+     */
     public void addCheckPoint(CheckPoint checkPoint) {
         checkPoints.add(checkPoint);
     }
 
-    /** Обновляет системные настройки. */
+    /**
+     * @return карта задач по id
+     */
+    public Map<String, Task> getTasks() {
+        return Collections.unmodifiableMap(tasks);
+    }
+
+    /**
+     * @return карта групп по имени
+     */
+    public Map<String, Group> getGroups() {
+        return Collections.unmodifiableMap(groups);
+    }
+
+    /**
+     * @return список всех проверок
+     */
+    public List<CheckAssignment> getAssignments() {
+        return Collections.unmodifiableList(assignments);
+    }
+
+    /**
+     * @return список чекпоинтов по порядку
+     */
+    public List<CheckPoint> getCheckPoints() {
+        return Collections.unmodifiableList(checkPoints);
+    }
+
+    /**
+     * @return текущие системные настройки
+     */
+    public SystemSettings getSettings() {
+        return settings;
+    }
+
+    /**
+     * Обновляет системные настройки.
+     */
     public void setSettings(SystemSettings settings) {
         this.settings = settings;
     }
-
-    /** @return карта задач по id */
-    public Map<String, Task> getTasks() { return Collections.unmodifiableMap(tasks); }
-
-    /** @return карта групп по имени */
-    public Map<String, Group> getGroups() { return Collections.unmodifiableMap(groups); }
-
-    /** @return список всех проверок */
-    public List<CheckAssignment> getAssignments() { return Collections.unmodifiableList(assignments); }
-
-    /** @return список чекпоинтов по порядку */
-    public List<CheckPoint> getCheckPoints() { return Collections.unmodifiableList(checkPoints); }
-
-    /** @return текущие системные настройки */
-    public SystemSettings getSettings() { return settings; }
 
     /**
      * Ищет студента по GitHub-нику среди всех групп.
@@ -68,8 +103,8 @@ public class CourseConfig {
      */
     public Optional<Student> findStudent(String nick) {
         return groups.values().stream()
-                .flatMap(g -> g.getStudents().stream())
-                .filter(s -> s.getGithubNick().equals(nick))
-                .findFirst();
+            .flatMap(g -> g.students().stream())
+            .filter(s -> s.githubNick().equals(nick))
+            .findFirst();
     }
 }

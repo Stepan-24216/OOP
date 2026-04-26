@@ -37,7 +37,7 @@ public class ScoreCalculator {
         Task task = result.getTask();
         int base = computeBaseScore(result, task.getMaxScore());
 
-        int bonus = settings.getBonusFor(result.getStudent().getGithubNick(), task.getId());
+        int bonus = settings.getBonusFor(result.getStudent().githubNick(), task.getId());
         LocalDate submissionDate = getLastCommitDate(repoDir, taskId);
         int finalScore = applyDeadlinePenalty(base + bonus, task, submissionDate);
 
@@ -63,7 +63,9 @@ public class ScoreCalculator {
      * Применяет штраф за просрочку.
      */
     private int applyDeadlinePenalty(int score, Task task, LocalDate submissionDate) {
-        if (submissionDate == null) return score;
+        if (submissionDate == null) {
+            return score;
+        }
         if (task.getHardDeadline() != null && submissionDate.isAfter(task.getHardDeadline())) {
             return 0;
         }
@@ -91,7 +93,9 @@ public class ScoreCalculator {
             Process process = pb.start();
             String output = new String(process.getInputStream().readAllBytes()).trim();
             process.waitFor();
-            if (output.isEmpty()) return null;
+            if (output.isEmpty()) {
+                return null;
+            }
             return LocalDate.parse(output);
         } catch (Exception e) {
             return null;

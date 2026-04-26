@@ -4,17 +4,25 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/** Системные настройки: таймауты, пороги оценок, бонусные баллы. */
+/**
+ * Системные настройки: таймауты, пороги оценок, бонусные баллы.
+ */
 public final class SystemSettings {
 
-    private int testTimeoutSeconds = 120;
     private final Map<String, Integer> gradeThresholds = new LinkedHashMap<>();
     private final Map<String, Map<String, Integer>> bonuses = new LinkedHashMap<>();
+    private int testTimeoutSeconds = 120;
 
-    /** @return максимальное время выполнения одного теста в секундах */
-    public int getTestTimeoutSeconds() { return testTimeoutSeconds; }
+    /**
+     * @return максимальное время выполнения одного теста в секундах
+     */
+    public int getTestTimeoutSeconds() {
+        return testTimeoutSeconds;
+    }
 
-    /** Устанавливает таймаут выполнения тестов. */
+    /**
+     * Устанавливает таймаут выполнения тестов.
+     */
     public void setTestTimeoutSeconds(int testTimeoutSeconds) {
         this.testTimeoutSeconds = testTimeoutSeconds;
     }
@@ -29,7 +37,9 @@ public final class SystemSettings {
         gradeThresholds.put(grade, threshold);
     }
 
-    /** @return неизменяемая карта меток оценок и их порогов */
+    /**
+     * @return неизменяемая карта меток оценок и их порогов
+     */
     public Map<String, Integer> getGradeThresholds() {
         return Collections.unmodifiableMap(gradeThresholds);
     }

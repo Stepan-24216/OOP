@@ -5,7 +5,9 @@ import groovy.lang.MissingMethodException;
 import groovy.lang.MissingPropertyException;
 import org.codehaus.groovy.runtime.InvokerHelper;
 
-/** Перенаправляет неизвестные методы и свойства скрипта в DSL-билдер. */
+/**
+ * Перенаправляет неизвестные методы и свойства скрипта в DSL-билдер.
+ */
 public class DelegatingMetaClass extends groovy.lang.DelegatingMetaClass {
 
     private final Object delegate;
