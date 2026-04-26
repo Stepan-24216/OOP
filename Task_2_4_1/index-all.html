@@ -159,14 +159,16 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="org/example/domain/CheckPoint.html#date()" class="member-name-link">date()</a> - Method in record class org.example.domain.<a href="org/example/domain/CheckPoint.html" title="class in org.example.domain">CheckPoint</a></dt>
 <dd>
-<div class="block">Returns the value of the <code>date</code> record component.</div>
+<div class="block">Возвращает дату контрольной точки.</div>
 </dd>
 <dt><a href="org/example/dsl/DelegatingMetaClass.html" class="type-name-link" title="class in org.example.dsl">DelegatingMetaClass</a> - Class in <a href="org/example/dsl/package-summary.html">org.example.dsl</a></dt>
 <dd>
 <div class="block">Перенаправляет неизвестные методы и свойства скрипта в DSL-билдер.</div>
 </dd>
 <dt><a href="org/example/dsl/DelegatingMetaClass.html#%3Cinit%3E(groovy.lang.MetaClass,java.lang.Object)" class="member-name-link">DelegatingMetaClass(MetaClass, Object)</a> - Constructor for class org.example.dsl.<a href="org/example/dsl/DelegatingMetaClass.html" title="class in org.example.dsl">DelegatingMetaClass</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Создает метакласс, который делегирует отсутствующие вызовы в DSL-билдер.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:E">E</h2>
 <dl class="index">
@@ -199,7 +201,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="org/example/domain/Student.html#fullName()" class="member-name-link">fullName()</a> - Method in record class org.example.domain.<a href="org/example/domain/Student.html" title="class in org.example.domain">Student</a></dt>
 <dd>
-<div class="block">Returns the value of the <code>fullName</code> record component.</div>
+<div class="block">Возвращает полное имя студента.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:G">G</h2>
@@ -213,55 +215,99 @@ loadScripts(document, 'script');</script>
 <div class="block">Генерирует Javadoc-документацию.</div>
 </dd>
 <dt><a href="org/example/config/CourseConfig.html#getAssignments()" class="member-name-link">getAssignments()</a> - Method in class org.example.config.<a href="org/example/config/CourseConfig.html" title="class in org.example.config">CourseConfig</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает список всех настроенных проверок.</div>
+</dd>
 <dt><a href="org/example/domain/SystemSettings.html#getBonusFor(java.lang.String,java.lang.String)" class="member-name-link">getBonusFor(String, String)</a> - Method in class org.example.domain.<a href="org/example/domain/SystemSettings.html" title="class in org.example.domain">SystemSettings</a></dt>
 <dd>
 <div class="block">Возвращает бонусные баллы студента за задачу, или 0 если их нет.</div>
 </dd>
 <dt><a href="org/example/config/CourseConfig.html#getCheckPoints()" class="member-name-link">getCheckPoints()</a> - Method in class org.example.config.<a href="org/example/config/CourseConfig.html" title="class in org.example.config">CourseConfig</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает список контрольных точек.</div>
+</dd>
 <dt><a href="org/example/domain/TaskResult.html#getErrorMessage()" class="member-name-link">getErrorMessage()</a> - Method in class org.example.domain.<a href="org/example/domain/TaskResult.html" title="class in org.example.domain">TaskResult</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает текст ошибки по задаче.</div>
+</dd>
 <dt><a href="org/example/domain/SystemSettings.html#getGradeThresholds()" class="member-name-link">getGradeThresholds()</a> - Method in class org.example.domain.<a href="org/example/domain/SystemSettings.html" title="class in org.example.domain">SystemSettings</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает настроенные пороги оценок.</div>
+</dd>
 <dt><a href="org/example/config/CourseConfig.html#getGroups()" class="member-name-link">getGroups()</a> - Method in class org.example.config.<a href="org/example/config/CourseConfig.html" title="class in org.example.config">CourseConfig</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает карту групп по имени.</div>
+</dd>
 <dt><a href="org/example/domain/Task.html#getHardDeadline()" class="member-name-link">getHardDeadline()</a> - Method in class org.example.domain.<a href="org/example/domain/Task.html" title="class in org.example.domain">Task</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает жёсткий дедлайн задачи.</div>
+</dd>
 <dt><a href="org/example/domain/Task.html#getId()" class="member-name-link">getId()</a> - Method in class org.example.domain.<a href="org/example/domain/Task.html" title="class in org.example.domain">Task</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает идентификатор задачи.</div>
+</dd>
 <dt><a href="org/example/domain/Task.html#getMaxScore()" class="member-name-link">getMaxScore()</a> - Method in class org.example.domain.<a href="org/example/domain/Task.html" title="class in org.example.domain">Task</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает максимальный балл за задачу.</div>
+</dd>
 <dt><a href="org/example/domain/Task.html#getName()" class="member-name-link">getName()</a> - Method in class org.example.domain.<a href="org/example/domain/Task.html" title="class in org.example.domain">Task</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает отображаемое название задачи.</div>
+</dd>
 <dt><a href="org/example/dsl/DelegatingMetaClass.html#getProperty(java.lang.Object,java.lang.String)" class="member-name-link">getProperty(Object, String)</a> - Method in class org.example.dsl.<a href="org/example/dsl/DelegatingMetaClass.html" title="class in org.example.dsl">DelegatingMetaClass</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/example/domain/TaskResult.html#getScore()" class="member-name-link">getScore()</a> - Method in class org.example.domain.<a href="org/example/domain/TaskResult.html" title="class in org.example.domain">TaskResult</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает итоговый балл за задачу.</div>
+</dd>
 <dt><a href="org/example/config/CourseConfig.html#getSettings()" class="member-name-link">getSettings()</a> - Method in class org.example.config.<a href="org/example/config/CourseConfig.html" title="class in org.example.config">CourseConfig</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает системные настройки проверки.</div>
+</dd>
 <dt><a href="org/example/domain/Task.html#getSoftDeadline()" class="member-name-link">getSoftDeadline()</a> - Method in class org.example.domain.<a href="org/example/domain/Task.html" title="class in org.example.domain">Task</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает мягкий дедлайн задачи.</div>
+</dd>
 <dt><a href="org/example/domain/StudentReport.html#getStudent()" class="member-name-link">getStudent()</a> - Method in class org.example.domain.<a href="org/example/domain/StudentReport.html" title="class in org.example.domain">StudentReport</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает студента, которому принадлежит отчёт.</div>
+</dd>
 <dt><a href="org/example/domain/TaskResult.html#getStudent()" class="member-name-link">getStudent()</a> - Method in class org.example.domain.<a href="org/example/domain/TaskResult.html" title="class in org.example.domain">TaskResult</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает студента из результата проверки.</div>
+</dd>
 <dt><a href="org/example/domain/TaskResult.html#getTask()" class="member-name-link">getTask()</a> - Method in class org.example.domain.<a href="org/example/domain/TaskResult.html" title="class in org.example.domain">TaskResult</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает задачу из результата проверки.</div>
+</dd>
 <dt><a href="org/example/domain/StudentReport.html#getTaskResults()" class="member-name-link">getTaskResults()</a> - Method in class org.example.domain.<a href="org/example/domain/StudentReport.html" title="class in org.example.domain">StudentReport</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает результаты по задачам.</div>
+</dd>
 <dt><a href="org/example/config/CourseConfig.html#getTasks()" class="member-name-link">getTasks()</a> - Method in class org.example.config.<a href="org/example/config/CourseConfig.html" title="class in org.example.config">CourseConfig</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает карту задач по идентификатору.</div>
+</dd>
 <dt><a href="org/example/domain/TaskResult.html#getTestsFailed()" class="member-name-link">getTestsFailed()</a> - Method in class org.example.domain.<a href="org/example/domain/TaskResult.html" title="class in org.example.domain">TaskResult</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает число упавших тестов.</div>
+</dd>
 <dt><a href="org/example/domain/TaskResult.html#getTestsPassed()" class="member-name-link">getTestsPassed()</a> - Method in class org.example.domain.<a href="org/example/domain/TaskResult.html" title="class in org.example.domain">TaskResult</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает число пройденных тестов.</div>
+</dd>
 <dt><a href="org/example/domain/TaskResult.html#getTestsSkipped()" class="member-name-link">getTestsSkipped()</a> - Method in class org.example.domain.<a href="org/example/domain/TaskResult.html" title="class in org.example.domain">TaskResult</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает число пропущенных тестов.</div>
+</dd>
 <dt><a href="org/example/domain/SystemSettings.html#getTestTimeoutSeconds()" class="member-name-link">getTestTimeoutSeconds()</a> - Method in class org.example.domain.<a href="org/example/domain/SystemSettings.html" title="class in org.example.domain">SystemSettings</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает таймаут выполнения тестов в секундах.</div>
+</dd>
 <dt><a href="org/example/domain/StudentReport.html#getTotalScore()" class="member-name-link">getTotalScore()</a> - Method in class org.example.domain.<a href="org/example/domain/StudentReport.html" title="class in org.example.domain">StudentReport</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Возвращает сумму баллов по всем задачам.</div>
+</dd>
 <dt><a href="org/example/infra/GitClient.html" class="type-name-link" title="class in org.example.infra">GitClient</a> - Class in <a href="org/example/infra/package-summary.html">org.example.infra</a></dt>
 <dd>
 <div class="block">Обёртка над консольным git-клиентом для клонирования и обновления репозиториев.</div>
@@ -270,7 +316,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="org/example/domain/Student.html#githubNick()" class="member-name-link">githubNick()</a> - Method in record class org.example.domain.<a href="org/example/domain/Student.html" title="class in org.example.domain">Student</a></dt>
 <dd>
-<div class="block">Returns the value of the <code>githubNick</code> record component.</div>
+<div class="block">Возвращает GitHub-ник студента.</div>
 </dd>
 <dt><a href="org/example/dsl/CourseConfigBuilder.html#group(groovy.lang.Closure)" class="member-name-link">group(Closure&lt;?&gt;)</a> - Method in class org.example.dsl.<a href="org/example/dsl/CourseConfigBuilder.html" title="class in org.example.dsl">CourseConfigBuilder</a></dt>
 <dd>
@@ -321,11 +367,17 @@ loadScripts(document, 'script');</script>
 <dt><a href="org/example/dsl/DelegatingMetaClass.html#invokeMethod(java.lang.Object,java.lang.String,java.lang.Object%5B%5D)" class="member-name-link">invokeMethod(Object, String, Object[])</a> - Method in class org.example.dsl.<a href="org/example/dsl/DelegatingMetaClass.html" title="class in org.example.dsl">DelegatingMetaClass</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="org/example/domain/TaskResult.html#isCompiled()" class="member-name-link">isCompiled()</a> - Method in class org.example.domain.<a href="org/example/domain/TaskResult.html" title="class in org.example.domain">TaskResult</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Показывает, успешно ли прошла компиляция.</div>
+</dd>
 <dt><a href="org/example/domain/TaskResult.html#isDocsGenerated()" class="member-name-link">isDocsGenerated()</a> - Method in class org.example.domain.<a href="org/example/domain/TaskResult.html" title="class in org.example.domain">TaskResult</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Показывает, удалось ли сгенерировать документацию.</div>
+</dd>
 <dt><a href="org/example/domain/TaskResult.html#isStyleOk()" class="member-name-link">isStyleOk()</a> - Method in class org.example.domain.<a href="org/example/domain/TaskResult.html" title="class in org.example.domain">TaskResult</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Показывает, успешно ли прошла проверка стиля.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:L">L</h2>
 <dl class="index">
@@ -351,11 +403,11 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="org/example/domain/CheckPoint.html#name()" class="member-name-link">name()</a> - Method in record class org.example.domain.<a href="org/example/domain/CheckPoint.html" title="class in org.example.domain">CheckPoint</a></dt>
 <dd>
-<div class="block">Returns the value of the <code>name</code> record component.</div>
+<div class="block">Возвращает название контрольной точки.</div>
 </dd>
 <dt><a href="org/example/domain/Group.html#name()" class="member-name-link">name()</a> - Method in record class org.example.domain.<a href="org/example/domain/Group.html" title="class in org.example.domain">Group</a></dt>
 <dd>
-<div class="block">Returns the value of the <code>name</code> record component.</div>
+<div class="block">Возвращает название группы.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:O">O</h2>
@@ -386,7 +438,7 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="org/example/domain/Student.html#repoUrl()" class="member-name-link">repoUrl()</a> - Method in record class org.example.domain.<a href="org/example/domain/Student.html" title="class in org.example.domain">Student</a></dt>
 <dd>
-<div class="block">Returns the value of the <code>repoUrl</code> record component.</div>
+<div class="block">Возвращает ссылку на репозиторий студента.</div>
 </dd>
 <dt><a href="org/example/runner/CheckRunner.html#run()" class="member-name-link">run()</a> - Method in class org.example.runner.<a href="org/example/runner/CheckRunner.html" title="class in org.example.runner">CheckRunner</a></dt>
 <dd>
@@ -467,21 +519,23 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="org/example/domain/Student.html#%3Cinit%3E(java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">Student(String, String, String)</a> - Constructor for record class org.example.domain.<a href="org/example/domain/Student.html" title="class in org.example.domain">Student</a></dt>
 <dd>
-<div class="block">Creates an instance of a <code>Student</code> record class.</div>
+<div class="block">Создает данные студента.</div>
 </dd>
 <dt><a href="org/example/domain/CheckAssignment.html#studentNicks()" class="member-name-link">studentNicks()</a> - Method in record class org.example.domain.<a href="org/example/domain/CheckAssignment.html" title="class in org.example.domain">CheckAssignment</a></dt>
 <dd>
-<div class="block">Returns the value of the <code>studentNicks</code> record component.</div>
+<div class="block">Возвращает список GitHub-ников студентов.</div>
 </dd>
 <dt><a href="org/example/domain/StudentReport.html" class="type-name-link" title="class in org.example.domain">StudentReport</a> - Class in <a href="org/example/domain/package-summary.html">org.example.domain</a></dt>
 <dd>
 <div class="block">Сводный отчёт по всем задачам одного студента.</div>
 </dd>
 <dt><a href="org/example/domain/StudentReport.html#%3Cinit%3E(org.example.domain.Student)" class="member-name-link">StudentReport(Student)</a> - Constructor for class org.example.domain.<a href="org/example/domain/StudentReport.html" title="class in org.example.domain">StudentReport</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Создает отчет для указанного студента.</div>
+</dd>
 <dt><a href="org/example/domain/Group.html#students()" class="member-name-link">students()</a> - Method in record class org.example.domain.<a href="org/example/domain/Group.html" title="class in org.example.domain">Group</a></dt>
 <dd>
-<div class="block">Returns the value of the <code>students</code> record component.</div>
+<div class="block">Возвращает список студентов группы.</div>
 </dd>
 <dt><a href="org/example/domain/SystemSettings.html" class="type-name-link" title="class in org.example.domain">SystemSettings</a> - Class in <a href="org/example/domain/package-summary.html">org.example.domain</a></dt>
 <dd>
@@ -501,17 +555,21 @@ loadScripts(document, 'script');</script>
 <div class="block">Лабораторная задача курса ООП.</div>
 </dd>
 <dt><a href="org/example/domain/Task.html#%3Cinit%3E(java.lang.String,java.lang.String,int,java.time.LocalDate,java.time.LocalDate)" class="member-name-link">Task(String, String, int, LocalDate, LocalDate)</a> - Constructor for class org.example.domain.<a href="org/example/domain/Task.html" title="class in org.example.domain">Task</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Создает задачу курса.</div>
+</dd>
 <dt><a href="org/example/domain/CheckAssignment.html#taskIds()" class="member-name-link">taskIds()</a> - Method in record class org.example.domain.<a href="org/example/domain/CheckAssignment.html" title="class in org.example.domain">CheckAssignment</a></dt>
 <dd>
-<div class="block">Returns the value of the <code>taskIds</code> record component.</div>
+<div class="block">Возвращает список идентификаторов задач.</div>
 </dd>
 <dt><a href="org/example/domain/TaskResult.html" class="type-name-link" title="class in org.example.domain">TaskResult</a> - Class in <a href="org/example/domain/package-summary.html">org.example.domain</a></dt>
 <dd>
 <div class="block">Результат проверки одной задачи у одного студента.</div>
 </dd>
 <dt><a href="org/example/domain/TaskResult.html#%3Cinit%3E(org.example.domain.Student,org.example.domain.Task)" class="member-name-link">TaskResult(Student, Task)</a> - Constructor for class org.example.domain.<a href="org/example/domain/TaskResult.html" title="class in org.example.domain">TaskResult</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Создает результат проверки для конкретного студента и задачи.</div>
+</dd>
 <dt><a href="org/example/dsl/CourseConfigBuilder.html#tasks(groovy.lang.Closure)" class="member-name-link">tasks(Closure&lt;?&gt;)</a> - Method in class org.example.dsl.<a href="org/example/dsl/CourseConfigBuilder.html" title="class in org.example.dsl">CourseConfigBuilder</a></dt>
 <dd>
 <div class="block">Открывает блок со списком задач.</div>
