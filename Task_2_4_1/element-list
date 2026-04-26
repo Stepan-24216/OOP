@@ -1,0 +1,7 @@
+org.example
+org.example.config
+org.example.domain
+org.example.dsl
+org.example.infra
+org.example.report
+org.example.runner
