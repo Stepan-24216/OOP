@@ -1,13 +1,13 @@
 package org.example;
 
+import java.nio.file.Path;
+
 import org.example.domain.Student;
 import org.example.domain.SystemSettings;
 import org.example.domain.Task;
 import org.example.domain.TaskResult;
 import org.example.runner.ScoreCalculator;
 import org.junit.jupiter.api.Test;
-
-import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -31,7 +31,6 @@ class ScoreCalculatorTest {
     @Test
     void calculate_usesPassedRatioWhenTestsExist() {
         SystemSettings settings = new SystemSettings();
-        ScoreCalculator calculator = new ScoreCalculator(settings);
 
         Task task = new Task("Task_1_2", "Task 1.2", 10, null, null);
         Student student = new Student("Stepan Efimov", "efimov", "https://example.com/repo.git");
@@ -41,6 +40,7 @@ class ScoreCalculatorTest {
         result.setTestsPassed(6);
         result.setTestsFailed(2);
         result.setTestsSkipped(2);
+        ScoreCalculator calculator = new ScoreCalculator(settings);
 
         calculator.calculate(result, Path.of("/tmp/not-a-repo"), task.getId());
 
@@ -51,7 +51,6 @@ class ScoreCalculatorTest {
     void calculate_appliesBonusAndCapsByMaxPlusBonus() {
         SystemSettings settings = new SystemSettings();
         settings.setBonus("efimov", "Task_1_3", 5);
-        ScoreCalculator calculator = new ScoreCalculator(settings);
 
         Task task = new Task("Task_1_3", "Task 1.3", 10, null, null);
         Student student = new Student("Stepan Efimov", "efimov", "https://example.com/repo.git");
@@ -60,6 +59,7 @@ class ScoreCalculatorTest {
         result.setTestsPassed(10);
         result.setTestsFailed(0);
         result.setTestsSkipped(0);
+        ScoreCalculator calculator = new ScoreCalculator(settings);
 
         calculator.calculate(result, Path.of("/tmp/not-a-repo"), task.getId());
 

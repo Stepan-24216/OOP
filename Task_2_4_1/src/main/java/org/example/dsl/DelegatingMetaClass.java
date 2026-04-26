@@ -12,6 +12,9 @@ public class DelegatingMetaClass extends groovy.lang.DelegatingMetaClass {
 
     private final Object delegate;
 
+    /**
+     * Создает метакласс, который делегирует отсутствующие вызовы в DSL-билдер.
+     */
     public DelegatingMetaClass(MetaClass adaptee, Object delegate) {
         super(adaptee);
         this.delegate = delegate;

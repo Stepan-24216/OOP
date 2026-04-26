@@ -7,6 +7,9 @@ import java.util.Objects;
  */
 public record Student(String fullName, String githubNick, String repoUrl) {
 
+    /**
+     * Создает данные студента.
+     */
     public Student(String fullName, String githubNick, String repoUrl) {
         this.fullName = Objects.requireNonNullElse(fullName, "");
         this.githubNick = Objects.requireNonNullElse(githubNick, "");
@@ -14,6 +17,8 @@ public record Student(String fullName, String githubNick, String repoUrl) {
     }
 
     /**
+     * Возвращает полное имя студента.
+     *
      * @return полное имя студента
      */
     @Override
@@ -22,6 +27,8 @@ public record Student(String fullName, String githubNick, String repoUrl) {
     }
 
     /**
+     * Возвращает GitHub-ник студента.
+     *
      * @return GitHub-ник студента
      */
     @Override
@@ -30,6 +37,8 @@ public record Student(String fullName, String githubNick, String repoUrl) {
     }
 
     /**
+     * Возвращает ссылку на репозиторий студента.
+     *
      * @return URL репозитория студента
      */
     @Override

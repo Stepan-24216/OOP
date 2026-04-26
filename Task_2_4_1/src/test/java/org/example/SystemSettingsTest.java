@@ -1,9 +1,8 @@
 package org.example;
 
+import java.util.Map;
 import org.example.domain.SystemSettings;
 import org.junit.jupiter.api.Test;
-
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

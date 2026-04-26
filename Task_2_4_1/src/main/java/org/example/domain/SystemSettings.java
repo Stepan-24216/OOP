@@ -14,6 +14,8 @@ public final class SystemSettings {
     private int testTimeoutSeconds = 120;
 
     /**
+     * Возвращает таймаут выполнения тестов в секундах.
+     *
      * @return максимальное время выполнения одного теста в секундах
      */
     public int getTestTimeoutSeconds() {
@@ -38,6 +40,8 @@ public final class SystemSettings {
     }
 
     /**
+     * Возвращает настроенные пороги оценок.
+     *
      * @return неизменяемая карта меток оценок и их порогов
      */
     public Map<String, Integer> getGradeThresholds() {

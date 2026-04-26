@@ -39,13 +39,11 @@ jacocoTestReport {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
                     'org/example/Main*',
-                    'org/example/CheckRunner*',
-                    'org/example/ConfigLoader*',
-                    'org/example/DelegatingMetaClass*',
-                    'org/example/HtmlReportGenerator*',
-                    'org/example/BuildRunner*',
-                    'org/example/GitClient*',
-                    'org/example/TestRunner*'
+                    'org/example/config/ConfigLoader*',
+                    'org/example/dsl/**',
+                    'org/example/infra/**',
+                    'org/example/report/**',
+                    'org/example/runner/CheckRunner*'
             ])
         }))
     }

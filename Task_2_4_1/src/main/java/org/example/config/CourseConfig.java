@@ -54,6 +54,8 @@ public class CourseConfig {
     }
 
     /**
+     * Возвращает карту задач по идентификатору.
+     *
      * @return карта задач по id
      */
     public Map<String, Task> getTasks() {
@@ -61,6 +63,8 @@ public class CourseConfig {
     }
 
     /**
+     * Возвращает карту групп по имени.
+     *
      * @return карта групп по имени
      */
     public Map<String, Group> getGroups() {
@@ -68,6 +72,8 @@ public class CourseConfig {
     }
 
     /**
+     * Возвращает список всех настроенных проверок.
+     *
      * @return список всех проверок
      */
     public List<CheckAssignment> getAssignments() {
@@ -75,6 +81,8 @@ public class CourseConfig {
     }
 
     /**
+     * Возвращает список контрольных точек.
+     *
      * @return список чекпоинтов по порядку
      */
     public List<CheckPoint> getCheckPoints() {
@@ -82,6 +90,8 @@ public class CourseConfig {
     }
 
     /**
+     * Возвращает системные настройки проверки.
+     *
      * @return текущие системные настройки
      */
     public SystemSettings getSettings() {

@@ -16,12 +16,17 @@ public final class TaskResult {
     private int score;
     private String errorMessage;
 
+    /**
+     * Создает результат проверки для конкретного студента и задачи.
+     */
     public TaskResult(Student student, Task task) {
         this.student = student;
         this.task = task;
     }
 
     /**
+     * Возвращает студента из результата проверки.
+     *
      * @return студент, у которого проверялась задача
      */
     public Student getStudent() {
@@ -29,6 +34,8 @@ public final class TaskResult {
     }
 
     /**
+     * Возвращает задачу из результата проверки.
+     *
      * @return проверяемая задача
      */
     public Task getTask() {
@@ -36,6 +43,8 @@ public final class TaskResult {
     }
 
     /**
+     * Показывает, успешно ли прошла компиляция.
+     *
      * @return true, если компиляция прошла успешно
      */
     public boolean isCompiled() {
@@ -50,6 +59,8 @@ public final class TaskResult {
     }
 
     /**
+     * Показывает, успешно ли прошла проверка стиля.
+     *
      * @return true, если проверка стиля прошла успешно
      */
     public boolean isStyleOk() {
@@ -64,6 +75,8 @@ public final class TaskResult {
     }
 
     /**
+     * Показывает, удалось ли сгенерировать документацию.
+     *
      * @return true, если документация была успешно сгенерирована
      */
     public boolean isDocsGenerated() {
@@ -78,6 +91,8 @@ public final class TaskResult {
     }
 
     /**
+     * Возвращает число пройденных тестов.
+     *
      * @return количество пройденных тестов
      */
     public int getTestsPassed() {
@@ -92,6 +107,8 @@ public final class TaskResult {
     }
 
     /**
+     * Возвращает число упавших тестов.
+     *
      * @return количество упавших тестов
      */
     public int getTestsFailed() {
@@ -106,6 +123,8 @@ public final class TaskResult {
     }
 
     /**
+     * Возвращает число пропущенных тестов.
+     *
      * @return количество пропущенных тестов
      */
     public int getTestsSkipped() {
@@ -120,6 +139,8 @@ public final class TaskResult {
     }
 
     /**
+     * Возвращает итоговый балл за задачу.
+     *
      * @return итоговый балл за задачу
      */
     public int getScore() {
@@ -134,6 +155,8 @@ public final class TaskResult {
     }
 
     /**
+     * Возвращает текст ошибки по задаче.
+     *
      * @return сообщение об ошибке, если какой-либо шаг завершился неудачей
      */
     public String getErrorMessage() {

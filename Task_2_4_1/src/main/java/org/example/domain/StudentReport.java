@@ -12,11 +12,16 @@ public final class StudentReport {
     private final Student student;
     private final List<TaskResult> taskResults = new ArrayList<>();
 
+    /**
+     * Создает отчет для указанного студента.
+     */
     public StudentReport(Student student) {
         this.student = student;
     }
 
     /**
+     * Возвращает студента, которому принадлежит отчёт.
+     *
      * @return студент, которому принадлежит отчёт
      */
     public Student getStudent() {
@@ -24,6 +29,8 @@ public final class StudentReport {
     }
 
     /**
+     * Возвращает результаты по задачам.
+     *
      * @return неизменяемый список результатов по задачам
      */
     public List<TaskResult> getTaskResults() {
@@ -38,6 +45,8 @@ public final class StudentReport {
     }
 
     /**
+     * Возвращает сумму баллов по всем задачам.
+     *
      * @return сумма баллов по всем задачам
      */
     public int getTotalScore() {

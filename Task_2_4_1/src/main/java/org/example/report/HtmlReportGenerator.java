@@ -1,6 +1,5 @@
 package org.example.report;
 
-
 import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -106,21 +105,41 @@ public class HtmlReportGenerator {
      */
     private String renderTaskRow(TaskResult result) {
         Task task = result.getTask();
-        return "<tr>" +
-            "<td>" + escape(task.getName()) + " (" + escape(task.getId()) + ")</td>" +
-            "<td class='" + (result.isCompiled() ? "ok" : "fail") + "'>" +
-            (result.isCompiled() ? "✓" : "✗") + "</td>" +
-            "<td class='" + (result.isStyleOk() ? "ok" : "fail") + "'>" +
-            (result.isStyleOk() ? "✓" : "✗") + "</td>" +
-            "<td class='" + (result.isDocsGenerated() ? "ok" : "fail") + "'>" +
-            (result.isDocsGenerated() ? "✓" : "✗") + "</td>" +
-            "<td>" + result.getTestsPassed() + "</td>" +
-            "<td>" + result.getTestsFailed() + "</td>" +
-            "<td>" + result.getTestsSkipped() + "</td>" +
-            "<td>" + result.getScore() + " / " + task.getMaxScore() + "</td>" +
-            "<td>" + (result.getErrorMessage() != null ? escape(result.getErrorMessage()) : "") +
-            "</td>" +
-            "</tr>\n";
+        StringBuilder row = new StringBuilder();
+        row.append("<tr>");
+        row.append("<td>")
+            .append(escape(task.getName()))
+            .append(" (")
+            .append(escape(task.getId()))
+            .append(")</td>");
+        row.append("<td class='")
+            .append(result.isCompiled() ? "ok" : "fail")
+            .append("'>")
+            .append(result.isCompiled() ? "✓" : "✗")
+            .append("</td>");
+        row.append("<td class='")
+            .append(result.isStyleOk() ? "ok" : "fail")
+            .append("'>")
+            .append(result.isStyleOk() ? "✓" : "✗")
+            .append("</td>");
+        row.append("<td class='")
+            .append(result.isDocsGenerated() ? "ok" : "fail")
+            .append("'>")
+            .append(result.isDocsGenerated() ? "✓" : "✗")
+            .append("</td>");
+        row.append("<td>").append(result.getTestsPassed()).append("</td>");
+        row.append("<td>").append(result.getTestsFailed()).append("</td>");
+        row.append("<td>").append(result.getTestsSkipped()).append("</td>");
+        row.append("<td>")
+            .append(result.getScore())
+            .append(" / ")
+            .append(task.getMaxScore())
+            .append("</td>");
+        row.append("<td>")
+            .append(result.getErrorMessage() != null ? escape(result.getErrorMessage()) : "")
+            .append("</td>");
+        row.append("</tr>\n");
+        return row.toString();
     }
 
     /**

@@ -15,6 +15,8 @@ public record CheckAssignment(List<String> studentNicks, List<String> taskIds) {
     }
 
     /**
+     * Возвращает список GitHub-ников студентов.
+     *
      * @return список GitHub-ников студентов
      */
     @Override
@@ -23,6 +25,8 @@ public record CheckAssignment(List<String> studentNicks, List<String> taskIds) {
     }
 
     /**
+     * Возвращает список идентификаторов задач.
+     *
      * @return список id задач
      */
     @Override

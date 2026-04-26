@@ -1,13 +1,12 @@
 package org.example;
 
+import java.time.LocalDate;
+import java.util.List;
 import org.example.config.CourseConfig;
 import org.example.domain.Group;
 import org.example.domain.Student;
 import org.example.domain.Task;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

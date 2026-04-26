@@ -16,6 +16,8 @@ public record Group(String name, List<Student> students) {
     }
 
     /**
+     * Возвращает название группы.
+     *
      * @return название группы
      */
     @Override
@@ -24,6 +26,8 @@ public record Group(String name, List<Student> students) {
     }
 
     /**
+     * Возвращает список студентов группы.
+     *
      * @return студенты группы
      */
     @Override

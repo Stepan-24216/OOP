@@ -14,6 +14,9 @@ public final class Task {
     private final LocalDate softDeadline;
     private final LocalDate hardDeadline;
 
+    /**
+     * Создает задачу курса.
+     */
     public Task(String id, String name, int maxScore, LocalDate softDeadline,
                 LocalDate hardDeadline) {
         this.id = Objects.requireNonNullElse(id, "");
@@ -24,6 +27,8 @@ public final class Task {
     }
 
     /**
+     * Возвращает идентификатор задачи.
+     *
      * @return уникальный идентификатор задачи
      */
     public String getId() {
@@ -31,6 +36,8 @@ public final class Task {
     }
 
     /**
+     * Возвращает отображаемое название задачи.
+     *
      * @return отображаемое название задачи
      */
     public String getName() {
@@ -38,6 +45,8 @@ public final class Task {
     }
 
     /**
+     * Возвращает максимальный балл за задачу.
+     *
      * @return максимальный балл за задачу
      */
     public int getMaxScore() {
@@ -45,6 +54,8 @@ public final class Task {
     }
 
     /**
+     * Возвращает мягкий дедлайн задачи.
+     *
      * @return мягкий дедлайн, после которого балл снижается вдвое
      */
     public LocalDate getSoftDeadline() {
@@ -52,6 +63,8 @@ public final class Task {
     }
 
     /**
+     * Возвращает жёсткий дедлайн задачи.
+     *
      * @return жёсткий дедлайн, после которого балл становится 0
      */
     public LocalDate getHardDeadline() {

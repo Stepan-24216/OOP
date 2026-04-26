@@ -14,6 +14,8 @@ public record CheckPoint(String name, LocalDate date) {
     }
 
     /**
+     * Возвращает название контрольной точки.
+     *
      * @return название контрольной точки
      */
     @Override
@@ -22,6 +24,8 @@ public record CheckPoint(String name, LocalDate date) {
     }
 
     /**
+     * Возвращает дату контрольной точки.
+     *
      * @return дата контрольной точки
      */
     @Override
