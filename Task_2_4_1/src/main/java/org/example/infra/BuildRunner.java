@@ -42,6 +42,9 @@ public class BuildRunner {
         return runGradleTask(taskDir, "javadoc", true);
     }
 
+    /**
+     * Запускает Gradle-задачу и проверяет её результат.
+     */
     private boolean runGradleTask(Path taskDir, String task, boolean allowMissingTask) {
         List<String> command = Files.isExecutable(taskDir.resolve("gradlew"))
             ? List.of("./gradlew", "--no-daemon", task)
@@ -63,6 +66,9 @@ public class BuildRunner {
         }
     }
 
+    /**
+     * Считывает весь вывод из InputStream в строку.
+     */
     private String readAll(InputStream in) throws IOException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         in.transferTo(out);
