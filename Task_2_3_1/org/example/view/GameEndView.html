@@ -105,14 +105,15 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../game/GameState.html" title="enum class in org.example.game">GameState</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#handleGameOver(java.lang.String,org.example.snake.Snake)" class="member-name-link">handleGameOver</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message,
- <a href="../snake/Snake.html" title="class in org.example.snake">Snake</a>&nbsp;snake)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#handleGameOver(java.lang.String,org.example.snake.Snake,java.util.function.Consumer)" class="member-name-link">handleGameOver</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message,
+ <a href="../snake/Snake.html" title="class in org.example.snake">Snake</a>&nbsp;snake,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../game/GameState.html" title="enum class in org.example.game">GameState</a>&gt;&nbsp;onChoice)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Окно с обработкой проигрыша.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../game/GameState.html" title="enum class in org.example.game">GameState</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#handleGameWin()" class="member-name-link">handleGameWin</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#handleGameWin(java.util.function.Consumer)" class="member-name-link">handleGameWin</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../game/GameState.html" title="enum class in org.example.game">GameState</a>&gt;&nbsp;onChoice)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Окно с обработкой победы.</div>
 </div>
@@ -148,17 +149,18 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="handleGameOver(java.lang.String,org.example.snake.Snake)">
+<section class="detail" id="handleGameOver(java.lang.String,org.example.snake.Snake,java.util.function.Consumer)">
 <h3>handleGameOver</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../game/GameState.html" title="enum class in org.example.game">GameState</a></span>&nbsp;<span class="element-name">handleGameOver</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message,
- <a href="../snake/Snake.html" title="class in org.example.snake">Snake</a>&nbsp;snake)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">handleGameOver</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message,
+ <a href="../snake/Snake.html" title="class in org.example.snake">Snake</a>&nbsp;snake,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../game/GameState.html" title="enum class in org.example.game">GameState</a>&gt;&nbsp;onChoice)</span></div>
 <div class="block">Окно с обработкой проигрыша.</div>
 </section>
 </li>
 <li>
-<section class="detail" id="handleGameWin()">
+<section class="detail" id="handleGameWin(java.util.function.Consumer)">
 <h3>handleGameWin</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../game/GameState.html" title="enum class in org.example.game">GameState</a></span>&nbsp;<span class="element-name">handleGameWin</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">handleGameWin</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="../game/GameState.html" title="enum class in org.example.game">GameState</a>&gt;&nbsp;onChoice)</span></div>
 <div class="block">Окно с обработкой победы.</div>
 </section>
 </li>

@@ -49,7 +49,7 @@ loadScripts(document, 'script');</script>
 <div class="header">
 <h1>Index</h1>
 </div>
-<a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:V">V</a>&nbsp;<a href="#I:W">W</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a><span class="vertical-separator">|</span><a href="serialized-form.html">Serialized&nbsp;Form</a>
+<a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:V">V</a>&nbsp;<a href="#I:W">W</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a><span class="vertical-separator">|</span><a href="serialized-form.html">Serialized&nbsp;Form</a>
 <h2 class="title" id="I:A">A</h2>
 <dl class="index">
 <dt><a href="org/example/game/GameModel.html#addObserver(org.example.game.GameObserver)" class="member-name-link">addObserver(GameObserver)</a> - Method in class org.example.game.<a href="org/example/game/GameModel.html" title="class in org.example.game">GameModel</a></dt>
@@ -84,6 +84,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Проверка на поражение.</div>
 </dd>
+<dt><a href="org/example/snake/Snake.html#containsPoint(int,int)" class="member-name-link">containsPoint(int, int)</a> - Method in class org.example.snake.<a href="org/example/snake/Snake.html" title="class in org.example.snake">Snake</a></dt>
+<dd>
+<div class="block">Проверка, находится ли точка внутри змейки.</div>
+</dd>
 <dt><a href="org/example/map/Map.html#createCellMap(int,int,java.util.List)" class="member-name-link">createCellMap(int, int, List&lt;LevelConfig.StonePositionConfig&gt;)</a> - Method in class org.example.map.<a href="org/example/map/Map.html" title="class in org.example.map">Map</a></dt>
 <dd>
 <div class="block">Создание массива клеток нашего поля карты.</div>
@@ -92,6 +96,15 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Создание конфига.</div>
 </dd>
+</dl>
+<h2 class="title" id="I:D">D</h2>
+<dl class="index">
+<dt><a href="org/example/snake/Direction.html" class="type-name-link" title="enum class in org.example.snake">Direction</a> - Enum Class in <a href="org/example/snake/package-summary.html">org.example.snake</a></dt>
+<dd>
+<div class="block">Направление движения змейки.</div>
+</dd>
+<dt><a href="org/example/snake/Direction.html#DOWN" class="member-name-link">DOWN</a> - Enum constant in enum class org.example.snake.<a href="org/example/snake/Direction.html" title="enum class in org.example.snake">Direction</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:E">E</h2>
 <dl class="index">
@@ -116,7 +129,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Контроллер игры</div>
 </dd>
-<dt><a href="org/example/game/GameController.html#%3Cinit%3E(org.example.game.GameModel,java.lang.Runnable,java.lang.Runnable)" class="member-name-link">GameController(GameModel, Runnable, Runnable)</a> - Constructor for class org.example.game.<a href="org/example/game/GameController.html" title="class in org.example.game">GameController</a></dt>
+<dt><a href="org/example/game/GameController.html#%3Cinit%3E(org.example.game.GameModel,org.example.view.GameEndView,java.lang.Runnable,java.lang.Runnable)" class="member-name-link">GameController(GameModel, GameEndView, Runnable, Runnable)</a> - Constructor for class org.example.game.<a href="org/example/game/GameController.html" title="class in org.example.game">GameController</a></dt>
 <dd>
 <div class="block">Конструктор.</div>
 </dd>
@@ -200,6 +213,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Получение координаты игрик.</div>
 </dd>
+<dt><a href="org/example/snake/Direction.html#getDeltaX()" class="member-name-link">getDeltaX()</a> - Method in enum class org.example.snake.<a href="org/example/snake/Direction.html" title="enum class in org.example.snake">Direction</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/example/snake/Direction.html#getDeltaY()" class="member-name-link">getDeltaY()</a> - Method in enum class org.example.snake.<a href="org/example/snake/Direction.html" title="enum class in org.example.snake">Direction</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/example/map/Map.html#getGameHeight()" class="member-name-link">getGameHeight()</a> - Method in class org.example.map.<a href="org/example/map/Map.html" title="class in org.example.map">Map</a></dt>
 <dd>
 <div class="block">Высота поля.</div>
@@ -281,11 +298,15 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:H">H</h2>
 <dl class="index">
-<dt><a href="org/example/view/GameEndView.html#handleGameOver(java.lang.String,org.example.snake.Snake)" class="member-name-link">handleGameOver(String, Snake)</a> - Method in class org.example.view.<a href="org/example/view/GameEndView.html" title="class in org.example.view">GameEndView</a></dt>
+<dt><a href="org/example/game/GameController.html#handleDirectionInput(org.example.snake.Direction)" class="member-name-link">handleDirectionInput(Direction)</a> - Method in class org.example.game.<a href="org/example/game/GameController.html" title="class in org.example.game">GameController</a></dt>
+<dd>
+<div class="block">Приём направления движения от любого источника ввода.</div>
+</dd>
+<dt><a href="org/example/view/GameEndView.html#handleGameOver(java.lang.String,org.example.snake.Snake,java.util.function.Consumer)" class="member-name-link">handleGameOver(String, Snake, Consumer&lt;GameState&gt;)</a> - Method in class org.example.view.<a href="org/example/view/GameEndView.html" title="class in org.example.view">GameEndView</a></dt>
 <dd>
 <div class="block">Окно с обработкой проигрыша.</div>
 </dd>
-<dt><a href="org/example/view/GameEndView.html#handleGameWin()" class="member-name-link">handleGameWin()</a> - Method in class org.example.view.<a href="org/example/view/GameEndView.html" title="class in org.example.view">GameEndView</a></dt>
+<dt><a href="org/example/view/GameEndView.html#handleGameWin(java.util.function.Consumer)" class="member-name-link">handleGameWin(Consumer&lt;GameState&gt;)</a> - Method in class org.example.view.<a href="org/example/view/GameEndView.html" title="class in org.example.view">GameEndView</a></dt>
 <dd>
 <div class="block">Окно с обработкой победы.</div>
 </dd>
@@ -324,9 +345,13 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Инициализация метки счёта и привязка к наблюдаемой змейке.</div>
 </dd>
+<dt><a href="org/example/snake/Direction.html#isOpposite(org.example.snake.Direction)" class="member-name-link">isOpposite(Direction)</a> - Method in enum class org.example.snake.<a href="org/example/snake/Direction.html" title="enum class in org.example.snake">Direction</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:L">L</h2>
 <dl class="index">
+<dt><a href="org/example/snake/Direction.html#LEFT" class="member-name-link">LEFT</a> - Enum constant in enum class org.example.snake.<a href="org/example/snake/Direction.html" title="enum class in org.example.snake">Direction</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/example/config/LevelConfig.html" class="type-name-link" title="class in org.example.config">LevelConfig</a> - Class in <a href="org/example/config/package-summary.html">org.example.config</a></dt>
 <dd>
 <div class="block">Конфигурация уровня.</div>
@@ -444,10 +469,20 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Рандомный спавн яблока на поле.</div>
 </dd>
+<dt><a href="org/example/map/Map.html#randomSpawnApple(java.util.List)" class="member-name-link">randomSpawnApple(List&lt;Snake&gt;)</a> - Method in class org.example.map.<a href="org/example/map/Map.html" title="class in org.example.map">Map</a></dt>
+<dd>
+<div class="block">Рандомный спавн яблока на поле с проверкой змей.</div>
+</dd>
+<dt><a href="org/example/game/GameController.html#resetSession()" class="member-name-link">resetSession()</a> - Method in class org.example.game.<a href="org/example/game/GameController.html" title="class in org.example.game">GameController</a></dt>
+<dd>
+<div class="block">Сброс состояния управления перед новым запуском уровня.</div>
+</dd>
 <dt><a href="org/example/game/SnakeGame.html#returnToMainMenu()" class="member-name-link">returnToMainMenu()</a> - Method in class org.example.game.<a href="org/example/game/SnakeGame.html" title="class in org.example.game">SnakeGame</a></dt>
 <dd>
 <div class="block">Возврат в главное меню.</div>
 </dd>
+<dt><a href="org/example/snake/Direction.html#RIGHT" class="member-name-link">RIGHT</a> - Enum constant in enum class org.example.snake.<a href="org/example/snake/Direction.html" title="enum class in org.example.snake">Direction</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:S">S</h2>
 <dl class="index">
@@ -569,6 +604,11 @@ loadScripts(document, 'script');</script>
 <div class="block">Енам типов наших клеток.</div>
 </dd>
 </dl>
+<h2 class="title" id="I:U">U</h2>
+<dl class="index">
+<dt><a href="org/example/snake/Direction.html#UP" class="member-name-link">UP</a> - Enum constant in enum class org.example.snake.<a href="org/example/snake/Direction.html" title="enum class in org.example.snake">Direction</a></dt>
+<dd>&nbsp;</dd>
+</dl>
 <h2 class="title" id="I:V">V</h2>
 <dl class="index">
 <dt><a href="org/example/game/GameState.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class org.example.game.<a href="org/example/game/GameState.html" title="enum class in org.example.game">GameState</a></dt>
@@ -576,6 +616,10 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns the enum constant of this class with the specified name.</div>
 </dd>
 <dt><a href="org/example/map/TypeCell.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class org.example.map.<a href="org/example/map/TypeCell.html" title="enum class in org.example.map">TypeCell</a></dt>
+<dd>
+<div class="block">Returns the enum constant of this class with the specified name.</div>
+</dd>
+<dt><a href="org/example/snake/Direction.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class org.example.snake.<a href="org/example/snake/Direction.html" title="enum class in org.example.snake">Direction</a></dt>
 <dd>
 <div class="block">Returns the enum constant of this class with the specified name.</div>
 </dd>
@@ -589,13 +633,18 @@ the order they are declared.</div>
 <div class="block">Returns an array containing the constants of this enum class, in
 the order they are declared.</div>
 </dd>
+<dt><a href="org/example/snake/Direction.html#values()" class="member-name-link">values()</a> - Static method in enum class org.example.snake.<a href="org/example/snake/Direction.html" title="enum class in org.example.snake">Direction</a></dt>
+<dd>
+<div class="block">Returns an array containing the constants of this enum class, in
+the order they are declared.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:W">W</h2>
 <dl class="index">
 <dt><a href="org/example/game/GameState.html#WIN" class="member-name-link">WIN</a> - Enum constant in enum class org.example.game.<a href="org/example/game/GameState.html" title="enum class in org.example.game">GameState</a></dt>
 <dd>&nbsp;</dd>
 </dl>
-<a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:V">V</a>&nbsp;<a href="#I:W">W</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a><span class="vertical-separator">|</span><a href="serialized-form.html">Serialized&nbsp;Form</a></main>
+<a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:V">V</a>&nbsp;<a href="#I:W">W</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a><span class="vertical-separator">|</span><a href="serialized-form.html">Serialized&nbsp;Form</a></main>
 </div>
 </div>
 </body>
