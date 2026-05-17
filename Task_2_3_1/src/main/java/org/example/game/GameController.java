@@ -14,9 +14,9 @@ import org.example.snake.Direction;
 import org.example.snake.Snake;
 import org.example.view.GameEndView;
 
-/**
- * Контроллер игры
- */
+    /**
+     * Контроллер игры.
+     */
 public class GameController {
 
     private final GameModel model;
@@ -30,10 +30,11 @@ public class GameController {
     private Timeline gameLoopTimeline;
     private boolean endGameHandled;
 
-    /**
-     * Конструктор.
-     */
-    public GameController(GameModel model, GameEndView gameEndView, Runnable returnToMenuAction, Runnable exitAction) {
+     /**
+      * Конструктор.
+      */
+     public GameController(GameModel model, GameEndView gameEndView,
+                           Runnable returnToMenuAction, Runnable exitAction) {
         this.model = model;
         this.gameEndView = gameEndView;
         this.returnToMenuAction = returnToMenuAction;

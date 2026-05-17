@@ -198,7 +198,7 @@ public class GamepadController {
     }
 
     /**
-     * Кнопочки с фигурками :)
+     * Кнопочки с фигурками :).
      */
     private void handleButtonEvent(int buttonNumber, short value) {
         // value: 1 = нажата, 0 = отпущена
@@ -217,6 +217,8 @@ public class GamepadController {
             case 2: // Кнопка Square
                 break;
             case 3: // Кнопка Triangle
+                break;
+            default:
                 break;
         }
     }

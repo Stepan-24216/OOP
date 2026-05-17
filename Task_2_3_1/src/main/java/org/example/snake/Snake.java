@@ -123,23 +123,23 @@ public class Snake {
         return head.getCordY();
     }
 
-     /**
-      * Получение массива с хвостом.
-      */
-     public ArrayList<Tail> getTails() {
-         return tails;
-     }
+    /**
+     * Получение массива с хвостом.
+     */
+    public ArrayList<Tail> getTails() {
+        return tails;
+    }
 
-     /**
-      * Проверка, находится ли точка внутри змейки.
-      */
-     public boolean containsPoint(int x, int y) {
-         for (Tail tail : tails) {
-             if (tail.getCordX() == x && tail.getCordY() == y) {
-                 return true;
-             }
-         }
-         return false;
-     }
- }
+    /**
+     * Проверка, находится ли точка внутри змейки.
+     */
+    public boolean containsPoint(int x, int y) {
+        for (Tail tail : tails) {
+            if (tail.getCordX() == x && tail.getCordY() == y) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
 

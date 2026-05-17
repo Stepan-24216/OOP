@@ -2,8 +2,8 @@ package org.example.map;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.example.snake.Snake;
 import org.example.config.LevelConfig;
+import org.example.snake.Snake;
 
 /**
  * Класс карты игры.
@@ -48,11 +48,12 @@ public class Map {
                 }
             }
 
-            if (!occupiedBySnake && !cellMap.get(randomIndex).hasApple() && !cellMap.get(randomIndex).hasBody()
-                && !cellMap.get(randomIndex).hasStone()) {
-                cellMap.get(randomIndex).setType(TypeCell.APPLE);
-                flag = false;
-            }
+             if (!occupiedBySnake && !cellMap.get(randomIndex).hasApple()
+                     && !cellMap.get(randomIndex).hasBody()
+                     && !cellMap.get(randomIndex).hasStone()) {
+                 cellMap.get(randomIndex).setType(TypeCell.APPLE);
+                 flag = false;
+             }
         }
     }
 

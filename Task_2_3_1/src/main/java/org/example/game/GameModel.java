@@ -92,8 +92,8 @@ public class GameModel {
     }
 
     /**
-         * Результат одного игрового шага.
-         */
-        public record StepResult(GameState state, String message) {
+     * Результат одного игрового шага.
+     */
+    public record StepResult(GameState state, String message) {
     }
 }

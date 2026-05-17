@@ -25,6 +25,12 @@ public enum Direction {
         return deltaY;
     }
 
+    /**
+     * Проверка, является ли направление противоположным другому.
+     *
+     * @param other направление для сравнения
+     * @return true если направления противоположны
+     */
     public boolean isOpposite(Direction other) {
         return (this == UP && other == DOWN)
             || (this == DOWN && other == UP)

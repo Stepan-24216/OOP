@@ -1,12 +1,12 @@
 package org.example.view;
 
+import java.util.function.Consumer;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import org.example.game.GameState;
 import org.example.snake.Snake;
 
-import java.util.function.Consumer;
 
 /**
  * Получение камней на поле.

@@ -72,7 +72,8 @@ public class SnakeGame extends Application {
             gameEndView = new GameEndView();
         }
 
-        gameController = new GameController(gameModel, gameEndView, this::returnToMainMenu, this::exitGame);
+         gameController = new GameController(gameModel, gameEndView,
+             this::returnToMainMenu, this::exitGame);
 
         gameLayer.requestFocus();
         primaryStage.setWidth(gameWidth);

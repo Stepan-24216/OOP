@@ -62,10 +62,11 @@ public class MainMenuController {
             levelComboBox.getSelectionModel().clearSelection();
             selectedLevel = null;
 
-            if (hasInvalidLevelFiles(dirPath, levelNames.size())) {
-                errorLabel.setText("Ошибка загрузки уровня: один или несколько JSON-конфигов невалидны");
-                errorLabel.setVisible(true);
-            } else if (levelNames.isEmpty()) {
+             if (hasInvalidLevelFiles(dirPath, levelNames.size())) {
+                 errorLabel.setText("Ошибка загрузки уровня: один или несколько "
+                     + "JSON-конфигов невалидны");
+                 errorLabel.setVisible(true);
+             } else if (levelNames.isEmpty()) {
                 errorLabel.setText("В выбранной папке нет файлов вида lvl_*.json");
                 errorLabel.setVisible(true);
             } else {
