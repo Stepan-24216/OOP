@@ -35,7 +35,7 @@ public class MainMenuController {
     private SnakeGame game;
 
     /**
-     * Обработка нажатия на кнопку.
+     * Обработка нажатия на кнопки.
      */
     @FXML
     private void handleBrowseDirectory() {
