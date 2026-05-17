@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Deque;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
@@ -14,9 +13,9 @@ import org.example.snake.Direction;
 import org.example.snake.Snake;
 import org.example.view.GameEndView;
 
-    /**
-     * Контроллер игры.
-     */
+/**
+ * Контроллер игры.
+ */
 public class GameController {
 
     private final GameModel model;
@@ -30,11 +29,11 @@ public class GameController {
     private Timeline gameLoopTimeline;
     private boolean endGameHandled;
 
-     /**
-      * Конструктор.
-      */
-     public GameController(GameModel model, GameEndView gameEndView,
-                           Runnable returnToMenuAction, Runnable exitAction) {
+    /**
+     * Конструктор.
+     */
+    public GameController(GameModel model, GameEndView gameEndView,
+                          Runnable returnToMenuAction, Runnable exitAction) {
         this.model = model;
         this.gameEndView = gameEndView;
         this.returnToMenuAction = returnToMenuAction;

@@ -60,18 +60,18 @@ public class MainMenuController {
             List<String> levelNames = levels.stream().map(LevelPath::getNameFile).toList();
             levelComboBox.setItems(FXCollections.observableArrayList(levelNames));
             levelComboBox.getSelectionModel().clearSelection();
-            selectedLevel = null;
+        selectedLevel = null;
 
-             if (hasInvalidLevelFiles(dirPath, levelNames.size())) {
-                 errorLabel.setText("Ошибка загрузки уровня: один или несколько "
-                     + "JSON-конфигов невалидны");
-                 errorLabel.setVisible(true);
-             } else if (levelNames.isEmpty()) {
-                errorLabel.setText("В выбранной папке нет файлов вида lvl_*.json");
-                errorLabel.setVisible(true);
-            } else {
-                errorLabel.setVisible(false);
-            }
+        if (hasInvalidLevelFiles(dirPath, levelNames.size())) {
+            errorLabel.setText("Ошибка загрузки уровня: один или несколько "
+                + "JSON-конфигы невалидны");
+            errorLabel.setVisible(true);
+        } else if (levelNames.isEmpty()) {
+            errorLabel.setText("В выбранной папке нет файлов вида lvl_*.json");
+            errorLabel.setVisible(true);
+        } else {
+            errorLabel.setVisible(false);
+        }
         } catch (Exception e) {
             levels = Collections.emptyList();
             levelComboBox.getItems().clear();

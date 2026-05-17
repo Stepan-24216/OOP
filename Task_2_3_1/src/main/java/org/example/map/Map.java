@@ -48,12 +48,12 @@ public class Map {
                 }
             }
 
-             if (!occupiedBySnake && !cellMap.get(randomIndex).hasApple()
-                     && !cellMap.get(randomIndex).hasBody()
-                     && !cellMap.get(randomIndex).hasStone()) {
-                 cellMap.get(randomIndex).setType(TypeCell.APPLE);
-                 flag = false;
-             }
+            if (!occupiedBySnake && !cellMap.get(randomIndex).hasApple()
+                    && !cellMap.get(randomIndex).hasBody()
+                    && !cellMap.get(randomIndex).hasStone()) {
+                cellMap.get(randomIndex).setType(TypeCell.APPLE);
+                flag = false;
+            }
         }
     }
 
