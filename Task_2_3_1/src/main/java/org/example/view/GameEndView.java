@@ -1,9 +1,12 @@
 package org.example.view;
 
+import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import org.example.game.GameState;
 import org.example.snake.Snake;
+
+import java.util.function.Consumer;
 
 /**
  * Получение камней на поле.
@@ -12,38 +15,46 @@ public class GameEndView {
     /**
      * Окно с обработкой проигрыша.
      */
-    public GameState handleGameOver(String message, Snake snake) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Игра окончена");
-        alert.setHeaderText("Вы проиграли!");
+    public void handleGameOver(String message, Snake snake, Consumer<GameState> onChoice) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Игра окончена");
+            alert.setHeaderText("Вы проиграли!");
 
-        alert.setContentText(message + "\nВаш итоговый счет: " + snake.getScore());
+            alert.setContentText(message + "\nВаш итоговый счет: " + snake.getScore());
 
-        ButtonType menuButton = new ButtonType("В главное меню");
-        ButtonType exitButton = new ButtonType("Выйти");
-        alert.getButtonTypes().setAll(menuButton, exitButton);
+            ButtonType menuButton = new ButtonType("В главное меню");
+            ButtonType exitButton = new ButtonType("Выйти");
+            alert.getButtonTypes().setAll(menuButton, exitButton);
 
-        return alert.showAndWait()
-            .map(response -> response == exitButton ? GameState.EXIT : GameState.MAIN_MENU)
-            .orElse(GameState.MAIN_MENU);
+            GameState chosenState = alert.showAndWait()
+                .map(response -> response == exitButton ? GameState.EXIT : GameState.MAIN_MENU)
+                .orElse(GameState.MAIN_MENU);
+
+            onChoice.accept(chosenState);
+        });
     }
 
     /**
      * Окно с обработкой победы.
      */
-    public GameState handleGameWin() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Игра окончена");
-        alert.setHeaderText("Вы победили!");
+    public void handleGameWin(Consumer<GameState> onChoice) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Игра окончена");
+            alert.setHeaderText("Вы победили!");
 
-        alert.setContentText("Вы набрали нужное количество очков");
+            alert.setContentText("Вы набрали нужное количество очков");
 
-        ButtonType menuButton = new ButtonType("В главное меню");
-        ButtonType exitButton = new ButtonType("Выйти");
-        alert.getButtonTypes().setAll(menuButton, exitButton);
+            ButtonType menuButton = new ButtonType("В главное меню");
+            ButtonType exitButton = new ButtonType("Выйти");
+            alert.getButtonTypes().setAll(menuButton, exitButton);
 
-        return alert.showAndWait()
-            .map(response -> response == exitButton ? GameState.EXIT : GameState.MAIN_MENU)
-            .orElse(GameState.MAIN_MENU);
+            GameState chosenState = alert.showAndWait()
+                .map(response -> response == exitButton ? GameState.EXIT : GameState.MAIN_MENU)
+                .orElse(GameState.MAIN_MENU);
+
+            onChoice.accept(chosenState);
+        });
     }
 }

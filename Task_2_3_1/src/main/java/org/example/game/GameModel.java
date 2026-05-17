@@ -68,7 +68,7 @@ public class GameModel {
                 notifyObservers();
                 return new StepResult(GameState.WIN, null);
             }
-            map.randomSpawnApple();
+            map.randomSpawnApple(snakes);
         }
 
         notifyObservers();

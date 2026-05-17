@@ -71,6 +71,7 @@ jacocoTestReport {
                     'org/example/MainMenuController*',
                     'org/example/game/SnakeGame*',
                     'org/example/snake/GamepadController*',
+                    'org/example/snake/Direction*',
                     'org/example/game/GameOverException*',
                     'org/example/view/GameEndView*',
                     'org/example/game/GameState*',

@@ -17,11 +17,14 @@ public class GamepadController {
     private static final int JS_EVENT_BUTTON = 0x01;
     private static final int JS_EVENT_AXIS = 0x02;
     private static final int JS_EVENT_INIT = 0x80;
+    private static final int DEAD_ZONE = 10000;
+    private static final int HYSTERESIS = 2500;
     private final GameController gameController;
-    private final boolean running = true;
     private volatile boolean readerThreadStarted = false;
-    private volatile boolean gamepadConnected = false;
     private String currentDevicePath = null;
+    private int horizontalAxisValue = 0;
+    private int verticalAxisValue = 0;
+    private Direction lastEmittedDirection = null;
 
     /**
      * Конструктор.
@@ -40,7 +43,6 @@ public class GamepadController {
             File device = new File(devicePath);
             if (device.exists() && device.canRead()) {
                 currentDevicePath = devicePath;
-                gamepadConnected = true;
                 System.out.println("Геймпад найден: " + devicePath);
                 startGamepadThread();
                 return;
@@ -61,16 +63,14 @@ public class GamepadController {
         Thread gamepadThread = new Thread(() -> {
             byte[] buffer = new byte[JS_EVENT_SIZE];
             try (FileInputStream inputStream = new FileInputStream(currentDevicePath)) {
-                while (running) {
+                while (!Thread.currentThread().isInterrupted()) {
                     int bytesRead = inputStream.read(buffer);
                     if (bytesRead == JS_EVENT_SIZE) {
                         processJoystickEvent(buffer);
                     }
                 }
             } catch (IOException e) {
-                if (running) {
-                    System.err.println("Ошибка чтения геймпада: " + e.getMessage());
-                }
+                System.err.println("Ошибка чтения геймпада: " + e.getMessage());
             } finally {
                 readerThreadStarted = false;
             }
@@ -110,47 +110,91 @@ public class GamepadController {
      * Обработка нажатий и наклонения стиков.
      */
     private void handleAxisEvent(int axisNumber, short value) {
-        final int THRESHOLD = 10000;
-
         switch (axisNumber) {
             case 0:
-                if (value < -THRESHOLD) {
-                    Platform.runLater(() -> gameController.handleKeyPress(KeyCode.LEFT));
-                } else if (value > THRESHOLD) {
-                    Platform.runLater(() -> gameController.handleKeyPress(KeyCode.RIGHT));
-                }
+                horizontalAxisValue = value;
+                emitResolvedDirection(axisNumber);
                 break;
 
             case 1:
-                if (value < -THRESHOLD) {
-                    Platform.runLater(() -> gameController.handleKeyPress(KeyCode.UP));
-                } else if (value > THRESHOLD) {
-                    Platform.runLater(() -> gameController.handleKeyPress(KeyCode.DOWN));
-                }
+                verticalAxisValue = value;
+                emitResolvedDirection(axisNumber);
                 break;
 
             case 6:
-                if (value < 0) {
-                    Platform.runLater(() -> gameController.handleKeyPress(KeyCode.LEFT));
-                    break;
-                } else if (value > 0) {
-                    Platform.runLater(() -> gameController.handleKeyPress(KeyCode.RIGHT));
-                    break;
-                }
+                horizontalAxisValue = value < 0 ? Short.MIN_VALUE : value > 0 ? Short.MAX_VALUE : 0;
+                emitResolvedDirection(axisNumber);
                 break;
 
             case 7:
-                if (value < 0) {
-                    Platform.runLater(() -> gameController.handleKeyPress(KeyCode.UP));
-                    break;
-                } else if (value > 0) {
-                    Platform.runLater(() -> gameController.handleKeyPress(KeyCode.DOWN));
-                    break;
-                }
+                verticalAxisValue = value < 0 ? Short.MIN_VALUE : value > 0 ? Short.MAX_VALUE : 0;
+                emitResolvedDirection(axisNumber);
                 break;
             default:
                 break;
         }
+    }
+
+    /**
+     * Преобразование состояния стика в одно направление.
+     */
+    private void emitResolvedDirection(int changedAxis) {
+        Direction direction = resolveDirection(changedAxis);
+        if (direction == null || direction == lastEmittedDirection) {
+            if (isCentered()) {
+                lastEmittedDirection = null;
+            }
+            return;
+        }
+
+        lastEmittedDirection = direction;
+        Platform.runLater(() -> gameController.handleDirectionInput(direction));
+    }
+
+    /**
+     * Определение направления по текущему состоянию осей.
+     */
+    private Direction resolveDirection(int changedAxis) {
+        boolean horizontalActive = Math.abs(horizontalAxisValue) > DEAD_ZONE;
+        boolean verticalActive = Math.abs(verticalAxisValue) > DEAD_ZONE;
+
+        if (!horizontalActive && !verticalActive) {
+            return null;
+        }
+
+        if (horizontalActive && !verticalActive) {
+            return horizontalAxisValue < 0 ? Direction.LEFT : Direction.RIGHT;
+        } else if (!horizontalActive) {
+            return verticalAxisValue < 0 ? Direction.UP : Direction.DOWN;
+        }
+
+        int horizontalAbs = Math.abs(horizontalAxisValue);
+        int verticalAbs = Math.abs(verticalAxisValue);
+
+        if (horizontalAbs > verticalAbs + HYSTERESIS) {
+            return horizontalAxisValue < 0 ? Direction.LEFT : Direction.RIGHT;
+        }
+
+        if (verticalAbs > horizontalAbs + HYSTERESIS) {
+            return verticalAxisValue < 0 ? Direction.UP : Direction.DOWN;
+        }
+
+        Direction fallbackDirection = lastEmittedDirection;
+        if (fallbackDirection != null) {
+            return fallbackDirection;
+        }
+
+        return changedAxis == 0
+            ? (horizontalAxisValue < 0 ? Direction.LEFT : Direction.RIGHT)
+            : (verticalAxisValue < 0 ? Direction.UP : Direction.DOWN);
+    }
+
+    /**
+     * Проверка, что стик вернулся в центр.
+     */
+    private boolean isCentered() {
+        return Math.abs(horizontalAxisValue) <= DEAD_ZONE
+            && Math.abs(verticalAxisValue) <= DEAD_ZONE;
     }
 
     /**

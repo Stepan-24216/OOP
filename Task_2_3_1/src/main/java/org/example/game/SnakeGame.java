@@ -15,6 +15,7 @@ import org.example.config.LevelConfig;
 import org.example.config.LevelConfigCreate;
 import org.example.map.Map;
 import org.example.snake.Snake;
+import org.example.view.GameEndView;
 import org.example.view.GameRenderer;
 import org.example.view.MainMenuController;
 import org.example.view.ScoreView;
@@ -34,6 +35,7 @@ public class SnakeGame extends Application {
     private GameRenderer gameRenderer;
     private GameController gameController;
     private GameModel gameModel;
+    private GameEndView gameEndView;
     private MainMenuController mainMenuController;
 
     /**
@@ -66,7 +68,11 @@ public class SnakeGame extends Application {
         gameModel.addObserver(gameRenderer);
         gameModel.addObserver(scoreView);
 
-        gameController = new GameController(gameModel, this::returnToMainMenu, this::exitGame);
+        if (gameEndView == null) {
+            gameEndView = new GameEndView();
+        }
+
+        gameController = new GameController(gameModel, gameEndView, this::returnToMainMenu, this::exitGame);
 
         gameLayer.requestFocus();
         primaryStage.setWidth(gameWidth);
@@ -102,8 +108,9 @@ public class SnakeGame extends Application {
             }
 
             initLevelDate();
+            gameController.resetSession();
             gameController.setupControls(canvas, scene);
-            map.randomSpawnApple();
+            map.randomSpawnApple(snakes);
 
             scoreView.initScoreLabel(gameLayer, snakes.get(0));
 
@@ -129,6 +136,7 @@ public class SnakeGame extends Application {
             gameRenderer = null;
             gameController = null;
             gameModel = null;
+            gameEndView = null;
             snakes.clear();
 
             Parent menuRoot = loadMenuRoot();
@@ -143,6 +151,7 @@ public class SnakeGame extends Application {
         if (gameController != null) {
             gameController.setGameState(GameState.PAUSE);
         }
+        gameEndView = null;
         primaryStage.close();
         Platform.exit();
     }

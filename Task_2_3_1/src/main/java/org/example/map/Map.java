@@ -2,6 +2,7 @@ package org.example.map;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.example.snake.Snake;
 import org.example.config.LevelConfig;
 
 /**
@@ -25,10 +26,29 @@ public class Map {
      * Рандомный спавн яблока на поле.
      */
     public void randomSpawnApple() {
+        randomSpawnApple(new ArrayList<>());
+    }
+
+    /**
+     * Рандомный спавн яблока на поле с проверкой змей.
+     */
+    public void randomSpawnApple(List<Snake> snakes) {
         boolean flag = true;
         while (flag) {
             int randomIndex = (int) (Math.random() * cellMap.size());
-            if (!cellMap.get(randomIndex).hasApple() && !cellMap.get(randomIndex).hasBody()
+            int cellSize = 30;
+            int cordX = (randomIndex % getCellsInRow()) * cellSize;
+            int cordY = ((randomIndex / getCellsInRow()) + getOffsetRows()) * cellSize;
+
+            boolean occupiedBySnake = false;
+            for (Snake snake : snakes) {
+                if (snake.containsPoint(cordX, cordY)) {
+                    occupiedBySnake = true;
+                    break;
+                }
+            }
+
+            if (!occupiedBySnake && !cellMap.get(randomIndex).hasApple() && !cellMap.get(randomIndex).hasBody()
                 && !cellMap.get(randomIndex).hasStone()) {
                 cellMap.get(randomIndex).setType(TypeCell.APPLE);
                 flag = false;

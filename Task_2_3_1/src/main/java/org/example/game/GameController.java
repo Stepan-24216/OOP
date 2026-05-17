@@ -1,11 +1,16 @@
 package org.example.game;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
-import org.example.snake.GamepadController;
+import javafx.util.Duration;
+import org.example.snake.Direction;
 import org.example.snake.Snake;
 import org.example.view.GameEndView;
 
@@ -15,25 +20,26 @@ import org.example.view.GameEndView;
 public class GameController {
 
     private final GameModel model;
-    private final GamepadController gamepadController;
     private final GameEndView gameEndView;
     private final Runnable returnToMenuAction;
     private final Runnable exitAction;
+    private static final int INPUT_BUFFER_LIMIT = 3;
 
-    private boolean upPressed;
-    private boolean downPressed;
-    private boolean leftPressed;
-    private boolean rightPressed;
+    private final Deque<Direction> directionBuffer = new ArrayDeque<>();
+    private Direction currentDirection;
+    private Timeline gameLoopTimeline;
+    private boolean endGameHandled;
 
     /**
      * Конструктор.
      */
-    public GameController(GameModel model, Runnable returnToMenuAction, Runnable exitAction) {
+    public GameController(GameModel model, GameEndView gameEndView, Runnable returnToMenuAction, Runnable exitAction) {
         this.model = model;
-        this.gamepadController = new GamepadController(this);
-        this.gameEndView = new GameEndView();
+        this.gameEndView = gameEndView;
         this.returnToMenuAction = returnToMenuAction;
         this.exitAction = exitAction;
+
+        new org.example.snake.GamepadController(this);
     }
 
     /**
@@ -44,19 +50,12 @@ public class GameController {
             return;
         }
 
-        Thread gameThread = new Thread(() -> {
-            while (model.getGameState() == GameState.PLAY) {
-                Platform.runLater(this::tick);
-                try {
-                    Thread.sleep(150);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        if (gameLoopTimeline == null) {
+            gameLoopTimeline = new Timeline(new KeyFrame(Duration.millis(150), event -> tick()));
+            gameLoopTimeline.setCycleCount(Timeline.INDEFINITE);
+        }
 
-        gameThread.setDaemon(true);
-        gameThread.start();
+        gameLoopTimeline.play();
     }
 
     /**
@@ -67,25 +66,20 @@ public class GameController {
             return;
         }
 
+        Direction direction = pollNextDirection();
+        if (direction != null) {
+            currentDirection = direction;
+        }
+
+        if (currentDirection == null) {
+            return;
+        }
+
         ArrayList<Snake> snakes = model.getSnakes();
 
         for (Snake snake : snakes) {
-            int speed = 30;
-            int newX = snake.getHead().getCordX();
-            int newY = snake.getHead().getCordY();
-
-            if (upPressed) {
-                newY -= speed;
-            }
-            if (downPressed) {
-                newY += speed;
-            }
-            if (leftPressed) {
-                newX -= speed;
-            }
-            if (rightPressed) {
-                newX += speed;
-            }
+            int newX = snake.getHead().getCordX() + currentDirection.getDeltaX();
+            int newY = snake.getHead().getCordY() + currentDirection.getDeltaY();
 
             GameModel.StepResult result = model.step(newX, newY, snake);
 
@@ -104,23 +98,18 @@ public class GameController {
      * Окончание игры.
      */
     private void finishGame(GameState endState, String loseMessage, Snake snake) {
-        if (model.getGameState() != GameState.PLAY) {
+        if (model.getGameState() != GameState.PLAY || endGameHandled) {
             return;
         }
 
+        endGameHandled = true;
+        stopGameLoop();
         model.setGameState(endState);
 
-        GameState action = (endState == GameState.WIN)
-            ? gameEndView.handleGameWin()
-            : gameEndView.handleGameOver(loseMessage, snake);
-
-        if (action == GameState.EXIT) {
-            exitAction.run();
-            return;
-        }
-
-        if (returnToMenuAction != null) {
-            returnToMenuAction.run();
+        if (endState == GameState.WIN) {
+            gameEndView.handleGameWin(this::applyEndAction);
+        } else {
+            gameEndView.handleGameOver(loseMessage, snake, this::applyEndAction);
         }
     }
 
@@ -141,38 +130,22 @@ public class GameController {
             case W:
             case UP:
                 resumeIfPaused();
-                if (!downPressed) {
-                    upPressed = true;
-                    leftPressed = false;
-                    rightPressed = false;
-                }
+                handleDirectionInput(Direction.UP);
                 break;
             case S:
             case DOWN:
                 resumeIfPaused();
-                if (!upPressed) {
-                    downPressed = true;
-                    leftPressed = false;
-                    rightPressed = false;
-                }
+                handleDirectionInput(Direction.DOWN);
                 break;
             case A:
             case LEFT:
                 resumeIfPaused();
-                if (!rightPressed) {
-                    leftPressed = true;
-                    upPressed = false;
-                    downPressed = false;
-                }
+                handleDirectionInput(Direction.LEFT);
                 break;
             case D:
             case RIGHT:
                 resumeIfPaused();
-                if (!leftPressed) {
-                    rightPressed = true;
-                    upPressed = false;
-                    downPressed = false;
-                }
+                handleDirectionInput(Direction.RIGHT);
                 break;
             case SPACE:
                 if (model.getGameState() == GameState.PAUSE) {
@@ -180,6 +153,7 @@ public class GameController {
                     startGameLoop();
                 } else if (model.getGameState() == GameState.PLAY) {
                     model.setGameState(GameState.PAUSE);
+                    stopGameLoop();
                 }
                 break;
             case ESCAPE:
@@ -198,6 +172,83 @@ public class GameController {
             model.setGameState(GameState.PLAY);
             startGameLoop();
         }
+    }
+
+    /**
+     * Приём направления движения от любого источника ввода.
+     */
+    public void handleDirectionInput(Direction direction) {
+        enqueueDirection(direction);
+    }
+
+    /**
+     * Сброс состояния управления перед новым запуском уровня.
+     */
+    public void resetSession() {
+        directionBuffer.clear();
+        currentDirection = null;
+        endGameHandled = false;
+        if (gameLoopTimeline != null) {
+            gameLoopTimeline.stop();
+        }
+    }
+
+    /**
+     * Выполнение действия после выбора в окне окончания игры.
+     */
+    private void applyEndAction(GameState action) {
+        if (action == GameState.EXIT) {
+            exitAction.run();
+            return;
+        }
+
+        if (returnToMenuAction != null) {
+            returnToMenuAction.run();
+        }
+    }
+
+    /**
+     * Остановка игрового цикла.
+     */
+    private void stopGameLoop() {
+        if (gameLoopTimeline != null) {
+            gameLoopTimeline.stop();
+        }
+    }
+
+    /**
+     * Добавление направления в буфер.
+     */
+    private void enqueueDirection(Direction direction) {
+        Direction referenceDirection = directionBuffer.peekLast();
+        if (referenceDirection == null) {
+            referenceDirection = currentDirection;
+        }
+
+        if (referenceDirection != null && direction.isOpposite(referenceDirection)) {
+            return;
+        }
+
+        if (directionBuffer.isEmpty() && direction == currentDirection) {
+            return;
+        }
+
+        if (!directionBuffer.isEmpty() && directionBuffer.peekLast() == direction) {
+            return;
+        }
+
+        if (directionBuffer.size() >= INPUT_BUFFER_LIMIT) {
+            return;
+        }
+
+        directionBuffer.addLast(direction);
+    }
+
+    /**
+     * Взятие следующего направления из буфера.
+     */
+    private Direction pollNextDirection() {
+        return directionBuffer.pollFirst();
     }
 
     /**

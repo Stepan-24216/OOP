@@ -3,6 +3,7 @@ package org.example.view;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -61,7 +62,10 @@ public class MainMenuController {
             levelComboBox.getSelectionModel().clearSelection();
             selectedLevel = null;
 
-            if (levelNames.isEmpty()) {
+            if (hasInvalidLevelFiles(dirPath, levelNames.size())) {
+                errorLabel.setText("Ошибка загрузки уровня: один или несколько JSON-конфигов невалидны");
+                errorLabel.setVisible(true);
+            } else if (levelNames.isEmpty()) {
                 errorLabel.setText("В выбранной папке нет файлов вида lvl_*.json");
                 errorLabel.setVisible(true);
             } else {
@@ -77,12 +81,33 @@ public class MainMenuController {
     }
 
     /**
+     * Проверка, есть ли в папке невалидные файлы уровней.
+     */
+    private boolean hasInvalidLevelFiles(String dirPath, int validLevelCount) {
+        File dir = new File(dirPath);
+        File[] files = dir.listFiles();
+        if (files == null) {
+            return false;
+        }
+
+        int levelFilesCount = 0;
+        for (File file : files) {
+            if (file.isFile() && file.getName().matches("lvl_\\d+\\.json")) {
+                levelFilesCount++;
+            }
+        }
+
+        return levelFilesCount > validLevelCount;
+    }
+
+    /**
      * Обработка нажатия на кнопку.
      */
     @FXML
     public void initialize() {
         try {
-            Image bgImage = new Image(getClass().getResourceAsStream("/menu.png"));
+            Image bgImage = new Image(Objects.requireNonNull(
+                getClass().getResourceAsStream("/menu.png")));
 
             BackgroundImage backgroundImage = new BackgroundImage(
                 bgImage,
@@ -98,11 +123,7 @@ public class MainMenuController {
             container.setStyle("-fx-background-color: darkslategray;");
             System.err.println("Не удалось загрузить фон: " + e.getMessage());
         }
-        levels =
-            SearchLevelInDir.searchLevelInDir("src/main/resources");
-
-        List<String> levelNames = levels.stream().map(LevelPath::getNameFile).toList();
-        levelComboBox.setItems(FXCollections.observableArrayList(levelNames));
+        loadLevelsFromDirectory("src/main/resources");
 
         levelComboBox.setOnAction(event -> {
             String selectedName = levelComboBox.getValue();
