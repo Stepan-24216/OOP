@@ -1,0 +1,17 @@
+{
+  "size": {
+    "height": 30,
+    "width": 30
+  },
+  "stones": [
+    {
+      "numString": 10,
+      "numCell": 10
+    },
+    {
+      "numString": 20,
+      "numCell": 5
+    }
+  ],
+  "goal": 100
+}
